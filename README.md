@@ -11,7 +11,9 @@ antoniovandre_eval_GUI -> https://github.com/antoniovandre2/antoniovandre_eval_G
 JavaAntonioVandreEvalGUI -> https://github.com/antoniovandre2/JavaAntonioVandreEvalGUI
 _____
 
-Outros GitHubs:
+GitHubs:
+
+https://github.com/antoniovandre
 
 https://github.com/antoniovandre2
 
