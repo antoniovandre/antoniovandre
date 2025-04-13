@@ -7818,3 +7818,28 @@ Sat Apr 12 22:18:59 -03 2025
 Pergunta: Quanto é 0 / 9? 
 Resposta: 0
 Eval: acertou.
+_____
+Sat Apr 12 22:56:21 -03 2025
+Pergunta: Quanto é 6 + 4? 
+Resposta: 10
+Eval: acertou.
+_____
+Sat Apr 12 22:56:29 -03 2025
+Pergunta: Quanto é 14 / 11, arredondado com 0 casas decimais? 
+Resposta: 1
+Eval: acertou.
+_____
+Sat Apr 12 22:56:32 -03 2025
+Pergunta: Quanto é 8 + 10? 
+Resposta: 18
+Eval: acertou.
+_____
+Sat Apr 12 22:56:38 -03 2025
+Pergunta: Quanto é 12 / 9, arredondado com 0 casas decimais? 
+Resposta: 1
+Eval: acertou.
+_____
+Sat Apr 12 22:56:41 -03 2025
+Pergunta: Quanto é 10 + 6? 
+Resposta: 16
+Eval: acertou.
