@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Script de atualização dos arquivos do diretório local do Legado ontológico a partir do Dropbox usando a interface gráfica para a resposta ao prompt, de Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Última atualização: 07-08-2015.
+
+xterm antoniovandre_atualizar_legadoontologico_local

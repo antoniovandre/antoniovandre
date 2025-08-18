@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script leitor de RSS. Para Puppy Linux.
+
+# Última atualização: 07-08-2021.
+
+TEMPO="${2}s"
+RSS="${1}"
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! hash traceroute &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"traceroute\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if ! hash iconv &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"iconv\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if ! hash perl &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"perl\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if ! hash antoniovandre_verificarinternet_1 &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"antoniovandre_verificarinternet_1\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if ! hash antoniovandre_verificarinternet &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"antoniovandre_verificarinternet\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if [ -z "${RSS}" ]; then echo -e "${AV_VERMELHO}Entre com a url RSS como primeiro argumento${AV_SEMCOR}."; exit 1; fi
+
+if ! [[ "${2}" =~ ^[0-9]+$ ]]; then echo -e "${AV_VERMELHO}Entre com o tempo de refresh, em segundos, como segundo argumento${AV_SEMCOR}."; exit 1; fi
+
+TITULOP="TITULOP"
+
+echo -e "Leitor de RSS.\nFonte: ${AV_CIANOCLARO}${RSS}${AV_SEMCOR}.\nTempo de refresh: ${AV_CIANOCLARO}${TEMPO}${AV_SEMCOR}.\n\nCtrl + C para sair.\n\n"
+
+while true; do
+	RAW=$(wget -qO- "${RSS}")
+	RAW=$(echo -n "${RAW}" | sed ':a;N;$!ba;s/<title>\n/<title>/g' | sed ':a;N;$!ba;s/<description>\n/<description>/g')
+
+	if [ -z "${RAW}" ]; then sleep "${TEMPO}"; continue; else break; fi
+done	
+
+SHIFT=$(echo "${RAW}" | grep "<item>" --binary-files=text | wc -l)
+
+SHIFT2=$(CONTADOR="0"; for LINHA in `echo $RAW`; do TEMP=$(echo $LINHA | grep "<title>" --binary-files=text ); if ! [ -z "${TEMP}" ]; then CONTADOR=$(expr "${CONTADOR}" + 1); fi; done; echo -n "${CONTADOR}")
+
+SHIFT3=$(CONTADOR="0"; for LINHA in `echo $RAW`; do TEMP=$(echo $LINHA | grep "<description>" --binary-files=text); if ! [ -z "${TEMP}" ]; then CONTADOR=$(expr "${CONTADOR}" + 1); fi; done; echo -n "${CONTADOR}")
+
+SHIFT4=$(CONTADOR="0"; for LINHA in `echo $RAW`; do TEMP=$(echo $LINHA | grep "<link>" --binary-files=text); if ! [ -z "${TEMP}" ]; then CONTADOR=$(expr "${CONTADOR}" + 1); fi; done; echo -n "${CONTADOR}")
+
+while true; do
+	if ! antoniovandre_verificarinternet_1 &>> /dev/null; then echo -e "${AV_VERMELHO}Perda de conexão com a internet${AV_SEMCOR}. Tentando reconexão..."; if ! antoniovandre_verificarinternet; then exit 1; fi; fi
+
+	CONTADOR=$SHIFT2
+	CONTADOR2=$SHIFT3
+	CONTADOR3=$SHIFT4
+	FLAG="0"
+	FLAG2="0"
+
+	while [ "${CONTADOR}" -ge $(expr "${SHIFT2}" - "${SHIFT}" + 1) ]; do
+		if [ "${FLAG2}" == "0" ]; then
+			RAW=$(wget -qO- "${RSS}")
+			RAW=$(echo -n "${RAW}" | sed ':a;N;$!ba;s/<title>\n/<title>/g' | sed ':a;N;$!ba;s/<description>\n/<description>/g')
+			if [ -z "${RAW}" ]; then sleep "${TEMPO}"; continue; fi
+		fi
+
+		TITULO=$(echo -n "${RAW}" | grep "<title>" --binary-files=text | head "-${CONTADOR}" | tail -1 | sed "s/<title>//g" 2>> /dev/null | sed "s/<\/title>//g" 2>> /dev/null | iconv -f iso-8859-1 -t utf-8 2>> /dev/null | perl -n -mHTML::Entities -e ' ; print HTML::Entities::decode_entities($_) ;' 2>> /dev/null | tr -d "\n")
+
+		DESCRICAO=$(echo -n "${RAW}" | grep "<description>" --binary-files=text | head "-${CONTADOR2}" | tail -1 | sed "s/<description>//g" 2>> /dev/null | sed "s/<\/description>//g" 2>> /dev/null | iconv -f iso-8859-1 -t utf-8 2>> /dev/null | perl -n -mHTML::Entities -e ' ; print HTML::Entities::decode_entities($_) ;' 2>> /dev/null | sed "s/<a/\\${AV_ROXO}<a/g" | sed "s/<t/\\${AV_ROXO}<t/g" | sed "s/<h/\\${AV_ROXO}<h/g" | sed "s/<s/\\${AV_ROXO}<s/g" | sed "s/<i/\\${AV_ROXO}<i/g" | sed "s/<b/\\${AV_ROXO}<b/g" | sed "s/<em/\\${AV_ROXO}<em/g" | sed "s/<\//\\${AV_ROXO}<\//g" | sed "s/>/>\\${AV_SEMCOR}/g" | sed "s/<\!\[CDATA\[/\\${AV_ROXO}\!\[CDATA\[\\${AV_SEMCOR}/g" | sed "s/\]\]>/\\${AV_ROXO}\]\]>\\${AV_SEMCOR}/g" | tr -d "\n")
+
+		LINK=$(echo -n "${RAW}" | grep "<link>" --binary-files=text | head "-${CONTADOR3}" | tail -1 | sed "s/<link>//g" 2>> /dev/null | sed "s/<\/link>//g" 2>> /dev/null | tr -d "\n")
+
+		if [ "${TITULOP}" == "TITULOP" ]; then FLAG="1"; fi
+
+		if [ "${TITULOP}" == "${TITULO}" ]; then FLAG="1"; FLAG2="1"; CONTADOR=$(expr "${CONTADOR}" - 1); CONTADOR2=$(expr "${CONTADOR2}" - 1); CONTADOR3=$(expr "${CONTADOR3}" - 1); continue; fi
+
+		if [ "${FLAG}" == "1" ]; then echo -e "${AV_CIANOCLARO}${TITULO}${AV_SEMCOR}"; echo -e "${DESCRICAO}\n"; echo -e "Ler mais: \"${AV_AZUL}${LINK}${AV_SEMCOR}\".\n"; fi
+
+		CONTADOR=$(expr "${CONTADOR}" - 1)
+		CONTADOR2=$(expr "${CONTADOR2}" - 1)
+		CONTADOR3=$(expr "${CONTADOR3}" - 1)
+	done
+
+	TITULOP=$TITULO;
+
+	sleep "${TEMPO}"
+done

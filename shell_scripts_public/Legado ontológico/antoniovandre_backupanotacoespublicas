@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Script de backup de "antoniovandre-anotações_públicas-6.txt", de Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Última atualização: 06-08-2021.
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+echo -n "Fazendo backup de \"antoniovandre-anotações_públicas-6.txt\"... "
+
+if ls "/home/antoniovandre/Legado ontológico (Ubuntu specific)/antoniovandre-anotações_públicas-6.txt" &>> /dev/null; then if antoniovandre_dbxcli_put "/home/antoniovandre/Legado ontológico (Ubuntu specific)/antoniovandre-anotações_públicas-6.txt" "/Legado ontológico/antoniovandre-anotações_públicas-6.txt" &>> /dev/null; then if antoniovandre_dbxcli_put "/home/antoniovandre/Legado ontológico (Ubuntu specific)/antoniovandre-anotações_públicas-6.txt" "/Documents/BACKUPED14/antoniovandre-anotações_públicas-6.txt" &>> /dev/null; then echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Um erro ocorreu${AV_SEMCOR}."; exit 1; fi; else echo -e "${AV_VERMELHO}Um erro ocorreu${AV_SEMCOR}."; exit 1; fi; else echo -e "${AV_VERMELHO}\"antoniovandre-anotações_públicas-6.txt\" não encontrado no LO local${AV_SEMCOR}."; exit 1; fi

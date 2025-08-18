@@ -1,0 +1,132 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script gerador do livro Legado Ontológico de Antonio Vandré.
+
+# Última atualização: 16-10-2020.
+
+LATEXENGINE="lualatex"
+TAMANHOBUFFER="10000000"
+
+DIRETORIOAVBASHSCRIPTS="${HOME}/shell_scripts/Ubuntu/"
+AVDIRETORIODOCUMENTOS="${HOME}/Documentos/"
+DIRETORIOAVLOSOURCES="${AVDIRETORIODOCUMENTOS}AVLO sources/"
+DIRETORIOTEMP="${HOME}/Temp/"
+LODBDIR="/Legado Ontológico/"
+AVDBSYNCFOLDER="/antoniovandre_dropbox_sync_folder/"
+ARQUIVODESCRICAOFORMAL="antoniovandre-descrição_formal-LOgenerator.txt"
+ARQUIVOANOTACOESPUBLICAS="antoniovandre-anotações_públicas-LOgenerator.txt"
+ARQUIVOLINKS="antoniovandre-links-LOgenerator.txt"
+IMAGEMFUNDOPRIMEIRAPAGINA="Antonio Vandré Pedrosa Furtunato Gomes - Legado ontológico - Livro - Background.png"
+IMAGEMLICENCA="by-nc-nd.png"
+
+DATA="$(date +%d-%m-%Y)"
+
+ARQUIVORESULTANTE="${AVDIRETORIODOCUMENTOS}Antonio Vandré Pedrosa Furtunato Gomes - Legado ontológico - Livro.zip"
+ARQUIVODADOSLOLIVRO="${AVDIRETORIODOCUMENTOS}antoniovandre - LO livro - dados.txt"
+LINKCOMPARTILHAMENTO="https://www.dropbox.com/s/e9au26vvs524nus/Antonio%20Vandr%C3%A9%20Pedrosa%20Furtunato%20Gomes%20-%20Legado%20ontol%C3%B3gico%20-%20Livro.zip?dl=0"
+
+FLAG="0"
+
+DIRETORIO=$PWD
+AVIFS=$IFS
+IFS=$'\n'
+
+PREFIXOARQUIVOST="antoniovandrelosource"
+ARQUIVOLOG="antoniovandrelologfile.txt"
+
+PREFIXOSPLIT="antoniovandrelosplited"
+LINHASSPLIT="10000"
+
+CABECALHO="\\documentclass{article}\\usepackage{fontspec}\\usepackage[utf8x]{inputenc}\\usepackage[T1]{fontenc}\\usepackage{amsfonts}\\usepackage{amssymb}\\usepackage{graphicx}\\usepackage{eso-pic}\\newcommand\\BackgroundIm{\\put(0,0){\\parbox[b][\\paperheight]{\\paperwidth}{\\vfill\\centering\\includegraphics[height=\\paperheight,width=\\paperwidth,keepaspectratio]{${IMAGEMFUNDOPRIMEIRAPAGINA}}\\vfill}}}\\setlength{\\parindent}{0cm}\\setlength{\\parskip}{0cm}\\begin{document}\\AddToShipoutPicture*{\\BackgroundIm}\\begin{center}{\\LARGE Antonio Vandré Pedrosa Furtunato Gomes}\\end{center}\\par \\par \\begin{center}{\\Large Legado Ontológico - Livro}\\end{center}\\par \\par \\begin{center}{\Large Versão ${DATA}}\\end{center}\\par \\par \\begin{figure}[h!]\\centering\\includegraphics[width=5cm]{${IMAGEMLICENCA}}\\end{figure}\\par \\par ";
+
+case "${LATEXENGINE}" in "xelatex") LATEXENGINEARGUMENTOS="-halt-on-error";; "xetex") LATEXENGINEARGUMENTOS="-halt-on-error";; "lualatex") LATEXENGINEARGUMENTOS="--halt-on-error";; "luatex") LATEXENGINEARGUMENTOS="--halt-on-error";; *) echo -e "É recomendável utilizar como LaTeX engine \"xelatex\", \"xetex\", \"lualatex\" ou \"luatex\"\n";; esac
+
+if ! hash antoniovandre_echo &>> /dev/null; then echo "antoniovandre_echo não encontrado."; read; FLAG="1"; fi
+
+if [ "${FLAG}" == "0" ]; then if ! [ -n "$AVCORES" ]; then antoniovandre_echo "Carregando antoniovandre_cores... " n; if ! source "${DIRETORIOAVBASHSCRIPTS}antoniovandre_cores"; then echo "Ocorreu um erro."; else echo -e "${AV_VERDE}OK${AV_SEMCOR}."; fi; fi; fi
+
+if [ "${FLAG}" == "0" ]; then if ! [ "$1" ==  "noprompt" ]; then echo -e "Certificou-se que os arquivos de ${DIRETORIOAVLOSOURCES} foram atualizados e formatados?\n\nCertificou-se também que o CloudHQ esteja ativo?\n\nPressione RETURN para continuar ou CTRL+c para sair."; read; fi; fi
+
+if [ "${FLAG}" == "0" ]; then cd "$DIRETORIOAVLOSOURCES"; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Checando dependências... " n; if hash antoniovandre_dbxcli && hash "${LATEXENGINE}" && hash md5sum && hash zip && hash split && hash antoniovandre_echo; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Limpando logfile... " n; rm "${DIRETORIOAVLOSOURCES}antoniovandrelologfile.txt" &>> /dev/null; echo -e "${AV_VERDE}OK${AV_SEMCOR}."; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Limpando arquivos temporários... " n; rm "${PREFIXOSPLIT}"* &>> /dev/null; echo -e "${AV_VERDE}OK${AV_SEMCOR}."; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Limpando arquivo final antigo... " n; rm "${ARQUIVORESULTANTE}" &>> /dev/null; echo -e "${AV_VERDE}OK${AV_SEMCOR}."; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Verificando imagens... " n; if ls "${IMAGEMFUNDOPRIMEIRAPAGINA}" &>> /dev/null && ls "${IMAGEMLICENCA}" &>> /dev/null; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Adicionando descrição formal... " n; if echo "________________________________________" > "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt" && cat "${DIRETORIOAVLOSOURCES}${ARQUIVODESCRICAOFORMAL}" >> "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Adicionando anotações públicas... " n; if echo "________________________________________" >> "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt" && cat "${DIRETORIOAVLOSOURCES}${ARQUIVOANOTACOESPUBLICAS}" >> "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Adicionando links... " n; if echo "________________________________________" >> "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt" && cat "${DIRETORIOAVLOSOURCES}${ARQUIVOLINKS}" >> "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Substituindo backslash char... " n; if sed ':a;N;$!ba;s/\\/(backslash)/g' "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt" > "${DIRETORIOTEMP}${PREFIXOARQUIVOST}2.txt"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Substituindo dollar char... " n; if sed ':a;N;$!ba;s/\$/\\\$/g' "${DIRETORIOTEMP}${PREFIXOARQUIVOST}2.txt" > "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Substituindo underline char... " n; if sed ':a;N;$!ba;s/_/\\_/g' "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt" > "${DIRETORIOTEMP}${PREFIXOARQUIVOST}2.txt"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Substituindo ^ char... " n; if sed ':a;N;$!ba;s/\^/(circunflexo)/g' "${DIRETORIOTEMP}${PREFIXOARQUIVOST}2.txt" | tr "^" "U" > "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Substituindo & char... " n; if sed ':a;N;$!ba;s/&/(eitza)/g' "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt" > "${DIRETORIOTEMP}${PREFIXOARQUIVOST}2.txt"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Substituindo sharp char... " n; if sed ':a;N;$!ba;s/#/\\#/g' "${DIRETORIOTEMP}${PREFIXOARQUIVOST}2.txt" > "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Substituindo % char... " n; if sed ':a;N;$!ba;s/%/\\%/g' "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt" > "${DIRETORIOTEMP}${PREFIXOARQUIVOST}2.txt"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Substituindo { char... " n; if sed ':a;N;$!ba;s/{/\\{/g' "${DIRETORIOTEMP}${PREFIXOARQUIVOST}2.txt" > "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Substituindo } char... " n; if sed ':a;N;$!ba;s/}/\\}/g' "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt" > "${DIRETORIOTEMP}${PREFIXOARQUIVOST}2.txt"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Substituindo ö char... " n; if sed ':a;N;$!ba;s/ö/\\"{o}/g' "${DIRETORIOTEMP}${PREFIXOARQUIVOST}2.txt" > "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Substituindo ~ char... " n; if sed ':a;N;$!ba;s/~/\\~{}/g' "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt" > "${DIRETORIOTEMP}${PREFIXOARQUIVOST}2.txt"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Substituindo newline... " n; if sed ':a;N;$!ba;s/\n/\\par\n/g' "${DIRETORIOTEMP}${PREFIXOARQUIVOST}2.txt" > "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Spliting arquivos... " n; if split -l "${LINHASSPLIT}" -d "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt" "${PREFIXOSPLIT}"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then CONTADOR="0"; NUMEROARQUIVOS=$(ls -1 ${PREFIXOSPLIT}* | wc -l); for SPLITEDFILE in $(ls -1 ${PREFIXOSPLIT}*); do
+
+	CONTADOR=$(expr "${CONTADOR}" + 1)
+
+	if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Adicionando cabeçalho ao arquivo ${CONTADOR} de ${NUMEROARQUIVOS}... " n; if echo "${CABECALHO}" > "${SPLITEDFILE}.tex" && echo "\\begin{center}Arquivo ${CONTADOR} de ${NUMEROARQUIVOS}\\end{center}.\\newpage" >> "${SPLITEDFILE}.tex"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+	if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Adicionando corpo ao arquivo ${CONTADOR} de ${NUMEROARQUIVOS}... " n; if cat "${SPLITEDFILE}" >> "${SPLITEDFILE}.tex"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+	if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Adicionando rodapé ao arquivo ${CONTADOR} de ${NUMEROARQUIVOS}... " n; if echo "\\end{document}" >> "${SPLITEDFILE}.tex"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+	if [ "${FLAG}" == "0" ]; antoniovandre_echo "Convertendo arquivo ${CONTADOR} de ${NUMEROARQUIVOS} para PDF (isto pode demorar)... " n; cpulimit -b -l "$(cat ${ARQUIVOCPULIMITPORCENTAGEM} | tr -d '\n')" -- buf_size=$TAMANHOBUFFER "${LATEXENGINE}" "${LATEXENGINEARGUMENTOS}" "${SPLITEDFILE}.tex" 1>> "${DIRETORIOAVLOSOURCES}${ARQUIVOLOG}" 2>> "${DIRETORIOAVLOSOURCES}${ARQUIVOLOG}"; sleep 5s; CHARPROGRESS=""; while ! [ "$(ps -A | grep ${LATEXENGINE})" == "" ]; do case "${CHARPROGRESS}" in "") CHARPROGRESS="-";; "-") CHARPROGRESS="\\";; "\\") CHARPROGRESS="|";; "|") CHARPROGRESS="/";; "/") CHARPROGRESS="-";; *) ;; esac; echo -ne "${CHARPROGRESS}"; sleep 5s; echo -ne "\b"; done; if ls "${SPLITEDFILE}.pdf" &>> /dev/null; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+	if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Renomeando arquivo ${CONTADOR}... " n; AVTEMP="${ARQUIVORESULTANTE##*/}"; if mv "${SPLITEDFILE}.pdf" "${AVTEMP%.*} - Arquivo ${CONTADOR} de ${NUMEROARQUIVOS}.pdf" &>> /dev/null; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+	if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Compactando arquivo ${CONTADOR}... " n; if zip -u "${ARQUIVORESULTANTE}" "${AVTEMP%.*} - Arquivo ${CONTADOR} de ${NUMEROARQUIVOS}.pdf" &>> /dev/null; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+done; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Criando arquivo de metadados... " n; if echo -ne "Nome: ${ARQUIVORESULTANTE##*/}" > "${ARQUIVODADOSLOLIVRO}" && echo -ne "\n\nLink: ${LINKCOMPARTILHAMENTO}" >> "${ARQUIVODADOSLOLIVRO}" && echo -ne "\n\nData: ${DATA}" >> "${ARQUIVODADOSLOLIVRO}" && echo -ne "\n\nMD5sum: " >> "${ARQUIVODADOSLOLIVRO}" && md5sum "${ARQUIVORESULTANTE}" 2>> /dev/null | cut -d " " -f1 >> "${ARQUIVODADOSLOLIVRO}"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Fazendo upload do novo arquivo de PDFs (isto pode demorar)... " n; if antoniovandre_dbxcli_put "${ARQUIVORESULTANTE}" "${LODBDIR}${ARQUIVORESULTANTE##*/}" &>> /dev/null; then echo "OK."; else echo "Ocorreu um erro."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Fazendo upload do novo arquivo de PDFs para documentos no Dropbox (isto pode demorar)... " n; if antoniovandre_dbxcli_put "${ARQUIVORESULTANTE}" "${AVDIRETORIODOCUMENTOSDROPBOX}${ARQUIVORESULTANTE##*/}" &>> /dev/null; then echo "OK."; else echo "Ocorreu um erro."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Fazendo upload do novo arquivo de PDFs para o diretório de sincronização no Dropbox (isto pode demorar)... " n; if antoniovandre_dbxcli_put "${ARQUIVORESULTANTE}" "${AVDBSYNCFOLDER}${ARQUIVORESULTANTE##*/}" &>> /dev/null; then echo "OK."; else echo "Ocorreu um erro."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Limpando memória... " n; rm "${DIRETORIOTEMP}${PREFIXOARQUIVOST}.txt" &>> /dev/null; rm "${DIRETORIOTEMP}${PREFIXOARQUIVOST}2.txt" &>> /dev/null; rm *tex &>> /dev/null; rm *log &>> /dev/null; rm *aux &>> /dev/null; rm *pdf &>> /dev/null; rm *aux &>> /dev/null; rm "${PREFIXOSPLIT}"* &>> /dev/null; echo -e "${AV_VERDE}OK${AV_SEMCOR}."; fi
+
+IFS=$AVIFS
+if [ "${FLAG}" == "0" ]; then cd "$DIRETORIO"; fi
+
+if [ "${FLAG}" == "0" ]; then echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}."; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Resta aguardar os serviços de sincronização fazerem seus trabalhos para o arquivo ser atualizado, o que pode demorar um pouco."; else exit 1; fi
+
+if ! [ "$1" ==  "noprompt" ]; then antoniovandre_echo "Pressione RETURN para sair."; read; fi
+

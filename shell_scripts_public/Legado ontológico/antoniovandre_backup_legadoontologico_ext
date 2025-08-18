@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Script de backup do legado ontológico a partir do disco local para o Dropbox, mais a atualização dos audios no Dropbox para o disco local. De Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 21-11-2016.
+
+flag_sucesso="0"
+
+#if [ "$flag_sucesso" = "0" ] && echo "Criptografando arquivos secretos... " && ! antoniovandre_criptografar_arquivos_secretos; then flag_sucesso=$(expr $flag_sucesso + 1); fi
+
+#echo ""
+
+if [ "$flag_sucesso" = "0" ] && echo "Copiando atualizações do LO local para LODB... " && ! antoniovandre_backup_legadoontologico; then flag_sucesso=$(expr $flag_sucesso + 1); fi
+
+echo ""
+
+#if [ "$flag_sucesso" = "0" ] && echo "Atualizando localmente os áudios e vídeos a partir do LODB... " && ! antoniovandre_atualizar_legadoontologico_local --apenas gsm --apenas 3gp --apenas mp4; then flag_sucesso=$(expr $flag_sucesso + 1); fi
+
+#echo ""
+
+if [ "$flag_sucesso" = "0" ]; then echo "Sucesso."; sleep 3s; else echo "Erro na execução de pelo menos um dos processos. Pressione RETURN para sair."; read key; exit 1; fi
+

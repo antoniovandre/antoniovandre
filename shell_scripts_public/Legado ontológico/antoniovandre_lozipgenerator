@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script gerador do arquivo zip do Legado Ontológico.
+
+# Última atualização: 16-10-2020.
+
+DIRETORIOAVBASHSCRIPTS="${HOME}/shell_scripts/Ubuntu/"
+LODBDIR="/Legado Ontológico/"
+TEMPDIR="/home/antoniovandre/Temp/"
+LOTEMPDIR="${TEMPDIR}LOtemp/"
+LOPUBLICDIR="/antoniovandre_public/"
+AVDBSYNCFOLDER="/antoniovandre_dropbox_sync_folder/"
+
+DATA="$(date +%d-%m-%Y)"
+
+ARQUIVO="${HOME}/Antonio Vandré Pedrosa Furtunato Gomes - Legado ontológico.zip"
+
+ARQUIVOINDICE="${LOTEMPDIR}indice.txt"
+
+FLAG="0"
+
+if ! hash antoniovandre_echo &>> /dev/null; then echo "antoniovandre_echo não encontrado."; read; FLAG="1"; fi
+
+if [ "${FLAG}" == "0" ]; then if ! [ -n "$AVCORES" ]; then antoniovandre_echo "Carregando antoniovandre_cores... " n; if ! source "${DIRETORIOAVBASHSCRIPTS}antoniovandre_cores"; then echo "Ocorreuum erro."; else echo -e "${AV_VERDE}OK${AV_SEMCOR}."; fi; fi; fi
+
+if [ "${FLAG}" == "0" ]; then if ! [ "$1" ==  "noprompt" ]; then echo -e "Certificou-se de que o CloudHQ esteja ativo?\n\nPressione RETURN para continuar ou CTRL+c para sair."; read; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Checando dependências... " n; if hash zip && hash md5sum && antoniovandre_echo; then echo "${AV_VERDE}OK${AV_SEMCOR}."; else echo "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Limpando diretório temporário... " n; if rm -fr "${LOTEMPDIR}" &>> /dev/null; then echo "${AV_VERDE}OK${AV_SEMCOR}."; else echo "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Criando diretório temporário... " n; if mkdir "${LOTEMPDIR}" &>> /dev/null; then echo "${AV_VERDE}OK${AV_SEMCOR}."; else echo "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Criando índice dos arquivos do LO... " n; if antoniovandre_dbxcli_ls -l -R "${LODBDIR}" > "${ARQUIVOINDICE}"; then echo "${AV_VERDE}OK${AV_SEMCOR}."; else echo "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Formatando índice dos arquivos do LO... " n; if echo -ne "\n" >> "${ARQUIVOINDICE}"; then echo "${AV_VERDE}OK${AV_SEMCOR}."; else echo "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Fazendo download dos arquivos do LO (isto pode demorar)... " n; CHARPROGRESS=""; while read -r LINHA; do case "${CHARPROGRESS}" in "") CHARPROGRESS="-";; "-") CHARPROGRESS="\\";; "\\") CHARPROGRESS="|";; "|") CHARPROGRESS="/";; "/") CHARPROGRESS="-";; *);; esac; echo -ne "${CHARPROGRESS}"; if [ "$(echo $LINHA | cut -d " " -f1)" == "-" ]; then if ! mkdir "${LOTEMPDIR}${LINHA#*/}" &>> /dev/null; then echo "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; break; fi; else if ! antoniovandre_dbxcli_get "/${LINHA#*/}" "${LOTEMPDIR}${LINHA#*/}" &>> /dev/null; then echo "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; break; fi; fi; echo -ne "\b"; done < "${ARQUIVOINDICE}"; if [ "${FLAG}" == "0" ]; then echo "${AV_VERDE}OK${AV_SEMCOR}."; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Removendo o índice dos arquivos do LO... " n; if rm "${ARQUIVOINDICE}" &>> /dev/null; then echo "${AV_VERDE}OK${AV_SEMCOR}."; else echo "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Removendo arquivo compactado antigo... " n; if rm "${ARQUIVO}" &>> /dev/null; then echo "${AV_VERDE}OK${AV_SEMCOR}."; else echo "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Compactando novos arquivos... " n; if zip -r "${ARQUIVO}" "${LOTEMPDIR}"* &>> /dev/null; then echo "${AV_VERDE}OK${AV_SEMCOR}."; else echo "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Fazendo upload do arquivo compactado (isto pode demorar)... " n; if antoniovandre_dbxcli_put "${ARQUIVO}" "${LOPUBLICDIR}${ARQUIVO##*/}" &>> /dev/null; then echo "${AV_VERDE}OK${AV_SEMCOR}."; else echo "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Fazendo upload do arquivo compactado para o diretório de sincronização do Dropbox (isto pode demorar)... " n; if antoniovandre_dbxcli_put "${ARQUIVO}" "${AVDBSYNCFOLDER}${ARQUIVO##*/}" &>> /dev/null; then echo "${AV_VERDE}OK${AV_SEMCOR}."; else echo "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Criando arquivo de metadados... " n; if echo -ne "Nome: ${ARQUIVO##*/}\n\nLink: " > "${ARQUIVODADOSLOARQUIVO}" && antoniovandre_dbxcli share list link | grep "${ARQUIVO##*/}" | cut -f2 >> "${ARQUIVODADOSLOARQUIVO}" && echo -ne "Data: ${DATA}" >> "${ARQUIVODADOSLOARQUIVO}" && echo -ne "\nMD5sum: " >> "${ARQUIVODADOSLOARQUIVO}" && md5sum "${ARQUIVO}" | cut -d " " -f1 >> "${ARQUIVODADOSLOARQUIVO}"; then echo "${AV_VERDE}OK${AV_SEMCOR}."; else echo "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Fazendo upload do arquivo de dados... " n; if antoniovandre_dbxcli_put "${ARQUIVODADOSLOARQUIVO}" "${AVDBSYNCFOLDER}${ARQUIVODADOSLOARQUIVO##*/}"; then echo "${AV_VERDE}OK${AV_SEMCOR}."; else echo "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Removendo diretório temporário... " n; if rm -fr "${LOTEMPDIR}" &>> /dev/null; then echo "${AV_VERDE}OK${AV_SEMCOR}."; else echo "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}."; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Resta aguardar os serviços de sincronização fazerem seus trabalhos para o arquivo ser atualizado, o que pode demorar um pouco."; else exit 1; fi
+
+if ! [ "$1" ==  "noprompt" ]; then antoniovandre_echo "Pressione RETURN para sair."; read; fi
+

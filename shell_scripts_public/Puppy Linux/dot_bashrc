@@ -1,0 +1,22 @@
+. /etc/profile
+
+#v1.0.5 need to override TERM setting in /etc/profile...
+#export TERM=xterm
+# ...v2.13 removed.
+
+#export HISTFILESIZE=2000
+#export HISTCONTROL=ignoredups
+#...v2.13 removed.
+PS1="\[\e]2;\w\a\e[32m\]$USER\\$ \[\e[0m\]"
+
+# Início Antonio Vandré config.
+
+PATH="/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/root/my-applications/bin:/usr/games:/root/shell_scripts/Puppy Linux:/root/shell_scripts/Puppy Linux/AV C Math"
+
+echo -ne "Carregando \"antoniovandre_cores\"... "; if source antoniovandre_cores &>> /dev/null; then echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}.\n"; else echo -e "Ocorreu um erro.\n"; fi
+
+source antoniovandre_aliases; echo -e "";
+
+antoniovandre_frases_aleatorias; echo -e "";
+
+# Fim Antonio Vandré config.

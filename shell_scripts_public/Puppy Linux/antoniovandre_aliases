@@ -1,0 +1,156 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de aliases. Deve ser executado com "source". Para Puppy Linux.
+
+# Última atualização: 11-08-2021.
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if [ "${1}" == "0" ]; then
+
+echo -ne "Removendo aliases... "
+
+unalias ab
+unalias f
+unalias sa
+unalias ra
+unalias vi
+unalias rss
+unalias uol
+unalias scdly
+unalias folha
+
+# Início aliases matemáticos 1/1.
+
+unalias S
+unalias P
+unalias Im
+unalias Se
+unalias Co
+unalias Ta
+unalias Ct
+unalias Sc
+unalias Cs
+unalias As
+unalias Ac
+unalias At
+unalias Act
+unalias Asc
+unalias Acs
+unalias Pt
+unalias Rts
+unalias Vnp
+unalias Ev
+unalias Der
+unalias Int
+unalias Fmp
+unalias Rz
+unalias Nr
+unalias Dt
+
+unalias Pts
+
+unalias Ce
+
+unalias Re
+
+unalias Gp
+
+unalias Comp
+
+unalias Grs
+
+unalias Evg
+
+unalias Gf
+
+unalias Gr
+
+unalias Gr3
+
+# Fim aliases matemáticos 1/1.
+
+# Início aliases temporários 1/1.
+
+unalias aliastemp
+
+# Fim aliases temporários 1/1.
+
+echo -e "${AV_VERDE}Ok${AV_SEMCOR}."
+
+else
+
+echo -ne "Carregando aliases... "
+
+alias ab="antoniovandre_background"
+alias f="antoniovandre_frases_aleatorias"
+alias sa="antoniovandre_showaliases"
+alias ra="source antoniovandre_aliases 0"
+alias vi="antoniovandre_verificarinternet"
+alias rss="nice -n 20 antoniovandre_leitorrss"
+alias uol="nice -n 20 antoniovandre_leitorrss http://rss.uol.com.br/feed/noticias.xml 120"
+alias scdly="nice -n 20 antoniovandre_leitorrss https://www.sciencedaily.com/rss/all.xml 120"
+alias folha="nice -n 20 antoniovandre_leitorrss https://feeds.folha.uol.com.br/emcimadahora/rss091.xml 120"
+
+# Início aliases matemáticos 1/1.
+
+alias S="antoniovandre_soma"
+alias P="antoniovandre_produto"
+alias Im="antoniovandre_inversomultiplicativo"
+alias Se="antoniovandre_seno"
+alias Co="antoniovandre_cosseno"
+alias Ta="antoniovandre_tangente"
+alias Ct="antoniovandre_cotangente"
+alias Sc="antoniovandre_secante"
+alias Cs="antoniovandre_cossecante"
+alias As="antoniovandre_arcoseno"
+alias Ac="antoniovandre_arcocosseno"
+alias At="antoniovandre_arcotangente"
+alias Act="antoniovandre_arcocotangente"
+alias Asc="antoniovandre_arcosecante"
+alias Acs="antoniovandre_arcocossecante"
+alias Pt="antoniovandre_potencia"
+alias Rts="antoniovandre_reduzirtermossemelhantes"
+alias Vnp="antoniovandre_valornumericopolinomio"
+alias Ev="antoniovandre_eval"
+alias Der="antoniovandre_derivada"
+alias Int="antoniovandre_integraldefinida"
+alias Fmp="antoniovandre_funcaomaisproxima /root/software_sources/C/Math/antoniovandre_pontos.txt /root/software_sources/C/Math/antoniovandre_funcoes.txt 1"
+alias Pc="antoniovandre_produtocomplexos"
+alias Rz="antoniovandre_raizesfuncao"
+alias Nr="antoniovandre_numeroraizes"
+alias Dt="antoniovandre_determinante"
+
+alias Pts="antoniovandre_proximotermosequencia"
+
+alias Ce="if ls /root/software_sources/C/Math/antoniovandre_math_estatisticas.txt &>> /dev/null; then cat /root/software_sources/C/Math/antoniovandre_math_estatisticas.txt; else echo \"Arquivo de estatísticas matemáticas ainda não existente.\"; fi"
+
+alias Re="rm /root/software_sources/C/Math/antoniovandre_math_estatisticas.txt &>> /dev/null; rm /root/software_sources/C/Math/antoniovandre_math_estatisticas.png &>> /dev/null"
+
+alias Gp="antoniovandre_gnuplot_mathstatistics"
+
+alias Comp="sudo antoniovandre_cmath_compilar"
+
+alias Grs="if ls /root/software_sources/C/Math/antoniovandre_math_estatisticas.png &>> /dev/null; then eog /root/software_sources/C/Math/antoniovandre_math_estatisticas.png &>> /dev/null; else echo 'Arquivo imagem gráfico não encontrado.'; fi"
+
+alias Evg="python3 /root/software_sources/Python/antoniovandre_eval_gui.py"
+
+alias Gf="antoniovandre_funcoesgerador"
+
+alias Gr="antoniovandre_graficocartesiano"
+
+alias Gr3="antoniovandre_graficocartesiano_3d"
+
+# Fim aliases matemáticos 1/1.
+
+# Início aliases temporários 1/1.
+
+alias aliastemp=""
+
+# Fim aliases temporários 1/1.
+
+echo -e "${AV_VERDE}Ok${AV_SEMCOR}."
+
+fi

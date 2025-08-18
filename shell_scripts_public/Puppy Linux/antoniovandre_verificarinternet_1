@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Script de verificação de conexão com a internet. De Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico). Para Puppy Linux.
+
+# Última atualização: 07-08-2021.
+
+URLFILE="/root/antoniovandre_urltouch.txt"
+
+if ! ls "${URLFILE}" &>> /dev/null; then echo -e "${AV_VERMELHO}Arquivo de URL não encontrado${AV_SEMCOR}."; exit 1; else URLTOUCH=$(cat "${URLFILE}" | tr -d "\n"); fi
+
+if traceroute "${URLTOUCH}" &>> /dev/null; then echo -e "${AV_VERDE}Internet acessível${AV_SEMCOR}."; else echo "${AV_VERMELHO}Sem internet${AV_SEMCOR}."; exit 1; fi
+

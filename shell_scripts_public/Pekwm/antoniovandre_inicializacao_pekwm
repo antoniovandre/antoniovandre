@@ -1,0 +1,54 @@
+#!/bin/sh
+
+# Script de inicialização do Pekwm, de Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Última atualização: 06-08-2021. Com exceção de linhas comentadas / descomentadas.
+
+#disper -s -r 1920x1080
+
+setxkbmap -model abnt2 -layout br &
+
+xset s off &
+
+#dropbox start &
+
+#xclipboard &
+
+#antoniovandre_cpufreq-set_gksudo &
+
+#antoniovandre_gedit &
+
+hsetroot -fill /home/antoniovandre/Imagens/Math\ wallpapers/Mathematical\ Ramblings\ -\ Desktop\ wallpaper.png &
+
+xscreensaver &
+
+#pcmanfm &
+
+thunar &
+
+#chromium-browser &
+
+#antoniovandre_googlechrome
+
+#antoniovandre_firefox
+
+#vlc &
+
+xfce4-terminal &
+
+python3 /home/antoniovandre/software_sources/Python/antoniovandre_eval_gui.py &
+
+antoniovandre_cpususpendtemperature &>> /dev/null &
+
+antoniovandre_daylight v &>> /dev/null &
+
+xclock &>> /dev/null &
+
+REDSHIFT_CONTADOR="1"; while [ "${REDSHIFT_CONTADOR}" -le "3" ]; do if ! redshift &>> /dev/null; then sleep 5s; REDSHIFT_CONTADOR=$(expr "${REDSHIFT_CONTADOR}" + 1); else break; fi; done; if [ "${REDSHIFT_CONTADOR}" == "4" ]; then redshift -l -8.2:-35; fi & 
+
+qupzilla https://livetrafficfeed.com/live/mathematicalramblings.blogspot.com &
+
+sleep 60s
+
+qupzilla -nw https://m.facebook.com/buddylist.php &
+qupzilla -nw https://mail.google.com/mail/u/0/h/qimzcgrm539d/?zy=b&f=1 &

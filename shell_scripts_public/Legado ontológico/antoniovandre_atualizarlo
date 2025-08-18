@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script gerador do livro Legado Ontológico de Antonio Vandré.
+
+# Última atualização: 17-03-2020.
+
+if antoniovandre_logenerator noprompt && antoniovandre_lozipgenerator noprompt; then echo "Sucesso."; else echo "Ocorreu um erro."; fi
+
+echo "Pressione RETURN para sair"
+
+read
+

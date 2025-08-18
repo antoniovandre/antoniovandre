@@ -1,0 +1,92 @@
+#!/bin/sh
+
+# Script de atualização dos arquivos do diretório local do Legado ontológico a partir do Dropbox, de Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Requer o software "md5sum".
+
+# Última atualização: 20-04-2016.
+
+LODB="/home/antoniovandre/Dropbox/Legado ontológico/"
+
+LO="/home/antoniovandre/Legado ontológico/"
+
+FILE_FLAG_ATUALIZOU_ARQUIVOS="/home/antoniovandre/Temp/antoniovandre_atualizar_legadoontologico_local_file_flag_atualizou_arquivos"
+
+FILE_FLAG_REMOVEU_ARQUIVOS="/home/antoniovandre/Temp/antoniovandre_atualizar_legadoontologico_local_file_flag_removeu_arquivos"
+
+FILE_FLAG_ARQUIVO_ENCONTRADO="/home/antoniovandre/Temp/antoniovandre_atualizar_legadoontologico_local_file_flag_arquivo_encontrado"
+
+FILE_PARAMETROS="/home/antoniovandre/Temp/antoniovandre_atualizar_legadoontologico_local_file_parametros"
+
+FILE_PADROES="/home/antoniovandre/Temp/antoniovandre_atualizar_legadoontologico_local_padroes"
+
+FILE_CONTADOR_PARAMETROS_PADROES="/home/antoniovandre/Temp/antoniovandre_atualizar_legadoontologico_local_file_contador_parametros_padroes"
+
+FILE_FLAG_PARAMETRO_JUMP="/home/antoniovandre/Temp/antoniovandre_atualizar_legadoontologico_local_file_flag_parametro_jump"
+
+FILE_NUMERO_ARQUIVOS_LODB="/home/antoniovandre/Temp/antoniovandre_atualizar_legadoontologico_local_file_numero_arquivos_lodb"
+
+FILE_NUMERO_ARQUIVOS_LO="/home/antoniovandre/Temp/antoniovandre_atualizar_legadoontologico_local_file_numero_arquivos_lo"
+
+FILE_CONTADOR="/home/antoniovandre/Temp/antoniovandre_atualizar_legadoontologico_local_file_contador"
+
+rm "$FILE_PARAMETROS" 2>> /dev/null
+
+touch "$FILE_PARAMETROS"
+
+rm "$FILE_PADROES" 2>> /dev/null
+
+touch "$FILE_PADROES"
+
+echo "0" > "$FILE_CONTADOR_PARAMETROS_PADROES"
+
+echo "0" > "$FILE_FLAG_ATUALIZOU_ARQUIVOS"
+
+echo "0" > "$FILE_FLAG_REMOVEU_ARQUIVOS"
+
+echo "0" > "$FILE_FLAG_ARQUIVO_ENCONTRADO"
+
+echo "0" > "$FILE_FLAG_PARAMETRO_JUMP"
+
+echo "0" > "$FILE_NUMERO_ARQUIVOS_LODB"
+
+echo "0" > "$FILE_NUMERO_ARQUIVOS_LO"
+
+echo "0" > "$FILE_CONTADOR"
+
+for parametro in $@; do echo $parametro >> "$FILE_PARAMETROS"; done
+
+cat "$FILE_PARAMETROS" | while read parametro; do if [ "$(cat "$FILE_FLAG_PARAMETRO_JUMP")" = "1" ]; then echo "*${parametro}*" >> "$FILE_PADROES"; echo "0" > "$FILE_FLAG_PARAMETRO_JUMP"; else if [ "$parametro" = "--apenas" ]; then echo $(expr $(cat "$FILE_CONTADOR_PARAMETROS_PADROES") + 1) > "$FILE_CONTADOR_PARAMETROS_PADROES"; echo "1" > "$FILE_FLAG_PARAMETRO_JUMP"; continue; fi; fi; done
+
+if [ "$(cat "$FILE_CONTADOR_PARAMETROS_PADROES")" -gt "5" ]; then echo "Número máximo de padrões excedido"; exit 1; fi
+
+if [ "$(cat "$FILE_CONTADOR_PARAMETROS_PADROES")" != "0" ]; then LODBfiles=$(find "$LODB" -type f \( -name "$(cat "$FILE_PADROES" | head -n 1 | tail -n 1)" -o -name "$(cat "$FILE_PADROES" | head -n 2 | tail -n 1)" -o -name "$(cat "$FILE_PADROES" | head -n 3 | tail -n 1)" -o -name "$(cat "$FILE_PADROES" | head -n 4 | tail -n 1)" -o -name "$(cat "$FILE_PADROES" | head -n 5 | tail -n 1)" \) -printf "%f\n"); LOfiles=$(find "$LO" -type f \( -name "$(cat "$FILE_PADROES" | head -n 1 | tail -n 1)" -o -name "$(cat "$FILE_PADROES" | head -n 2 | tail -n 1)" -o -name "$(cat "$FILE_PADROES" | head -n 3 | tail -n 1)" -o -name "$(cat "$FILE_PADROES" | head -n 4 | tail -n 1)" -o -name "$(cat "$FILE_PADROES" | head -n 5 | tail -n 1)" \) -printf "%f\n"); else LOfiles=$(ls -1 "$LO"); LODBfiles=$(ls -1 "$LODB"); fi
+
+printf "%04d" $(echo "$LODBfiles" | wc -l) > "$FILE_NUMERO_ARQUIVOS_LODB"
+
+printf "%04d" $(echo "$LOfiles" | wc -l) > "$FILE_NUMERO_ARQUIVOS_LO"
+
+if ! ping -c 1 www.dropbox.com 1>> /dev/null 2>> /dev/null; then echo "Sem conexão com os servidores Dropbox. Pressione RETURN para sair."; read key; exit 1; else echo -n "Delay para indexação dos arquivos"; for i in `seq 1 5`; do sleep 1s; echo -n "."; done; echo " Pronto."; fi
+
+echo "Atualizando arquivos:"
+
+echo "$LODBfiles" | while read file; do printf "%04d" $(expr $(cat "$FILE_CONTADOR") + 1) > "$FILE_CONTADOR"; printf "$(cat "$FILE_CONTADOR")/$(cat "$FILE_NUMERO_ARQUIVOS_LODB")\b\b\b\b\b\b\b\b\b"; if [ "$(md5sum "${LODB}${file}" 2>> /dev/null | awk '{print $1}')" != "$(md5sum "${LO}${file}" 2>> /dev/null | awk '{print $1}')" ]; then cp "${LODB}${file}" "${LO}${file}"; echo "1" > "$FILE_FLAG_ATUALIZOU_ARQUIVOS"; fi; done
+
+echo ""
+
+if [ "$(cat "$FILE_FLAG_ATUALIZOU_ARQUIVOS")" = "1" ]; then echo "Pronto."; else echo "Inalterados."; fi
+
+echo ""
+
+echo "Removendo arquivos deletados:"
+
+echo "0" > "$FILE_CONTADOR"
+
+if [ "$LOfiles" != "" ]; then echo "$LOfiles" | while read lofile; do printf "%04d" $(expr $(cat "$FILE_CONTADOR") + 1) > "$FILE_CONTADOR"; printf "$(cat "$FILE_CONTADOR")/$(cat "$FILE_NUMERO_ARQUIVOS_LO")\b\b\b\b\b\b\b\b\b"; echo "$LODBfiles" | while read lodbfile; do if [ "$lofile" = "$lodbfile" ]; then echo "1" > "$FILE_FLAG_ARQUIVO_ENCONTRADO"; fi; done; if [ "$(cat "$FILE_FLAG_ARQUIVO_ENCONTRADO")" = "0" ]; then rm "${LO}${lofile}"; echo "1" > "$FILE_FLAG_REMOVEU_ARQUIVOS"; else echo "0" > "$FILE_FLAG_ARQUIVO_ENCONTRADO"; fi; done; fi
+
+echo ""
+
+if [ "$(cat "$FILE_FLAG_REMOVEU_ARQUIVOS")" = "1" ]; then echo "Pronto."; else echo "Nenhum arquivo removido."; fi
+
+sleep 3s
+

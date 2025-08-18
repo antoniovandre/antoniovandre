@@ -1,0 +1,104 @@
+#!/bin/sh
+
+# Script de backup dos arquivos do Legado Ontológico, do PC para a conta Dropbox. De Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Requer os sofwares "md5sum" e "unix2dos".
+
+# Uso: antoniovandre_backup_legadoontologico [-i <padrão ignorado>] [-i <padrão ignorado>]...
+
+# Última atualização: 21-04-2016.
+
+DIRETORIO_ORIGEM="/home/antoniovandre/Legado ontológico/"
+
+DIRETORIO_DESTINO="/home/antoniovandre/Dropbox/Legado ontológico/"
+
+FILE_PARAMETROS="/home/antoniovandre/Temp/antoniovandre_backup_legadoontologico_file_parametros"
+
+FILE_PADROES_IGNORADOS="/home/antoniovandre/Temp/antoniovandre_backup_legadoontologico_file_padroes_ignorados"
+
+FILE_CONTADOR_PARAMETROS_IGNORADOS="/home/antoniovandre/Temp/antoniovandre_backup_legadoontologico_file_contador_padroes_ignorados"
+
+FILE_FLAG_ENCONTROU_ARQUIVO="/home/antoniovandre/Temp/antoniovandre_backup_legadoontologico_file_flag_encontrou_arquivo"
+
+FILE_FLAG_ATUALIZACOES="/home/antoniovandre/Temp/antoniovandre_backup_legadoontologico_file_flag_atualizacoes"
+
+FILE_FLAG_CRIACOES="/home/antoniovandre/Temp/antoniovandre_backup_legadoontologico_file_flag_criacoes"
+
+FILE_FLAG_REMOCOES="/home/antoniovandre/Temp/antoniovandre_backup_legadoontologico_file_flag_remocoes"
+
+FILE_FLAG_PARAMETRO_JUMP="/home/antoniovandre/Temp/antoniovandre_backup_legadoontologico_file_flag_parametro_jump"
+
+FILE_NUMERO_ARQUIVOS_ORIGEM="/home/antoniovandre/Temp/antoniovandre_backup_legadoontologico_file_numero_arquivos_origem"
+
+FILE_NUMERO_ARQUIVOS_DESTINO="/home/antoniovandre/Temp/antoniovandre_backup_legadoontologico_file_numero_arquivos_destino"
+
+FILE_CONTADOR="/home/antoniovandre/Temp/antoniovandre_backup_legadoontologico_file_contador"
+
+rm "$FILE_PARAMETROS" 2>> /dev/null
+
+touch "$FILE_PARAMETROS"
+
+rm "$FILE_PADROES_IGNORADOS" 2>> /dev/null
+
+touch "$FILE_PADROES_IGNORADOS"
+
+echo "0" > "$FILE_CONTADOR_PARAMETROS_IGNORADOS"
+
+echo "0" > "$FILE_FLAG_ENCONTROU_ARQUIVO"
+
+echo "0" > "$FILE_FLAG_ATUALIZACOES"
+
+echo "0" > "$FILE_FLAG_CRIACOES"
+
+echo "0" > "$FILE_FLAG_REMOCOES"
+
+echo "0" > "$FILE_FLAG_PARAMETRO_JUMP"
+
+echo "0" > "$FILE_NUMERO_ARQUIVOS_ORIGEM"
+
+echo "0" > "$FILE_NUMERO_ARQUIVOS_DESTINO"
+
+echo "0" > "$FILE_CONTADOR"
+
+if (! find "$DIRETORIO_ORIGEM" -type d 1>> /dev/null 2>> /dev/null) || (! find "$DIRETORIO_DESTINO" -type d 1>> /dev/null 2>> /dev/null); then echo "Erro."; exit 1; fi
+
+for parametro in $@; do echo $parametro >> "$FILE_PARAMETROS"; done
+
+cat "$FILE_PARAMETROS" | while read parametro; do if [ "$(cat "$FILE_FLAG_PARAMETRO_JUMP")" = "1" ]; then echo "*${parametro}*" >> "$FILE_PADROES_IGNORADOS"; echo "0" > "$FILE_FLAG_PARAMETRO_JUMP"; else if [ "$parametro" = "-i" ]; then echo $(expr $(cat "$FILE_CONTADOR_PARAMETROS_IGNORADOS") + 1) > "$FILE_CONTADOR_PARAMETROS_IGNORADOS"; echo "1" > "$FILE_FLAG_PARAMETRO_JUMP"; continue; fi; fi; done
+
+if [ "$(cat "$FILE_CONTADOR_PARAMETROS_IGNORADOS")" -gt "5" ]; then echo "Número máximo de padrões ignorados excedido. Pressione RETURN para sair."; read key; exit 1; fi
+
+lista_origem=$(find "$DIRETORIO_ORIGEM" -type f \( ! -iname "$(cat "$FILE_PADROES_IGNORADOS" | head -n 1 | tail -n 1)" ! -iname "$(cat "$FILE_PADROES_IGNORADOS" | head -n 2 | tail -n 1)" ! -iname "$(cat "$FILE_PADROES_IGNORADOS" | head -n 3 | tail -n 1)" ! -iname "$(cat "$FILE_PADROES_IGNORADOS" | head -n 4 | tail -n 1)" ! -iname "$(cat "$FILE_PADROES_IGNORADOS" | head -n 5 | tail -n 1)" \))
+
+lista_destino=$(find "$DIRETORIO_DESTINO" -type f \( ! -iname "$(cat "$FILE_PADROES_IGNORADOS" | head -n 1 | tail -n 1)" ! -iname "$(cat "$FILE_PADROES_IGNORADOS" | head -n 2 | tail -n 1)" ! -iname "$(cat "$FILE_PADROES_IGNORADOS" | head -n 3 | tail -n 1)" ! -iname "$(cat "$FILE_PADROES_IGNORADOS" | head -n 4 | tail -n 1)" ! -iname "$(cat "$FILE_PADROES_IGNORADOS" | head -n 5 | tail -n 1)" \))
+
+printf "%04d" $(echo "$lista_origem" | wc -l) > "$FILE_NUMERO_ARQUIVOS_ORIGEM"
+
+printf "%04d" $(echo "$lista_destino" | wc -l) > "$FILE_NUMERO_ARQUIVOS_DESTINO"
+
+echo "Copiando e/ou atualizando arquivos, ignorando inalterações:"
+
+echo "$lista_origem" | while read primeiro; do printf "%04d" $(expr $(cat "$FILE_CONTADOR") + 1) > "$FILE_CONTADOR"; printf "$(cat "$FILE_CONTADOR")/$(cat "$FILE_NUMERO_ARQUIVOS_ORIGEM")\r"; echo "$lista_destino" | while read segundo; do if [ "${primeiro##*/}" = "${segundo##*/}" ]; then echo "1" > "$FILE_FLAG_ENCONTROU_ARQUIVO"; if [ "$(md5sum "$primeiro" | awk '{print $1}')" != "$(md5sum "$segundo" | awk '{print $1}')" ]; then cp "$primeiro" "$segundo"; echo "1" > "$FILE_FLAG_ATUALIZACOES"; fi; fi; done; if [ "$(cat $FILE_FLAG_ENCONTROU_ARQUIVO)" = "0" ]; then cp "$primeiro" "$DIRETORIO_DESTINO"; echo "1" > "$FILE_FLAG_CRIACOES"; fi; echo "0" > "$FILE_FLAG_ENCONTROU_ARQUIVO"; done
+
+echo ""; echo ""
+
+echo "Removendo arquivos deletados, ignorando inalterações:"
+
+echo "0" > "$FILE_CONTADOR"
+
+echo "$lista_destino" | while read segundo; do printf "%04d" $(expr $(cat "$FILE_CONTADOR") + 1) > "$FILE_CONTADOR"; printf "$(cat "$FILE_CONTADOR")/$(cat "$FILE_NUMERO_ARQUIVOS_DESTINO")\r"; echo "$lista_origem" | while read primeiro; do if [ "${primeiro##*/}" = "${segundo##*/}" ]; then echo "1" > "$FILE_FLAG_ENCONTROU_ARQUIVO"; fi; done; if [ "$(cat $FILE_FLAG_ENCONTROU_ARQUIVO)" = "0" ]; then rm "$segundo"; echo "1" > "$FILE_FLAG_REMOCOES"; fi; echo "0" > "$FILE_FLAG_ENCONTROU_ARQUIVO"; done
+
+echo ""; echo ""
+
+if [ "$(cat "$FILE_FLAG_ATUALIZACOES")" = "1" ]; then mensagem_saida_1="Arquivo(s) atualizado(s)."; fi
+
+if [ "$(cat "$FILE_FLAG_CRIACOES")" = "1" ]; then mensagem_saida_2="Arquivo(s) criado(s)."; fi
+
+if [ "$(cat "$FILE_FLAG_REMOCOES")" = "1" ]; then mensagem_saida_3="Arquivo(s) removido(s)."; fi
+
+if [ "$(cat "$FILE_FLAG_ATUALIZACOES")" = "0" ] && [ "$(cat "$FILE_FLAG_CRIACOES")" = "0" ] && [ "$(cat "$FILE_FLAG_REMOCOES")" = "0" ]; then mensagem_saida_4="Arquivos inalterados."; fi
+
+echo "$mensagem_saida_1 $mensagem_saida_2 $mensagem_saida_3 $mensagem_saida_4" | sed -e 's/^[ ]*//'
+
+sleep 3s
+

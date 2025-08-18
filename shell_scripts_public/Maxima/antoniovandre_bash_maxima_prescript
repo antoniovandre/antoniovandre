@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Script gerador do gráfico do histórico de uso das funções em "Antonio Vandré Pedrosa Furtunato Gomes - Maxima API".
+
+# Última atualização: 21-03-2020.
+
+if ! hash antoniovandre_echo 1>> /dev/null 2>> /dev/null; then echo "antoniovandre_echo não encontrado."; read; exit 1; fi
+
+DIRETORIOAVBASHSCRIPTS="${HOME}/shell_scripts/Ubuntu/"
+
+if ! [ -n "$AVCORES" ]; then if ! source "${DIRETORIOAVBASHSCRIPTS}antoniovandre_cores"; then echo "Ocorreu um erro ao carregar o arquivo de cores."; fi; fi
+
+if ! hash maxima 1>> /dev/null 2>> /dev/null; then echo "${AV_VERMELHO}Software Maxima não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if ! hash gnuplot 1>> /dev/null 2>> /dev/null; then echo "${AV_VERMELHO}Software Gnuplot não encontrado${AV_SEMCOR}."; exit 1; fi
+
+export API_path="/usr/local/share/Antonio Vandré Pedrosa Furtunato Gomes - Maxima API - Antonio Vandré Pedrosa Furtunato Gomes Linux issue.mac"
+
+export encontrou_arquivo_registro_atividades="nao"
+
+while read -r linha; do if [ "$(echo $linha | tr -d " " | cut -d "\"" -f 1)" == "antoniovandre_arquivo_estatisticas_funcoes:" ]; then export encontrou_arquivo_registro_atividades="sim"; export maxima_arquivo_registro_atividades=`echo "$linha" | cut -d'"' -f 2`; fi; if [ "$(echo $linha | tr -d " " | cut -d "\"" -f 1)" == "antoniovandre_arquivo_grafico_estatisticas_funcoes:" ]; then export maxima_grafico_registro_atividades=`echo "$linha" | cut -d'"' -f 2`; fi; done < "$API_path"
+
+export avmhgpdf="${HOME}${ANTONIOVANDRE_DROPBOX_SYNC_FOLDER}antoniovandre_maxima_history_gnuplot_datafile"
+
+export avmhgpdf_t="${HOME}${ANTONIOVANDRE_DROPBOX_SYNC_FOLDER}antoniovandre_maxima_history_gnuplot_datafile_temp"
+
+export avmhgpi=$maxima_grafico_registro_atividades
+
+export antoniovandre_maxima_logs_folder="/Mathematical Ramblings/Mathematical Ramblings - Public/Softwares/Maxima scripts/Logs/"
+
+export avmh=$maxima_arquivo_registro_atividades
+
+export gerar_grafico="sim"
+
+export executou_prescript="sim"
+

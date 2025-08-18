@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script para execução de um comando Maxima em BASH.
+
+# Última atualização: 22-03-2020.
+
+if ! hash antoniovandre_echo 1>> /dev/null 2>> /dev/null; then echo "antoniovandre_echo não encontrado."; read; exit 1; fi
+
+DIRETORIOAVBASHSCRIPTS="${HOME}/shell_scripts/Ubuntu/"
+
+if ! [ -n "$AVCORES" ]; then if ! source "${DIRETORIOAVBASHSCRIPTS}antoniovandre_cores"; then echo "Ocorreu um erro ao carregar o arquivo de cores."; fi; fi
+
+if ! [ -n "$executou_prescript" ]; then antoniovandre_echo "Executando prescript... " n; if ! source antoniovandre_bash_maxima_prescript; then echo -e "${AV_VERMELHO}Falhou${AV_SEMCOR}."; exit 1; else echo -e "${AV_VERDE}OK${AV_SEMCOR}."; fi; fi
+
+metodo_backup="$2"
+
+case "$metodo_backup" in
+	built-in)
+		if ! antoniovandre_verificarinternet_1 >> /dev/null; then echo -e "${AV_VERMELHO}Sem conexão com a internet${AV_SEMCOR}."; exit 1; fi
+
+		if ! [ -n "$ANTONIOVANDRE_DROPBOX_SYNC_FOLDER" ]; then echo -e "${AV_VERMELHO}Variável ANTONIOVANDRE_DROPBOX_SYNC_FOLDER não setada${AV_SEMCOR}."; exit 1; fi
+
+		if [ "$encontrou_arquivo_registro_atividades" == "nao" ]; then echo -e "${AV_VERMELHO}Arquivo histórico de atividades não definido${AV_SEMCOR}."; exit 1; fi
+
+		antoniovandre_echo "Recuperando histórico de atividades... " n
+
+		if ! antoniovandre_dbxcli_ls "${ANTONIOVANDRE_DROPBOX_SYNC_FOLDER}${maxima_arquivo_registro_atividades##*/}" 1>> /dev/null 2>> /dev/null; then rm "$maxima_arquivo_registro_atividades" 1>> /dev/null 2>> /dev/null; touch "$maxima_arquivo_registro_atividades" 1>> /dev/null 2>> /dev/null; antoniovandre_echo "Novo registro criado."; else if antoniovandre_dbxcli_get "${ANTONIOVANDRE_DROPBOX_SYNC_FOLDER}${maxima_arquivo_registro_atividades##*/}" "$maxima_arquivo_registro_atividades" 1>> /dev/null 2>> /dev/null; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Falhou${AV_SEMCOR}."; exit 1; fi; fi
+
+		if ! maxima --quiet --init-mac="$API_path" --batch-string="$1"; then exit 1; fi
+
+		antoniovandre_echo "Salvando histórico de atividades... " n
+
+		if antoniovandre_dbxcli_put "$maxima_arquivo_registro_atividades" "${ANTONIOVANDRE_DROPBOX_SYNC_FOLDER}${maxima_arquivo_registro_atividades##*/}" 1>> /dev/null 2>> /dev/null; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -n "${AV_VERMELHO}Falhou${AV_SEMCOR}."; exit 1; fi
+
+		if [ "$gerar_grafico" == "sim" ]; then antoniovandre_echo "Construindo gráfico do histórico de atividades... " n; if ! antoniovandre_maxima_history_gnuplot_generate_command; then exit 1; fi; if antoniovandre_dbxcli_put "$maxima_grafico_registro_atividades" "${ANTONIOVANDRE_DROPBOX_SYNC_FOLDER}${maxima_grafico_registro_atividades##*/}" 1>> /dev/null 2>> /dev/null; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Falhou${AV_SEMCOR}."; exit 1; fi; fi
+		;;
+	dbxcli)
+		if [ "$encontrou_arquivo_registro_atividades" == "nao" ]; then echo -n "${AV_VERMELHO}Arquivo histórico de atividades não definido${AV_SEMCOR}."; exit 1; fi
+
+		if ! antoniovandre_dbxcli_sync_dropbox_sync_folder tolocal; then echo -n "${AV_VERMELHO}Erro ao executar dbxcli${AV_SEMCOR}."; exit 1; fi
+
+		cp "${HOME}${ANTONIOVANDRE_DROPBOX_SYNC_FOLDER}${maxima_arquivo_registro_atividades##*/}" "$maxima_arquivo_registro_atividades" 1>> /dev/null 2>> /dev/null
+
+		if ! maxima --quiet --init-mac="$API_path" --batch-string="$1"; then exit 1; fi
+
+		if [ "$gerar_grafico" == "sim" ]; then if ! antoniovandre_maxima_history_gnuplot_generate_command; then exit 1; fi; fi
+
+		cp "$maxima_arquivo_registro_atividades" "${HOME}${ANTONIOVANDRE_DROPBOX_SYNC_FOLDER}${maxima_arquivo_registro_atividades##*/}" 1>> /dev/null 2>> /dev/null
+
+		if ! antoniovandre_dbxcli_sync_dropbox_sync_folder tocloud; then echo -e "${AV_VERMELHO}Erro ao executar dbxcli${AV_SEMCOR}."; exit 1; fi
+		;;
+	none)
+		if ! maxima --quiet --init-mac="$API_path" --batch-string="$1"; then exit 1; fi
+
+		if [ "$gerar_grafico" == "sim" ]; then if ! antoniovandre_maxima_history_gnuplot_generate_command; then exit 1; fi; fi
+		;;
+	*)
+		antoniovandre_echo "Entre no segundo argumento o método de backup \"built-in\", \"dbxcli\" ou \"none\""
+		;;
+esac
+
+antoniovandre_echo "Executando postscript... " n; if ! antoniovandre_maxima_postscript; then echo -e "${AV_VERMELHO}Falhou${AV_SEMCOR}."; exit 1; fi; echo -e "${AV_VERDE}OK${AV_SEMCOR}."
+

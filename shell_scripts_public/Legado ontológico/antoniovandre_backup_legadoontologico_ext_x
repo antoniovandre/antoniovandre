@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Script para execução do "antoniovandre_backup_legadoontologico_ext" em interface gráfica. De Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 08-03-2016.
+
+xterm antoniovandre_backup_legadoontologico_ext
+

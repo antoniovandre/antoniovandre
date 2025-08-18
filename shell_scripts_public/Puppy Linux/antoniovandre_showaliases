@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script para mostrar os aliases. Para Puppy Linux.
+
+# Última atualização: 08-08-2021.
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+ALIASESSCRIPT="/root/shell_scripts/Puppy Linux/antoniovandre_aliases"
+
+while read -r LINHA; do if [ "${LINHA:0:6}" == "alias " ]; then TAMANHO=$(expr $(echo -n "${LINHA}" | wc -c) - 5); echo -e "${AV_CIANOCLARO}alias${AV_SEMCOR}${LINHA:5:$TAMANHO}\n"; fi; done < "${ALIASESSCRIPT}"
+
+exit 0
