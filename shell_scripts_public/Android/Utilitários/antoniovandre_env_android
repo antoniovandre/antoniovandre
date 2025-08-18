@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de carregamento de variáveis de ambiente, versão para Android.
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 09-06-2024.
+
+export AVENV="1"
+
+export TEMPDIR="${HOME}/storage/shared/av_temp/"
+
+export AVSOFTWARESDIR="${HOME}/storage/shared/av_softwares/"
+
+export BASHSCRIPTSDIR="${AVSOFTWARESDIR}BASH scripts/"
+
+export CSOURCESDIR="${HOME}/storage/shared/av_softwares/C/"
+
+export PATH="${PATH}:${HOME}/:${AVSOFTWARESDIR}:${BASHSCRIPTSDIR}"

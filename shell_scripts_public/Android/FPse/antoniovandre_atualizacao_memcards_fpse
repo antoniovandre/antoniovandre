@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de atualização dos PS1 memory cards no Android.
+
+# Última atualização: 09-10-2020.
+
+SOURCEDIR="/storage/emulated/0/av_misc/PS1 memory cards/"
+DESTDIR="/storage/emulated/0/.fpse/memcards/"
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "/storage/emulated/0/av_softwares/BASH scripts/antoniovandre_cores_android" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! hash md5sum; then echo -e "${AV_VERMELHO}Software \"md5sum\" não encontrado${AV_SEMCOR}."; exit 1; fi;
+
+OLDIFS=$IFS
+IFS=$'\n'
+
+for ARQUIVO in $(ls -1 "${SOURCEDIR}"); do MD5S=$(md5sum "${SOURCEDIR}${ARQUIVO##*/}" 2>> /dev/null | cut -d ' ' -f 1); MD5D=$(md5sum "${DESTDIR}${ARQUIVO##*/}" 2>> /dev/null | cut -d ' ' -f 1); if [ "${MD5S}" != "${MD5D}" ]; then if ! cp "${SOURCEDIR}${ARQUIVO##*/}" "${DESTDIR}${ARQUIVO##*/}" >> /dev/null; then echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR} com \"${ARQUIVO}\"."; else echo -e "${AV_VERDE}Sucesso${AV_SEMCOR} com \"${ARQUIVO}\"."; fi; else if [ "${MD5S}" == "" ] || [ "${MD5D}" == "" ]; then echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR} com \"${ARQUIVO}\"."; else echo -e "\"${ARQUIVO}\" ${AV_AMARELO}inalterado${AV_SEMCOR}."; fi; fi; done
+
+IFS=$OLDIFS
+
+exit 0

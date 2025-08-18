@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de limpeza do diretório WhatsApp.
+
+# Última atualização: 15-10-2020.
+
+WHATSAPPDIR="/storage/emulated/0/WhatsApp Business/"
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "/storage/emulated/0/av_softwares/BASH scripts/antoniovandre_cores_android" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ls "${WHATSAPPDIR}" &>> /dev/null; then echo -ne "Limpando diretório WhatsApp... "; if rm -fr "${WHATSAPPDIR}" &>> /dev/null; then echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; fi; else echo -e "Diretório WhatsApp inexistente."; fi
+
+exit 0

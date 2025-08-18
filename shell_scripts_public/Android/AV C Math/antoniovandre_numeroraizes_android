@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Projeto Mathematical Ramblings.
+
+# Script que retorna o número de raízes de uma função em dado intervalo, para Android.
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 06-06-2024. Não considerando alterações em variáveis globais.
+
+if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/storage/shared/av_softwares/BASH scripts/antoniovandre_env_android" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+TEMPFILE="${TEMPDIR}avnr"
+
+if ! [ -n "$AVCORES" ]; then echo -n "Carregando cores... "; if ! source "${BASHSCRIPTSDIR}antoniovandre_cores_android" &>> /dev/null; then echo "Ocorreu um erro."; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}."; fi; fi
+
+if ! hash antoniovandre_eval_android; then echo -e "${AV_VERMELHO}\"antoniovandre_eval_android\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if ! hash antoniovandre_raizesfuncao_android &>> /dev/null; then echo -e "${AV_VERMELHO}\"antoniovandre_raizesfuncao_android\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if [ "$#" != "5" ] || ! [[ "${4}" =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]]; then echo -e "${AV_VERMELHO}Use antoniovandre_numeroraizes_android <FUNÇÃO> <MÍNIMO VALOR DA PESQUISA> <MÁXIMO VALOR DA PESQUISA> <STEP> <LOG>${AV_SEMCOR}."; exit 1; fi
+
+DELIMITADOR=$(TEMP=$(antoniovandre_eval_android "system delimitadorstring" "0" | tr -d "\n"); echo -ne \\x$(printf %02x ${TEMP%.*}))
+
+echo -n "" > "${TEMPFILE}"
+
+if [ "${5}" != "0" ]; then antoniovandre_raizesfuncao_android "${1}" "${2}" "${3}" "${4}" "1" 2>> /dev/null | tee "${TEMPFILE}"; TEMP=$(cat "${TEMPFILE}" | tail -n 1); else TEMP=$(antoniovandre_raizesfuncao_android "${1}" "${2}" "${3}" "${4}" "0"); fi
+
+if [ -z "${TEMP}" ]; then NUMERORAIZES="0"; else if [ "${TEMP}" == "inf" ]; then NUMERORAIZES="inf"; else NUMERORAIZES=$(CONTADOR="1"; for I in `seq 0 $(expr $(echo -n "${TEMP}" | wc -c | tr -d "\n") - 1)`; do if [ "${TEMP:${I}:1}" == "${DELIMITADOR}" ]; then CONTADOR=$(expr "${CONTADOR}" + 1); fi; done; echo -n "${CONTADOR}"); fi; fi
+
+case "${NUMERORAIZES}" in
+	"inf") echo "inf";;
+	*) echo "${NUMERORAIZES}";;
+esac
+
+exit 0

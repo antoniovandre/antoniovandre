@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script gerador do arquivo de dados do arquivo zip do Legado Ontológico, para Android.
+
+# Última atualização: 16-10-2020.
+
+DATA="$(date +%d-%m-%Y)"
+
+ARQUIVO="/storage/emulated/0/Antonio Vandré Pedrosa Furtunato Gomes - Legado ontológico.zip"
+ARQUIVODADOSLOARQUIVO="/storage/emulated/0/antoniovandre_dropbox_sync_folder/antoniovandre - LO arquivo - dados.txt"
+
+LINKCOMPARTILHAMENTO="https://www.dropbox.com/s/u640171wdbkwod4/Antonio%20Vandr%C3%A9%20Pedrosa%20Furtunato%20Gomes%20-%20Legado%20ontol%C3%B3gico.zip?dl=0"
+
+FLAG="0"
+
+if ! [ -n "$AVCORES" ]; then bash "${DIRETORIOAVBASHSCRIPTS}"antoniovandre_echo_android "Carregando antoniovandre_cores... " n; if ! source "${DIRETORIOAVBASHSCRIPTS}antoniovandre_cores_android" &>> /dev/null; then echo "Ocorreu um erro."; else echo -e "${AV_VERDE}OK${AV_SEMCOR}."; fi; fi
+
+if ! [ "$1" ==  "noprompt" ]; then echo -e "Certificou-se de que o arquivo ${ARQUIVO} esteja atualizado?\n\nPressione RETURN para continuar ou CTRL+c para sair."; read; fi
+
+if [ "${FLAG}" == "0" ]; then bash "${DIRETORIOAVBASHSCRIPTS}"antoniovandre_echo_android "Checando dependências... " n; if hash md5sum && ls "${DIRETORIOAVBASHSCRIPTS}"antoniovandre_echo_android &>> /dev/null; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then bash "${DIRETORIOAVBASHSCRIPTS}"antoniovandre_echo_android "Criando arquivo de metadados... " n; if echo -ne "Nome: ${ARQUIVO##*/}" > "${ARQUIVODADOSLOARQUIVO}" && echo -ne "\n\nLink: ${LINKCOMPARTILHAMENTO}" >> "${ARQUIVODADOSLOARQUIVO}" && echo -ne "\n\nData: ${DATA}" >> "${ARQUIVODADOSLOARQUIVO}" && echo -ne "\n\nMD5sum: " >> "${ARQUIVODADOSLOARQUIVO}" && md5sum "${ARQUIVO}" 2>> /dev/null | cut -d " " -f1 >> "${ARQUIVODADOSLOARQUIVO}"; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}."; fi
+
+if [ "${FLAG}" == "0" ]; then bash "${DIRETORIOAVBASHSCRIPTS}"antoniovandre_echo_android "Resta copiar os arquivos \"${ARQUIVO}\" e \"${ARQUIVODADOSLOARQUIVO}\" para os diretórios apropriados e aguardar os serviços de sincronização fazerem seus trabalhos para o arquivo ser atualizado, o que pode demorar um pouco."; else exit 1; fi
+
+if ! [ "$1" ==  "noprompt" ]; then bash "${DIRETORIOAVBASHSCRIPTS}"antoniovandre_echo_android "Pressione RETURN para sair."; read; fi
+

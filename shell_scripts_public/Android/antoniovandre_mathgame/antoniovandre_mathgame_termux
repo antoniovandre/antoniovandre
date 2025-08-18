@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Projeto Mathematical Ramblings.
+
+# Script de um simples jogo de Matemática, para Android, Termux shortcut.
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 06-08-2020.
+
+TEMP=$PWD &>> /dev/null
+
+cd /storage/emulated/0/av_softwares/BASH\ scripts/ &>> /dev/null
+
+bash antoniovandre_mathgame ne
+
+cd '${TEMP}' &>> /dev/null

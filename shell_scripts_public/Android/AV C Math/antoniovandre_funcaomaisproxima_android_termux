@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script lançador de "antoniovandre_funcaomaisproxima_android", de Antonio Vandré Pedrosa Furtunato Gomes, para Android, Termux shortcut.
+
+# Licença de uso: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 06-08-2020.
+
+"${HOME}/antoniovandre_funcaomaisproxima_android" "/storage/emulated/0/av_softwares/C/Math/antoniovandre_pontos.txt" "/storage/emulated/0/av_softwares/C/Math/antoniovandre_funcoes.txt" 1
+
+read

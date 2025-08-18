@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Script para gerar uma lista de MD5SUMs dos arquivos de um diretório, para Android. De Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 07-06-2024. Não considerando alterações em variáveis globais.
+
+if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/storage/shared/av_softwares/BASH scripts/antoniovandre_env_android" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+DELIMITADOR=$'%'
+
+if ! [ -n "${AVCORES}" ]; then source "${BASHSCRIPTSDIR}antoniovandre_cores" &>> /dev/null; fi
+
+if ! hash md5sum; then echo -e "${AV_VERMELHO}Software \"md5sum\" não encontrado${AV_SEMCOR}."; fi
+
+if ! [ -n "${1}" ]; then echo -e "${AV_VERMELHO}Entre com um diretório como argumento${AV_SEMCOR}."; exit 1; fi
+
+if ! [ -d "${1}" ]; then echo -e "${AV_VERMELHO}Entre com um diretório como argumento${AV_SEMCOR}."; exit 1; fi
+
+OLDIFS=$IFS
+IFS=$'\n'
+
+for i in `find "${1}"`; do if [ -f "${i}" ]; then echo -e "${i}${DELIMITADOR}$(md5sum ${i} | cut -d ' ' -f 1)"; fi; done
+
+IFS=$OLDIFS

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Script de limpeza do diretório WhatsApp. Termux shortcut. De Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 15-10-2020.
+
+bash /storage/emulated/0/av_softwares/BASH\ scripts/antoniovandre_whatsapp_limparmemoria
+
+read

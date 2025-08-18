@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Script de atualização dos PS1 memory cards no Android. Termux shortcut. De Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 08-10-2020.
+
+bash /storage/emulated/0/av_softwares/BASH\ scripts/antoniovandre_atualizacao_memcards_fpse
+
+read

@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de visualização de estatísticas do AV3DNavigator, para Android, de Antonio Vandré.
+
+# Última atualização: 31-01-2025.
+
+if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/storage/shared/av_softwares/BASH scripts/antoniovandre_env_android" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "$(echo -n $BASHSCRIPTSDIR | sed 's/\ /\\\ /g')antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! hash curl &>> /dev/null; then echo -ne "${AV_VERMELHO}Software \"curl\" não encontrado${AV_SEMCOR}"; echo "."; exit 1; fi
+
+echo -ne "Fetching data..."; RAW=$(curl -s "https://api.github.com/repos/antoniovandre2/AV3DNavigatorStats/releases" 2>> /dev/null); if [ "${RAW}" != "" ]; then echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; else echo -e " ${AV_VERMELHO} Ocorreu um erro${AV_SEMCOR}."; exit 1; fi
+
+NAMES=$(echo -n "${RAW}" | sed 's/AV3DNavigatorStats//g' | grep "\"name\": \"AV3DNavigator" | awk '{print $2}' | tr -d ',')
+
+VALUES=$(echo -n "${RAW}" | grep "download_count" | awk '{print $2}' | tr -d ',')
+
+CONTADOR=$(echo -n $VALUES | wc -w)
+
+echo -e "Estatísticas de uso do AV3DNavigator:\n"
+
+for ID in `seq 1 $CONTADOR`; do echo -ne "Chave: "; echo -n "${NAMES}" | sed "${ID}q;d" | tr -d '\n'; echo -ne ". "; echo -ne "Valor: ${AV_CIANOCLARO}"; echo -n "${VALUES}" | sed "${ID}q;d" | tr -d '\n'; echo -e "${AV_SEMCOR}."; done

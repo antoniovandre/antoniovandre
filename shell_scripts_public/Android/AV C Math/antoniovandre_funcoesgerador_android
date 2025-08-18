@@ -1,0 +1,111 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script gerador de funções para uso de "antoniovandre_funcaomaisproxima" e "antoniovandre_funcaomaisproxima_android", de Antonio Vandré Pedrosa Furtunato Gomes, para Android.
+
+# Várias opções devido às limitações do compilador/hardware.
+
+# Licença de uso: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 16-06-2024. Não considerando as alterações nas variáveis globais, comentação de linhas, e adaptações para continuidade quando houver crash.
+
+if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/storage/shared/av_softwares/BASH scripts/antoniovandre_env_android" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+ARQUIVOFUNCOES="${CSOURCESDIR}Math/antoniovandre_funcoes.txt"
+
+VALORMINIMO="-10"
+VALORMAXIMO="10"
+VALORPASSO="1"
+
+VARIAVEL="X"
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "$(echo -n $BASHSCRIPTSDIR | sed 's/\ /\\\ /g')antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+echo -n "" > "${ARQUIVOFUNCOES}"
+
+# Gerador de polinômios de grau zero.
+
+for i in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i}),"; done >> "${ARQUIVOFUNCOES}"
+
+# Gerador de polinômios do primeiro grau.
+
+for i in `seq $VALORMINIMO $VALORPASSO "-${VALORPASSO}" | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*${VARIAVEL}+(${j}),"; done; done >> "${ARQUIVOFUNCOES}"
+
+for i in `seq $VALORPASSO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*${VARIAVEL}+(${j}),"; done; done >> "${ARQUIVOFUNCOES}"
+
+# Gerador de polinômios do segundo grau.
+
+#for i in `seq $VALORMINIMO $VALORPASSO "-${VALORPASSO}" | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*${VARIAVEL}^2+(${j})*${VARIAVEL}+(${k}),"; done; done; done >> "${ARQUIVOFUNCOES}"
+
+#for i in `seq $VALORPASSO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*${VARIAVEL}^2+(${j})*${VARIAVEL}+(${k}),"; done; done; done >> "${ARQUIVOFUNCOES}"
+
+# Gerador de polinômios do terceiro grau.
+
+#for i in `seq $VALORMINIMO $VALORPASSO "-${VALORPASSO}" | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*${VARIAVEL}^3+(${j})*${VARIAVEL}^2+(${k})*${VARIAVEL}+(${l}),"; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+#for i in `seq $VALORPASSO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*${VARIAVEL}^3+(${j})*${VARIAVEL}^2+(${k})*${VARIAVEL}+(${l}),"; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+# Gerador de polinômios do quarto grau.
+
+#for i in `seq $VALORMINIMO $VALORPASSO "-${VALORPASSO}" | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for m in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*${VARIAVEL}^4+(${j})*${VARIAVEL}^3+(${k})*${VARIAVEL}^2+(${l})*${VARIAVEL}+(${m}),"; done; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+#for i in `seq $VALORPASSO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for m in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*${VARIAVEL}^4+(${j})*${VARIAVEL}^3+(${k})*${VARIAVEL}^2+(${l})*${VARIAVEL}+(${m}),"; done; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+# Gerador de polinômios do quinto grau.
+
+#for i in `seq $VALORMINIMO $VALORPASSO "-${VALORPASSO}" | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for m in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for n in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*${VARIAVEL}^5+(${j})*${VARIAVEL}^4+(${k})*${VARIAVEL}^3+(${l})*${VARIAVEL}^2+(${m})*${VARIAVEL}+(${n}),"; done; done; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+#for i in `seq $VALORPASSO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for m in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for n in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*${VARIAVEL}^5+(${j})*${VARIAVEL}^4+(${k})*${VARIAVEL}^3+(${l})*${VARIAVEL}^2+(${m})*${VARIAVEL}+(${n}),"; done; done; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+# Gerador de funções senoidais.
+
+#for i in `seq $VALORMINIMO $VALORPASSO "-${VALORPASSO}" | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*sen((${j})*${VARIAVEL}+(${k}))+(${l}),"; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+#for i in `seq $VALORPASSO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*sen((${j})*${VARIAVEL}+(${k}))+(${l}),"; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+# Gerador de funções cossenoidais.
+
+#for i in `seq $VALORMINIMO $VALORPASSO "-${VALORPASSO}" | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*cos((${j})*${VARIAVEL}+(${k}))+(${l}),"; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+#for i in `seq $VALORPASSO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*cos((${j})*${VARIAVEL}+(${k}))+(${l}),"; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+# Gerador de funções tangenciais.
+
+#for i in `seq $VALORMINIMO $VALORPASSO "-${VALORPASSO}" | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*tg((${j})*${VARIAVEL}+(${k}))+(${l}),"; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+#for i in `seq $VALORPASSO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*tg((${j})*${VARIAVEL}+(${k}))+(${l}),"; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+# Gerador de funções cotangenciais.
+
+#for i in `seq $VALORMINIMO $VALORPASSO "-${VALORPASSO}" | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*cotg((${j})*${VARIAVEL}+(${k}))+(${l}),"; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+#for i in `seq $VALORPASSO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*cotg((${j})*${VARIAVEL}+(${k}))+(${l}),"; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+# Gerador de funções tipo secante.
+
+#for i in `seq $VALORMINIMO $VALORPASSO "-${VALORPASSO}" | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*sec((${j})*${VARIAVEL}+(${k}))+(${l}),"; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+#for i in `seq $VALORPASSO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*sec((${j})*${VARIAVEL}+(${k}))+(${l}),"; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+# Gerador de funções tipo cossecante.
+
+#for i in `seq $VALORMINIMO $VALORPASSO "-${VALORPASSO}" | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*cossec((${j})*${VARIAVEL}+(${k}))+(${l}),"; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+#for i in `seq $VALORPASSO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*cossec((${j})*${VARIAVEL}+(${k}))+(${l}),"; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+# Gerador de funções modulares tipo afim.
+
+#for i in `seq $VALORMINIMO $VALORPASSO "-${VALORPASSO}" | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*modulo((${j})*${VARIAVEL}+(${k}))+(${l}),"; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+#for i in `seq $VALORPASSO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})*modulo((${j})*${VARIAVEL}+(${k}))+(${l}),"; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+# Gerador de funções tipo 1/x.
+
+#for i in `seq $VALORMINIMO $VALORPASSO "-${VALORPASSO}" | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})/((${j})*${VARIAVEL}+(${k}))+(${l}),"; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+#for i in `seq $VALORPASSO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for l in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "(${i})/((${j})*${VARIAVEL}+(${k}))+(${l}),"; done; done; done; done >> "${ARQUIVOFUNCOES}"
+
+if [ $(cat "${ARQUIVOFUNCOES}" | wc -c) != "0" ]; then sed -i '$ s/.$//' "${ARQUIVOFUNCOES}"; fi
+
+echo -e "Arquivo \"${AV_AMARELO}${ARQUIVOFUNCOES}${AV_SEMCOR}\" construído."

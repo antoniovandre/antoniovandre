@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Script de verificação de conexão com a internet, para Android, Termux shortcut. De Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 10-08-2024.
+
+if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/storage/shared/av_softwares/BASH scripts/antoniovandre_env_android" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "${BASHSCRIPTSDIR}antoniovandre_cores_android" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+bash "${BASHSCRIPTSDIR}antoniovandre_verificarinternet_android"
+
+read
