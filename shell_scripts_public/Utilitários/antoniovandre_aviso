@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Simples script de caixa de diálogo.
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 07-07-2024. Não considerando alterações em variáveis globais.
+
+if [ "${#}" != "2" ]; then echo "Requer 2 argumentos."; exit 1; fi
+
+if [ "${1}" == "python" ]; then
+	if ! hash python3 &>> /dev/null; then echo "Python 3 não encontrado."; exit 1; fi
+
+	if ! ls "${HOME}/software_sources/Python/Aviso.py" &>> /dev/null; then echo "Script Python não encontrado."; exit 1; fi
+
+	python3 "${HOME}/software_sources/Python/Aviso.py" "${2}"
+else if [ "${1}" == "gtk" ]; then
+	if ! ls "${HOME}/software_sources/C/aviso" &>> /dev/null; then echo "Software GTK não encontrado."; exit 1; fi
+
+	"${HOME}/software_sources/C/aviso" "${2}"
+fi; fi

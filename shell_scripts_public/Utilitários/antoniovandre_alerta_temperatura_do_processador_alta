@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Script de alerta de superaquecimento do processador, de Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 25-11-2016.
+
+notify-send -i "/home/antoniovandre/Dropbox/Imagens/Ícones/burnintest-cpu.png" "Aviso" "Temperatura do processador alta."
+
+play --no-show-progress "/home/antoniovandre/Dropbox/Voices/Temperatura_do_processador_alta.ogg"

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Script de liberação do uso da cpu pelo Firefox, na GUI. De Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+xterm antoniovandre_cpulimit_firefox_free
+

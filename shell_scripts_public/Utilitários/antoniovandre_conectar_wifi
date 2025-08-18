@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Script de conexão em redes wifi utilizando o Network Manager, de Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 21-12-2016.
+
+nmcli dev wifi con "$1" password "$2"

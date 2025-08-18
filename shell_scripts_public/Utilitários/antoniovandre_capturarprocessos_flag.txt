@@ -1,0 +1,5 @@
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Arquivo flag para captura de processos. "1" para capturar ou qualquer outra string para não capturar.
+
+1
