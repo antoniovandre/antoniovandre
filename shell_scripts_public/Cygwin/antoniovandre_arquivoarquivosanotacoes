@@ -1,0 +1,27 @@
+#!/bin/bash.exe
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de definições de arquivos de anotações. Deve ser executado com "source". Para Cygwin, usuário Guest.
+
+# Última atualização: 26-11-2023.
+
+export ARQUIVOANOTACOES="1"
+
+export DIRETORIOTRABALHOP="/cygdrive/f/Antonio Vandré Pedrosa Furtunato Gomes"
+
+export DIRETORIOTRABALHO="${DIRETORIOTRABALHOP}/"
+export DIRETORIOCYGWIN="Cygwin/"
+export DIRETORIOTRABALHOC="/cygdrive/f/AntonioVandrePedrosaFurtunatoGomes/C/"
+export DIRETORIOTRABALHOJAVA="/cygdrive/f/AntonioVandrePedrosaFurtunatoGomes/Java/"
+
+export ARQUIVOANOTACOES="antoniovandre-anotações_públicas-5.txt"
+export ARQUIVOANOTACOESPRIVADAS="antoniovandre-anotações_privadas-5.crypto"
+export ARQUIVOARTIGOSLIDOS="antoniovandre-artigos_lidos-5.txt"
+export ARQUIVOATUALMENTELENDO="antoniovandre-atualmente_lendo-4.txt"
+
+export ARQUIVOAVBLOCKRUNESTATISTICAS="AVBlockRun - Estatísticas.txt"
+export ARQUIVOAV3DSPACECATCHESTATISTICAS="AV3DSpaceCatch - Estatísticas.txt"
+export ARQUIVOAV3DSPACEWARESTATISTICAS="AV3DSpaceWar - Estatísticas.txt"
+
+export ARQUIVOSENHAANOTACOESPRIVADAS="as"

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script lançador do "antoniovandre_eval" sem log.
+
+# Última atualização: 16-06-2024. Não considerando alterações em variáveis globais.
+
+if [ "${#}" == "1" ]; then antoniovandre_eval "${@}" "0"; else echo -e "${AV_VERMELHO} Número incorreto de argumentos${AV_SEMCOR}."; exit 1; fi

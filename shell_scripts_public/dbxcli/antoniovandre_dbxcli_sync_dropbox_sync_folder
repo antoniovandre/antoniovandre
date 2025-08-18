@@ -1,0 +1,101 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de sincronização de um diretório no Dropbox com um diretório local.
+
+# Última atualização: 30-03-2020 Não considerando alterações em variáveis globais.
+
+DIRETORIOAVBASHSCRIPTS="${HOME}/shell_scripts/Ubuntu/Utilitários/"
+
+antoniovandre_dropbox_sync_folder_index_cloud="${HOME}/antoniovandre_dropbox_sync_folder_index_cloud"
+
+antoniovandre_dropbox_sync_folder_index_local="${HOME}/antoniovandre_dropbox_sync_folder_index_local"
+
+antoniovandre_dropbox_sync_folder_index_local_revision_hash="${HOME}/antoniovandre_dropbox_sync_folder_index_local_revision_hash"
+
+antoniovandre_dropbox_sync_folder_tempfile="${HOME}/antoniovandre_dropbox_sync_folder_tempfile"
+
+antoniovandre_dropbox_sync_folder_lockfile="${HOME}/antoniovandre_dropbox_sync_folder_lockfile"
+
+tempo_de_espera_atualizacao="0s"
+
+FLAG="0"
+
+if ! hash antoniovandre_echo 1>> /dev/null 2>> /dev/null; then echo "antoniovandre_echo não encontrado."; read; FLAG="1"; fi
+
+if [ "${FLAG}" == "0" ]; then if ! [ -n "$AVCORES" ]; then antoniovandre_echo "Carregando antoniovandre_cores... " n; if ! source "${DIRETORIOAVBASHSCRIPTS}antoniovandre_cores"; then echo "Ocorreu um erro."; else echo -e "${AV_VERDE}OK${AV_SEMCOR}."; fi; fi; fi
+
+if [ "${FLAG}" == "0" ]; then if ! antoniovandre_verificarinternet_1 1>> /dev/null 2>> /dev/null; then echo -e "Sem conexão com a internet${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then if ! [ -n "$ANTONIOVANDRE_DROPBOX_SYNC_FOLDER" ]; then echo -e "${AV_VERMELHO}Variável ANTONIOVANDRE_DROPBOX_SYNC_FOLDER não setada${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then if ! hash antoniovandre_dbxcli 1>> /dev/null 2>> /dev/null; then echo -e "${AV_VERMELHO}Software antoniovandre_dbxcli não encontrado${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then if ! hash md5sum 1>> /dev/null 2>> /dev/null; then echo -e "${AV_VERMELHO}Software md5sum não encontrado${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then if [ -f "$antoniovandre_dropbox_sync_folder_lockfile" ]; then echo -e "${AV_VERMELHO}Script já em execução ou finalizado precocemente. Remova o arquivo lock ${antoniovandre_dropbox_sync_folder_lockfile} para forçar a inicialização${AV_SEMCOR}."; FLAG="1"; else touch "$antoniovandre_dropbox_sync_folder_lockfile"; fi; fi
+
+function construir_index_local_revision_hash ()
+{
+	antoniovandre_echo "Construindo index" n
+	if $1; then rm -fr ${HOME}${ANTONIOVANDRE_DROPBOX_SYNC_FOLDER}* 1>> /dev/null 2>> /dev/null; fi; rm "$antoniovandre_dropbox_sync_folder_index_local_revision_hash" 1>> /dev/null 2>> /dev/null; touch "$antoniovandre_dropbox_sync_folder_index_local_revision_hash" 1>> /dev/null 2>> /dev/null; while read -r linhacloud; do echo -n "."; arquivocloud="/${linhacloud#*/}"; arquivocloudrevision=`echo "$linhacloud" | cut -d " " -f 1`; if $1; then if [ "$arquivocloudrevision" == "-" ]; then mkdir "${HOME}${arquivocloud}" 1>> /dev/null 2>> /dev/null; arquivocloudhash="-"; else antoniovandre_dbxcli_get "$arquivocloud" "${HOME}${arquivocloud}" 1>> /dev/null 2>> /dev/null; fi; fi; if [ -d "${HOME}${arquivocloud}" ]; then arquivocloudhash="-"; else arquivocloudhash=`md5sum "${HOME}${arquivocloud}" 2>> /dev/null| cut -d " " -f 1`; fi; echo "$arquivocloudrevision $arquivocloudhash $arquivocloud" >> "$antoniovandre_dropbox_sync_folder_index_local_revision_hash"; done < "$antoniovandre_dropbox_sync_folder_index_cloud"
+	echo -e " ${AV_VERDE}OK${AV_SEMCOR}."
+}
+
+if [ "${FLAG}" == "0" ]; then sleep $tempo_de_espera_atualizacao; while ! antoniovandre_dbxcli ls -lR "$ANTONIOVANDRE_DROPBOX_SYNC_FOLDER" > "$antoniovandre_dropbox_sync_folder_tempfile"; do antoniovandre_echo "Tentando novamente criar o arquivo index cloud..."; done; fi
+
+if [ "${FLAG}" == "0" ]; then tail -n +3 "$antoniovandre_dropbox_sync_folder_tempfile" > "$antoniovandre_dropbox_sync_folder_index_cloud"; fi
+
+if [ "${FLAG}" == "0" ]; then sleep "$tempo_de_espera_atualizacao"; while ! find -L "${HOME}${ANTONIOVANDRE_DROPBOX_SYNC_FOLDER}" -name '*' > "$antoniovandre_dropbox_sync_folder_tempfile"; do antoniovandre_echo "Tentando novamente criar o arquivo index local..."; done; fi
+
+if [ "${FLAG}" == "0" ]; then tail -n +2 "$antoniovandre_dropbox_sync_folder_tempfile" > "$antoniovandre_dropbox_sync_folder_index_local"; fi
+
+if [ "${FLAG}" == "0" ]; then orientacao="$1"; fi
+
+if [ "${FLAG}" == "0" ]; then if ! [ -f "$antoniovandre_dropbox_sync_folder_index_local_revision_hash" ]
+	then
+		sobrescrever_tudo_local=true
+		construir_index_local_revision_hash $sobrescrever_tudo_local
+	else
+		sobrescrever_tudo_local=false
+
+		case "$orientacao" in
+			tolocal)
+				antoniovandre_echo "Comparando cloud com local" n
+				while read -r linhacloud; do echo -n "."; flag_arquivo_encontrado=false; arquivocloud="/${linhacloud#*/}"; arquivocloudrevision=`echo "$linhacloud" | cut -d " " -f 1`; antoniovandre_dbxcli_get "$arquivocloud" "$antoniovandre_dropbox_sync_folder_tempfile" 1>> /dev/null 2>> /dev/null; arquivocloudhash=`md5sum "$antoniovandre_dropbox_sync_folder_tempfile" 2>> /dev/null | cut -d " " -f 1`; while read -r linhalocal; do arquivolocalrevisio="-"; arquivolocalhash=`md5sum "$arquivolocal" 2>> /dev/null | cut -d " " -f 1`; if [ "$arquivocloud" == "${arquivolocal#"$HOME"}" ] && [ "$arquivocloudhash" == "$arquivolocalhash" ]; then flag_arquivo_encontrado=true; fi; done < "$antoniovandre_dropbox_sync_folder_index_local"; if ! $flag_arquivo_encontrado; then if [ "$arquivocloudrevision" == "-" ]; then mkdir "${HOME}${arquivocloud}" 1>> /dev/null 2>> /dev/null; else antoniovandre_dbxcli_get "$arquivocloud" "${HOME}${arquivocloud}" 1>> /dev/null 2>> /dev/null; fi; fi; done < "$antoniovandre_dropbox_sync_folder_index_cloud"
+				echo -e " ${AV_VERDE}OK${AV_SEMCOR}."
+
+				antoniovandre_echo "Comparando local com cloud" n
+				while read -r linhalocal; do echo -n "."; flag_arquivo_encontrado=false; arquivolocal="$linhalocal"; arquivolocalrevision="-"; arquivolocalhash=`md5sum "$arquivolocal" 2>> /dev/null | cut -d " " -f 1`; while read -r linhacloud; do arquivocloud="/${linhacloud#*/}"; arquivocloudrevision=`echo "$linhacloud" | cut -d " " -f 1`; if [ "${arquivolocal#"$HOME"}" == "$arquivocloud" ]; then flag_arquivo_encontrado=true; fi; done < "$antoniovandre_dropbox_sync_folder_index_cloud"; if ! $flag_arquivo_encontrado; then rm -r "$arquivolocal" 1>> /dev/null 2>> /dev/null; fi; done < "$antoniovandre_dropbox_sync_folder_index_local"
+				echo -e " ${AV_VERDE}OK${AV_SEMCOR}."
+
+				construir_index_local_revision_hash $sobrescrever_tudo_local
+				;;
+			tocloud)
+				antoniovandre_echo "Comparando index com local" n
+				while read -r linhalocalrevisionhash; do echo -n ".";flag_arquivo_encontrado=false; arquivolocalrevisionhash="/${linhalocalrevisionhash#*/}"; arquivolocalrevision=`echo "$linhalocalrevisionhash" | cut -d " " -f 1`; arquivolocalhash=`echo "$linhalocalrevisionhash" | cut -d " " -f 2`; while read -r linhalocal; do arquivolocal="$linhalocal"; if [ "${HOME}${arquivolocalrevisionhash}" == "$arquivolocal" ] && ([ "$arquivolocalhash" == "`md5sum "$arquivolocal" 2>> /dev/null | cut -d " " -f 1`" ] || [ "$arquivolocalhash" == "-" ]); then flag_arquivo_encontrado=true; fi; done < "$antoniovandre_dropbox_sync_folder_index_local"; if ! $flag_arquivo_encontrado; then antoniovandre_dbxcli_rm "$arquivolocalrevisionhash" 1>> /dev/null 2>> /dev/null; fi; done < "$antoniovandre_dropbox_sync_folder_index_local_revision_hash"
+				echo -e " ${AV_VERDE}OK${AV_SEMCOR}."
+
+				antoniovandre_echo "Comparando local com index" n
+				while read -r linhalocal; do echo -n "."; flag_arquivo_encontrado=false; arquivolocal="$linhalocal"; while read -r linhalocalrevisionhash; do arquivolocalrevisionhash="/${linhalocalrevisionhash#*/}"; arquivolocalhash=`echo "$linhalocalrevisionhash" | cut -d " " -f 2`; if [ "${HOME}${arquivolocalrevisionhash}" == "$arquivolocal" ] && (([[ -f "$arquivolocal" ]] && [ "$arquivolocalhash" == `md5sum "$arquivolocal" 2>> /dev/null | cut -d " " -f 1` ]) || ([[ -d "$arquivolocal" ]] && [ "$arquivolocalhash" == "-" ])); then flag_arquivo_encontrado=true; fi; done < "$antoniovandre_dropbox_sync_folder_index_local_revision_hash"; if ! $flag_arquivo_encontrado; then if [[ -f "$arquivolocal" ]]; then antoniovandre_dbxcli_put "$arquivolocal" "${arquivolocal#"$HOME"}" 1>> /dev/null 2>> /dev/null; else antoniovandre_dbxcli_mkdir "${arquivolocal#"$HOME"}" 1>> /dev/null 2>> /dev/null; fi; fi; done < "$antoniovandre_dropbox_sync_folder_index_local"
+				echo -e " ${AV_VERDE}OK${AV_SEMCOR}."
+
+				construir_index_local_revision_hash $sobrescrever_tudo_local
+				;;
+			reconstruir)
+				sobrescrever_tudo_local=true
+				construir_index_local_revision_hash $sobrescrever_tudo_local
+				;;
+			*)
+				antoniovandre_echo "Entre com uma das orientações \"tolocal\", \"tocloud\" ou \"reconstruir\"."
+				;;
+		esac
+fi; fi
+
+if [ "${FLAG}" == "0" ]; then rm "$antoniovandre_dropbox_sync_folder_lockfile" 1>> /dev/null 2>> /dev/null; fi
+
+if [ "${FLAG}" == "0" ]; then echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; exit 1; fi
+
+if ! [ -z $2 ]; then if [ $2 == "prompt" ]; then echo ""; antoniovandre_echo "Pressione RETURN para sair."; read; fi; fi
+

@@ -1,0 +1,21 @@
+#!/bin/bash.exe
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de sair do BASH. Deve ser executado com "source". Para Cygwin, usuário Guest.
+
+# Última atualização: 14-05-2022.
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "/home/Guest/antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+# if ! hash killall; then "${AV_VERMELHO}Software \"killall\" não encontrado"; exit 1; fi
+
+FLAG="0"
+
+if ls ~/.bash_history &>> /dev/null; then echo -n "Removendo .bash_history... "; if rm ~/.bash_history &>> /dev/null; then echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Erro${AV_SEMCOR}."; fi; fi
+
+echo -n "Executando \"history -c && history -w\"... "; if history -c && history -w &>> /dev/null; then echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Erro${AV_SEMCOR}."; fi
+
+if [ "${FLAG}" == "0" ]; then echo -n "Saindo..."; sleep 1s; kill $PPID; else echo -e "${AV_VERMELHO}Erros ocorreram no processamento${AV_SEMCOR}."; fi
+
+unset FLAG

@@ -1,0 +1,358 @@
+#!/bin/bash.exe
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de aliases. Deve ser executado com "source". Para Cygwin, usuário Guest.
+
+# Última atualização: 26-11-2023. Com exceção de modificações em variáveis globais e alternâncias entre mesmos aliases.
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! [ -n "$ARQUIVOANOTACOES" ]; then echo -ne "Carregando definições de arquivos de anotações... "; if source /cygdrive/f/Antonio\ Vandré\ Pedrosa\ Furtunato\ Gomes/Cygwin/antoniovandre_arquivoarquivosanotacoes; then echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAGRC="1"; fi; fi
+
+if [ "${1}" == "0" ]; then
+
+if [ "${2}" != "0" ]; then echo -ne "Removendo aliases... "; fi
+
+unalias ab
+unalias f
+unalias sa
+unalias ra
+unalias vi
+unalias rss
+unalias uol
+unalias scdly
+unalias folha
+unalias mgne
+unalias mgoe
+unalias tmega
+unalias sair
+unalias mrc
+unalias apr
+unalias apdown
+unalias apbkdc
+unalias apbklo
+unalias apbkc
+unalias apbk
+unalias aprdown
+unalias aprbkdc
+unalias aprbklo
+unalias aprbkc
+unalias aprbk
+unalias mrqdown
+unalias mrqdbkdc
+unalias mrqdbklo
+unalias mrqdbkc
+unalias mrqbk
+unalias arldbkdc
+unalias arldbklo
+unalias arlbk
+unalias aldbkdc
+unalias aldbklo
+unalias albk
+unalias h
+unalias hf
+unalias h3d
+
+# Início aliases de games 1/2.
+
+unalias tttbk
+unalias sfa3bk
+unalias sfa2bk
+unalias sfabk
+unalias ssf2bk
+unalias hsf2bk
+unalias sfex2pbk
+unalias mvscbk
+unalias dstlkbk
+unalias kof94bk
+unalias kof95bk
+unalias kof98hbk
+unalias kof2000bk
+unalias kof2001bk
+unalias kof2003bk
+unalias svcbk
+unalias ff3bk
+unalias rbffspecbk
+unalias rbff2bk
+unalias aof3bk
+
+# Fim aliases de games 1/2.
+
+# Início aliases matemáticos 1/2.
+
+unalias S
+unalias P
+unalias Im
+unalias Se
+unalias Co
+unalias Ta
+unalias Ct
+unalias Sc
+unalias Cs
+unalias As
+unalias Ac
+unalias At
+unalias Act
+unalias Asc
+unalias Acs
+unalias Pt
+unalias Rts
+unalias Vnp
+unalias Ev
+unalias Der
+unalias Int
+unalias Fmp
+unalias Pc
+unalias Rz
+unalias Nr
+unalias Dt
+
+unalias Ce
+
+unalias Re
+
+unalias Comp
+
+unalias EvJ
+
+unalias AV3DNgb
+unalias AV3DNgp
+unalias AV3DNgr
+unalias AV3DNgf
+unalias AV3DNgctcp
+unalias AV3DNgstcp
+unalias AV3DNt
+
+# Fim aliases matemáticos 1/2.
+
+unalias brdkbk
+unalias brlobk
+unalias brbk
+
+unalias scdkbk
+unalias sclobk
+unalias scbk
+
+# Início aliases temporários 1/2.
+
+unalias aliastemp
+
+# Fim aliases temporários 1/2.
+
+if [ "${2}" != "0" ]; then echo -e "${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+else
+
+if [ "${2}" != "0" ]; then echo -ne "Carregando aliases... "; fi
+
+alias ab="\"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_background\""
+alias f="\"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_frases_aleatorias\""
+alias sa="\"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_showaliases\""
+alias ra="source \"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_aliases\" 0"
+alias vi="\"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_verificarinternet\""
+alias rss="nice -n 20 \"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_leitorrss\""
+alias uol="nice -n 20 \"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_leitorrss http://rss.uol.com.br/feed/noticias.xml 120\""
+alias scdly="nice -n 20 \"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_leitorrss https://www.sciencedaily.com/rss/all.xml 120\""
+alias folha="nice -n 20 \"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_leitorrss https://feeds.folha.uol.com.br/emcimadahora/rss091.xml 120\""
+alias mgne="\"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_mathgame/antoniovandre_mathgame_cygwin ne\""
+alias mgoe="\"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_mathgame/antoniovandre_mathgame_cygwin oe\""
+alias tmega="\"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_touchmega\""
+alias sair="source \"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_sair\""
+alias mrc="bash \"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}Mathematical Ramblings/antoniovandre_mathematicalramblings_check\""
+alias apr="mintty.exe -e \"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_anotacoesprivadas\"; while ! ls \"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}${ARQUIVOSENHAANOTACOESPRIVADAS}\" &>> /dev/null; do sleep 1s; done; source \"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_anotacoesprivadas\" 1"
+
+alias apdown="if echo \"Fazendo o download de ${ARQUIVOANOTACOES}...\"; dbxcli-windows-amd64.exe get \"/Legado ontológico/${ARQUIVOANOTACOES}\" \"F:\\\\${DIRETORIOTRABALHOP##*/}\\\\${ARQUIVOANOTACOES}\"; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -e \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias aprdown="if echo \"Fazendo o download de ${ARQUIVOANOTACOESPRIVADAS}...\"; dbxcli-windows-amd64.exe get \"/Legado ontológico/${ARQUIVOANOTACOESPRIVADAS}\" \"F:\\\\${DIRETORIOTRABALHOP##*/}\\\\${ARQUIVOANOTACOESPRIVADAS}\"; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -e \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias apbkdc="if echo \"Copiando ${ARQUIVOANOTACOES} para documentos no Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\\\\${DIRETORIOTRABALHOP##*/}\\\\${ARQUIVOANOTACOES}\" \"/Documents/BACKUPED14/${ARQUIVOANOTACOES}\"; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -e \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias apbklo="if echo \"Copiando ${ARQUIVOANOTACOES} para o Legado Ontológico...\"; dbxcli-windows-amd64.exe put \"F:\\\\${DIRETORIOTRABALHOP##*/}\\\\${ARQUIVOANOTACOES}\" \"/Legado ontológico/${ARQUIVOANOTACOES}\"; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -ne \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias apbkc="if echo \"Copiando ${ARQUIVOANOTACOES} para a unidade C...\"; cp \"${DIRETORIOTRABALHO}${ARQUIVOANOTACOES}\" \"/cygdrive/c/Antonio Vandré Pedrosa Furtunato Gomes/${ARQUIVOANOTACOES}\" &>> /dev/null; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -ne \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias apbkg="if echo \"Copiando ${ARQUIVOANOTACOES} para o diretório GitHub local...\"; cp \"${DIRETORIOTRABALHO}${ARQUIVOANOTACOES}\" \"${DIRETORIOTRABALHO}Mathematical Ramblings/GitHub/${ARQUIVOANOTACOES}\" &>> /dev/null; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -ne \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias apbk="apbkc; apbkdc; apbklo; apbkg"
+
+alias aprbkdc="if echo \"Copiando ${ARQUIVOANOTACOESPRIVADAS} para documentos no Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\\\\${DIRETORIOTRABALHOP##*/}\\\\${ARQUIVOANOTACOESPRIVADAS}\" \"/Documents/BACKUPED14/${ARQUIVOANOTACOESPRIVADAS}\"; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -ne \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias aprbklo="if echo \"Copiando ${ARQUIVOANOTACOESPRIVADAS} para o Legado Ontológico...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\\\\${ARQUIVOANOTACOESPRIVADAS}\" \"/Legado ontológico/${ARQUIVOANOTACOESPRIVADAS}\"; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -ne \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias aprbkc="if echo \"Copiando ${ARQUIVOANOTACOESPRIVADAS} para a unidade C...\"; cp \"${DIRETORIOTRABALHO}${ARQUIVOANOTACOESPRIVADAS}\" \"/cygdrive/c/Antonio Vandré Pedrosa Furtunato Gomes/${ARQUIVOANOTACOESPRIVADAS}\" &>> /dev/null; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -ne \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias aprbk="aprbkc; aprbkdc; aprbklo"
+
+alias mrqdown="if echo \"Fazendo download do Mathematical Ramblings quiz data.txt...\"; dbxcli-windows-amd64.exe get \"/Legado ontológico/Mathematical Ramblings quiz data.txt\" \"F:\\\\${DIRETORIOTRABALHOP##*/}\\Mathematical Ramblings quiz data.txt\"; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -e \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias mrqdbkdc="if echo \"Copiando Mathematical Ramblings quiz data.txt para documentos no Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\\\\${DIRETORIOTRABALHOP##*/}\\Mathematical Ramblings quiz data.txt\" \"/Documents/BACKUPED14/Mathematical Ramblings quiz data.txt\"; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -e \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias mrqdbklo="if echo \"Copiando Mathematical Ramblings quiz data.txt para o Legado Ontológico...\"; dbxcli-windows-amd64.exe put \"F:\\\\${DIRETORIOTRABALHOP##*/}\\Mathematical Ramblings quiz data.txt\" \"/Legado ontológico/Mathematical Ramblings quiz data.txt\"; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -ne \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias mrqdbkc="if echo \"Copiando Mathematical Ramblings quiz data.txt para a unidade C...\"; cp \"${DIRETORIOTRABALHO}Mathematical Ramblings quiz data.txt\" \"/cygdrive/c/Antonio Vandré Pedrosa Furtunato Gomes/Mathematical Ramblings quiz data - Antonio Vandré Pedrosa Furtunato Gomes.txt\" &>> /dev/null; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -ne \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias mrqdbkdt="if echo \"Copiando Mathematical Ramblings quiz data.txt para o diretório de trabalho...\"; cp \"${DIRETORIOTRABALHO}Mathematical Ramblings quiz data.txt\" \"${DIRETORIOTRABALHO}Mathematical Ramblings quiz data - Antonio Vandré Pedrosa Furtunato Gomes.txt\" &>> /dev/null; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -ne \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias mrqdbkg="if echo \"Copiando Mathematical Ramblings quiz data.txt para o diretório GitHub local...\"; cp \"${DIRETORIOTRABALHO}Mathematical Ramblings quiz data.txt\" \"${DIRETORIOTRABALHO}Mathematical Ramblings/GitHub/Mathematical Ramblings quiz data - Antonio Vandré Pedrosa Furtunato Gomes.txt\" &>> /dev/null; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -ne \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias mrqbk="mrqdbkc; mrqdbkdc; mrqdbkdt; mrqdbklo; mrqdbkg"
+
+alias arldbkdc="if echo \"Copiando ${ARQUIVOARTIGOSLIDOS} para documentos no Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\\\\${DIRETORIOTRABALHOP##*/}\\\\${ARQUIVOARTIGOSLIDOS}\" \"/Documents/BACKUPED14/${ARQUIVOARTIGOSLIDOS}\"; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -e \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias arldbklo="if echo \"Copiando ${ARQUIVOARTIGOSLIDOS} para o Legado Ontológico...\"; dbxcli-windows-amd64.exe put \"F:\\\\${DIRETORIOTRABALHOP##*/}\\\\${ARQUIVOARTIGOSLIDOS}\" \"/Legado ontológico/${ARQUIVOARTIGOSLIDOS}\"; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -ne \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias arlbk="arldbkdc; arldbklo"
+
+alias aldbkdc="if echo \"Copiando ${ARQUIVOATUALMENTELENDO} para documentos no Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\\\\${DIRETORIOTRABALHOP##*/}\\\\${ARQUIVOATUALMENTELENDO}\" \"/Documents/BACKUPED14/${ARQUIVOATUALMENTELENDO}\"; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -e \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias aldbklo="if echo \"Copiando ${ARQUIVOATUALMENTELENDO} para o Legado Ontológico...\"; dbxcli-windows-amd64.exe put \"F:\\\\${DIRETORIOTRABALHOP##*/}\\\\${ARQUIVOATUALMENTELENDO}\" \"/Legado ontológico/${ARQUIVOATUALMENTELENDO}\"; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -ne \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias albk="aldbkdc; aldbklo"
+
+alias h="cd ${HOME}"
+
+alias hf="cd \"${DIRETORIOTRABALHO}\""
+
+alias h3d="cd \"${DIRETORIOTRABALHOJAVA}AV3DNavigator/\""
+
+# Início aliases de games 2/2.
+
+alias tttbk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/tektagt/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/tektagt &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/tektagt &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do TTT, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\tektagt\\\\\${FILE##*/}\" \"/mame_sta/tektagt/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+alias sfa3bk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/sfa3/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/sfa3 &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/sfa3 &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do Street Fighter Alpha 3, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\sfa3\\\\\${FILE##*/}\" \"/mame_sta/sfa3/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+alias sfa2bk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/sfa2/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/sfa2 &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/sfa2 &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do Street Fighter Alpha 2, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\sfa2\\\\\${FILE##*/}\" \"/mame_sta/sfa2/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+alias sfabk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/sfa/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/sfa &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/sfa &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do Street Fighter Alpha, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\sfa\\\\\${FILE##*/}\" \"/mame_sta/sfa/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+alias ssf2bk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/ssf2/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/ssf2 &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/ssf2 &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do Super Street Fighter II: The New Challengers, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\ssf2\\\\\${FILE##*/}\" \"/mame_sta/ssf2/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+alias hsf2bk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/hsf2/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/hsf2 &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/hsf2 &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do Hyper Street Fighter II, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\hsf2\\\\\${FILE##*/}\" \"/mame_sta/hsf2/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+alias sfex2pbk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/sfex2p/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/sfex2p &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/sfex2p &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do Jogo Street Fighter EX2 Plus, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\sfex2p\\\\\${FILE##*/}\" \"/mame_sta/sfex2p/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+alias mvscbk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/mvsc/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/mvsc &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/mvsc &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do Marvel Vs. Capcom: Clash of Super Heroes, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\mvsc\\\\\${FILE##*/}\" \"/mame_sta/mvsc/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+alias dstlkbk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/dstlk/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/dstlk &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/dstlk &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do Darkstalkers, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\dstlk\\\\\${FILE##*/}\" \"/mame_sta/dstlk/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+alias kof94bk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/kof94/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/kof94 &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/kof94 &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do KoF 94, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\kof94\\\\\${FILE##*/}\" \"/mame_sta/kof94/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+alias kof95bk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/kof95/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/kof95 &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/kof95 &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do KoF 95, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\kof95\\\\\${FILE##*/}\" \"/mame_sta/kof95/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+alias kof98hbk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/kof98h/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/kof98h &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/kof98h &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do The King of Fighters '98 - The Slugfest, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\kof98h\\\\\${FILE##*/}\" \"/mame_sta/kof98h/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+alias kof2000bk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/kof2000/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/kof2000 &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/kof2000 &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do KoF 2000, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\kof2000\\\\\${FILE##*/}\" \"/mame_sta/kof2000/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+alias kof2001bk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/kof2001/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/kof2001 &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/kof2001 &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do KoF 2001, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\kof2001\\\\\${FILE##*/}\" \"/mame_sta/kof2001/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+alias kof2003bk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/kof2003/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/kof2003 &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/kof2003 &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do KoF 2003, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\kof2003\\\\\${FILE##*/}\" \"/mame_sta/kof2003/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+alias svcbk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/svc/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/svc &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/svc &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do SNK vs Capcom - SVC Chaos, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\svc\\\\\${FILE##*/}\" \"/mame_sta/svc/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+alias ff3bk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/fatfury3/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/fatfury3 &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/fatfury3 &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do Fatal Fury 3, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\fatfury3\\\\\${FILE##*/}\" \"/mame_sta/fatfury3/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+alias rbffspecbk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/rbffspec/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/rbffspec &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/rbffspec &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do RBFFSpec, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\rbffspec\\\\\${FILE##*/}\" \"/mame_sta/rbffspec/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+alias rbff2bk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/rbff2/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/rbff2 &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/rbff2 &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do RBFF2, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\rbff2\\\\\${FILE##*/}\" \"/mame_sta/rbff2/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+alias aof3bk="LISTA=\$(ls -1 \"${DIRETORIOTRABALHO}MAME/sta/aof3/\"); TOTAL=\$(echo \"\${LISTA}\" | wc.exe -l); CONTADOR=\"1\"; if ! dbxcli-windows-amd64.exe ls /mame_sta/tektagt &>> /dev/null; then dbxcli-windows-amd64.exe mkdir /mame_sta/aof3 &>> /dev/null; fi; for FILE in \"\${LISTA}\"; do if echo \"Copiando o state do Art of Fighting 3, arquivo \${CONTADOR} de \${TOTAL}, '\${FILE##*/}', para o Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\Antonio Vandré Pedrosa Furtunato Gomes\MAME\sta\tektagt\\\\\${FILE##*/}\" \"/mame_sta/tektagt/\${FILE##*/}\"; then echo -ne \"\${AV_VERDE}Sucesso\${AV_SEMCOR}. \"; else echo -ne \"\${AV_VERMELHO}Ocorreu um erro\${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\"; CONTADOR=\$(expr \"\${CONTADOR} + 1\"); done; unset LISTA; unset TOTAL; unset FILE"
+
+# Fim aliases de games 2/2.
+
+# Início aliases matemáticos 1/2.
+
+# alias S="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_soma_cygwin"
+alias S="antoniovandre_soma_windows.exe"
+
+alias P="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_produto_cygwin"
+alias Im="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_inversomultiplicativo_cygwin"
+
+# alias Se="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_seno_cygwin"
+alias Se="antoniovandre_seno_windows.exe"
+
+# alias Co="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_cosseno_cygwin"
+alias Co="antoniovandre_cosseno_windows.exe"
+
+alias Ta="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_tangente_cygwin"
+alias Ct="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_cotangente_cygwin"
+alias Sc="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_secante_cygwin"
+alias Cs="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_cossecante_cygwin"
+alias As="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_arcoseno_cygwin"
+alias Ac="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_arcocosseno_cygwin"
+alias At="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_arcotangente_cygwin"
+alias Act="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_arcocotangente_cygwin"
+alias Asc="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_arcosecante_cygwin"
+alias Acs="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_arcocossecante_cygwin"
+alias Pt="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_potencia_cygwin"
+alias Rts="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_reduzirtermossemelhantes_cygwin"
+alias Vnp="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_valornumericopolinomio_cygwin"
+
+# alias Ev="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_eval_cygwin"
+alias Ev="antoniovandre_eval_windows.exe"
+
+alias Der="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_derivada_cygwin"
+alias Int="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_integraldefinida_cygwin"
+
+#alias Fmp="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_funcaomaisproxima_cygwin ${HOME}software_sources/C/Math/antoniovandre_pontos.txt ${HOME}software_sources/C/Math/antoniovandre_funcoes.txt 1"
+
+alias Fmp="antoniovandre_funcaomaisproxima_windows.exe ${DIRETORIOTRABALHOC}/Math/antoniovandre_pontos_windows.txt ${DIRETORIOTRABALHOC}/Math/antoniovandre_funcoes_windows.txt 1"
+
+alias Pc="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_produtocomplexos_cygwin"
+
+# alias Rz="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_raizesfuncao_cygwin"
+alias Rz="antoniovandre_raizesfuncao_windows.exe"
+
+alias Nr="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_numeroraizes_cygwin"
+alias Dt="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_determinante_cygwin"
+
+# alias Ce="if ls \"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}software_sources/C/Math/antoniovandre_math_estatisticas_cygwin.txt\" &>> /dev/null; then cat \"${HOME}software_sources/C/Math/antoniovandre_math_estatisticas.txt\"; else echo \"Arquivo de estatísticas matemáticas ainda não existente.\"; fi"
+
+alias Ce="if ls \"${DIRETORIOTRABALHOC}Math/antoniovandre_math_estatisticas_windows.txt\" &>> /dev/null; then cat \"${DIRETORIOTRABALHOC}/Math/antoniovandre_math_estatisticas_windows.txt\"; else echo \"Arquivo de estatísticas matemáticas ainda não existente.\"; fi"
+
+# alias Re="rm \"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}software_sources/C/Math/antoniovandre_math_estatisticas_cygwin.txt\" &>> /dev/null; rm \"${HOME}software_sources/C/Math/antoniovandre_math_estatisticas.png\" &>> /dev/null"
+
+alias Re="rm \"/cygdrive/f/AntonioVandrePedrosaFurtunatoGomes/C/Math/antoniovandre_math_estatisticas_windows.txt\" &>> /dev/null; rm \"/cygdrive/f/AntonioVandrePedrosaFurtunatoGomes/C/Math/antoniovandre_math_estatisticas.png\" &>> /dev/null"
+
+alias Comp="\"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}AV C Math/antoniovandre_cmath_compilar_windows.sh\""
+
+alias EvJ="java -jar F:\\\\AntonioVandrePedrosaFurtunatoGomes\\\\Java\\\\JavaAntonioVandreEval.jar"
+
+alias AV3DNgb="AV3DNavigator\ -\ Plugin\ -\ Gráfico\ de\ barras.exe"
+alias AV3DNgp="AV3DNavigator\ -\ Plugin\ -\ Gráfico\ de\ pizza.exe"
+alias AV3DNgr="AV3DNavigator\ -\ Plugin\ -\ Gráfico\ de\ radar.exe"
+alias AV3DNgf="AV3DNavigator\ -\ Plugin\ -\ Gráfico\ de\ função.exe"
+alias AV3DNgctcp="AV3DNavigator\ -\ Plugin\ -\ Gráfico\ de\ curva\ tridimensional\ por\ coordenadas\ paramétricas.exe"
+alias AV3DNgstcp="AV3DNavigator\ -\ Plugin\ -\ Gráfico\ de\ superfície\ tridimensional\ por\ coordenadas\ paramétricas.exe"
+alias AV3DNt="AV3DNavigator\ -\ Plugin\ -\ Texto.exe"
+
+
+# Fim aliases matemáticos 1/2.
+
+alias brdcbk="if echo \"Copiando estatísticas do AVBlockRun para documentos no Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\\\\${DIRETORIOTRABALHOP##*/}\\\\${ARQUIVOAVBLOCKRUNESTATISTICAS}\" \"/Documents/BACKUPED14/${ARQUIVOAVBLOCKRUNESTATISTICAS}\"; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -e \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias brlobk="if echo \"Copiando estatísticas do AVBlockRun para o Legado ontológico...\"; dbxcli-windows-amd64.exe put \"F:\\\\${DIRETORIOTRABALHOP##*/}\\\\${ARQUIVOAVBLOCKRUNESTATISTICAS}\" \"/Legado ontológico/${ARQUIVOAVBLOCKRUNESTATISTICAS}\"; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -e \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias brbk="brdcbk; brlobk"
+
+alias scdcbk="if echo \"Copiando estatísticas do AV3DSpaceCatch para documentos no Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\\\\${DIRETORIOTRABALHOP##*/}\\\\${ARQUIVOAV3DSPACECATCHESTATISTICAS}\" \"/Documents/BACKUPED14/${ARQUIVOAV3DSPACECATCHESTATISTICAS}\"; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -e \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias sclobk="if echo \"Copiando estatísticas do AV3DSpaceCatch para o Legado ontológico...\"; dbxcli-windows-amd64.exe put \"F:\\\\${DIRETORIOTRABALHOP##*/}\\\\${ARQUIVOAV3DSPACECATCHESTATISTICAS}\" \"/Legado ontológico/${ARQUIVOAV3DSPACECATCHESTATISTICAS}\"; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -e \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias scbk="scdcbk; sclobk"
+
+alias swdcbk="if echo \"Copiando estatísticas do AV3DSpaceWar para documentos no Dropbox...\"; dbxcli-windows-amd64.exe put \"F:\\\\${DIRETORIOTRABALHOP##*/}\\\\${ARQUIVOAV3DSPACEWARESTATISTICAS}\" \"/Documents/BACKUPED14/${ARQUIVOAV3DSPACEWARESTATISTICAS}\"; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -e \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias swlobk="if echo \"Copiando estatísticas do AV3DSpaceWar para o Legado ontológico...\"; dbxcli-windows-amd64.exe put \"F:\\\\${DIRETORIOTRABALHOP##*/}\\\\${ARQUIVOAV3DSPACEWARESTATISTICAS}\" \"/Legado ontológico/${ARQUIVOAV3DSPACEWARESTATISTICAS}\"; then echo -ne \"${AV_VERDE}Sucesso${AV_SEMCOR}. \"; else echo -e \"${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. \"; fi; date | tr -d \"\\n\"; echo \".\""
+
+alias swbk="swdcbk; swlobk"
+
+# Início aliases temporários 2/2.
+
+alias aliastemp="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_temp.sh"
+
+# Fim aliases temporários 2/2.
+
+if [ "${2}" != "0" ]; then echo -e "${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+fi

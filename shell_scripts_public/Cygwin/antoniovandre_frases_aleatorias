@@ -1,0 +1,26 @@
+#!/bin/bash.exe
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de mostrar frases aleatórias. Para Cygwin, usuário Guest.
+
+# Última atualização: 29-04-2022.
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! hash antoniovandre_echo; then echo -e "${AV_VERMELHO}antoniovandre_echo não encontrado${AV_SEMCOR}."; fi
+
+ARQUIVOFRASES="/cygdrive/f/Antonio Vandré Pedrosa Furtunato Gomes/Cygwin/antoniovandre-frases.txt"
+
+TOTALLINHAS=$(cat.exe "${ARQUIVOFRASES}" | wc.exe -l)
+
+LINHA=$(expr.exe $(expr.exe $(date.exe +%s) % $TOTALLINHAS) + 1)
+
+LINHA="${LINHA}p"
+
+FRASE=$(sed.exe -n "${LINHA}" < "${ARQUIVOFRASES}")
+
+echo -ne "${AV_CIANOCLARO}"; antoniovandre_echo "${FRASE}"; echo -ne "${AV_SEMCOR}"
+
+if ! [ -z $1 ]; then if [ $1 == "prompt" ]; then echo -e "\nPressione RETURN para sair."; read; fi; fi
+

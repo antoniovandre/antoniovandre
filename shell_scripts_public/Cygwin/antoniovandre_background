@@ -1,0 +1,12 @@
+#!/bin/bash.exe
+
+# Projeto Mathematical Ramblings.
+
+# Script de executar programas em background. Para Cygwin.
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 10-07-2021.
+
+$@ &>> /dev/null &
+

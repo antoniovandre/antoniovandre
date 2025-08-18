@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Projeto Mathematical Ramblings.
+
+# Script para compilar os sources do AV C Math.
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 18-06-2024. Não considerando alterações em variáveis globais.
+
+if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/shell_scripts/Utilitários/antoniovandre_env" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+SOURCEDIR="${CSOURCESDIR}Math/"
+
+DESTDIR="${CSOURCESDIR}Math/"
+
+echo -e "Certifique-se de que esteja executando este script com privilégios de escrita em \"${AV_AMARELO}${SOURCEDIR}${AV_SEMCOR}\" e \"${AV_AMARELO}${DESTDIR}${AV_SEMCOR}\"."; read;
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "${BASHSCRIPTSDIR}antoniovandre_cores_android" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! hash gcc &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"gcc\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+DIR="${PWD}"
+cd "${SOURCEDIR}"
+
+OLDIFS="${IFS}"
+IFS=$'\n'
+
+for FILE in `ls -1 *.c`; do echo -n "Trabalhando em \"${FILE}\"... "; if gcc "${FILE}" -o "${FILE%%.*}" -lm &>> /dev/null; then if ([ "${SOURCEDIR}" != "${DESTDIR}" ] && mv "${FILE%%.*}" "${DESTDIR}" &>> /dev/null) || ([ "${SOURCEDIR}" == "${DESTDIR}" ]) &>> /dev/null; then if chmod +x "${DESTDIR}${FILE%%.*}"; then echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu uma falha${AV_SEMCOR}."; exit 1; fi; else echo -e "${AV_VERMELHO}Ocorreu uma falha${AV_SEMCOR}."; exit 1; fi; else echo -e "${AV_VERMELHO}Ocorreu uma falha${AV_SEMCOR}."; exit 1; fi; done
+
+IFS="${OLDIFS}"
+
+echo -e "\n${AV_VERDE}Sucesso${AV_SEMCOR} ao compilar e por no path todos os softwares."
+
+cd "${DIR}"
+

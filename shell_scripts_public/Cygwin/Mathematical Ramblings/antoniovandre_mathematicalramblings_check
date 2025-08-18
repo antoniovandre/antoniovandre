@@ -1,0 +1,513 @@
+#!/bin/bash
+
+# Projeto Mathematical Ramblings.
+
+# Script de checagem do perfeito estado de funcionamento do weblog Mathematical Ramblings, grosso modo. Permite a verificação do funcionamento sem a necessidade de abrir o browser. Para Cygwin.
+
+# Última atualização: 22-05-2022.
+
+if ! hash antoniovandre_echo &>> /dev/null; then echo -e "Software \"antoniovandre_echo\" não encontrado."; exit 1; fi
+
+if ! [ -n "$AVCORES" ]; then antoniovandre_echo "Carregando antoniovandre_cores... " n; if ! source "antoniovandre_cores" &>> /dev/null; then echo "Ocorreu um erro."; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}."; fi; fi
+
+if ! hash antoniovandre_verificarinternet_1 &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"antoniovandre_verificarinternet_1\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if ! hash ${SOFTWAREVERIFICADORJS} &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"${SOFTWAREVERIFICADORJS}\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if ! hash TRACERT.EXE &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"TRACERT.EXE\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if ! antoniovandre_verificarinternet_1 &>> /dev/null; then echo -e "${AV_VERMELHO}Sem conexão com internet para verificar${AV_SEMCOR}."; exit 1; fi
+
+SOFTWAREVERIFICADORJS="ls"
+
+if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi
+
+TEMPDIR="/cygdrive/f/Antonio Vandré Pedrosa Furtunato Gomes/Cygwin/Mathematical Ramblings/avmrcdir"
+TEMPFILE="avmrc"
+DOWNLOADDIRECTORY="."
+FLAGFILE="avmrcff"
+ASCIIARTFILE="/cygdrive/f/Antonio Vandré Pedrosa Furtunato Gomes/Cygwin/Mathematical Ramblings/Mathematical Ramblings - ascii art - Small.txt"
+TEMPOLIMITE="60"
+TENTATIVASEXECUCAO="4" # Verificação de 5 segundos entre uma tentativa e outra, verificando de os scripts ainda estão em execução.
+
+mkdir "${TEMPDIR}" &>> /dev/null
+rm -fr "${TEMPDIR}/"* &>> /dev/null
+
+FLAGE="0"
+FLAG="0"
+
+TEMPCURDIR=$PWD
+cd "${TEMPDIR}"
+
+if ls "${ASCIIARTFILE}" &>> /dev/null; then cat "${ASCIIARTFILE}"; fi
+
+echo ""; antoniovandre_echo "Verificando funcionalidade do weblog Mathematical Ramblings."; echo "";
+
+# Verificação da disponibilidade de "MathematicalRamblings.js".
+
+antoniovandre_echo "Verificando \"MathematicalRamblings.js\"" n
+
+CONTADOR="0"; FLAGP=$FLAG; echo "0" > "${FLAGFILE}"
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://unpkg.com/MathematicalRamblingsjs" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep MathematicalRamblings | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://antoniovandre2.github.io/MathematicalRamblingsjs2/MathematicalRamblings.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep MathematicalRamblings.js | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://dl.dropboxusercontent.com/s/8tu34kcvoxqcwvb/MathematicalRamblings.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep MathematicalRamblings.js | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+if [ "${FLAG}" != "${FLAGP}" ] || [ "${FLAGT}" == "${CONTADOR}" ]; then echo -e "${AV_VERMELHO}Erro ao carregar \"MathematicalRamblings.js\" ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); FLAGE=$(expr "${FLAGE}" + 1); else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do jQuery.
+
+antoniovandre_echo "Verificando jQuery" n
+
+CONTADOR="0"; FLAGP=$FLAG; echo "0" > "${FLAGFILE}"
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep jquery | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://unpkg.com/jquery" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep jquery | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://code.jquery.com/jquery-latest.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep jquery | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+if [ "${FLAG}" != "${FLAGP}" ] || [ "${FLAGT}" == "${CONTADOR}" ]; then echo -e " ${AV_VERMELHO}Erro ao carregar jQuery ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); FLAGE=$(expr "${FLAGE}" + 1); else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do Polyfill.
+
+antoniovandre_echo "Verificando Polyfill" n
+
+CONTADOR="0"; FLAGP=$FLAG; echo "0" > "${FLAGFILE}"
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://polyfill.io/v3/polyfill.js?features=es6" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep polyfill | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "${TEMP}" > "${POLYFILLPATHFILE}"; echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://dl.dropbox.com/s/cjc1zw7yxkqpy9v/polyfill.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep polyfill | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+if [ "${FLAG}" != "${FLAGP}" ] || [ "${FLAGT}" == "${CONTADOR}" ]; then echo -e " ${AV_VERMELHO}Erro ao carregar Polyfill ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); FLAGE=$(expr "${FLAGE}" + 1); else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do MathJax.
+
+antoniovandre_echo "Verificando MathJax" n
+
+CONTADOR="0"; FLAGP=$FLAG; echo "0" > "${FLAGFILE}"
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep tex-mml-chtml.js | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if ${SOFTWAREVERIFICADORJS} "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep tex-mml-chtml.js | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if ${SOFTWAREVERIFICADORJS} "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+if [ "${FLAG}" != "${FLAGP}" ] || [ "${FLAGT}" == "${CONTADOR}" ]; then echo -e " ${AV_VERMELHO}Erro ao carregar MathJax ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); FLAGE=$(expr "${FLAGE}" + 1); else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do math.js.
+
+antoniovandre_echo "Verificando math.js" n
+
+CONTADOR="0"; FLAGP=$FLAG; echo "0" > "${FLAGFILE}"
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://cdnjs.cloudflare.com/ajax/libs/mathjs/6.0.3/math.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep math | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://cdn.jsdelivr.net/npm/josdejong/mathjs/blob/develop/index.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep index.js | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://unpkg.com/mathjs" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep mathjs | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+if [ "${FLAG}" != "${FLAGP}" ] || [ "${FLAGT}" == "${CONTADOR}" ]; then echo -e " ${AV_VERMELHO}Erro ao carregar math.js ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); FLAGE=$(expr "${FLAGE}" + 1); else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do GIFEncoder.js.
+
+antoniovandre_echo "Verificando GIFEncoder.js" n
+
+CONTADOR="0"; FLAGP=$FLAG; echo "0" > "${FLAGFILE}"
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://github.com/antimatter15/jsgif/raw/master/GIFEncoder.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep GIFEncoder | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://dl.dropbox.com/s/avwxze7v1jbgcbs/GIFEncoder.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep GIFEncoder | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+if [ "${FLAG}" != "${FLAGP}" ] || [ "${FLAGT}" == "${CONTADOR}" ]; then echo -e " ${AV_VERMELHO}Erro ao carregar GIFEncoder.js ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); FLAGE=$(expr "${FLAGE}" + 1); else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do LZWEncoder.js.
+
+antoniovandre_echo "Verificando LZWEncoder.js" n
+
+CONTADOR="0"; FLAGP=$FLAG; echo "0" > "${FLAGFILE}"
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://github.com/antimatter15/jsgif/raw/master/LZWEncoder.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep LZWEncoder | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://dl.dropbox.com/s/flbcir0jpjr9wlj/LZWEncoder.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep LZWEncoder | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+if [ "${FLAG}" != "${FLAGP}" ] || [ "${FLAGT}" == "${CONTADOR}" ]; then echo -e " ${AV_VERMELHO}Erro ao carregar LZWEncoder.js ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); FLAGE=$(expr "${FLAGE}" + 1); else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do NeuQuant.js.
+
+antoniovandre_echo "Verificando NeuQuant.js" n
+
+CONTADOR="0"; FLAGP=$FLAG; echo "0" > "${FLAGFILE}"
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://github.com/antimatter15/jsgif/raw/master/NeuQuant.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep NeuQuant | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://dl.dropbox.com/s/6qlaz6r1x54vvuy/NeuQuant.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep NeuQuant | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+if [ "${FLAG}" != "${FLAGP}" ] || [ "${FLAGT}" == "${CONTADOR}" ]; then echo -e " ${AV_VERMELHO}Erro ao carregar NeuQuant.js ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); FLAGE=$(expr "${FLAGE}" + 1); else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do b64.js.
+
+antoniovandre_echo "Verificando b64.js" n
+
+CONTADOR="0"; FLAGP=$FLAG; echo "0" > "${FLAGFILE}"
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://github.com/antimatter15/jsgif/raw/master/b64.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep b64 | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://dl.dropbox.com/s/15nhne91yul3thh/b64.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep b64 | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+if [ "${FLAG}" != "${FLAGP}" ] || [ "${FLAGT}" == "${CONTADOR}" ]; then echo -e " ${AV_VERMELHO}Erro ao carregar b64.js ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); FLAGE=$(expr "${FLAGE}" + 1); else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do moment.js.
+
+antoniovandre_echo "Verificando moment.js" n
+
+CONTADOR="0"; FLAGP=$FLAG; echo "0" > "${FLAGFILE}"
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://momentjs.com/downloads/moment.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep moment | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://dl.dropbox.com/s/obokytwydph55ok/moment.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep moment | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+if [ "${FLAG}" != "${FLAGP}" ] || [ "${FLAGT}" == "${CONTADOR}" ]; then echo -e " ${AV_VERMELHO}Erro ao carregar moment.js ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); FLAGE=$(expr "${FLAGE}" + 1); else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do md5.js.
+
+antoniovandre_echo "Verificando md5.js" n
+
+CONTADOR="0"; FLAGP=$FLAG; echo "0" > "${FLAGFILE}"
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://dl.dropbox.com/s/m6h2ixi0phosd09/md5.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep md5 | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+
+if [ "${FLAG}" != "${FLAGP}" ] || [ "${FLAGT}" == "${CONTADOR}" ]; then echo -e " ${AV_VERMELHO}Erro ao carregar md5.js ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); FLAGE=$(expr "${FLAGE}" + 1); else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do Plotly.
+
+antoniovandre_echo "Verificando Plotly" n
+
+CONTADOR="0"; FLAGP=$FLAG; echo "0" > "${FLAGFILE}"
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://cdn.plot.ly/plotly-latest.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep plotly | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://dl.dropbox.com/s/v4zhaui2vglzixf/plotly-1.58.5.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep plotly | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+if [ "${FLAG}" != "${FLAGP}" ] || [ "${FLAGT}" == "${CONTADOR}" ]; then echo -e " ${AV_VERMELHO}Erro ao carregar Plotly ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); FLAGE=$(expr "${FLAGE}" + 1); else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do HackTimer.js.
+
+antoniovandre_echo "Verificando HackTimer.js" n
+
+CONTADOR="0"; FLAGP=$FLAG; echo "0" > "${FLAGFILE}"
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://github.com/turuslan/HackTimer/raw/master/HackTimer.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep HackTimer | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://dl.dropbox.com/s/tnvgjmdd5tniacw/HackTimer.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep HackTimer | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+if [ "${FLAG}" != "${FLAGP}" ] || [ "${FLAGT}" == "${CONTADOR}" ]; then echo -e " ${AV_VERMELHO}Erro ao carregar HackTimer.js ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); FLAGE=$(expr "${FLAGE}" + 1); else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do offline.js.
+
+antoniovandre_echo "Verificando offline.js" n
+
+CONTADOR="0"; FLAGP=$FLAG; echo "0" > "${FLAGFILE}"
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://dl.dropbox.com/s/qkkvdnlf60t95e9/offline.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep offline | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+if [ "${FLAG}" != "${FLAGP}" ] || [ "${FLAGT}" == "${CONTADOR}" ]; then echo -e " ${AV_VERMELHO}Erro ao carregar offline.js ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); FLAGE=$(expr "${FLAGE}" + 1); else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do FeedEk.js.
+
+antoniovandre_echo "Verificando FeedEk.js" n
+
+CONTADOR="0"; FLAGP=$FLAG; echo "0" > "${FLAGFILE}"
+
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+CONTADOR=$(expr "${CONTADOR}" + 1); if wget.exe -r -np "https://dl.dropbox.com/s/ami3ahsdg2lja0r/FeedEk.js" -p "${DOWNLOADDIRECTORY}" &>> /dev/null; then TEMP=$(ls -1 "${DOWNLOADDIRECTORY}" | grep FeedEk | tr -d "'" | tr -d "\n"); if [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ]; then echo -e "${AV_VERMELHO}${SOFTWAREVERIFICADORJS} em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if "${SOFTWAREVERIFICADORJS}" "${TEMP}" &>> /dev/null; then echo "0" > "${FLAGFILE}"; else echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -a | grep ${SOFTWAREVERIFICADORJS})" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then FLAGT=$(expr "${FLAGT}" + 1); fi; fi
+
+FLAG=$(expr $(cat "${FLAGFILE}" | tr -d "\n") + "${FLAG}")
+
+
+if [ "${FLAG}" != "${FLAGP}" ] || [ "${FLAGT}" == "${CONTADOR}" ]; then echo -e " ${AV_VERMELHO}Erro ao carregar FeedEk.js ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); FLAGE=$(expr "${FLAGE}" + 1); else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do Chatroll.
+
+antoniovandre_echo "Verificando Chatroll" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget.exe "https://chatroll.com/embed/chat/fj4k?id=Y9jvA5AoMfJ&platform=html" -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar Chatroll ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); FLAGE=$(expr "${FLAGE}" + 1); else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do Daylight.
+
+antoniovandre_echo "Verificando Daylight" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget.exe "https://www.timeanddate.com/scripts/sunmap.php" -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar Daylight ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); FLAGE=$(expr "${FLAGE}" + 1); else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do Free Live Traffic Feed.
+
+antoniovandre_echo "Verificando Free Live Traffic Feed" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget.exe "https://cdn.livetrafficfeed.com/static/v4/live.js" -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar Free Live Traffic Feed ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); FLAGE=$(expr "${FLAGE}" + 1); else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do Scientifc Calculator.
+
+antoniovandre_echo "Verificando Scientifc Calculator" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget.exe "https://math.tools/extensions/embed/v1/sc.js?v1" -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar Scientifc Calculator ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); FLAGE=$(expr "${FLAGE}" + 1); else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade online do webblog.
+
+antoniovandre_echo "Tracert no weblog" n
+
+echo -ne "."
+
+FLAGT="0"; TEMPO=$(date +%s)
+
+if ! TRACERT.EXE mathematicalramblings.blogspot.com &>> /dev/null; then echo -e " ${AV_VERMELHO}Weblog online indisponível ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); fi
+
+# Finalizando.
+
+cd "${TEMPCURDIR}"
+
+rm -fr "${TEMPDIR}" &>> /dev/null
+rm "${TEMPFILE}" &>> /dev/null
+rm "${FLAGFILE}" &>> /dev/null
+rm "${POLYFILLPATHFILE}" &>> /dev/null
+
+echo ""; if [ "${FLAGE}" == "0" ]; then echo -ne "${AV_VERDE}Sucesso${AV_SEMCOR}. "; antoniovandre_echo "Weblog Mathematical Ramblings funcionando perfeitamente."; else if [ "${FLAGE}" == "1" ]; then echo -ne "${AV_VERMELHO}Erro${AV_SEMCOR}. "; antoniovandre_echo "Ocorreu um erro na verificação da funcionalidade do weblog Mathematical Ramblings."; else echo -ne "${AV_VERMELHO}Erro${AV_SEMCOR}. "; antoniovandre_echo "Ocorreram ${FLAGE} erros na verificação da funcionalidade do weblog Mathematical Ramblings."; fi; fi; echo ""

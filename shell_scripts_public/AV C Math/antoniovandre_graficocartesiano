@@ -1,0 +1,157 @@
+#!/bin/bash
+
+# ____________________
+
+# Proprietário Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Projeto Mathematical Ramblings.
+
+# ____________________
+
+# Construtor de gráficos cartesianos.
+
+# ____________________
+
+# Requer "antoniovandre_eval" e Gnuplot.
+
+# ____________________
+
+# Primeiro argumento: funçoes em VARIAVEL, separadas por DELIMITADOR;
+
+# Segundo argumento: o menor valor atribuído à variável, se omitido "-1";
+
+# Terceiro argumento: o maior valor atribuído à variável, se omitido "1";
+
+# Quarto argumento: a resolução do gráfico, se omitido "100";
+
+# Quinto argumento: a translação x, se omitido "0";
+
+# Sexto argumento: a translação y, se omitido "0";
+
+# Sétimo argumento: a rotação no sentido anti-horário, em radianos, se omitido "0";
+
+# Oitavo argumento: o menor valor de x no gráfico, se omitido sem regras;
+
+# Nono argumento: o maior valor de x no gráfico, se omitido sem regras;
+
+# Décimo argumento: o menor valor de y no gráfico, se omitido sem regras;
+
+# Décimo primeiro argumento: o maior valor de y no gráfico, se omitido sem regras.
+
+# ____________________
+
+# A rotação é aplicada antes da translação.
+
+# ____________________
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# ____________________
+
+# Última atualização: 15-06-2024. Com exceção das variáveis globais.
+
+if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/shell_scripts/Utilitários/antoniovandre_env" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+ARQUIVODAT="${TEMPDIR}avgc.dat"
+
+ARQUIVODAT2="${TEMPDIR}avgc2.dat"
+ARQUIVOGRAFICO="${TEMPDIR}avgc.png"
+
+AVGCBACKGROUND="${BASHSCRIPTSMATHDIR}avgcbackground.png"
+
+ARQUIVOTEMP="${TEMPDIR}avgctf"
+
+AVVERSIONMIN="20240607"
+
+SOFTWAREVIEW="eog"
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando cores... "; if ! source "${BASHSCRIPTSDIR}antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! hash gnuplot &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"Gnuplot\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+GNUPLOTVERSION=$(TEMP=$(gnuplot -V | cut -d " " -f 2); TEMP=$(echo "${TEMP} * 10" | bc); echo -n "${TEMP%.*}")
+
+GNUPLOTPATCHLEVEL=$(TEMP=$(gnuplot -V | cut -d " " -f 3); if [ "${TEMP}" == "patchlevel" ]; then TEMP=$(gnuplot -V | cut -d " " -f 4); echo -n "${TEMP}"; else echo -n "0"; fi)
+
+GNUPLOTGDPNG=$(gnuplot -e "show version long" &>> "${ARQUIVOTEMP}"; cat "${ARQUIVOTEMP}" | tr -d "\n" | grep "+GD_PNG")
+
+if ! hash "${SOFTWAREVIEW}" &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"${SOFTWAREVIEW}\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if ! hash antoniovandre_eval &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"antoniovandre_eval\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+TEMP=$(antoniovandre_eval "system version" "0" | tr -d "\n")
+
+if [ "${TEMP%.*}" -lt "${AVVERSIONMIN}" ]; then echo -e "${AV_VERMELHO}Requer \"antoniovandre\" superior ou igual a ${AVVERSIONMIN}${AV_SEMCOR}."; exit 1; fi
+
+VARIAVEL=$(TEMP=$(antoniovandre_eval "system variaveldesubstituicao" "0" | tr -d "\n"); echo -ne \\x$(printf %02x ${TEMP%.*}))
+
+BARRA="1" # "1" para habilitar, consome muito processamento.
+
+TAMBARRAPROGRESSO="30"
+
+BARRAPROGRESSOCHAR0="-"
+
+BARRAPROGRESSOCHAR1="#"
+
+STEP=$(TEMP=$(antoniovandre_eval "system intervaloprogresso3" "0" | tr -d "\n"); echo -n ${TEMP%.*})
+
+DELIMITADOR=$(TEMP=$(antoniovandre_eval "system delimitadorstring" "0" | tr -d "\n"); echo -ne \\x$(printf %02x ${TEMP%.*}))
+
+TOKENINICIOEVAL=$(TEMP=$(antoniovandre_eval "system tokeninicioeval" "0" | tr -d "\n"); echo -ne \\x$(printf %02x ${TEMP%.*}))
+
+TOKENFIMEVAL=$(TEMP=$(antoniovandre_eval "system tokenfimeval" "0" | tr -d "\n"); echo -ne \\x$(printf %02x ${TEMP%.*}))
+
+MAXVALUE=$(antoniovandre_eval "system valor_max" "0" | tr -d "\n")
+
+if [ "${#}" -lt "1" ] || ([ "${#}" == "1" ] && ([ "${1}" == "h" ] || [ "${1}" == "help" ] || [ "${1}" == "ajuda" ])); then echo -e "Primeiro argumento: funçoes em \"${VARIAVEL}\", separadas por \"${DELIMITADOR}\";\n\nSegundo argumento: o menor valor atribuído à variável, se omitido \"-1\";\n\nTerceiro argumento: o maior valor atribuído à variável, se omitido \"1\";\n\nQuarto argumento: a resolução do gráfico, se omitido \"100\";\n\nQuinto argumento: a translação x, se omitido \"0\";\n\nSexto argumento: a translação y, se omitido \"0\";\n\nSétimo argumento: a rotação no sentido anti-horário, em radianos, se omitido \"0\";\n\nOitavo argumento: o menor valor de x no gráfico, se omitido sem regras;\n\nNono argumento: o maior valor de x no gráfico, se omitido sem regras;\n\nDécimo argumento: o menor valor de y no gráfico, se omitido sem regras;\n\nDécimo primeiro argumento: o maior valor de y no gráfico, se omitido sem regras."; exit 0; fi
+
+FUNCOES="${1}"
+
+MIN=$(if ! [ -z "${2}" ]; then antoniovandre_eval "${2}" "0" | tr -d "\n"; else echo -n "-1"; fi)
+
+MAX=$(if ! [ -z "${3}" ]; then antoniovandre_eval "${3}" "0" | tr -d "\n"; else echo -n "1"; fi)
+
+RESOLUCAO=$(if ! [ -z "${4}" ]; then echo -n "${4}"; else echo -n "100"; fi)
+
+TRANSX=$(if ! [ -z "${5}" ]; then antoniovandre_eval "${5}" "0" | tr -d "\n"; else echo -n "0"; fi)
+
+TRANSY=$(if ! [ -z "${6}" ]; then antoniovandre_eval "${6}" "0" | tr -d "\n"; else echo -n "0"; fi)
+
+ROT=$(if ! [ -z "${7}" ]; then antoniovandre_eval "${7}" "0" | tr -d "\n"; else echo -n "0"; fi)
+
+if ! [ -z "${8}" ]; then MINX=$(antoniovandre_eval "${8}" "0" | tr -d "\n"); FLAGMINX="1"; else MINX="${MAXVALUE}"; FLAGMINX="0"; fi
+
+if ! [ -z "${9}" ]; then MAXX=$(antoniovandre_eval "${9}" "0" | tr -d "\n"); FLAGMAXX="1"; else MAXX="-${MAXVALUE}"; FLAGMAXX="0"; fi
+
+if ! [ -z "${10}" ]; then MINY=$(antoniovandre_eval "${10}" "0" | tr -d "\n"); FLAGMINY="1"; else MINY="${MAXVALUE}"; FLAGMINY="0"; fi
+
+if ! [ -z "${11}" ]; then MAXY=$(antoniovandre_eval "${11}" "0" | tr -d "\n"); FLAGMAXY="1"; else MAXY="-${MAXVALUE}"; FLAGMAXY="0"; fi
+
+CHARPROGRESS=""
+
+echo -n "" > "${ARQUIVOTEMP}"
+
+TEMP=$(antoniovandre_eval "${TOKENINICIOEVAL}${MAX}${TOKENFIMEVAL} - ${TOKENINICIOEVAL}${MIN}${TOKENFIMEVAL}" "0" | tr -d "\n"); if [ "${TEMP:0:1}" == "-" ]; then echo -e "${AV_VERMELHO}Valor máximo menor que o valor mínimo${AV_SEMCOR}."; exit 1; fi
+
+echo -n "" > "${ARQUIVODAT}"
+
+if ! [[ "${RESOLUCAO}" =~ ^[0-9]+$ ]]; then echo -e "${AV_VERMELHO}Valor inválido para a resolução${AV_SEMCOR}."; exit 1; fi
+
+NUMEROFUNCOES=$(CONTADOR="1"; for I in `seq 0 $(expr $(echo -n "${FUNCOES}" | wc -c | tr -d "\n") - 1)`; do if [ "${FUNCOES:${I}:1}" == "${DELIMITADOR}" ]; then CONTADOR=$(expr "${CONTADOR}" + 1); fi; done; echo -n "${CONTADOR}")
+
+if [ "${NUMEROFUNCOES}" -gt "1" ]; then FUNCAOSINGULARPLURAL="Funções"; else FUNCAOSINGULARPLURAL="Função"; fi
+
+echo "Construindo arquivo dat..."; if hash tput &>> /dev/null; then tput civis; fi ; for K in `seq 1 "${NUMEROFUNCOES}"`; do for I in `seq 0 "${RESOLUCAO}"`; do PONTO=$(antoniovandre_eval "${TOKENINICIOEVAL}${MIN}${TOKENFIMEVAL} + ${TOKENINICIOEVAL}${I}${TOKENFIMEVAL} * ${TOKENINICIOEVAL}${TOKENINICIOEVAL}${MAX}${TOKENFIMEVAL} - ${TOKENINICIOEVAL}${MIN}${TOKENFIMEVAL}${TOKENFIMEVAL} / ${TOKENINICIOEVAL}${RESOLUCAO}${TOKENFIMEVAL}" "0" | tr -d "\n"); PONTO2=$(echo -n "${FUNCOES}" | cut -d ${DELIMITADOR} -f ${K} | sed "s/${VARIAVEL}/${TOKENINICIOEVAL}${PONTO}${TOKENFIMEVAL}/g"); PONTOY=$(antoniovandre_eval "${PONTO2}" "0" | tr -d "\n"); if [[ "${PONTOY}" =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]]; then COORDX=$(antoniovandre_eval "${TOKENINICIOEVAL}${TRANSX}${TOKENFIMEVAL} + cos${TOKENINICIOEVAL}${ROT}${TOKENFIMEVAL} * ${TOKENINICIOEVAL}${PONTO}${TOKENFIMEVAL} - sen${TOKENINICIOEVAL}${ROT}${TOKENFIMEVAL} * ${TOKENINICIOEVAL}${PONTOY}${TOKENFIMEVAL}" "0" | tr -d "\n"); if [[ "${COORDX}" =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]]; then if [ "${FLAGMINX}" == "0" ]; then TEMP=$(antoniovandre_eval "${TOKENINICIOEVAL}${MINX}${TOKENFIMEVAL} < ${TOKENINICIOEVAL}${COORDX}${TOKENFIMEVAL}" "0" | tr -d "\n"); if [ "${TEMP}" == "${COORDX}" ]; then MINX="${COORDX}"; fi; fi; if [ "${FLAGMAXX}" == "0" ]; then TEMP=$(antoniovandre_eval "${TOKENINICIOEVAL}${MAXX}${TOKENFIMEVAL} > ${TOKENINICIOEVAL}${COORDX}${TOKENFIMEVAL}" "0" | tr -d "\n"); if [ "${TEMP}" == "${COORDX}" ]; then MAXX="${COORDX}"; fi; fi; COORDY=$(antoniovandre_eval "${TOKENINICIOEVAL}${TRANSY}${TOKENFIMEVAL} + sen${TOKENINICIOEVAL}${ROT}${TOKENFIMEVAL} * ${TOKENINICIOEVAL}${PONTO}${TOKENFIMEVAL} + cos${TOKENINICIOEVAL}${ROT}${TOKENFIMEVAL} * ${TOKENINICIOEVAL}${PONTOY}${TOKENFIMEVAL}" "0" | tr -d "\n"); if [[ "${COORDY}" =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]]; then if [ "${FLAGMINY}" == "0" ]; then TEMP=$(antoniovandre_eval "${TOKENINICIOEVAL}${MINY}${TOKENFIMEVAL} < ${TOKENINICIOEVAL}${COORDY}${TOKENFIMEVAL}" "0" | tr -d "\n"); if [ "${TEMP}" == "${COORDY}" ]; then MINY="${COORDY}"; fi; fi; if [ "${FLAGMAXY}" == "0" ]; then TEMP=$(antoniovandre_eval "${TOKENINICIOEVAL}${MAXY}${TOKENFIMEVAL} > ${TOKENINICIOEVAL}${COORDY}${TOKENFIMEVAL}" "0" | tr -d "\n"); if [ "${TEMP}" == "${COORDY}" ]; then MAXY="${COORDY}"; fi; fi; echo -n "${COORDX}" >> "${ARQUIVODAT}"; echo -n " " >> "${ARQUIVODAT}"; echo "${COORDY}" >> "${ARQUIVODAT}"; fi; fi; fi; if [ $(antoniovandre_eval "${TOKENINICIOEVAL}${TOKENINICIOEVAL}${TOKENINICIOEVAL}${TOKENINICIOEVAL}${K}${TOKENFIMEVAL} - 1${TOKENFIMEVAL} * ${TOKENINICIOEVAL}${RESOLUCAO}${TOKENFIMEVAL}${TOKENFIMEVAL} + ${TOKENINICIOEVAL}${I}${TOKENFIMEVAL}${TOKENFIMEVAL} % ${TOKENINICIOEVAL}${STEP}${TOKENFIMEVAL}" "0" | tr -d "\n") == $(antoniovandre_eval "0" "0" | tr -d "\n") ] || [ $(antoniovandre_eval "${TOKENINICIOEVAL}${TOKENINICIOEVAL}${TOKENINICIOEVAL}${K}${TOKENFIMEVAL} - 1${TOKENFIMEVAL} * ${TOKENINICIOEVAL}${RESOLUCAO}${TOKENFIMEVAL}${TOKENFIMEVAL} + ${TOKENINICIOEVAL}${I}${TOKENFIMEVAL}" "0" | tr -d "\n") == $(antoniovandre_eval "${NUMEROFUNCOES} * ${RESOLUCAO}" "0" | tr -d "\n") ]; then PROGRESSRATIO=$(antoniovandre_eval "${TOKENINICIOEVAL}${TOKENINICIOEVAL}${TOKENINICIOEVAL}${TOKENINICIOEVAL}${K}${TOKENFIMEVAL} - 1${TOKENFIMEVAL} * ${TOKENINICIOEVAL}${RESOLUCAO}${TOKENFIMEVAL}${TOKENFIMEVAL} + ${TOKENINICIOEVAL}${I}${TOKENFIMEVAL}${TOKENFIMEVAL} / ${TOKENINICIOEVAL}${TOKENINICIOEVAL}${NUMEROFUNCOES}${TOKENFIMEVAL} * ${TOKENINICIOEVAL}${RESOLUCAO}${TOKENFIMEVAL}${TOKENFIMEVAL}" "0" | tr -d "\n"); echo -ne "\r"; if [ "${BARRA}" == "1" ]; then echo -ne "["; for J in `seq 0 "${TAMBARRAPROGRESSO}"`; do BARRAPROGRESSO=$(echo "${TOKENINICIOEVAL}${TAMBARRAPROGRESSO}${TOKENFIMEVAL} * ${TOKENINICIOEVAL}${PROGRESSRATIO}${TOKENFIMEVAL}" | bc -l | tr -d "\n"); if [ -z "${BARRAPROGRESSO%.*}" ]; then BARRAPROGRESSO="0"; fi; if [ "${J}" -le "${BARRAPROGRESSO%.*}" ]; then echo -ne "${AV_VERDE}${BARRAPROGRESSOCHAR1}${AV_SEMCOR}"; else echo -ne "${AV_CINZACLARO}${BARRAPROGRESSOCHAR0}${AV_SEMCOR}"; fi; done; echo -ne "] "; fi; PORCENTAGEM=$(echo "100 * ${TOKENINICIOEVAL}${PROGRESSRATIO}${TOKENFIMEVAL}" | bc -l | tr -d "\n"); LC_NUMERIC="en_US.UTF-8" printf "%3.4f" "${PORCENTAGEM}" | tr -d "\n" ; echo -n "%"; case "${CHARPROGRESS}" in "") CHARPROGRESS="-";; "-") CHARPROGRESS="\\";; "\\") CHARPROGRESS="|";; "|") CHARPROGRESS="/";; "/") CHARPROGRESS="-";; *) ;; esac; echo -ne " ${CHARPROGRESS}"; fi; done; done; echo -e "\b${AV_VERDE}Ok${AV_SEMCOR}."; if hash tput &>> /dev/null; then tput cnorm; fi
+
+LABX=$(antoniovandre_eval "${TOKENINICIOEVAL}${MINX}${TOKENFIMEVAL} < ${TOKENINICIOEVAL}${TOKENINICIOEVAL}${TOKENINICIOEVAL}${MINY}${TOKENFIMEVAL} - ${TOKENINICIOEVAL}${MAXY}${TOKENFIMEVAL}${TOKENFIMEVAL} + ${TOKENINICIOEVAL}${MAXX}${TOKENFIMEVAL}${TOKENFIMEVAL}" "0" | tr -d "\n")
+LABY=$(antoniovandre_eval "${TOKENINICIOEVAL}${MAXY}${TOKENFIMEVAL} > ${TOKENINICIOEVAL}${TOKENINICIOEVAL}${TOKENINICIOEVAL}${MAXX}${TOKENFIMEVAL} - ${TOKENINICIOEVAL}${MINX}${TOKENFIMEVAL}${TOKENFIMEVAL} + ${TOKENINICIOEVAL}${MINY}${TOKENFIMEVAL}${TOKENFIMEVAL}" "0" | tr -d "\n")
+
+echo "${LABX} ${LABY}" > "${ARQUIVODAT2}"
+
+if [ "${GNUPLOTGDPNG}" != "" ]; then STR="set xtics font 'Monospace,12'; set ytics font 'Monospace,12'; set terminal png size 1080,1080; set size ratio -1; set output '${ARQUIVOGRAFICO}'; set multiplot; set border 0; unset zeroaxis; set lmargin 0; set rmargin 1; set bmargin 0; set tmargin 1; unset tics; unset title; plot '${AVGCBACKGROUND}' binary filetype=png w rgbimage; set xzeroaxis lt 6 lw 2; set yzeroaxis lt 6 lw 2; set xtics ('' 0); set ytics ('' 0); set label sprintf (\"Gráfico cartesiano.\n${FUNCAOSINGULARPLURAL}: ${FUNCOES};\nRotação: ${ROT};\nTranslação x: ${TRANSX};\nTranslação y: ${TRANSY}.\") noenhanced font 'Monospace,12' at graph 0,1; plot [${LABX}:${MAXX}] [${MINY}:${LABY}] '${ARQUIVODAT}' notitle with points pointtype 7 pointsize 0.3 lc 'black'; plot [${LABX}:${MAXX}] [${MINY}:${LABY}] '${ARQUIVODAT2}' notitle with points pointtype 7 pointsize 0; unset multiplot"; else STR="set xtics font 'Monospace,12'; set ytics font 'Monospace,12'; set terminal png size 1080,1080; set size ratio -1; set output '${ARQUIVOGRAFICO}'; set border 0; set xzeroaxis lt 6 lw 2; set yzeroaxis lt 6 lw 2; set xtics ('' 0); set ytics ('' 0); set label sprintf (\"Gráfico cartesiano.\n${FUNCAOSINGULARPLURAL}: ${FUNCOES};\nRotação: ${ROT};\nTranslação x: ${TRANSX};\nTranslação y: ${TRANSY}.\") noenhanced font 'Monospace,12' at graph 0,1; plot [${LABX}:${MAXX}] [${MINY}:${LABY}] '${ARQUIVODAT}' notitle with points pointtype 7 pointsize 0.3 lc 'black'; plot [${LABX}:${MAXX}] [${MINY}:${LABY}] '${ARQUIVODAT2}' with points pointtype 7 pointsize 0"; fi
+
+echo -ne "Gerando gráfico... "; if ! gnuplot -p -e "${STR}" &>> /dev/null; then echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; exit 1; else echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}."; fi
+
+eval "${SOFTWAREVIEW} ${ARQUIVOGRAFICO}" &>> /dev/null &
+
+exit 0

@@ -1,0 +1,61 @@
+#!/bin/bash.exe
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de edição de arquivos de anotações privadas.
+
+# Execute sem argumentos para criar o arquivo de senha. Execute com o argumento "1" para ler a senha do arquivo de senha.
+
+# Última atualização: 13-10-2023. Com exceção de modificações em variáveis globais.
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "/home/Guest/antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! hash nano; then echo -e "${AV_VERMELHO}Software \"nano\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if [ "${1}" != "1" ]; then if ! [ -n "$ARQUIVOANOTACOES" ]; then echo -ne "Carregando definições de arquivos de anotações... "; if source /cygdrive/f/Antonio\ Vandré\ Pedrosa\ Furtunato\ Gomes/Cygwin/antoniovandre_arquivoarquivosanotacoes; then echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAGRC="1"; fi; echo ""; fi; fi
+
+DIRETORIODESTINO=$DIRETORIOTRABALHO
+
+ARQUIVOSENHAANOTACOESPRIVADASS="${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}${ARQUIVOSENHAANOTACOESPRIVADAS}"
+
+FLAG="0"
+
+if [ "${1}" != "1" ]; then trap '' 2; echo -n "Entre com a senha de criptografia: "; read -s SENHA; trap 2; echo "${SENHA}" > "${ARQUIVOSENHAANOTACOESPRIVADASS}"; exit 0; else SENHA=$(cat "${ARQUIVOSENHAANOTACOESPRIVADASS}"); rm "${ARQUIVOSENHAANOTACOESPRIVADASS}" &>> /dev/null; fi
+
+if [ "${FLAG}" == "0" ]; then if ! cd "${DIRETORIOTRABALHO}" &>> /dev/null; then FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then if ! cp "${ARQUIVOANOTACOESPRIVADAS}" "${ARQUIVOANOTACOESPRIVADAS}.bak" &>> /dev/null; then FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then if ! ccrypt -d -K "${SENHA}" "${ARQUIVOANOTACOESPRIVADAS}" &>> /dev/null; then FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then NANOPIDS=$(OLDIFS=$IFS; IFS='\n'; for i in "$(ps | grep nano | awk '{print $2}')"; do echo $i; done; IFS=$OLDIFS); fi
+
+if [ "${FLAG}" == "0" ]; then if ! mintty.exe -e nano "${ARQUIVOANOTACOESPRIVADAS}" &>> /dev/null; then FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then sleep 4s; OLDIFS=$IFS; IFS='\n'; for i in $(ps | grep nano | awk '{print $2}'); do FLAGPID="1"; for j in $NANOPIDS; do if [ "${i}" == "${j}" ]; then FLAGPID="0"; fi; done; if [ "${FLAGPID}" == "1" ]; then NANOPID=$i; break; fi; done; IFS=$OLDIFS; unset FLAGPID; fi
+
+if [ "${FLAG}" == "0" ]; then FLAGNANO="0"; while [ "${FLAGNANO}" == "0" ]; do FLAGNANO="1"; OLDIFS=$IFS; IFS='\n'; for i in $(ps | grep nano | awk '{print $2}'); do if [ "${i}" == "${NANOPID}" ]; then FLAGNANO="0"; fi; done; sleep 1s; done; unset NANOPID; unset FLAGNANO; fi
+
+if [ "${FLAG}" == "0" ]; then if ! ccrypt -e -K "${SENHA}" "${ARQUIVOANOTACOESPRIVADAS}" &>> /dev/null; then FLAG="1"; fi; fi
+
+unset SENHA &>> /dev/null
+
+if [ "${FLAG}" == "0" ]; then if ! mv "${ARQUIVOANOTACOESPRIVADAS}.cpt" "${ARQUIVOANOTACOESPRIVADAS}" &>> /dev/null; then FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ]; then if [ "${PWD}/" != "${DIRETORIODESTINO}" ]; then if ! cp "${ARQUIVOANOTACOESPRIVADAS}" "${DIRETORIODESTINO}${ARQUIVOANOTACOESPRIVADAS}"; then FLAG="1"; fi; fi; fi
+
+if [ "${FLAG}" == "0" ]; then echo -e "${AV_VERDE}Sucesso${AV_SEMCOR} ao criar ${ARQUIVOANOTACOESPRIVADAS}."; else echo -e "${AV_VERMELHO}Ocorreu erro${AV_SEMCOR}."; rm "${ARQUIVOANOTACOESPRIVADAS}.cpt" &>> /dev/null; echo -n "Restaurando arquivo original... "; if cp "${ARQUIVOANOTACOESPRIVADAS}.bak" "${ARQUIVOANOTACOESPRIVADAS}" &>> /dev/null && mv "${ARQUIVOANOTACOESPRIVADAS}.bak" "${DIRETORIODESTINO}${ARQUIVOANOTACOESPRIVADAS}" &>> /dev/null; then echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu erro${AV_SEMCOR}."; fi; fi
+
+if ls ~/.bash_history &>> /dev/null; then echo -n "Removendo .bash_history... "; if rm ~/.bash_history &>> /dev/null; then echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Erro${AV_SEMCOR}."; fi; fi
+
+echo -n "Executando \"history -c && history -w\"... "; if history -c && history -w &>> /dev/null; then echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Erro${AV_SEMCOR}."; fi
+
+if [ "${FLAG}" == "0" ]; then if echo "Copiando ${ARQUIVOANOTACOESPRIVADAS} para documentos no Dropbox..."; dbxcli-windows-amd64.exe put "F:\\Antonio Vandré Pedrosa Furtunato Gomes\\\\${ARQUIVOANOTACOESPRIVADAS}" "/Documents/BACKUPED14/${ARQUIVOANOTACOESPRIVADAS}"; then echo -ne "${AV_VERDE}Sucesso${AV_SEMCOR}. "; else echo -ne "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. "; fi; date | tr -d "\n"; echo "."; fi
+
+if [ "${FLAG}" == "0" ]; then if echo "Copiando ${ARQUIVOANOTACOESPRIVADAS} para o Legado Ontológico..."; dbxcli-windows-amd64.exe put "F:\\Antonio Vandré Pedrosa Furtunato Gomes\\\\${ARQUIVOANOTACOESPRIVADAS}" "/Legado ontológico/${ARQUIVOANOTACOESPRIVADAS}"; then echo -ne "${AV_VERDE}Sucesso${AV_SEMCOR}. "; else echo -ne "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. "; fi; date | tr -d "\n"; echo "."; fi
+
+if [ "${FLAG}" == "0" ]; then if echo "Copiando ${ARQUIVOANOTACOESPRIVADAS} para a unidade C..."; cp "/cygdrive/f/Antonio Vandré Pedrosa Furtunato Gomes/${ARQUIVOANOTACOESPRIVADAS}" "/cygdrive/c/Antonio Vandré Pedrosa Furtunato Gomes/${ARQUIVOANOTACOESPRIVADAS}" &>> /dev/null; then echo -ne "${AV_VERDE}Sucesso${AV_SEMCOR}. "; else echo -ne "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}. "; fi; date | tr -d "\n"; echo "."; fi
+
+unset FLAG
+unset DIRETORIODESTINO
+unset ARQUIVO

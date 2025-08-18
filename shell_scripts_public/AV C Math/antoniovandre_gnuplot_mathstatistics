@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Projeto Mathematical Ramblings.
+
+# Script gerador do gráfico do histórico de uso das funções matemáticas escritas em C.
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 01-06-2024. Não considerando alterações em variáveis globais.
+
+if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/shell_scripts/Utilitários/antoniovandre_env" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+ARQUIVOESTATISTICAS="${CSOURCESDIR}Math/antoniovandre_math_estatisticas.txt"
+ARQUIVOIMAGEMESTATISTICAS="${CSOURCESDIR}Math/antoniovandre_math_estatisticas.png"
+ARQUIVOTEMP="${TEMPDIR}avgpms.dat"
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "${BASHSCRIPTSDIR}antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! hash gnuplot &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"Gnuplot\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if ! ls "${ARQUIVOESTATISTICAS}" &>> /dev/null; then echo -e "${AV_VERMELHO}Arquivo de estatísticas não encontrado${AV_SEMCOR}."; exit 1; fi
+
+CONTADOR="1"
+MAXVALUE="0"
+
+rm "${ARQUIVOTEMP}" &>> /dev/null
+
+while read LINE; do if [ "$(echo ${LINE} | cut -d ' ' -f 2)" -gt "${MAXVALUE}" ]; then MAXVALUE="$(echo ${LINE} | cut -d ' ' -f 2)"; fi; echo "${CONTADOR} ${LINE}" >> "${ARQUIVOTEMP}"; CONTADOR="$(expr ${CONTADOR} + 1)"; done < "${ARQUIVOESTATISTICAS}"
+
+echo -ne "Gerando gráfico... "; if ! gnuplot -p -e "set xtics font 'Verdana,6'; set yrange [0:]; set boxwidth 0.3; set style fill solid; set xtics 1; set ytics ${MAXVALUE}; set terminal png size 800,600; set output '${ARQUIVOIMAGEMESTATISTICAS}'; set xtics rotate by 45 right; plot '${ARQUIVOTEMP}' using 1:3:xtic(2) notitle with boxes linecolor rgb '#444444'" &>> /dev/null; then echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; exit 1; else echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}."; fi
+
+rm "${ARQUIVOTEMP}" &>> /dev/null
