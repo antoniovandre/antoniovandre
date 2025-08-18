@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Script de inicialização do navegador Firefox, por Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 08-10-2016.
+
+if ! cd /home/antoniovandre/.mozilla; then antoniovandre_dialogbox Erro_ao_acessar_dot_mozilla.; exit; else cd ~-; fi
+
+firefox
+
+#cpulimit -l 50 firefox
+
+#nice -n 10 firefox
+
+#sleep 5s
+
+#for pid in $(ps -A | grep firefox | awk '{print $1}'); do renice 10 $pid; done
+

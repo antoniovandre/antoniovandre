@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Script de ignoração da sincronização do diretório "dot_mozilla_Linux" no Dropbox. De Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 10-03-2016.
+
+dropbox exclude add /home/antoniovandre/Dropbox/dot_mozilla_Linux/
+
+sleep 3s
+

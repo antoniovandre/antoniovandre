@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes
+
+# Script otimizado para games e vídeos, de Antonio Vandré.
+
+# Última atualização: 20-08-2024. Não considerando alterações nos parâmetros.
+
+if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/shell_scripts/Utilitários/antoniovandre_env" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "${BASHSCRIPTS}antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+sudo modprobe i2c-dev &>> /dev/null
+
+# Brilho.
+
+if [ "${1}" == "r" ] && ([ "${2}" == "" ] || [ "${2}" == "all" ]); then echo -n "Restaurando o brilho..."; if hash ddcutil &>> /dev/null && ddcutil setvcp 10 90 &>> /dev/null; then echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; else echo -e " ${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; fi; else if [ "${1}" == "" ] || [ "${1}" == "all" ]; then echo -n "Ajustando o brilho..."; if hash ddcutil &>> /dev/null && ddcutil setvcp 10 85 &>> /dev/null; then echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; else echo -e " ${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; fi; fi; fi
+
+# Contraste.
+
+if [ "${1}" == "r" ] && ([ "${2}" == "" ] || [ "${2}" == "all" ]); then echo -n "Restaurando o contraste..."; if hash ddcutil &>> /dev/null && ddcutil setvcp 12 50 &>> /dev/null; then echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; else echo -e " ${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; fi; else if [ "${1}" == "" ] || [ "${1}" == "all" ]; then echo -n "Ajustando o contraste..."; if hash ddcutil &>> /dev/null && ddcutil setvcp 12 70 &>> /dev/null; then echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; else echo -e " ${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; fi; fi; fi
+
+# Níveis de vermelho, verde e azul.
+
+if [ "${1}" == "r" ] && ([ "${2}" == "rgb" ] || [ "${2}" == "all" ]); then echo -n "Restaurando os níveis de vermelho, verde e azul..."; if hash ddcutil &>> /dev/null && ddcutil setvcp 6c 50 &>> /dev/null && ddcutil setvcp 6e 50 &>> /dev/null && ddcutil setvcp 70 50 &>> /dev/null; then echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; else echo -e " ${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; fi; else if [ "${1}" == "rgb" ] || [ "${1}" == "all" ]; then echo -n "Ajustando os níveis de vermelho, verde e azul..."; if hash ddcutil &>> /dev/null && ddcutil setvcp 6c 55 &>> /dev/null && ddcutil setvcp 6e 55 &>> /dev/null && ddcutil setvcp 70 55 &>> /dev/null; then echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; else echo -e " ${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; fi; fi; fi
+
+#Priorizando o Google Chrome para o YouTube.
+
+if [ "${1}" == "r" ] && ([ "${2}" == "chr" ] || [ "${2}" == "all" ]); then echo -n "Restaurando a prioridade do Google Chrome..."; for PID in `pgrep chrome`; do sudo renice -n 0 -p $PID &>> /dev/null; done; echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; else if [ "${1}" == "chr" ]; then echo -n "Priorizando o Google Chrome..."; for PID in `pgrep chrome`; do sudo renice -n -20 -p $PID &>> /dev/null; done; echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi; fi
+
+if [ "${1}" == "r" ] && ([ "${2}" == "fire" ] || [ "${2}" == "all" ]); then echo -n "Restaurando a prioridade do Firefox..."; for PID in `pgrep fire`; do sudo renice -n 0 -p $PID &>> /dev/null; done; echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; else if [ "${1}" == "fire" ]; then echo -n "Priorizando o Firefox..."; for PID in `pgrep firefox`; do sudo renice -n -20 -p $PID &>> /dev/null; done; echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi; fi

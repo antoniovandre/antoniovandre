@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de carregamento de variáveis de ambiente.
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 11-08-2024.
+
+export AVENV="1"
+
+export TEMPDIR="${HOME}/antoniovandre_temp/"
+
+export AVSOFTWARESDIR="${HOME}/software_sources/"
+
+export BASHSCRIPTSDIR="${HOME}/shell_scripts/Utilitários/"
+
+export BASHSCRIPTSMATHDIR="${HOME}/shell_scripts/AV C Math/"
+
+export BASHSCRIPTSAV3DNAVIGATORDIR="${HOME}/shell_scripts/AV3DNavigator/"
+
+export CSOURCESDIR="${AVSOFTWARESDIR}C/"
+
+export PATH="${PATH}:${AVSOFTWARESDIR}:${BASHSCRIPTSDIR}:${BASHSCRIPTSMATHDIR}:${BASHSCRIPTSAV3DNAVIGATORDIR}:${CSOURCESDIR}:${CSOURCESDIR}Math"

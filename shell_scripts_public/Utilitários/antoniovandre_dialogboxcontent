@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Script auxiliar, complementar de "antoniovandre_dialogbox", de exibição de uma caixa de diálogo GUI. De Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Última atualização: 08-07-2020.
+
+ARQUIVOTEMPORARIO="/home/antoniovandre/Temp/dialogboxcontent"
+
+if ! ls "${ARQUIVOTEMPORARIO}" &>> /dev/null; then echo "Erro ao acessar arquivo temporário."; read; exit 1; else cat "${ARQUIVOTEMPORARIO}"; rm "${ARQUIVOTEMPORARIO}" &>> /dev/null; echo -e "\nPressione RETURN para sair."; read; fi
+

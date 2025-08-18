@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# Script de inicialização do Pekwm, de Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Última atualização: 22-03-2020.
+
+disper -s -r 1920x1080
+
+setxkbmap -model abnt2 -layout br &
+
+xset s off &
+
+#dropbox start &
+
+#xclipboard &
+
+#antoniovandre_cpufreq-set_gksudo &
+
+#antoniovandre_gedit &
+
+hsetroot -fill /home/antoniovandre/Imagens/Wallpapers/Alienware\ wallpaper.jpg &
+
+xscreensaver &
+
+pcmanfm &
+
+#chromium-browser &
+
+#antoniovandre_googlechrome
+
+#antoniovandre_firefox
+
+#vlc &
+
+gnome-terminal &

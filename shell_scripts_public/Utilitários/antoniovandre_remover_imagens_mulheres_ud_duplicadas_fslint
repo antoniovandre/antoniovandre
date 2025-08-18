@@ -1,0 +1,16 @@
+#!/bin/bash
+
+FILE_LISTA_FSLINT="/home/antoniovandre/Temp/imagens mulheres duplicadas.txt"
+
+DIRECTORY_IMAGENS_MULHERES_UD="/mnt/sda2/imagens mulheres (unique directory)/"
+
+contador=1
+
+line=" "
+
+echo -n "Removendo localmente em sincronia com o MEGA"
+
+while true; do line=$(sed "${contador}q;d" "$FILE_LISTA_FSLINT"); if [ "$line" = "" ]; then break; fi; if [[ $line == \#* ]]; then contador=$(expr $contador + 2); continue; fi; file=${line##*/}; rm "${DIRECTORY_IMAGENS_MULHERES_UD}${file}"; megarm "/Root/imagens mulheres (unique directory)/${file}" -u a.vandre.g.cinco@gmail.com -p 1245780mg5; echo -n "."; contador=$(expr $contador + 1); done
+
+echo " Concluído."
+

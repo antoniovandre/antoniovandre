@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Script para visualização de múltiplas imagens. De Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Requer o software "mirage".
+
+# Última atualização: 06-04-2016.
+
+TEMPDIR="/home/antoniovandre/Temp/antoniovandre_imageviewer/"
+
+mkdir $TEMPDIR
+
+for i in `seq 1 $#`; do cp "$(echo $1 | sed 's/\ / /g' | sed 's/ /\ /g')" $TEMPDIR; shift; done
+
+mirage $TEMPDIR
+
+rm -r $TEMPDIR
+

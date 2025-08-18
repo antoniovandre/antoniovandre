@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Script de inicialização do navegador Google Chrome, por Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 21-02-2016.
+
+google-chrome-stable &
+
+sleep 5s
+
+for pid in $(ps -A | grep chrome | awk '{print $1}'); do renice 10 $pid; done
+

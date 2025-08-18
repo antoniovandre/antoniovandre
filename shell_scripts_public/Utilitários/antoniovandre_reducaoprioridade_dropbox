@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Script de redução da prioridade do processo "dropbox", afim de deixar o sistema mais leve. De Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 09-03-2016.
+
+for pid in $(ps -A | grep dropbox | awk '{print $1}'); do renice 11 $pid; done
+

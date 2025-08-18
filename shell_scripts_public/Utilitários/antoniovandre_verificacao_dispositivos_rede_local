@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Script de verificação de dispositivos na rede local, por Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 14-10-2016.
+
+LOG="/home/antoniovandre/Temp/svdrlav"
+
+for ip in `seq 1 255`; do ping -c 1 $1.$ip; done > "$LOG"
+
+echo "A seguir, o log será exibido no editor nano. Ao sair, o log será automaticamente excluído.\n\nPressione RETURN para continuar."
+
+read key;
+
+nano "$LOG"
+
+rm "$LOG"

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Script para desligar o monitor do notebook. De Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 03-04-2016.
+
+sleep 1s; xset -display :0.0 dpms force off
+

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Script de exibição de uma caixa de diálogo GUI. De Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Última atualização: 08-07-2020.
+
+ARQUIVOTEMPORARIO="/home/antoniovandre/Temp/dialogboxcontent"
+
+if ! echo $@ > "${ARQUIVOTEMPORARIO}"; then echo "Erro ao criar arquivo temporário."; exit 1; else if ! hash xterm &>> /dev/null; then echo "Software \"xterm\" não encontrado."; exit 1; else if ! hash antoniovandre_dialogboxcontent &>> /dev/null; then echo "Software auxiliar \"antoniovandre_dialogboxcontent\" não encontrado."; exit 1; else xterm antoniovandre_dialogboxcontent; fi; fi; fi
+
