@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Script de liberação do uso da cpu pelo Chromium, na GUI. De Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+# Script de liberação do uso da cpu pelo Chromium, na GUI. De Antonio Vandré Pedrosa Furtunato Gomes (antoniovandre.github.io/MathematicalRamblingsjs).
 
 xterm antoniovandre_cpulimit_chromium_free
 
