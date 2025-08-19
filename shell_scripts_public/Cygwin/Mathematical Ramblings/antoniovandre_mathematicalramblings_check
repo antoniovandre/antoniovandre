@@ -499,7 +499,7 @@ echo -ne "."
 
 FLAGT="0"; TEMPO=$(date +%s)
 
-if ! TRACERT.EXE mathematicalramblings.blogspot.com &>> /dev/null; then echo -e " ${AV_VERMELHO}Weblog online indisponível ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); fi
+if ! TRACERT.EXE antoniovandre.github.io/MathematicalRamblingsjs &>> /dev/null; then echo -e " ${AV_VERMELHO}Weblog online indisponível ou perda de conexão com a internet${AV_SEMCOR}."; FLAG=$(expr "${FLAG}" + 1); fi
 
 # Finalizando.
 
