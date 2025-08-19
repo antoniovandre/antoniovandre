@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Script de backup do legado ontológico a partir do disco local para o Dropbox, mais a atualização dos audios no Dropbox para o disco local. De Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+# Script de backup do legado ontológico a partir do disco local para o Dropbox, mais a atualização dos audios no Dropbox para o disco local. De Antonio Vandré Pedrosa Furtunato Gomes (antoniovandre.github.io/MathematicalRamblingsjs).
 
 # Última atualização: 21-11-2016.
 

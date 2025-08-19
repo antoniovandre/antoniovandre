@@ -46,7 +46,7 @@ xclock &>> /dev/null &
 
 REDSHIFT_CONTADOR="1"; while [ "${REDSHIFT_CONTADOR}" -le "3" ]; do if ! redshift &>> /dev/null; then sleep 5s; REDSHIFT_CONTADOR=$(expr "${REDSHIFT_CONTADOR}" + 1); else break; fi; done; if [ "${REDSHIFT_CONTADOR}" == "4" ]; then redshift -l -8.2:-35; fi & 
 
-qupzilla https://livetrafficfeed.com/live/mathematicalramblings.blogspot.com &
+qupzilla https://livetrafficfeed.com/live/antoniovandre.github.io/MathematicalRamblingsjs &
 
 sleep 60s
 
