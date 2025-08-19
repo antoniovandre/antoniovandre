@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Script de redução da prioridade do processo "dropbox", afim de deixar o sistema mais leve. De Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+# Script de redução da prioridade do processo "dropbox", afim de deixar o sistema mais leve. De Antonio Vandré Pedrosa Furtunato Gomes (antoniovandre.github.io/MathematicalRamblingsjs).
 
 # Última atualização: 09-03-2016.
 

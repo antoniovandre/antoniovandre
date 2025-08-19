@@ -1,7 +1,7 @@
 <#
 Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
 
-Job: "mathematicalramblings.blogspot.com".
+Job: "antoniovandre.github.io/MathematicalRamblingsjs".
 
 Script de backup do arquivo "antoniovandre-atualmente_lendo-4.txt".
 
