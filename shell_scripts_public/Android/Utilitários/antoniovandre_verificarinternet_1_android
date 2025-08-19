@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Script de verificação de conexão com a internet, apenas um toque, para Android. De Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+# Script de verificação de conexão com a internet, apenas um toque, para Android. De Antonio Vandré Pedrosa Furtunato Gomes (antoniovandre.github.io/MathematicalRamblingsjs).
 
 # Última atualização: 07-06-2024. Não considerando alterações em variáveis globais.
 
