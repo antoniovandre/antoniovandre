@@ -4,7 +4,7 @@
 
 # Script de visualização de estatísticas de uso do AV3DNavigator, de Antonio Vandré.
 
-# Última atualização: 13-08-2025.
+# Última atualização: 29-08-2025.
 
 if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/shell_scripts/Utilitários/antoniovandre_env" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
 
@@ -42,7 +42,7 @@ for ID in `seq -s " " 1 "${CONTADOR}"`; do echo -ne "Chave: "; CHAVE=$(echo -n "
 
 if [ "${ID}" == "0" ]; then
 
-echo -e "1 \"No data\" 0\n2 \"No data\" 0\n3 \"No data\" 0\n4 \"No data\" 0\n5 \"No data\" 0\n6 \"No data\" 0" > "${TEMPDATFILE}"
+echo -e "1 \"No data\" 0\n2 \"No data\" 0\n3 \"No data\" 0\n4 \"No data\" 0\n5 \"No data\" 0\n6 \"No data\" 0\n7 \"No data\" 0" > "${TEMPDATFILE}"
 
 MAXY="4"
 
