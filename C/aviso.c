@@ -17,7 +17,7 @@ gcc `pkg-config gtk4 --cflags` aviso.c -o aviso `pkg-config gtk4 --libs` -lm
 #include <strings.h>
 #include <gtk/gtk.h>
 
-int key_pressed (GtkWindow * window, guint keyval, guint keycode)
+int key_pressed (GtkWindow * window, guint keyval)
 	{if (keyval == GDK_KEY_Escape) gtk_window_destroy(window);}
 
 int activate (GApplication * app, gpointer * user_data)
