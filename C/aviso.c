@@ -60,7 +60,7 @@ int activate (GApplication * app, gpointer * user_data)
 				}
 
 
-		if (user_data[2] != NULL)
+		if (user_data[2] != NULL) if (strcmp((char *) user_data[2], ""))
 			{
 			for (i = 0; i < strlen((char *) user_data[2]); i++)
 				if (! ((((char *) user_data[2])[i] == '0') || (((char *) user_data[2])[i] == '1') || (((char *) user_data[2])[i] == '2') || (((char *) user_data[2])[i] == '3') || (((char *) user_data[2])[i] == '4') || (((char *) user_data[2])[i] == '5') || (((char *) user_data[2])[i] == '6') || (((char *) user_data[2])[i] == '7') || (((char *) user_data[2])[i] == '8') || (((char *) user_data[2])[i] == '9')))
