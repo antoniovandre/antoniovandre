@@ -25,7 +25,7 @@ gcc `pkg-config gtk4 --cflags` aviso.c -o aviso `pkg-config gtk4 --libs` -lm
 #include <strings.h>
 #include <gtk/gtk.h>
 
-#define BUFFER 4096
+#define BUFFER 8192
 
 int key_pressed (GtkWindow * window, guint keyval)
 	{if (keyval == GDK_KEY_Escape) gtk_window_destroy(window);}
@@ -46,6 +46,7 @@ int activate (GApplication * app, gpointer * user_data)
 	int tamanho_linha = 0;
 	int linhas = 1;
 	int i;
+	int flag_tamanho_int = 1;
 
 	if (user_data[1] != NULL)
 		{
@@ -64,21 +65,35 @@ int activate (GApplication * app, gpointer * user_data)
 				largura_aviso = (int) fmax(largura_aviso, tamanho_linha);
 				}
 
-		if ((user_data[2] != NULL) && (atoi((char *) user_data[2])))
+
+		if (user_data[2] != NULL)
 			{
-			gtk_window_set_default_size (GTK_WINDOW(window), (int) fmax(200, 12 * largura_aviso * atoi((char *) user_data[2]) / 10), (int) fmax(100, 25 * linhas * atoi((char *) user_data[2]) / 10));
+			for (i = 0; i < strlen((char *) user_data[2]); i++)
+				if (! ((((char *) user_data[2])[i] == '0') || (((char *) user_data[2])[i] == '1') || (((char *) user_data[2])[i] == '2') || (((char *) user_data[2])[i] == '3') || (((char *) user_data[2])[i] == '4') || (((char *) user_data[2])[i] == '5') || (((char *) user_data[2])[i] == '6') || (((char *) user_data[2])[i] == '7') || (((char *) user_data[2])[i] == '8') || (((char *) user_data[2])[i] == '9')))
+					{flag_tamanho_int = 0; break;}
 
-			aviso_formated = (char *) malloc (strlen(aviso) + 24 + strlen((char *) user_data[2]));
-			strcpy(aviso_formated, "");
-			strcat(aviso_formated, "<span size='");
-			strcat(aviso_formated, (char *) user_data[2]);
-			strcat(aviso_formated, "pt'>");
-			strcat(aviso_formated, aviso);
-			strcat(aviso_formated, "</span>");
+			if (flag_tamanho_int)
+				{
+				gtk_window_set_default_size (GTK_WINDOW(window), (int) fmax(200, 12 * largura_aviso * atoi((char *) user_data[2]) / 10), (int) fmax(100, 25 * linhas * atoi((char *) user_data[2]) / 10));
 
-			gtk_label_set_markup(GTK_LABEL(label), aviso_formated);
+				aviso_formated = (char *) malloc (strlen(aviso) + 24 + strlen((char *) user_data[2]));
+				strcpy(aviso_formated, "");
+				strcat(aviso_formated, "<span size='");
+				strcat(aviso_formated, (char *) user_data[2]);
+				strcat(aviso_formated, "pt'>");
+				strcat(aviso_formated, aviso);
+				strcat(aviso_formated, "</span>");
 
-			free(aviso_formated);
+				gtk_label_set_markup(GTK_LABEL(label), aviso_formated);
+
+				free(aviso_formated);
+				}
+			else
+				{
+				gtk_window_set_default_size (GTK_WINDOW(window), (int) fmax(200, 12 * largura_aviso), (int) fmax(100, 25 * linhas));
+
+				gtk_label_set_markup(GTK_LABEL(label), aviso);
+				}
 			}
 		else
 			{
