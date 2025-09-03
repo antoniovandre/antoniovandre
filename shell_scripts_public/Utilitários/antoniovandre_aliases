@@ -55,8 +55,9 @@ unalias gm06
 unalias gm1
 unalias gm15
 unalias xcz
-unalias apy
-unalias agtk
+unalias ap
+unalias ag
+unalias ac
 unalias c
 
 # Início aliases matemáticos 1/1.
@@ -173,8 +174,9 @@ alias gm06="if hash xcalib &>> /dev/null; then if [ '$(ps -A | grep Xorg)' != ''
 alias gm1="if hash xcalib &>> /dev/null; then if [ '$(ps -A | grep Xorg)' != '' ]; then xcalib -gc 1 -a &>> /dev/null; fi; fi"
 alias gm15="if hash xcalib &>> /dev/null; then if [ '$(ps -A | grep Xorg)' != '' ]; then xcalib -gc 1.5 -a &>> /dev/null; fi; fi"
 alias xcz="if hash xcalib &>> /dev/null; then if [ '$(ps -A | grep Xorg)' != '' ]; then xcalib -c &>> /dev/null; fi; fi"
-alias apy="antoniovandre_aviso python"
-alias agtk="antoniovandre_aviso gtk"
+alias ap="antoniovandre_aviso python"
+alias ag="antoniovandre_aviso gtk"
+alias ac="antoniovandre_aviso console"
 alias c="antoniovandre_cmd"
 
 # Início aliases matemáticos 1/1.
