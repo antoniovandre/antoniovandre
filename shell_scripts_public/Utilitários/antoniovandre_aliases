@@ -4,7 +4,7 @@
 
 # Script de aliases. Deve ser executado com "source".
 
-# Última atualização: 10-02-2025.
+# Última atualização: 03-09-2025.
 
 if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/shell_scripts/Utilitários/antoniovandre_env" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
 
@@ -57,6 +57,7 @@ unalias gm15
 unalias xcz
 unalias apy
 unalias agtk
+unalias c
 
 # Início aliases matemáticos 1/1.
 
@@ -174,6 +175,7 @@ alias gm15="if hash xcalib &>> /dev/null; then if [ '$(ps -A | grep Xorg)' != ''
 alias xcz="if hash xcalib &>> /dev/null; then if [ '$(ps -A | grep Xorg)' != '' ]; then xcalib -c &>> /dev/null; fi; fi"
 alias apy="antoniovandre_aviso python"
 alias agtk="antoniovandre_aviso gtk"
+alias c="antoniovandre_cmd"
 
 # Início aliases matemáticos 1/1.
 
