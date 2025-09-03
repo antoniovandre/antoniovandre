@@ -4,7 +4,7 @@
 
 // Um segundo argumento pode ser passado: o tamanho do texto.
 
-// Dependências: gtk4, strings, math.
+// Dependências: gtk4, string, math.
 
 /* Compile com o comando:
 
@@ -16,7 +16,7 @@ gcc `pkg-config gtk4 --cflags` aviso.c -o aviso `pkg-config gtk4 --libs` -lm
 // Última atualização: 03-09-2025. Não considerando alterações em variáveis globais.
 
 #include <math.h>
-#include <strings.h>
+#include <string.h>
 #include <gtk/gtk.h>
 
 #define BUFFER 8192
