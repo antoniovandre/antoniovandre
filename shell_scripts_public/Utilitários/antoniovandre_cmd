@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes (antoniovandre.github.io/MathematicalRamblingsjs).
+
+# Script que executa um comando e mostra a saída pelo app aviso.
+
+# Caso o primeiro argumento seja "t", o último argumento é reservado para o tamanho da fonte no aviso.
+
+# Licença de uso: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 03-09-2025.
+
+if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/shell_scripts/Utilitários/antoniovandre_env" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "${BASHSCRIPTS}antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! hash aviso; then echo -e "${AV_VERMELHO}Software \"aviso\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if [ "${1}" == "t" ]; then aviso "$(${@:2:$(($#-2))} | antoniovandre_newlineparser)" ${@: -1}; else aviso "$(${@:1:$(($#-1))} | antoniovandre_newlineparser)"; fi
