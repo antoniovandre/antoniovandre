@@ -1,4 +1,4 @@
-// Proprietário: AntonioVandrePedrosaFurtunatoGomes.
+// Proprietário: Antonio Vandré Pedrosa Furtunato Gomes (antoniovandre.github.io/MathematicalRamblingsjs).
 
 // Software exibidor de uma caixa de diálogo com um aviso passado como parâmetro por linha de comando.
 
@@ -61,8 +61,6 @@ int activate (GApplication * app, gpointer * user_data)
 int main (int argc, char ** argv)
 	{
 	GtkApplication * app = gtk_application_new ("org.antoniovandre.aviso", G_APPLICATION_DEFAULT_FLAGS);
-
-	gtk_init();
 
 	g_signal_connect (app, "activate", G_CALLBACK(activate), argv[1]);
 
