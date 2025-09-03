@@ -2,13 +2,7 @@
 
 // Software exibidor de uma caixa de diálogo com um aviso passado como parâmetro por linha de comando.
 
-/*
-
-Um segundo argumento pode ser passado: o tamanho do texto.
-
-Também pode-se ler do stdin utilizando como primeiro argumento "-s".
-
-*/
+// Um segundo argumento pode ser passado: o tamanho do texto.
 
 // Dependências: gtk4, strings, math.
 
@@ -117,8 +111,6 @@ int activate (GApplication * app, gpointer * user_data)
 int main (int argc, char ** argv)
 	{
 	GtkApplication * app = gtk_application_new ("org.antoniovandre.aviso", G_APPLICATION_DEFAULT_FLAGS);
-
-	if (argv[1] != NULL) if (! (strcmp(argv[1], "-s"))) fgets(argv[1], BUFFER, stdin);
 
 	g_signal_connect (app, "activate", G_CALLBACK(activate), argv);
 
