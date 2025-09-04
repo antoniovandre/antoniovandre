@@ -6,7 +6,7 @@
 
 # Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
 
-# Última atualização: 11-08-2024.
+# Última atualização: 11-08-2024. Não considerando alterações em variáveis globais.
 
 export AVENV="1"
 
@@ -14,7 +14,7 @@ export TEMPDIR="${HOME}/antoniovandre_temp/"
 
 export AVSOFTWARESDIR="${HOME}/software_sources/"
 
-export BASHSCRIPTSDIR="${HOME}/shell_scripts/Utilitários/"
+export BASHSCRIPTSDIR="${HOME}/shell_scripts/Util/"
 
 export BASHSCRIPTSMATHDIR="${HOME}/shell_scripts/AV C Math/"
 
