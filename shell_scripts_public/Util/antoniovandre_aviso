@@ -6,9 +6,9 @@
 
 # Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
 
-# Última atualização: 03-09-2025. Não considerando alterações em variáveis globais.
+# Última atualização: 04-09-2025. Não considerando alterações em variáveis globais.
 
-if [ "${#}" -lt "2" ]; then echo "Requer no mínimo 2 argumentos."; exit 1; fi
+if [ "${#}" -lt "2" ]; then echo "Requer no mínimo 3 argumentos."; exit 1; fi
 
 if [ "${1}" == "python" ]; then
 	if ! hash python3 &>> /dev/null; then echo "Python 3 não instalado."; exit 1; fi
