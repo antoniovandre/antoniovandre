@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 28-10-2016.
+
+echo "Reiniciando driver..."; rmmod rtl8192se; modprobe rtl8192se
+
+echo "Reiniciando network-manager..."; service network-manager restart
+
+#echo "Delay de 60 segundos"; for i in `seq 1 60`; do printf "${i}/60\r"; sleep 1s; done; echo "\nReconectando..."
+
+#nmcli dev wifi con "GVT-0D8D" password "0073435018"

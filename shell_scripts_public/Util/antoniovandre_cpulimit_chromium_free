@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Script de liberação de uso total do processador, através do cpulimit para Chromium. De Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 20-10-2016.
+
+for pid in `ps -A | grep chromium | awk '{print $1}'`; do if ! cpulimit -b -l 100 -p $pid 1>> /dev/null 2>> /dev/null; then echo "Erro."; read key; exit 1; fi; done; echo "Sucesso."; read key
+

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Script de conversão de gifs para mp4's das artes cartesianas do Mathematical Ramblings (mathematicaltamblings.blogspot.com). Webpage dedicada: "sites.google.com/site/mathematicalramblings/mr-artes-cartesianas".
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 17-05-2024.
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "/data/data/com.termux/files/home/storage/shared/av_softwares/BASH scripts/antoniovandre_cores_android" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! hash ffmpeg &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"ffmpeg\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+echo -ne "Convertendo... "; if ! ffmpeg -stream_loop 2 -i "${1}" -pix_fmt yuv420p -vf "scale=1080:-2,setpts=2*PTS" "${1}.mp4" -y -hide_banner -loglevel panic >> /dev/null; then echo -e "${AV_VERMELHO}Erro ao converter${AV_SEMCOR}."; exit 1; else echo -e "${AV_VERDE} Sucesso${AV_SEMCOR}."; fi

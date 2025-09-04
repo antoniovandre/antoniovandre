@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Script de cópia de arquivos de diretório para diretório renomeando os arquivos com o mesmo nome, os arquivos da origem. De Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 13-03-2016.
+
+echo "Certifique-se de ter digitado os diretórios de origem e destino com / em seus finais.\n\nPressione RETURN para continuar ou Ctrl+C para sair."
+
+read key
+
+SAVEIFS=$IFS
+
+IFS=$(echo "\n")
+
+for file in $1*; do tempstring=$(ls "$2${file##*/}" 2>>/dev/null); if [ "${file##*/}" = "${tempstring##*/}" ]; then cp $file ${tempstring%.*}_`date +%Y%m%d%H%M%S`.${tempstring##*.}; else cp $file $2; fi; done
+
+IFS=$SAVEIFS
+

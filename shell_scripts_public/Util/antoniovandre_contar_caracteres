@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Script de contagem de caracteres, de Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 11-11-2016.
+
+echo -n "$1" | wc -c

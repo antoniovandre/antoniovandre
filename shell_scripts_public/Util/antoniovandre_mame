@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Script de execução preferencial para Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 26-04-2016.
+
+mame -rp /home/antoniovandre/MAMEroms\(0.37b11\ romset\ mixed\ with\ others\)/ -video opengl -window -nofilter -nomaximize -scalemode none -nomouse -resolution 640-480 $@
+

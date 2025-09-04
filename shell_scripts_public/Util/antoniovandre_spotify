@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Script de inicialização do Spotify, por Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 29-09-2016.
+
+cpulimit -l 15 spotify
+
+#nice -n 10 spotify
+
+#sleep 5s
+
+#for pid in $(ps -A | grep spotify | awk '{print $1}'); do renice 10 $pid; done
+

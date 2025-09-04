@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# SCRIPT EM DESENVOLVIMENTO, NÃO O EXECUTE.
+
+# Script de conversão dos audios wav para gsm, no diretório do legado ontológico, ocupando menos espaço em disco. De Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 04-03-2016.
+
+LO="/home/antoniovandre/Legado ontológico/"
+
+LOcloud="/home/antoniovandre/Dropbox/Legado ontológico/"
+
+dir=$PWD
+
+echo "A seguir, confirme entrando com a string \"C\".\n"
+
+antoniovandre_atualizar_legadoontologico_local
+
+cd "$LO"
+
+for file in `ls rec*wav`; do sox "$file" -r 8000 "${file}.gsm" resample -ql; rm "$file"; done
+
+sox input.wav -r 8000 output.gsm resample -q1
+
+cd "$LOcloud"
+
+rm "rec*wav"
+
+cp "${LO}/*.gsm" $PWD
+
+cd "$dir"
+

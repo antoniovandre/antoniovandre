@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# Script de denunciar arquivos iguais em um mesmo diretório. De Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Requer o software "md5sum".
+
+# Uso: antoniovandre_denuciar_arquivos_iguais <diretório>
+
+# Última atualização: 10-10-2016.
+
+FILE_CONTADOR_PRIMEIRO="/home/antoniovandre/Temp/avdaip"
+
+FILE_CONTADOR_SEGUNDO="/home/antoniovandre/Temp/avdais"
+
+FILE_CONTADOR_PRIMEIRO_VOLATILE="/home/antoniovandre/Temp/avdaicpv"
+
+FILE_CONTADOR_SEGUNDO_VOLATILE="/home/antoniovandre/Temp/avdaicsv"
+
+while [ "$key" != "y" ] && [ "$key" != "n" ]; do echo "Continuar última sessão? (y/n)"; read key; done; if [ "$key" = "y" ]; then if (! find "$FILE_CONTADOR_PRIMEIRO" 1>> /dev/null 2>> /dev/null) || (! find "$FILE_CONTADOR_SEGUNDO" 1>> /dev/null 2>> /dev/null); then echo "Erro ao acessar arquivos contadores. Inicie uma nova sessão."; exit 1; fi; echo "Continuando..."; else if [ "$key" = "n" ]; then echo "Iniciando nova sessão..."; echo "0" > "$FILE_CONTADOR_PRIMEIRO"; echo "0" > "$FILE_CONTADOR_SEGUNDO"; fi; fi
+
+if [ "$1" = "" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then echo "Uso: antoniovandre_denuciar_arquivos_iguais <diretório>"; exit 1; fi
+
+lista=$(find "$1" -type f)
+
+if [ "$lista" = "" ]; then echo "Diretório vazio."; exit 1; fi
+
+echo "0" > "$FILE_CONTADOR_PRIMEIRO_VOLATILE"; while IFS= read -r primeiro; do if [ "$(cat "$FILE_CONTADOR_PRIMEIRO_VOLATILE")" -lt "$(cat "$FILE_CONTADOR_PRIMEIRO")" ]; then echo $(expr $(cat "$FILE_CONTADOR_PRIMEIRO_VOLATILE") + 1) > "$FILE_CONTADOR_PRIMEIRO_VOLATILE"; continue; fi; if [ "$primeiro" = "" ]; then echo "Sessão incompatível com a última execução. Saindo..."; echo "0" > "$FILE_CONTADOR_PRIMEIRO"; echo "0" > "$FILE_CONTADOR_SEGUNDO"; exit 1; fi; echo "0" > "$FILE_CONTADOR_SEGUNDO_VOLATILE"; while IFS= read -r segundo; do if [ "$(cat "$FILE_CONTADOR_SEGUNDO_VOLATILE")" -lt "$(cat "$FILE_CONTADOR_SEGUNDO")" ]; then echo $(expr $(cat "$FILE_CONTADOR_SEGUNDO_VOLATILE") + 1) > "$FILE_CONTADOR_SEGUNDO_VOLATILE"; continue; fi; if [ "$segundo" = "" ]; then echo "Sessão incompatível com a última execução. Saindo..."; echo "0" > "$FILE_CONTADOR_PRIMEIRO"; echo "0" > "$FILE_CONTADOR_SEGUNDO"; exit 1; fi; if [ "$primeiro" != "$segundo" ] && [ "$(md5sum "$primeiro" | awk '{print $1}')" = "$(md5sum "$segundo" | awk '{print $1}')" ]; then echo "$primeiro , $segundo"; fi; echo $(expr $(cat "$FILE_CONTADOR_SEGUNDO") + 1) > "$FILE_CONTADOR_SEGUNDO"; done <<< "$lista"; echo $(expr $(cat "$FILE_CONTADOR_PRIMEIRO") + 1) > "$FILE_CONTADOR_PRIMEIRO"; echo "0" > "$FILE_CONTADOR_SEGUNDO"; done <<< "$lista"
+
+echo "Sucesso. Saindo..."
+
+echo "0" > "$FILE_CONTADOR_PRIMEIRO"
+
+echo "0" > "$FILE_CONTADOR_SEGUNDO"
+
+exit 0
+

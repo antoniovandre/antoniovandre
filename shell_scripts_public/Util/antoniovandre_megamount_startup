@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Script de startup do script antoniovandre_megamount, de Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 02-08-2017.
+
+sudo -u antoniovandre /home/antoniovandre/shell_scripts/Shell\ scripts\ -\ Ubuntu/antoniovandre_megamount

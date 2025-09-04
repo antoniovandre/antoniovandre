@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Script voltado para atividades temporárias. De Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Requer BASH.
+# Requer Megatools 1.9.97 (http://megatools.megous.com).
+# Recomenda-se armazenar o TEMPFILE no diretório "/run". Para isto verifique as permições. 
+
+# Última atualização: 04-04-2016.
+
+if [ "$1" = "" ] || [ "$2" = "" ] || [ "$3" = "" ] || [ "$4" = "" ] || [ "$5" = "" ] || [ "$6" = "" ] || [ "$7" = "" ]; then echo "Uso: antoniovandre_megaupload EMAIL SENHA DIRETÓRIO_REMOTO DIRETÓRIO_LOCAL DELAY_AFTER_ERROR LOG_FILE LOG_MESSAGE"; exit; fi
+
+TEMPFILE="/run/antoniovandre_megaupload_tempfile"
+
+rm "$TEMPFILE" 2>> /dev/null
+
+while ! (set -o pipefail && megacopy -r "$3" -l "$4" -u "$1" -p "$2" | "$TEMPFILE") || [ "$(cat "$TEMPFILE" | grep "can't connect to server")" != "" ]; do rm "$TEMPFILE"; sleep $5; done
+
+rm "$TEMPFILE" 2>> /dev/null
+
+echo "$7" >> "$6"
+
