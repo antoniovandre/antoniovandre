@@ -1,3 +1,0 @@
-#!/bin/sh
-
-megacopy -u a.vandre.g.dez@gmail.com -p 1245780mg10 -l /home/antoniovandre/MAMEroms\(0.37b11\ romset\ mixed\ with\ others\) -r /Root/MAMEroms\(0.37b11\ romset\ mixed\ with\ others\)

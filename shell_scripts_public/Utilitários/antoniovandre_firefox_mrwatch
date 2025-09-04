@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
-
-# Script de inicialização do Mozilla Firefox para Antonio Vandré para vigilância do Mathematical Ramblings.
-
-# Última atualização: 15-06-2024.
-
-firefox -new-window https://analytics.google.com/analytics/web/#/p342761899/reports/intelligenthome -new-window https://livetrafficfeed.com/live/antoniovandre.github.io/MathematicalRamblingsjs

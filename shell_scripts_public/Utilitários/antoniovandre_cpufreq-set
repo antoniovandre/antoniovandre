@@ -1,9 +1,0 @@
-#!/bin/sh
-
-# Script limitador das cpus do notebook para evitar o desligamento automático, de Antonio Vandré Pedrosa Furtunato Gomes.
-
-# Última atualização: 28-10-2016.
-
-for core in `seq 0 3`; do cpufreq-set -c $core -g powersave; done
-
-date > /home/antoniovandre/Temp/antoniovandre_cpufreq-set_latest_execute

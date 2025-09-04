@@ -1,9 +1,0 @@
-#!/bin/sh
-
-for i in `seq 1 10`; do
-
-megacopy -u a.vandre.g.quinze@gmail.com -p 1245780mg15 -l "/home/antoniovandre/GoodSMS 3.13 [Updated GoodMerge Set]" -r "/Root/GoodSMS 3.13 [Updated GoodMerge Set]"
-
-while ! ping -c 1 www.mega.nz; do sleep 5m; done
-
-done

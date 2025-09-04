@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# Script de contagem de caracteres, de Antonio Vandré Pedrosa Furtunato Gomes (antoniovandre.github.io/MathematicalRamblingsjs).
-
-# Última atualização: 11-11-2016.
-
-echo -n "$1" | wc -c

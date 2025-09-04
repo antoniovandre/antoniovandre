@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# Script para criar um disco virtual na memória RAM. De Antonio Vandré Pedrosa Furtunato Gomes (antoniovandre.github.io/MathematicalRamblingsjs).
-
-# Última atualização: 11-04-2016.
-
-sudo mount -t tmpfs -o size=$1,mode=0777 tmpfs /mnt/ramdisc

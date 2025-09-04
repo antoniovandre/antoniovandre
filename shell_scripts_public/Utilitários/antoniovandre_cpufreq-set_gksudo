@@ -1,9 +1,0 @@
-#!/bin/sh
-
-# Script de execução do script "antoniovandre_cpufreq-set" com o gksudo, de Antonio Vandré Pedrosa Furtunato Gomes.
-
-# Última atualização: 09-04-2016.
-
-while ! gksudo antoniovandre_cpufreq-set; do antoniovandre_dialogbox Senha_incorreta._Tente_novamente.; done
-
-antoniovandre_dialogbox Sucesso ao executar "antoniovandre_cpufreq-set".
