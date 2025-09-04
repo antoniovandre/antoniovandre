@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de kill de processos, de Antonio Vandré.
+
+# Última atualização: 09-08-2024.
+
+IFS=$'\n'
+
+for PROCESSO in `ps -u "${USER}"`; do if [ "$(echo -n ${PROCESSO} | awk '{print $4}')" == "${1}" ]; then kill -s 9 "$(echo -n ${PROCESSO} | awk '{print $1}')"; fi; done

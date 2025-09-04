@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de buffering do daylight, one step.
+
+# Última atualização: 14-11-2020.
+
+SOFTWAREVIEW="eog"
+ARQUIVOIMAGEM="/home/antoniovandre/Temp/daylight.jpg"
+FLAG="0";
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! hash "${SOFTWAREVIEW}" &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"${SOFTWAREVIEW}\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+echo -ne "Fazendo o download do daylight... "; if wget https://www.timeanddate.com/scripts/sunmap.php?earth=1 -O "${ARQUIVOIMAGEM}" &>> /dev/null; then FLAG=1; fi
+
+if [ "${FLAG}" == "1" ]; then echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; exit 1; fi
+
+eval "${SOFTWAREVIEW} ${ARQUIVOIMAGEM}" &>> /dev/null &
+
+exit 0

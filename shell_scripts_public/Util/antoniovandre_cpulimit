@@ -1,0 +1,69 @@
+#!/bin/bash
+
+# Projeto Mathematical Ramblings.
+
+# Script de cpulimit personalizado.
+
+# Uso: antoniovandre_cpulimit <PADRÃO> [p [e]]. Utilize "p" como segundo argumento de deseja persistir na procura do padrão, neste caso use a key CTRL+c para sair. Utilize "e" como terceiro argumento se deseja aplicar o limite do segundo arquivo.
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 02-07-2020.
+
+if ! hash cpulimit &>> /dev/null; then echo "Software cpulimit não encontrado."; exit 1; fi
+
+if [ "${3}" == "e" ]; then CPULIMITPFILE="/home/antoniovandre/antoniovandre_cpulimit_porcentagem_2.txt"; else CPULIMITPFILE="/home/antoniovandre/antoniovandre_cpulimit_porcentagem.txt"; fi
+
+if ! ls "${CPULIMITPFILE}" &>> /dev/null; then echo "Erro ao localizar ${CPULIMITPFILE}."; exit 1; fi
+
+PIDA=""
+FLAG="0"
+N="0"
+
+TEMP=$(ps -A | grep $1 | sed 's/  */ /g')
+
+while [ "$(echo ${TEMP} | cut -d ' ' -f $(expr 4 \* ${N} + 1))" != "" ]; do N=$(expr $N + 1); done
+
+  if [ "${N}" != "0" ]; then for I in `seq 1 $N`; do
+    PROGRAM=$(echo $TEMP | cut -d " " -f $(expr 4 \* $I))
+
+    PID=$(echo $TEMP | cut -d " " -f $(expr 4 \* $I - 3))
+
+    echo "Instância detectada."; (cpulimit -l $(cat "${CPULIMITPFILE}" | tr -d "\n") -p $PID &>> /dev/null &)
+
+    FLAG="1"
+
+    PIDA="${PIDA} ${PID}"
+  done; fi
+
+while [ "${PROGRAM}" != "" ] && [ "${2}" == "p" ]; do
+  PIDA2=""
+  PROGRAM=""
+  N2="0"
+
+  TEMP=$(ps -A | grep $1 | sed 's/  */ /g')
+
+  while [ "$(echo ${TEMP} | cut -d ' ' -f $(expr 4 \* ${N2} + 1))" != "" ]; do N2=$(expr $N2 + 1); done
+
+  if [ "${N2}" != "0" ]; then for I in `seq 1 $N2`; do
+    PROGRAM=$(echo $TEMP | cut -d " " -f $(expr 4 \* $I))
+
+    PID=$(echo $TEMP | cut -d " " -f $(expr 4 \* $I - 3))
+
+    PIDA2="${PIDA2} ${PID}"
+
+    FLAG2="0"
+
+    for J in `seq 1 $N`; do if [ "$(echo $PIDA | cut -d ' ' -f $J)" == "${PID}" ]; then FLAG2="1"; break; fi; done
+
+    if [ "${FLAG2}" == "0" ]; then echo "Nova instância detectada."; (cpulimit -l $(cat "${CPULIMITPFILE}" | tr -d "\n") -p $PID &>> /dev/null &); fi
+  done; fi
+
+  sleep 5s
+
+  N=$N2
+  PIDA=$PIDA2
+done
+
+if [ "${FLAG}" == "0" ]; then echo "Padrão ${1} não encontrado em execução."; else if [ "${2}" == "p" ]; then echo "Padrão ${1} finalizado."; fi; fi
+

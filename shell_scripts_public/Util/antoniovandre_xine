@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Script de execução customizada do software Xine, de Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 07-01-2017.
+
+cpulimit -l 50 -- xine "$@"

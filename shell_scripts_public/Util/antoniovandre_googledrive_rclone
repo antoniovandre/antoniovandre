@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Script de virtualização do Google Drive, de Antonio Vandré.
+
+# Última atualização: 21-02-2025.
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive:/" "/home/antoniovandre/Google Drive"

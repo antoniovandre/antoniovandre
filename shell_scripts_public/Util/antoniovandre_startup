@@ -1,0 +1,10 @@
+#!/bin/bash
+
+export LANG=C.UTF-8
+
+# bash /home/antoniovandre/shell_scripts/Utilitários/antoniovandre_capturaprocessos &
+# bash /home/antoniovandre/shell_scripts/Utilitários/antoniovandre_logprocessos 'Inicialização' &
+bash /home/antoniovandre/shell_scripts/Utilitários/antoniovandre_googledrive_rclone &
+sudo mount --bind /mnt/C0D0970BD0970736/ Backup &
+sudo mount --bind /mnt/abd4b09a-d330-4a01-a4fd-21c793f1b043/ 'Backup 2' &
+sudo mount --bind /mnt/871b1058-973a-4ece-be68-eba0d5b3a519/ 'Backup AV/' &

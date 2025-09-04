@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Script de inicialização do emulador zsnes, por Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+
+# Última atualização: 14-10-2016.
+
+#zsnes
+
+cpulimit -l 75 zsnes
+
+#nice -n 10 zsnes
+
+#sleep 5s
+
+#for pid in $(ps -A | grep zsnes | awk '{print $1}'); do renice 10 $pid; done
+

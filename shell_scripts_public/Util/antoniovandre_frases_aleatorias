@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de mostrar frases aleatórias.
+
+# Última atualização: 16-06-2024. Não considerando alterações em variáveis globais.
+
+if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/shell_scripts/Utilitários/antoniovandre_env" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "${BASHSCRIPTS}antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! ls "${BASHSCRIPTSDIR}antoniovandre_echo" 1>> /dev/null 2>> /dev/null; then echo -e "${AV_VERMELHO}antoniovandre_echo não encontrado${AV_SEMCOR}."; fi
+
+ARQUIVOFRASES="/usr/local/share/antoniovandre-frases.txt"
+
+TOTALLINHAS=$(cat "${ARQUIVOFRASES}" | wc -l)
+
+LINHA=$(expr $(expr $(date +%s) % $TOTALLINHAS) + 1)
+
+LINHA="${LINHA}p"
+
+FRASE=$(sed -n "${LINHA}" < "${ARQUIVOFRASES}")
+
+echo -ne "${AV_CIANOCLARO}"; bash "${BASHSCRIPTSDIR}antoniovandre_echo" "${FRASE}"; echo -ne "${AV_SEMCOR}"
+
+if ! [ -z $1 ]; then if [ $1 == "prompt" ]; then echo -e "\nPressione RETURN para sair."; read; fi; fi
+

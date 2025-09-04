@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Proprietário Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script que suspende a CPU caso uma temperatura alta seja atingida. Certifique-se de que "pm-suspend" seja executado por "sudo" sem prompt.
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 05-08-2021. Com exceção de modificação nas variáveis globais.
+
+TEMPLIMIT="80"
+INTERVALOTEMPO="4"
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! hash sensors &>> /dev/null; then echo -e "${AV_VERMELHO}Softwares \"sensors\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+OLDIFS=$IFS
+IFS=$'\n'
+
+while true; do FLAG="0"; for STR in $(sensors -u | grep "input:" | cut -d " " -f 4); do if ! [[ "${STR}" =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]] &>> /dev/null; then continue; fi; TEMP=${STR%.*}; if [ "${TEMP}" -ge "${TEMPLIMIT}" ]; then FLAG="1"; break; else echo -e "Temperatura ${TEMP} graus Celsius. ${AV_VERDE}Ok${AV_SEMCOR}."; fi; done; if [ "${FLAG}" == "1" ]; then echo -e "${AV_VERMELHO}Temperatura alta atingida${AV_SEMCOR}. Suspendendo..."; sudo pm-suspend; fi; sleep "${INTERVALOTEMPO}"; echo ""; done
+
+IFS=$OLDIFS
+
+exit 0
