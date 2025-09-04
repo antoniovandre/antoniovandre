@@ -16,4 +16,4 @@ if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if !
 
 if ! hash aviso; then echo -e "${AV_VERMELHO}Software \"aviso\" não encontrado${AV_SEMCOR}."; exit 1; fi
 
-if [ "${1}" == "t" ]; then aviso "$(${@:2:$(($#-2))} | antoniovandre_newlineparser)" "${@: -1}"; else aviso "$(${@:1:$#} | antoniovandre_newlineparser)" "${@}"; fi
+if [ "${1}" == "t" ]; then aviso "$(${@:2:$(($#-2))} | antoniovandre_newlineparser)" "${@: -1}"; else aviso "$(${@:1:$#} | antoniovandre_newlineparser)" "${@: 1}"; fi
