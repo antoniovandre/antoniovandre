@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes (http://bit.ly/antoniovandre_legadoontologico).
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes (http://antoniovandre.github.io/MathematicalRamblingsjs).
 
 # Última atualização: 10-07-2024. Não considerando alterações em variáveis/parâmetros globais.
 
@@ -8,9 +8,9 @@
 
 # Gerando logs.
 
-"${HOME}/shell_scripts/Utilitários/antoniovandre_logprocessos" "Inicialização Linux"
+"${HOME}/shell_scripts/Util/antoniovandre_logprocessos" "Inicialização Linux"
 
-"${HOME}/shell_scripts/Utilitários/antoniovandre_capturaprocessos" &
+"${HOME}/shell_scripts/Util/antoniovandre_capturaprocessos" &
 
 # Ajustando gamma e saturação.
 
