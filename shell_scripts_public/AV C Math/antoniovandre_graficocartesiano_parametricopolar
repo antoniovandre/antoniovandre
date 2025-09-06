@@ -50,9 +50,9 @@
 
 # ____________________
 
-# Última atualização: 15-06-2024. Com exceção das variáveis globais.
+# Última atualização: 15-06-2024. Com exceção das variáveis globais e "gambiarras".
 
-if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/shell_scripts/Utilitários/antoniovandre_env" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/shell_scripts/Util/antoniovandre_env" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
 
 ARQUIVODAT="${TEMPDIR}avgcppol.dat"
 
@@ -96,7 +96,8 @@ BARRAPROGRESSOCHAR0="-"
 
 BARRAPROGRESSOCHAR1="#"
 
-STEP=$(TEMP=$(antoniovandre_eval "system intervaloprogresso3" "0" | tr -d "\n"); echo -n ${TEMP%.*})
+# STEP=$(TEMP=$(antoniovandre_eval "system intervaloprogresso3" "0" | tr -d "\n"); echo -n ${TEMP%.*})
+STEP="100"
 
 DELIMITADOR=$(TEMP=$(antoniovandre_eval "system delimitadorstring" "0" | tr -d "\n"); echo -ne \\x$(printf %02x ${TEMP%.*}))
 

@@ -1,0 +1,404 @@
+#!/bin/bash
+
+# Projeto Mathematical Ramblings.
+
+# Script de checagem do perfeito estado de funcionamento do weblog Mathematical Ramblings, grosso modo. Permite a verificação do funcionamento sem a necessidade de abrir o browser. Versão para Android.
+
+# Última atualização: 01-08-2024. Não considerando alterações em variáveis globais.
+
+if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/storage/shared/av_softwares/BASH scripts/antoniovandre_env_android" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! hash "${BASHSCRIPTSDIR}antoniovandre_echo_android" &>> /dev/null; then echo -e "Software \"antoniovandre_echo_android\" não encontrado."; exit 1; fi
+
+if ! [ -n "$AVCORES" ]; then bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Carregando antoniovandre_cores... " n; if ! source "${BASHSCRIPTSDIR}antoniovandre_cores_android" &>> /dev/null; then echo "Ocorreu um erro."; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}."; fi; fi
+
+if ! hash wget &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"wget\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if ! hash "${BASHSCRIPTSDIR}antoniovandre_verificarinternet_1_android" &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"${BASHSCRIPTSDIR}antoniovandre_verificarinternet_1_android\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if ! hash node &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"node\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if ! bash "${BASHSCRIPTSDIR}antoniovandre_verificarinternet_1_android" &>> /dev/null; then echo -e "${AV_VERMELHO}Sem conexão com internet para verificar${AV_SEMCOR}."; exit 1; fi
+
+if [ "$(ps -A | grep node)" != "" ]; then echo -e "${AV_VERMELHO}Node em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi
+
+TEMPDIR="${TEMPDIR}avmrcdir"
+TEMPFILE="${TEMPDIR}avmrc"
+FLAGFILE="${TEMPDIR}avmrcff"
+DOWNLOADLOGFILE="${TEMPDIR}avmrclog"
+ASCIIARTFILE="${BASHSCRIPTSDIR}Mathematical Ramblings - ascii art - Small.txt"
+TEMPOLIMITE="60"
+TENTATIVASEXECUCAO="4" # Verificação de 5 segundos entre uma tentativa e outra, verificando de os scripts ainda estão em execução.
+
+mkdir "${TEMPDIR}" &>> /dev/null
+rm -fr "${TEMPDIR}/"* &>> /dev/null
+
+TEMPCURDIR=$PWD
+cd "${TEMPDIR}"
+
+if ls "${ASCIIARTFILE}" &>> /dev/null; then cat "${ASCIIARTFILE}"; fi
+
+echo ""; bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando funcionalidade do weblog Mathematical Ramblings."; echo "";
+
+# Verificação da disponibilidade de "MathematicalRamblings.js".
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando \"MathematicalRamblings.js\"" n
+
+FLAG="0"
+echo "0" > "${FLAGFILE}"
+
+rm "${DOWNLOADLOGFILE}" &>> /dev/null
+
+echo -ne "."
+
+TEMPO=$(date +%s)
+
+if wget -r -np https://unpkg.com/MathematicalRamblingsjs -P "${TEMPDIR}" -o "${DOWNLOADLOGFILE}" &>> /dev/null; then TEMP=$(cat ${DOWNLOADLOGFILE} | grep MathematicalRamblings | cut -d " " -f 6 | tr -d '“' | tr -d '”' | tr -d "‘" | tr -d "’" | tr -d "\"" | tr -d "\'" | tr -d "\n"); if [ "$(ps -A | grep node)" != "" ]; then echo -e "${AV_VERMELHO}Node em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if node "${TEMP}" &>> /dev/null; then echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -A | grep node)" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then echo -e " ${AV_VERMELHO}Tempo de execução longo demais${AV_SEMCOR}."; exit 1; fi; fi
+
+FLAG=$(cat "${FLAGFILE}" | tr -d "\n")
+
+if [ "$(date +%s)" -gt "$(expr ${TEMPO} + ${TEMPOLIMITE})" ]; then echo -e " ${AV_VERMELHO}Tempo limite de download e execução excedido${AV_SEMCOR}."; exit 1; fi
+
+rm "${DOWNLOADLOGFILE}" &>> /dev/null
+
+echo -ne "."
+
+TEMPO=$(date +%s)
+
+if wget -r -np https://antoniovandre2.github.io/MathematicalRamblingsjs2/MathematicalRamblings.js -P "${TEMPDIR}" -o "${DOWNLOADLOGFILE}" &>> /dev/null; then TEMP=$(cat ${DOWNLOADLOGFILE} | grep MathematicalRamblings.js | cut -d " " -f 6 | tr -d '“' | tr -d '”' | tr -d "‘" | tr -d "’" | tr -d "\"" | tr -d "\'" | tr -d "\n"); if [ "$(ps -A | grep node)" != "" ]; then echo -e "${AV_VERMELHO}Node em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if node "${TEMP}" &>> /dev/null; then echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -A | grep node)" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then echo -e " ${AV_VERMELHO}Tempo de execução longo demais${AV_SEMCOR}."; exit 1; fi; fi
+
+FLAG=$(cat "${FLAGFILE}" | tr -d "\n")
+
+if [ "$(date +%s)" -gt "$(expr ${TEMPO} + ${TEMPOLIMITE})" ]; then echo -e " ${AV_VERMELHO}Tempo limite de download e execução excedido${AV_SEMCOR}."; exit 1; fi
+
+rm "${DOWNLOADLOGFILE}" &>> /dev/null
+
+echo -ne "."
+
+TEMPO=$(date +%s)
+
+if wget -r -np https://dl.dropboxusercontent.com/s/8tu34kcvoxqcwvb/MathematicalRamblings.js -P "${TEMPDIR}" -o "${DOWNLOADLOGFILE}" &>> /dev/null; then TEMP=$(cat ${DOWNLOADLOGFILE} | grep MathematicalRamblings.js | cut -d " " -f 6 | tr -d '“' | tr -d '”' | tr -d "‘" | tr -d "’" | tr -d "\"" | tr -d "\'" | tr -d "\n"); if [ "$(ps -A | grep node)" != "" ]; then echo -e "${AV_VERMELHO}Node em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if node "${TEMP}" &>> /dev/null; then echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -A | grep node)" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then echo -e " ${AV_VERMELHO}Tempo de execução longo demais${AV_SEMCOR}."; exit 1; fi; fi
+
+FLAG=$(cat "${FLAGFILE}" | tr -d "\n")
+
+if [ "$(date +%s)" -gt "$(expr ${TEMPO} + ${TEMPOLIMITE})" ]; then echo -e " ${AV_VERMELHO}Tempo limite de download e execução excedido${AV_SEMCOR}."; exit 1; fi
+
+if [ "${FLAG}" == "0" ]; then echo -e " ${AV_VERMELHO}Erro ao carregar \"MathematicalRamblings.js\" ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do jQuery.
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando jQuery" n
+
+FLAG="0"
+echo "0" > "${FLAGFILE}"
+
+rm "${DOWNLOADLOGFILE}" &>> /dev/null
+
+echo -ne "."
+
+TEMPO=$(date +%s)
+
+if wget -r -np https://dl.dropbox.com/s/ifsswmhe2xh5yz7/jquery-3.6.0.js -P "${TEMPDIR}" -o "${DOWNLOADLOGFILE}" &>> /dev/null; then TEMP=$(cat ${DOWNLOADLOGFILE} | grep jquery | cut -d " " -f 6 | tr -d '“' | tr -d '”' | tr -d "‘" | tr -d "’" | tr -d "\"" | tr -d "\'" | tr -d "\n"); if [ "$(ps -A | grep node)" != "" ]; then echo -e "${AV_VERMELHO}Node em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if node "${TEMP}" &>> /dev/null; then echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -A | grep node)" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then echo -e " ${AV_VERMELHO}Tempo de execução longo demais${AV_SEMCOR}."; exit 1; fi; fi
+
+FLAG=$(cat "${FLAGFILE}" | tr -d "\n")
+
+if [ "$(date +%s)" -gt "$(expr ${TEMPO} + ${TEMPOLIMITE})" ]; then echo -e " ${AV_VERMELHO}Tempo limite de download e execução excedido${AV_SEMCOR}."; exit 1; fi
+
+rm "${DOWNLOADLOGFILE}" &>> /dev/null
+
+echo -ne "."
+
+TEMPO=$(date +%s)
+
+if wget -r -np https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js -P "${TEMPDIR}" -o "${DOWNLOADLOGFILE}" &>> /dev/null; then TEMP=$(cat ${DOWNLOADLOGFILE} | grep jquery | cut -d " " -f 6 | tr -d '“' | tr -d '”' | tr -d "‘" | tr -d "’" | tr -d "\"" | tr -d "\'" | tr -d "\n"); if [ "$(ps -A | grep node)" != "" ]; then echo -e "${AV_VERMELHO}Node em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if node "${TEMP}" &>> /dev/null; then echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -A | grep node)" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then echo -e " ${AV_VERMELHO}Tempo de execução longo demais${AV_SEMCOR}."; exit 1; fi; fi
+
+FLAG=$(cat "${FLAGFILE}" | tr -d "\n")
+
+if [ "$(date +%s)" -gt "$(expr ${TEMPO} + ${TEMPOLIMITE})" ]; then echo -e " ${AV_VERMELHO}Tempo limite de download e execução excedido${AV_SEMCOR}."; exit 1; fi
+
+rm "${DOWNLOADLOGFILE}" &>> /dev/null
+
+echo -ne "."
+
+TEMPO=$(date +%s)
+
+if wget -r -np https://unpkg.com/jquery -P "${TEMPDIR}" -o "${DOWNLOADLOGFILE}" &>> /dev/null; then TEMP=$(cat ${DOWNLOADLOGFILE} | grep jquery | cut -d " " -f 6 | tr -d '“' | tr -d '”' | tr -d "‘" | tr -d "’" | tr -d "\"" | tr -d "\'" | tr -d "\n"); if [ "$(ps -A | grep node)" != "" ]; then echo -e "${AV_VERMELHO}Node em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if node "${TEMP}" &>> /dev/null; then echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -A | grep node)" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then echo -e " ${AV_VERMELHO}Tempo de execução longo demais${AV_SEMCOR}."; exit 1; fi; fi
+
+FLAG=$(cat "${FLAGFILE}" | tr -d "\n")
+
+if [ "$(date +%s)" -gt "$(expr ${TEMPO} + ${TEMPOLIMITE})" ]; then echo -e " ${AV_VERMELHO}Tempo limite de download e execução excedido${AV_SEMCOR}."; exit 1; fi
+
+rm "${DOWNLOADLOGFILE}" &>> /dev/null
+
+echo -ne "."
+
+TEMPO=$(date +%s)
+
+if wget -r -np http://code.jquery.com/jquery-latest.js -P "${TEMPDIR}" -o "${DOWNLOADLOGFILE}" &>> /dev/null; then TEMP=$(cat ${DOWNLOADLOGFILE} | grep jquery | cut -d " " -f 6 | tr -d '“' | tr -d '”' | tr -d "‘" | tr -d "’" | tr -d "\"" | tr -d "\'" | tr -d "\n"); if [ "$(ps -A | grep node)" != "" ]; then echo -e "${AV_VERMELHO}Node em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if node "${TEMP}" &>> /dev/null; then echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -A | grep node)" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then echo -e " ${AV_VERMELHO}Tempo de execução longo demais${AV_SEMCOR}."; exit 1; fi; fi
+
+FLAG=$(cat "${FLAGFILE}" | tr -d "\n")
+
+if [ "$(date +%s)" -gt "$(expr ${TEMPO} + ${TEMPOLIMITE})" ]; then echo -e " ${AV_VERMELHO}Tempo limite de download e execução excedido${AV_SEMCOR}."; exit 1; fi
+
+if [ "${FLAG}" == "0" ]; then echo -e " ${AV_VERMELHO}Erro ao carregar jQuery ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do MathJax.
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando MathJax" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget "https://dl.dropbox.com/scl/fi/m7twroqr5plooe9w3w5om/tex-mml-chtml.js?rlkey=tkjiuphdbgaobr25saedua1yw&st=w9zlhfis" -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget "https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js" -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar MathJax ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do math.js.
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando math.js" n
+
+FLAG="0"
+echo "0" > "${FLAGFILE}"
+
+rm "${DOWNLOADLOGFILE}" &>> /dev/null
+
+echo -ne "."
+
+TEMPO=$(date +%s)
+
+if wget -r -np https://cdnjs.cloudflare.com/ajax/libs/mathjs/6.0.3/math.js -P "${TEMPDIR}" -o "${DOWNLOADLOGFILE}" &>> /dev/null; then TEMP=$(cat ${DOWNLOADLOGFILE} | grep math.js | cut -d " " -f 6 | tr -d '“' | tr -d '”' | tr -d "‘" | tr -d "’" | tr -d "\"" | tr -d "\'" | tr -d "\n"); if [ "$(ps -A | grep node)" != "" ]; then echo -e "${AV_VERMELHO}Node em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if node "${TEMP}" &>> /dev/null; then echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -A | grep node)" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then echo -e " ${AV_VERMELHO}Tempo de execução longo demais${AV_SEMCOR}."; exit 1; fi; fi
+
+FLAG=$(cat "${FLAGFILE}" | tr -d "\n")
+
+if [ "$(date +%s)" -gt "$(expr ${TEMPO} + ${TEMPOLIMITE})" ]; then echo -e " ${AV_VERMELHO}Tempo limite de download e execução excedido${AV_SEMCOR}."; exit 1; fi
+
+rm "${DOWNLOADLOGFILE}" &>> /dev/null
+
+echo -ne "."
+
+TEMPO=$(date +%s)
+
+if wget -r -np https://cdn.jsdelivr.net/npm/josdejong/mathjs/blob/develop/index.js -P "${TEMPDIR}" -o "${DOWNLOADLOGFILE}" &>> /dev/null; then TEMP=$(cat ${DOWNLOADLOGFILE} | grep index.js | cut -d " " -f 6 | tr -d '“' | tr -d '”' | tr -d "‘" | tr -d "’" | tr -d "\"" | tr -d "\'" | tr -d "\n"); if [ "$(ps -A | grep node)" != "" ]; then echo -e "${AV_VERMELHO}Node em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if node "${TEMP}" &>> /dev/null; then echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -A | grep node)" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then echo -e " ${AV_VERMELHO}Tempo de execução longo demais${AV_SEMCOR}."; exit 1; fi; fi
+
+FLAG=$(cat "${FLAGFILE}" | tr -d "\n")
+
+if [ "$(date +%s)" -gt "$(expr ${TEMPO} + ${TEMPOLIMITE})" ]; then echo -e " ${AV_VERMELHO}Tempo limite de download e execução excedido${AV_SEMCOR}."; exit 1; fi
+
+echo -ne "."
+
+TEMPO=$(date +%s)
+
+if wget -r -np https://unpkg.com/mathjs -P "${TEMPDIR}" -o "${DOWNLOADLOGFILE}" &>> /dev/null; then TEMP=$(cat ${DOWNLOADLOGFILE} | grep mathjs | cut -d " " -f 6 | tr -d '“' | tr -d '”' | tr -d "‘" | tr -d "’" | tr -d "\"" | tr -d "\'" | tr -d "\n"); if [ "$(ps -A | grep node)" != "" ]; then echo -e "${AV_VERMELHO}Node em execução. Certifique-se de que não haja nenhuma instância${AV_SEMCOR}."; exit 1; fi; (if node "${TEMP}" &>> /dev/null; then echo "1" > "${FLAGFILE}"; fi); TRIES="0"; while [ "$(ps -A | grep node)" != "" ] && [ "${TRIES}" -le "${TENTATIVASEXECUCAO}" ]; do TRIES=$(expr $TRIES + 1); sleep 5s; done; if [ "${TRIES}" -gt "${TENTATIVASEXECUCAO}" ]; then echo -e " ${AV_VERMELHO}Tempo de execução longo demais${AV_SEMCOR}."; exit 1; fi; fi
+
+FLAG=$(cat "${FLAGFILE}" | tr -d "\n")
+
+if [ "$(date +%s)" -gt "$(expr ${TEMPO} + ${TEMPOLIMITE})" ]; then echo -e " ${AV_VERMELHO}Tempo limite de download e execução excedido${AV_SEMCOR}."; exit 1; fi
+
+if [ "${FLAG}" == "0" ]; then echo -e " ${AV_VERMELHO}Erro ao carregar math.js ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do Offline.js.
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando Offline.js" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget "https://dl.dropbox.com/s/qkkvdnlf60t95e9/offline.js" -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar Offline.js ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do md5.js.
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando md5.js" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget "https://dl.dropbox.com/s/m6h2ixi0phosd09/md5.js" -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar md5.js ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do Moment.js.
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando Moment.js" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget "https://dl.dropbox.com/s/obokytwydph55ok/moment.js" -O "${TEMPFILE}" &>> /dev/null; fi
+
+echo -ne "."
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget "https://momentjs.com/downloads/moment.js" -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar Moment.js ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do FeedEk.js.
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando FeekEk.js" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget "https://dl.dropbox.com/s/ami3ahsdg2lja0r/FeedEk.js" -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar FeedEk ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do Chatroll.
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando Chatroll" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget "https://chatroll.com/embed/chat/fj4k?id=Y9jvA5AoMfJ&platform=html" -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar Chatroll ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade da Folha de São Paulo.
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando Folha de São Paulo" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget "http://feeds.folha.uol.com.br/emcimadahora/rss091.xml" -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar Folha de São Paulo ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do G1.
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando G1" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget "http://g1.globo.com/dynamo/rss2.xml" -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar G1 ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do R7.
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando R7" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget "http://noticias.r7.com/feed.xml" -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar R7 ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do The New York Times.
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando The New York Times" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar The New York Times ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do BBC UK.
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando BBC UK" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget "http://feeds.bbci.co.uk/news/rss.xml" -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar BBC UK ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do Ecns.
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando Ecns" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget "http://www.ecns.cn/rss/rss.xml" -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar Ecns ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do Clarín.
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando Clarín" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget "https://www.clarin.com/rss/lo-ultimo/" -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar Clarín ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do Daylight.
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando Daylight" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget https://www.timeanddate.com/scripts/sunmap.php -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar Daylight ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do Free Live Traffic Feed.
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando Free Live Traffic Feed" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget https://cdn.livetrafficfeed.com/static/v4/live.js -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar Free Live Traffic Feed ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade do Scientifc Calculator.
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Verificando Scientifc Calculator" n
+
+rm "${TEMPFILE}" &>> /dev/null
+
+echo -ne "."
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then wget https://math.tools/extensions/embed/v1/sc.js?v1 -O "${TEMPFILE}" &>> /dev/null; fi
+
+if ! ls "${TEMPFILE}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Erro ao carregar Scientifc Calculator ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+# Verificação da disponibilidade online do webblog.
+
+bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Ping no weblog" n
+
+echo -ne "."
+
+if ! ping -c 1 &>> /dev/null; then echo -e " ${AV_VERMELHO}Weblog online indisponível ou perda de conexão com a internet${AV_SEMCOR}."; exit 1; else echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; fi
+
+cd "${TEMPCURDIR}"
+
+rm -fr "${TEMPDIR}" &>> /dev/null
+rm "${TEMPFILE}" &>> /dev/null
+rm "${DOWNLOADLOGFILE}" &>> /dev/null
+rm "${FLAGFILE}" &>> /dev/null
+rm "${POLYFILLPATHFILE}" &>> /dev/null
+
+echo ""; echo -ne "\n${AV_VERDE}Sucesso${AV_SEMCOR}. "; bash "${BASHSCRIPTSDIR}antoniovandre_echo_android" "Weblog Mathematical Ramblings funcionando perfeitamente."; echo ""

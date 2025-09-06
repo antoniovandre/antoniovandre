@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Projeto Mathematical Ramblings.
+
+# Script de checagem do perfeito estado de funcionamento do weblog Mathematical Ramblings, grosso modo. Permite a verificação do funcionamento sem a necessidade de abrir o browser. Versão para Android. Subversão para Termux shortcut.
+
+# Última atualização: 09-06-2024. Não considerando alterações em variáveis globais.
+
+if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/storage/shared/av_softwares/BASH scripts/antoniovandre_env_android" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+bash "${BASHSCRIPTSDIR}antoniovandre_mathematicalramblings_check_android"
+
+read

@@ -1,0 +1,2 @@
+./storage/emulated/0/ccrypt-1.10.android/ccrypt -d -k /storage/emulated/0/antoniovandre-criptografar_arquivos_secretos_software_senha.txt /storage/emulated/0/antoniovandre-anotacoes_privadas.txt.cpt
+

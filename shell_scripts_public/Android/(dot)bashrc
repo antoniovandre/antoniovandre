@@ -1,0 +1,15 @@
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Última atualização: 31-05-2024. Não considerando alterações em variáveis globais.
+
+if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/storage/shared/av_softwares/BASH scripts/antoniovandre_env_android" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando cores... "; if ! source "${BASHSCRIPTSDIR}antoniovandre_cores_android" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+cd "${BASHSCRIPTSDIR}"
+
+if hash "${BASHSCRIPTSDIR}antoniovandre_aliases_android" &>> /dev/null; then source "${BASHSCRIPTSDIR}antoniovandre_aliases_android"; echo ""; fi
+
+bash antoniovandre_frases_aleatorias_android
+
+echo ""

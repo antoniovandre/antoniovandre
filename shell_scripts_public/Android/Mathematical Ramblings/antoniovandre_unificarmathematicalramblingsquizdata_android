@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Script unificador do Mathematical Ramblings quiz data.txt, para Android. De Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 09-06-2024. Não considerando alterações em variáveis globais.
+
+if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/storage/shared/av_softwares/BASH scripts/antoniovandre_env_android" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+FILEPREFIX="/data/data/com.termux/files/home/storage/downloads/Mathematical Ramblings quiz data"
+
+FILEBACKUP="/data/data/com.termux/files/home/storage/downloads/Backup - Mathematical Ramblings quiz data.txt"
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "${BASHSCRIPTSDIR}antoniovandre_cores_android" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+TEMP=$(ls -Art "${FILEPREFIX}"* | tail -n 1 | tr -d '\n')
+
+echo -n "Unificando Mathematical Ramblings quiz data... "; if cp "${TEMP}" "${FILEBACKUP}" &>> /dev/null && rm "${FILEPREFIX}"* &>> /dev/null && cp "${FILEBACKUP}" "${FILEPREFIX}.txt" &>> /dev/null; then echo -e "${AV_VERDE} Sucesso${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; fi
