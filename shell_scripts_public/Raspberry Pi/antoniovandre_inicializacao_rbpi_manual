@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Script de inicialização manual de processos úteis para o Raspberry Pi de Antonio Vandré Pedrosa Furtunato Gomes (google.com/profiles/a.vandre.g).
+
+# Última atualizacao: 14-08-2015.
+
+#for pid in $(ps -A | grep nfsv | awk '{print $1}'); do sudo renice -2 $pid; done
+
+#lxterminal &
+
+#clipit &
+
+#tickr &
+
+#vlc /home/pi/Music/Radio\ Electrovibe\ stream.asx &
+
+#iceweasel &
+
+xmodmap /home/pi/.Xmodmap

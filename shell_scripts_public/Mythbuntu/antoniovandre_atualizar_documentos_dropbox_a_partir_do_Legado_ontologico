@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Script de atualização dos documentos dropbox a partir do Legado ontológico, ambos armazenados na conta Dropbox. Tudo a partir deste dispositivo cliente.
+
+# Última atualização: 23-07-2015.
+
+cp -u /home/mythbuntu/Dropbox/Legado\ ontológico/* /home/mythbuntu/Dropbox/Documents/BACKUPED14/
+

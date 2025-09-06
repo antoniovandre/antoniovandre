@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Script de backup dos memcards do pcsx do Raspberry Pi conectado ao notebook, de Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Última atualização: 30-07-2015.
+
+cp -u /mnt/notebookantoniovandre/home/antoniovandre/Dropbox/ps1_memcards_temp/* /mnt/notebookantoniovandre/home/antoniovandre/Dropbox/epsxe_memcards/

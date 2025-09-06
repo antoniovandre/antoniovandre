@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Script de atualização dos arquivos locais a partir dos armazenados na conta Dropbox para Antonio Vandré Pedrosa Furtunato Gomes (google.com/profiles/a.vandre.g).
+
+# Convém lembrar que este procedimento, aqui no Mythbuntu é o oposto do mais comumente realizado no Ubuntu instalado em meu atual (vide data de última atualização). Neste sistema edito os arquivos dropbox direnamente em sua pasta de sistema para, posteriormente, através deste script, atualizar os arquivos locais.
+
+# Última atualização: 23-07-2015.
+
+cp -u /home/mythbuntu/Dropbox/Documents/BACKUPED14/* /home/mythbuntu/Documentos/BACKUPED14/

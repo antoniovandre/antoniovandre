@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Script facilitador da atualização dos documentos localizados no diretório cloud "Legado ontológico" e do diretório "Shell scripts" com os demais diretórios significantes, no sistema Mythbuntu, para Antonio Vandré Pedrosa Furtunato Gomes (google.com/profiles/a.vandre.g).
+
+# Última atualização: 25-07-2015.
+
+antoniovandre_atualizar_documentos_dropbox_a_partir_do_Legado_ontologico
+
+antoniovandre_atualizar_documentos_locais_do_Dropbox
+
+chmod a+x /home/mythbuntu/Shell\ scripts/*
+
+antoniovandre_shell_scripts_to_system_path
+
+antoniovandre_mythbuntu_shell_scripts_to_Dropbox

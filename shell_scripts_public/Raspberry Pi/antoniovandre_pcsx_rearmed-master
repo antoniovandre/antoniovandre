@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Script de inicialização do Pcsx Rearmed Master para Antonio Vandré Pedrosa Furtunato Gomes (google.com/profiles/a.vandre.g).
+
+# Última atualização: 31-07-2015.
+
+if [ $(pwd) != "/home/pi/pcsx_rearmed-master" ]; then cd /home/pi/pcsx_rearmed-master/; cdflag="1"; fi
+
+./pcsx &
+
+for pid in $(ps -A | grep pcsx | awk '{print $1}'); do sudo renice -5 $pid; done
+
+if [ $cdflag == "1" ]; then cd ~-; fi

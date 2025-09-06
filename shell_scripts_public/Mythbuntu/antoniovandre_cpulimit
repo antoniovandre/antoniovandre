@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# Script limitador de uso da cpu por processos específicos para Antonio Vandré Pedrosa Furtunato Gomes (google.com/profiles/a.vandre.g).
+
+# Última atualização: 25-07-2015.
+
+p="15"
+
+p2="25"
+
+killall cpulimit
+
+cpulimit -e firefox -l $p &
+
+cpulimit -e vlc -l $p  &
+
+cpulimit -e Thunar -l $p &
+
+cpulimit -e dropbox -l $p &
+
+cpulimit -e xfce4-terminal -l $p &
+
+cpulimit -e tea -l $p &
+
+#cpulimit -e xine -l $p2 &
+
+cpulimit -e parcellite -l $p &
+
+cpulimit -e midori -l $p2 &
+
+#cpulimit -e nomnom -l $p &
+
+cpulimit -e libreoffice -l $p2 &
+
+cpulimit -e gedit -l $p &
+
+cpulimit -e chrome-sandbox -l $p2 &

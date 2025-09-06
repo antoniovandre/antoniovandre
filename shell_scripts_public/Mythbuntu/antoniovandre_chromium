@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Script de inicialização do navegador Chromium no Mythbuntu para Antonio Vandré Pedrosa Furtunato Gomes (google.com/profiles/a.vandre.g).
+
+# Última atualzação: 24-07-2015.
+
+cpulimit -l 20 chromium-browser

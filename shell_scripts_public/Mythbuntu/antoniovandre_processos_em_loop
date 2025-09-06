@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Script/Lista de processos que são executados em loop, periodicamente, para Antonio Vandré Pedrosa Furtunato Gomes (google.com/profiles/a.vandre.g).
+
+# Última atualização: 23-07-2015.
+
+while true; do
+
+# Início do trecho customizável do script.
+
+#antoniovandre_atualizar_documentos_dropbox_a_partir_do_Legado_ontologico;
+
+#antoniovandre_atualizar_documentos_locais_do_Dropbox;
+
+dropbox stop; dropbox start;
+
+# Fim do trecho customizável do script.
+
+sleep 600;
+
+done

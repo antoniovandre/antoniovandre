@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Script de inicialização do tea (editor de textos) para Antonio Vandré Pedrosa Furtunato Gomes (google.com/profiles/a.vandre.g).
+
+# Última atualização: 23-07-2015.
+
+tea /home/mythbuntu/Dropbox/Legado\ ontológico/antoniovandre-anotacoes_publicas_sutis.txt /home/mythbuntu/Dropbox/Legado\ ontológico/antoniovandre-anotacoes_publicas_sutis_2.txt /home/mythbuntu/Dropbox/Legado\ ontológico/antoniovandre-weblogs.txt /home/mythbuntu/Dropbox/Legado\ ontológico/antoniovandre-weblogs_2.txt /home/mythbuntu/Dropbox/Legado\ ontológico/antoniovandre-atualmente_lendo.txt /home/mythbuntu/Dropbox/Legado\ ontológico/antoniovandre-notas_livros_lidos.txt /home/mythbuntu/Dropbox/Legado\ ontológico/antoniovandre-livros_lidos.txt /home/mythbuntu/Dropbox/Legado\ ontológico/antoniovandre-livros_lidos_nao_matematicos_menos_biologia_e_filosofia.txt &

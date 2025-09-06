@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Script que copia todos os shell scripts do diretório home (em um subdiretório específico) para um diretório path do sistema, podendo serem executados sem preocupações com suas localizações, para Antonio Vandré Pedrosa Furtunato Gomes (google.com/profiles/a.vandre.g).
+
+# Última atualização: 24-07-2015.
+
+sudo cp -u /home/mythbuntu/Shell\ scripts/* /usr/local/bin/
