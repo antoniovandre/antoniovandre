@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Script de extração e compactação da imagem iso do pendrive contendo save games do Xbox 360 para posterior hospedagem no Dropbox. De Antonio Vandré Pedrosa Furtunato Gomes (http://antoniovandre.github.io/MathematicalRamblingsjs).
+
+# Última atualização 30-03-2016.
+
+if ! gksudo chmod a+r /dev/sdb; then echo "Erro ao acessar o dispositivo. Pressione RETURN para sair."; read key; exit; fi
+
+echo "Aguarde o processo, pode demorar um pouco. Não retire a mídia onde estão armazenados os saves. Um prompt será exibibo ao final do procedimento."
+
+if ! dd if=/dev/sdb of=/dev/stdout bs=900k | bzip2 -9 > /home/antoniovandre/Dropbox/xbox360_saves/Xbox\ 360\ -\ Game\ saves\ allowed\ -\ Antonio\ Vandré\ Pedrosa\ Furtunato\ Gomes\ \[bit.ly\(slash\)antoniovandre_legadoontologico\].img.bz2; then echo "Erro ao criar imagem compactada. Pressione RETURN para sair."; read key; exit; fi
+
+echo "Sucesso. Pressione RETURN para sair."
+
+read key
+

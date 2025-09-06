@@ -1,7 +1,7 @@
 <#
 Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
 
-Job: "antoniovandre.github.io/MathematicalRamblingsjs".
+Job: "mathematicalramblings.blogspot.com".
 
 Microsoft.PowerShell_profile.ps1
 

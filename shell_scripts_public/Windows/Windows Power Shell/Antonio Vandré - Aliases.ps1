@@ -1,7 +1,7 @@
 <#
 Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
 
-Job: "antoniovandre.github.io/MathematicalRamblingsjs".
+Job: "mathematicalramblings.blogspot.com".
 
 Script de aliases.
 
