@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Script de backups automáticos de atualizações do LO local para LODB e novos audios em LODB para LO local.
+
+# Última atualização: 05-03-2015.
+
+echo "Recomenda-se o uso manual deste script, em uma instância de shel exclusiva, evitando problemas que poderão ocasionar perda de dados."
+
+while true; do if [ "$(dropbox status)" == "$(echo Atualizado)" ] 2>> /dev/null; then echo ""; AVBOE; date; sleep 3m; else sleep 1m; fi; done

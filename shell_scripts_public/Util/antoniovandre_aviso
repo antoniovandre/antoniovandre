@@ -25,9 +25,9 @@ else if [ "${1}" == "ncurses" ]; then
 
 	xterm -e "${HOME}/software_sources/C/aviso_ncurses" "${2}"
 else if [ "${1}" == "console" ]; then
-	if ! ls "${HOME}/shell_scripts/Utilitários/antoniovandre_dialogbox" &>> /dev/null; then echo "Software console não encontrado."; exit 1; fi
+	if ! ls "${HOME}/shell_scripts/Util/antoniovandre_dialogbox" &>> /dev/null; then echo "Software console não encontrado."; exit 1; fi
 
-	"${HOME}/shell_scripts/Utilitários/antoniovandre_dialogbox" "${2}"
+	"${HOME}/shell_scripts/Util/antoniovandre_dialogbox" "${2}"
 else if [ "${1}" == "java" ]; then
 	if ! hash java &>> /dev/null; then echo "Java não instalado."; exit 1; fi
 
