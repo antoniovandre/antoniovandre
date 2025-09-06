@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Script de loop de processos para Antonio Vandré Pedrosa Furtunato Gomes (google.com/profiles/a.vandre.g).
+
+# Última atualização: 09-07-2015.
+
+while true; do . /home/antoniovandre/shell_scripts/BACKUPED2/processos_em_loop; sleep 60; done
+

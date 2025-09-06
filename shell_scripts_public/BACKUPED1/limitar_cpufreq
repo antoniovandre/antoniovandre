@@ -1,0 +1,2 @@
+cpufreq-selector -c 0 -g ondemand -f 2000;cpufreq-selector -c 1 -g ondemand -f 2000;cpufreq-selector -c 2 -g ondemand -f 2000;cpufreq-selector -c 3 -g ondemand -f 2000
+

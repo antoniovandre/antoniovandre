@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes [google.com/profiles/a.vandre.g].
+
+cp -u /public/dotsnes96_snapshots/* ~/Dropbox/zsnes_saves/
+

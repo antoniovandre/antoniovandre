@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes [google.com/profiles/a.vandre.g].
+
+ifconfig eth0 down
+
+ifconfig eth0 hw ether 00:1A:3F:69:13:BC
+
+ifconfig eth0 up

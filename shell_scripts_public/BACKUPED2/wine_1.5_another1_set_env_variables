@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes [google.com/profiles/a.vandre.g].
+
+unset WINEVERPATH
+
+unset PATH
+
+export PATH=$WINE_TEMP_PATH
+
+unset WINE_TEMP_PATH
+
+unset WINESERVER
+
+unset WINELOADER
+
+unset WINEDLLPATH
+
+unset LD_LIBRARY_PATH
+
+export LD_LIBRARY_PATH=$WINE_TEMP_LD_LIBRARY_PATH
+
+unset WINE_TEMP_LD_LIBRARY_PATH
+
+unset W
+

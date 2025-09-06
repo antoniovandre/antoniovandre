@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes [google.com/profiles/a.vandre.g].
+
+echo disable > /sys/firmware/acpi/interrupts/gpe01
+
+echo disable > /sys/firmware/acpi/interrupts/gpe02
+
+echo disable > /sys/firmware/acpi/interrupts/gpe06
+
+echo disable > /sys/firmware/acpi/interrupts/gpe07
+
+echo disable > /sys/firmware/acpi/interrupts/gpe09
+
+echo disable > /sys/firmware/acpi/interrupts/gpe0B
+
+echo disable > /sys/firmware/acpi/interrupts/gpe0D
+
+echo disable > /sys/firmware/acpi/interrupts/gpe15
+
+echo disable > /sys/firmware/acpi/interrupts/gpe17
+
+echo disable > /sys/firmware/acpi/interrupts/gpe1D

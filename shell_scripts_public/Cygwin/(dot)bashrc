@@ -1,0 +1,25 @@
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# bashrc para Cygwin.
+
+# Última atualização: 31-01-2023.
+
+FLAGRC="0"
+
+trap '' 2; SENHA=""; while [ "${SENHA}" != "queroentrar" ]; do echo -n "Entre com a senha: "; read -s SENHA; echo ""; done; unset SENHA; trap 2; echo ""
+
+PATH="${PATH}:/home/Guest:/cygdrive/f/Antonio Vandré Pedrosa Furtunato Gomes/Cygwin/:/cygdrive/f/AntonioVandrePedrosaFurtunatoGomes/C/"
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source /cygdrive/f/Antonio\ Vandré\ Pedrosa\ Furtunato\ Gomes/Cygwin/antoniovandre_cores &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+PS1="${AV_LARANJA}Cygwin prompt${AV_SEMCOR}> "
+
+if ! [ -n "$ARQUIVOANOTACOES" ]; then echo -ne "Carregando definições de arquivos de anotações... "; if source /cygdrive/f/Antonio\ Vandré\ Pedrosa\ Furtunato\ Gomes/Cygwin/antoniovandre_arquivoarquivosanotacoes; then echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAGRC="1"; fi; fi
+
+if [ "${FLAGRC}" == "0" ]; then if hash "${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_aliases" &>> /dev/null; then echo ""; source "${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_aliases"; echo ""; fi; fi
+
+if [ "${FLAGRC}" == "0" ]; then alias rla="source \"${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_aliases\""; fi
+
+bash "${DIRETORIOTRABALHO}${DIRETORIOCYGWIN}antoniovandre_frases_aleatorias"
+
+echo ""

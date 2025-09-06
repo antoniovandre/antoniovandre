@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Script de backup de documentos número 14 para Antonio Vandré Pedrosa Furtunato Gomes (google.com/profiles/a.vandre.g).
+
+# Última atualização: 08-07-2015.
+
+if [ "$1" == "" ]; then echo -e "Uso incorreto.\n"; exit; fi
+
+if [ "/home/antoniovandre/shell_scripts/BACKUPED2" != "$(pwd)" ]; then cd /home/antoniovandre/shell_scripts/BACKUPED2/; cdflag="1"; fi
+
+if [ "$1" == "a" ] || [ "$2" == "a" ]; then ./backup_documentos /home/antoniovandre/Documentos/BACKUPED14/antoniovandre-anotacoes_publicas_sutis.txt 14 l
+
+if [ "$1" == "w" ] || [ "$2" == "w" ]; then ./backup_documentos /home/antoniovandre/Documentos/BACKUPED14/antoniovandre-weblogs.txt 14 l; fi
+
+if [ "$cdflag" == "1" ]; then cd ~-; fi
+

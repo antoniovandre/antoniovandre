@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Script de atualização dos arquivos do legado ontológico da nuvem para o notebook. Pertencente a Antonio Vandré Pedrosa Furtunato Gomes (google.com/profiles/a.vandre.g).
+
+# Última atualização: 10-07-2015.
+
+if [ "$1" == "" ]; then echo "Uso incorreto."; exit; fi
+
+echo "Cuidado! Isto irá sobrescrever todos os arquivos do Legado Ontológico do Dropbox em todos os outros diretórios correspondentes em disco (veja o código fonte do script para mais detalhes). Aperte \"C\" para continuar ou qualquer outro comando para sair."; read -n1 key; if [ "$key" != "C" ]; then echo -e "\nSaindo."; exit; else echo -e "\nContinuando."; fi
+
+cp -u /home/antoniovandre/Dropbox/Legado\ ontológico/* /home/antoniovandre/Legado\ ontológico/
+
+cp -u /home/antoniovandre/Dropbox/Legado\ ontológico/* /home/antoniovandre/temp\ cloud\ drive\ folder/Legado\ ontológico/
+
+cp -u /home/antoniovandre/Dropbox/Legado\ ontológico/* /home/antoniovandre/Copy/Legado\ ontológico/
+
+cp -u /home/antoniovandre/Dropbox/Legado\ ontológico/* /home/antoniovandre/Documentos/BACKUPED$1/
+
+cp -u /home/antoniovandre/Dropbox/Legado\ ontológico/* /home/antoniovandre/Dropbox/Documents/BACKUPED$1/
+
+cp -u /home/antoniovandre/Dropbox/Legado\ ontológico/* /home/antoniovandre/temp\ cloud\ drive\ folder/Documentos/BACKUPED$1/
+
+cp -u /home/antoniovandre/Dropbox/Legado\ ontológico/* /home/antoniovandre/Copy/Documentos/BACKUPED$1/
+

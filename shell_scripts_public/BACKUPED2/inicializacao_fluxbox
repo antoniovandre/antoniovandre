@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Script de inicialização do Fluxbox para Antonio Vandré Pedrosa Furtunato Gomes (google.com/profiles/a.vandre.g).
+
+# Última atualização: 09-07-2015.
+
+firefox &
+
+#google-chrome-stable &
+
+vlc &
+
+gedit &
+
+clipit &
+
+pcmanfm &
+
+dropbox start &
+
+#SpiderOak &
+
+xsensors &
+
+wicd-gtk &
+
+gnome-terminal &
+
+#pavucontrol &
+
+#sudo mount /dev/sda2 /mnt/sda2 &
+
+xset s off &
+
+cd /home/antoniovandre/programas/copy/x86/
+
+./CopyAgent &
+
+#cd /home/antoniovandre/shell_scripts/BACKUPED2/
+
+#sudo ./limitar_cpufreq_arg 100 &
+
+#sudo ./renice_para_programas_pesados 10
+
+#sudo for pid in $(ps -A | grep firefox | awk '{print $1}'); do renice -5 $pid; done
+
+cd ~
+
+gnome-settings-daemon &
+
+#transmission-gtk &
+
+#vuze &
+
+. /home/antoniovandre/shell_scripts/BACKUPED2/loop_de_processos &
+

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes [google.com/profiles/a.vandre.g].
+
+cp -u /public/mame_snap/* ~/Dropbox/mame_snap/
+cp -u /public/mame_hi/* ~/Dropbox/mame_hi/
+cp -u /public/mame_memcard/* ~/Dropbox/mame_memcard/
+cp -u /public/mame_nvram/* ~/Dropbox/mame_nvram/
+cp -u /public/mame_samples/* ~/Dropbox/mame_samples/
+

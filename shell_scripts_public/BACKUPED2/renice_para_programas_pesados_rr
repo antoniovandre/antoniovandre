@@ -1,0 +1,76 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes [google.com/profiles/a.vandre.g].
+
+# Última atualização: 01-07-2015.
+
+if [ "$1" == "" ]; then echo "Uso incorreto."; exit; fi
+
+value=$1
+
+#if [ "$1" == "r" ]; then value=0; for pid in $(ps -A | grep dbus-daemon | awk '{print $1}'); do renice 0 $pid; done; for pid in $(ps -A | grep kworker | awk '{print $1}'); do renice -20 $pid; done; else if [ "$2" == "t" ]; then for pid in $(ps -A | grep dbus-daemon | awk '{print $1}'); do renice $value $pid; done; for pid in $(ps -A | grep kworker | awk '{print $1}'); do renice $value $pid; done; fi; fi
+
+for pid in $(ps -A | grep ubuntuone | awk '{print $1}'); do renice $value $pid; done
+
+#for pid in $(ps -A | grep openbox | awk '{print $1}'); do renice $value $pid; done
+
+for pid in $(ps -A | grep dropbox | awk '{print $1}'); do renice $value $pid; done
+
+#for pid in $(ps -A | grep at-spi | awk '{print $1}'); do renice $value $pid; done
+
+#for pid in $(ps -A | grep gnome-keyring-d | awk '{print $1}'); do renice $value $pid; done
+
+#for pid in $(ps -A | grep dconf | awk '{print $1}'); do renice $value $pid; done
+
+#for pid in $(ps -A | grep gnome | awk '{print $1}'); do renice $value $pid; done
+
+#for pid in $(ps -A | grep xfce | awk '{print $1}'); do renice $value $pid; done
+
+#for pid in $(ps -A | grep fluxbox | awk '{print $1}'); do renice $value $pid; done
+
+#for pid in $(ps -A | grep panel | awk '{print $1}'); do renice $value $pid; done
+
+#for pid in $(ps -A | grep unity | awk '{print $1}'); do renice $value $pid; done
+
+#for pid in $(ps -A | grep update | awk '{print $1}'); do renice $value $pid; done
+
+#for pid in $(ps -A | grep firefox | awk '{print $1}'); do renice $value $pid; done
+
+#for pid in $(ps -A | grep chrome | awk '{print $1}'); do renice $value $pid; done
+
+for pid in $(ps -A | grep vlc | awk '{print $1}'); do renice $value $pid; done
+
+for pid in $(ps -A | grep Thunar | awk '{print $1}'); do renice $value $pid; done
+
+for pid in $(ps -A | grep pcmanfm | awk '{print $1}'); do renice $value $pid; done
+
+#for pid in $(ps -A | grep tumblerd | awk '{print $1}'); do renice $value $pid; done
+
+#for pid in $(ps -A | grep wicd | awk '{print $1}'); do renice $value $pid; done
+
+#for pid in $(ps -A | grep arora | awk '{print $1}'); do renice $value $pid; done
+
+#for pid in $(ps -A | grep opera | awk '{print $1}'); do renice $value $pid; done
+
+for pid in $(ps -A | grep skype | awk '{print $1}'); do renice $value $pid; done
+
+#for pid in $(ps -A | grep pavucontrol | awk '{print $1}'); do renice $value $pid; done
+
+#for pid in $(ps -A | grep plugin-containe | awk '{print $1}'); do renice $value $pid; done
+
+for pid in $(ps -A | grep cairo | awk '{print $1}'); do renice $value $pid; done
+
+#for pid in $(ps -A | grep thunderbird | awk '{print $1}'); do renice $value $pid; done
+
+for pid in $(ps -A | grep SpiderOak | awk '{print $1}'); do renice $value $pid; done
+
+for pid in $(ps -A | grep Copy | awk '{print $1}'); do renice $value $pid; done
+
+for pid in $(ps -A | grep clipit | awk '{print $1}'); do renice $value $pid; done
+
+for pid in $(ps -A | grep transmission | awk '{print $1}'); do renice $value $pid; done
+
+for pid in $(ps -A | grep java | awk '{print $1}'); do renice $value $pid; done
+
+for pid in $(ps -A | grep gedit | awk '{print $1}'); do renice $value $pid; done
+

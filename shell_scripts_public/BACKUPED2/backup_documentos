@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes [google.com/profiles/a.vandre.g].
+
+# Script para backup de documentos txt de nomes contínuos para outros diretórios em disco e diretórios cloud.
+
+# Última atualização: 02-07-2015.
+
+if [ "$3" == "l" ]; then cp -u $1 ~/Legado\ ontológico/; fi
+
+if [ "$3" == "l" ]; then cp -u $1 ~/Dropbox/Legado\ ontológico/; fi
+
+if [ "$3" == "l" ]; then cp -u $1 ~/Copy/Legado\ ontológico/; fi
+
+if [ "$3" == "l" ]; then cp -u $1 ~/temp\ cloud\ drive\ folder/Legado\ ontológico/; fi
+
+cp -u $1 ~/Dropbox/Documents/BACKUPED$2/
+
+cp -u $1 ~/Copy/Documentos/BACKUPED$2/
+
+cp -u $1 ~/temp\ cloud\ drive\ folder/Documentos/BACKUPED$2/
+

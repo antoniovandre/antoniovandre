@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes [google.com/profiles/a.vandre.g].
+
+mount -t tmpfs -o size=1100M,mode=0777 tmpfs /ramdisc

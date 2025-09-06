@@ -1,0 +1,23 @@
+#!/bin/bash
+
+#zbrightness 0.2
+#Script para diminuir / aumentar o brilho do monitor em laptops (script to increase / decrease the display brightness on laptops)
+#Requer o Zenity (requires Zenity)
+#Requer, antes da instalação, a execução do comando (Requires, before installation, running the command): sudo chmod 666 /sys/class/backlight/acpi_video0/brightness
+#Autor: Rodrigo | http://linuxlike.blogspot.com
+
+value=$(cat /sys/class/backlight/acpi_video0/brightness)
+value_max=$(cat /sys/class/backlight/acpi_video0/max_brightness)
+
+if [ $(echo $LANG | cut -b1-2) = "pt" ]
+then
+  title_text="Controle de brilho"
+  scale_text="Ajuste de intensidade (1 a $value_max)"
+else
+  title_text="Brightness control"
+  scale_text="Intensity adjustment (1 to $value_max)"
+fi
+
+new_value=$(zenity --scale --title "$title_text" --text "$scale_text" --min-value 0 --max-value $value_max --value $value --step 1)
+
+echo -n $new_value > /sys/class/backlight/acpi_video0/brightness

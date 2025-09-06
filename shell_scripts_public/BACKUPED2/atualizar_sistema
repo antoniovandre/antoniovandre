@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes [google.com/profiles/a.vandre.g].
+
+apt-get update
+
+apt-get upgrade -y --force-yes
+
+apt-get autoremove -y --force-yes
+
+#apt-get dist-upgrade -y --force-yes
+
+#apt-get autoremove -y --force-yes
+
+apt-get clean -y --force-yes

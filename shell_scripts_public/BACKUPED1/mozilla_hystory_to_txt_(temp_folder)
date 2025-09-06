@@ -1,0 +1,17 @@
+# Destination : ~/temp/historico_mozilla.txt
+
+echo "SELECT datetime(moz_historyvisits.visit_date/1000000,'unixepoch'), moz_places.url,moz_places.title,moz_places.visit_count FROM moz_places, moz_historyvisits WHERE moz_places.id = moz_historyvisits.place_id ORDER by moz_historyvisits.visit_date; " | sqlite3 ~/.mozilla/firefox/pfxhuttk.default/places.sqlite | grep bbc.uk.co > ~/temp/historico_mozilla.txt
+
+echo "SELECT datetime(moz_historyvisits.visit_date/1000000,'unixepoch'), moz_places.url,moz_places.title,moz_places.visit_count FROM moz_places, moz_historyvisits WHERE moz_places.id = moz_historyvisits.place_id ORDER by moz_historyvisits.visit_date; " | sqlite3 ~/.mozilla/firefox/pfxhuttk.default/places.sqlite | grep hypescience.com >> ~/temp/historico_mozilla.txt
+
+echo "SELECT datetime(moz_historyvisits.visit_date/1000000,'unixepoch'), moz_places.url,moz_places.title,moz_places.visit_count FROM moz_places, moz_historyvisits WHERE moz_places.id = moz_historyvisits.place_id ORDER by moz_historyvisits.visit_date; " | sqlite3 ~/.mozilla/firefox/pfxhuttk.default/places.sqlite | grep ultimosegundo.ig.com.br >> ~/temp/historico_mozilla.txt
+
+echo "SELECT datetime(moz_historyvisits.visit_date/1000000,'unixepoch'), moz_places.url,moz_places.title,moz_places.visit_count FROM moz_places, moz_historyvisits WHERE moz_places.id = moz_historyvisits.place_id ORDER by moz_historyvisits.visit_date; " | sqlite3 ~/.mozilla/firefox/pfxhuttk.default/places.sqlite | grep jornalciencia.com >> ~/temp/historico_mozilla.txt
+
+echo "SELECT datetime(moz_historyvisits.visit_date/1000000,'unixepoch'), moz_places.url,moz_places.title,moz_places.visit_count FROM moz_places, moz_historyvisits WHERE moz_places.id = moz_historyvisits.place_id ORDER by moz_historyvisits.visit_date; " | sqlite3 ~/.mozilla/firefox/pfxhuttk.default/places.sqlite | grep ultimosegundo.ig.com.br >> ~/temp/historico_mozilla.txt
+
+echo "SELECT datetime(moz_historyvisits.visit_date/1000000,'unixepoch'), moz_places.url,moz_places.title,moz_places.visit_count FROM moz_places, moz_historyvisits WHERE moz_places.id = moz_historyvisits.place_id ORDER by moz_historyvisits.visit_date; " | sqlite3 ~/.mozilla/firefox/pfxhuttk.default/places.sqlite | grep sciencedaily.com >> ~/temp/historico_mozilla.txt
+
+echo "SELECT datetime(moz_historyvisits.visit_date/1000000,'unixepoch'), moz_places.url,moz_places.title,moz_places.visit_count FROM moz_places, moz_historyvisits WHERE moz_places.id = moz_historyvisits.place_id ORDER by moz_historyvisits.visit_date; " | sqlite3 ~/.mozilla/firefox/pfxhuttk.default/places.sqlite | grep g1.globo.com >> ~/temp/historico_mozilla.txt
+
+echo "SELECT datetime(moz_historyvisits.visit_date/1000000,'unixepoch'), moz_places.url,moz_places.title,moz_places.visit_count FROM moz_places, moz_historyvisits WHERE moz_places.id = moz_historyvisits.place_id ORDER by moz_historyvisits.visit_date; " | sqlite3 ~/.mozilla/firefox/pfxhuttk.default/places.sqlite | grep pe360graus.globo.com >> ~/temp/historico_mozilla.txt

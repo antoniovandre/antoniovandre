@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes [google.com/profiles/a.vandre.g].
+
+cp -u ~/volatile\ docs/* ~/Dropbox/volatile\ docs/

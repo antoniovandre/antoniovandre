@@ -1,0 +1,13 @@
+#!/bin/sh
+
+echo "mostrando na tela as configurações do disco"
+
+hdparm -c -d -t /dev/sda
+
+echo 
+
+echo "melhorando a leitura e escrita do hda"
+
+hdparm -c 1 -d 1 -t /dev/sda
+
+echo "feito!"

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Script de backup dos arquivos do Legado Ontológico, do PC para a conta Dropbox. De Antonio Vandré Pedrosa Furtunato Gomes (antoniovandre.github.io/MathematicalRamblingsjs).
+# Script de backup dos arquivos do Legado Ontológico, do PC para a conta Dropbox. De Antonio Vandré Pedrosa Furtunato Gomes (http://antoniovandre.github.io/MathematicalRamblingsjs).
 
 # Requer os sofwares "md5sum" e "unix2dos".
 

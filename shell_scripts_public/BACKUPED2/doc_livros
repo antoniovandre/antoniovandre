@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Script de backup de documentos referentes a livros número 14 para Antonio Vandré Pedrosa Furtunato Gomes (google.com/profiles/a.vandre.g).
+
+# Última atualização: 18-07-2015.
+
+if [ "$1" == "" ]; then echo -e "Uso incorreto.\n"; exit; fi
+
+if [ "/home/antoniovandre/shell_scripts/BACKUPED2" != "$(pwd)" ]; then cd /home/antoniovandre/shell_scripts/BACKUPED2/; cdflag="1"; fi
+
+if [ "$1" == "l" ] || [ "$2" == "l" ] || [ "$3" == "l" ] || [ "$4" == "l" ]; then ./backup_documentos /home/antoniovandre/Documentos/BACKUPED14/antoniovandre-livros_lidos.txt 14 l; fi
+
+if [ "$1" == "ln" ] || [ "$2" == "ln" ] || [ "$3" == "ln" ] || [ "$4" == "ln" ]; then ./backup_documentos /home/antoniovandre/Documentos/BACKUPED14/antoniovandre-livros_lidos_nao_matematicos_menos_biologia_e_filosofia.txt 14 l; fi
+
+if [ "$1" == "a" ] || [ "$2" == "a" ] || [ "$3" == "a" ] || [ "$4" == "a" ]; then ./backup_documentos /home/antoniovandre/Documentos/BACKUPED14/antoniovandre-atualmente_lendo.txt 14 l; fi
+
+if [ "$1" == "n" ] || [ "$2" == "n" ] || [ "$3" == "n" ] || [ "$4" == "n" ]; then ./backup_documentos /home/antoniovandre/Documentos/BACKUPED14/antoniovandre-notas_livros_lidos.txt 14 l; fi
+
+if [ "$cdflag" == "1" ]; then cd ~-; fi
+

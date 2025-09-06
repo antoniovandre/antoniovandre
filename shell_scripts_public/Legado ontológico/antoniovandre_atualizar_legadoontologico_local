@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Script de atualização dos arquivos do diretório local do Legado ontológico a partir do Dropbox, de Antonio Vandré Pedrosa Furtunato Gomes (antoniovandre.github.io/MathematicalRamblingsjs).
+# Script de atualização dos arquivos do diretório local do Legado ontológico a partir do Dropbox, de Antonio Vandré Pedrosa Furtunato Gomes (http://antoniovandre.github.io/MathematicalRamblingsjs).
 
 # Requer o software "md5sum".
 

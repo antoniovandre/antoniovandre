@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes [google.com/profiles/a.vandre.g].
+
+cpufreq-selector -c 0 -g powersave -f $1
+
+cpufreq-selector -c 1 -g powersave -f $1
+
+cpufreq-selector -c 2 -g powersave -f $1
+
+cpufreq-selector -c 3 -g powersave -f $1
+

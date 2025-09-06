@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes [google.com/profiles/a.vandre.g].
+
+export W=/usr/local/wine-1.4.1
+
+export WINEVERPATH=$W
+
+export WINE_TEMP_PATH=$PATH
+
+export PATH=$W/bin:$PATH
+
+export WINESERVER=$W/bin/wineserver
+
+export WINELOADER=$W/bin/wine
+
+export WINEDLLPATH=$W/lib/wine/fakedlls
+
+export WINE_TEMP_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+
+export LD_LIBRARY_PATH=$W/lib:$LD_LIBRARY_PATH
+

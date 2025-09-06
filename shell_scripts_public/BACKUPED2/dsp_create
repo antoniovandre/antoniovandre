@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes [google.com/profiles/a.vandre.g].
+
+mknod /dev/dsp c 14 3
+
+chgrp audio /dev/dsp
+
+chmod g+w /dev/dsp

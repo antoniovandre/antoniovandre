@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Processos para estarem em loop (cuidado) de Antonio Vandré Pedrosa Furtunato Gomes (google.com/profiles/a.vandre.g).
+
+# Última atualização: 09-07-2015.
+
+. /home/antoniovandre/shell_scripts/BACKUPED2/doc w
+
+. /home/antoniovandre/shell_scripts/BACKUPED2/backup_rbpi_gamestats
+

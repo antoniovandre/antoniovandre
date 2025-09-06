@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes [google.com/profiles/a.vandre.g].
+
+rmmod rtl8192se;modprobe rtl8192se

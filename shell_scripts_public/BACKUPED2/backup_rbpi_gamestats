@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes [google.com/profiles/a.vandre.g].
+
+# Última atualização: 09-07-2015.
+
+if [ "/home/antoniovandre/shell_scripts/BACKUPED2" != "$(pwd)" ]; then cd /home/antoniovandre/shell_scripts/BACKUPED2/; cdflag="1"; fi
+
+./backup_epsxe_memcards
+
+./backup_gens_saves
+
+./backup_mame_gamestats
+
+./backup_snes_snapshots
+
+./backup_stella_statedir
+
+if [ "$cdflag" == "1" ]; then cd ~-; fi
+
