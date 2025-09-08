@@ -1,12 +1,12 @@
-// Proprietário: Antonio Vandre Pedrosa Furtunato Gomes (bit.ly/antoniovandre_legadoontologico).
+// Proprietário: Antonio Vandre Pedrosa Furtunato Gomes.
 
-// Projeto Mathematical Ramblings (mathematicalramblings.blogspot.com).
+// Projeto Mathematical Ramblings.
 
 // Biblioteca C de funções e constantes pertencentes a Antonio Vandre Pedrosa Furtunato Gomes.
 
 // Licença de uso: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
 
-// Última atualização: 03-09-2024. Não considerando alterações em variáveis globais.
+// Última atualização: 07-09-2025. Não considerando alterações em variáveis globais.
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -17,7 +17,7 @@
 
 #include "antoniovandre_constantes.c"
 
-#define VERSION 20240903
+#define VERSION 20250907
 #define MENSAGEMNAOCOMPILADOR "Software não compilado em razão do compilador não ser compatível."
 #define NUMEROZERO 0
 #define NUMEROUM 1
@@ -1371,13 +1371,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 	funcoesconstantes [37].valor = (TIPONUMEROREAL) FISICA_MP_SI_VALOR;
 	antoniovandre_copiarstring (funcoesconstantes [37].comentario, FISICA_MP_SI_COMENTARIO);
 
-	/* Comentando para maior compatibilidade.
-
-	antoniovandre_copiarstring (funcoesconstantes [38].token, FISICA_A_SI);
-	funcoesconstantes [38].valor = (TIPONUMEROREAL) FISICA_A_SI_VALOR;
-	antoniovandre_copiarstring (funcoesconstantes [38].comentario, FISICA_A_SI_COMENTARIO);
-
-	*/
+	antoniovandre_copiarstring (funcoesconstantes [38].token, MATEMATICA_AP);
+	funcoesconstantes [38].valor = (TIPONUMEROREAL) MATEMATICA_AP_VALOR;
+	antoniovandre_copiarstring (funcoesconstantes [38].comentario, MATEMATICA_AP_COMENTARIO);
 
 	antoniovandre_copiarstring (funcoesconstantes [39].token, "modulo");
 	antoniovandre_copiarstring (funcoesconstantes [39].comentario, "Função módulo.");
@@ -1418,9 +1414,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 	antoniovandre_copiarstring (funcoesconstantes [51].token, "fahrenheitparacelsius");
 	antoniovandre_copiarstring (funcoesconstantes [51].comentario, "Função para converter temperatura em Fahrenheit para Celsius.");
 
-	antoniovandre_copiarstring (funcoesconstantes [52].token, FISICA_AM_SI);
-	funcoesconstantes [52].valor = (TIPONUMEROREAL) FISICA_AM_SI_VALOR;
-	antoniovandre_copiarstring (funcoesconstantes [52].comentario, FISICA_AM_SI_COMENTARIO);
+	antoniovandre_copiarstring (funcoesconstantes [52].token, FISICA_A_SI);
+	funcoesconstantes [52].valor = (TIPONUMEROREAL) FISICA_A_SI_VALOR;
+	antoniovandre_copiarstring (funcoesconstantes [52].comentario, FISICA_A_SI_COMENTARIO);
 
 	antoniovandre_copiarstring (funcoesconstantes [53].token, FISICA_KE_SI);
 	funcoesconstantes [53].valor = (TIPONUMEROREAL) FISICA_KE_SI_VALOR;
