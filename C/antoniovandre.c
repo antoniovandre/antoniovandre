@@ -6,7 +6,7 @@
 
 // Licença de uso: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
 
-// Última atualização: 07-09-2025. Não considerando alterações em variáveis globais.
+// Última atualização: 11-09-2025. Não considerando alterações em variáveis globais.
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -17,7 +17,7 @@
 
 #include "antoniovandre_constantes.c"
 
-#define VERSION 20250907
+#define VERSION 20250911
 #define MENSAGEMNAOCOMPILADOR "Software não compilado em razão do compilador não ser compatível."
 #define NUMEROZERO 0
 #define NUMEROUM 1
@@ -26,7 +26,7 @@
 #define TAMANHO_BUFFER_WORD 1024 // Para strings pequenas.
 #define TAMANHO_BUFFER_PHRASE 16384 // Para strings grandes.
 #define TAMANHO_BUFFER_TEXT 500000000 // Para conteúdos de arquivos.
-#define VALOR_MAX 99999999999999999 // A fim de evitar erros de saída.
+#define VALOR_MAX 0.9999999999999999E17 // A fim de evitar erros de saída.
 #define VALOR_MAX_2 10000000 // Valor máximo. Segunda opção.
 #define VALOR_MAX_3 50 // Valor máximo. Terceira opção.
 #define MARCADORREAL VALOR_MAX + NUMEROUM // Útil para delimitar memórias alocadas.
@@ -1220,6 +1220,10 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 
 	char * ignstr;
 	flag = NUMEROZERO;
+
+	resultado = strtold (str, & err);
+
+	if (* err == NUMEROZERO) if (resultado > VALOR_MAX) {char * result = (char *) malloc (TAMANHO_BUFFER_PHRASE); antoniovandre_copiarstring (result, STRINGSAIDAERROOVER); if (MACROALOCACAODINAMICA) {free (str2); free (buffer); free (funcoesconstantes);} return result;}
 
 	for (j = NUMEROZERO; j < len; j++)
 		{
