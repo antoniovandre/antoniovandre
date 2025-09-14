@@ -2,8 +2,10 @@
 
 # Script de exibição de uma caixa de diálogo GUI. De Antonio Vandré Pedrosa Furtunato Gomes.
 
-# Última atualização: 31-08-2025.
+# Última atualização: 14-09-2025.
 
 if ! hash xterm &>> /dev/null; then echo "Software \"xterm\" não encontrado."; exit 1; fi
 
-xterm -e "echo \"$@\"; read"
+PARAMS="\"$@\""
+
+xterm -e "echo \"${PARAMS}\"; read"
