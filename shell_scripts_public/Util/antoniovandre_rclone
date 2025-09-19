@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Script de virtualização de storages cloud com Rclone, de Antonio Vandré.
+
+# Última atualização: 19-09-2025.
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive:/" "/home/antoniovandre/Google Drive"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 2:/" "/home/antoniovandre/Google Drive 2"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 3:/" "/home/antoniovandre/Google Drive 3"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 4:/" "/home/antoniovandre/Google Drive 4"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 5:/" "/home/antoniovandre/Google Drive 5"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 6:/" "/home/antoniovandre/Google Drive 6"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 7:/" "/home/antoniovandre/Google Drive 7"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 8:/" "/home/antoniovandre/Google Drive 8"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 9:/" "/home/antoniovandre/Google Drive 9"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 10:/" "/home/antoniovandre/Google Drive 10"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 11:/" "/home/antoniovandre/Google Drive 11"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 12:/" "/home/antoniovandre/Google Drive 12"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 13:/" "/home/antoniovandre/Google Drive 13"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 14:/" "/home/antoniovandre/Google Drive 14"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 15:/" "/home/antoniovandre/Google Drive 15"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 16:/" "/home/antoniovandre/Google Drive 16"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 17:/" "/home/antoniovandre/Google Drive 17"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 18:/" "/home/antoniovandre/Google Drive 18"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 19:/" "/home/antoniovandre/Google Drive 19"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 20:/" "/home/antoniovandre/Google Drive 20"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 21:/" "/home/antoniovandre/Google Drive 21"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 22:/" "/home/antoniovandre/Google Drive 22"
+
+rclone mount --daemon --vfs-cache-mode full "Google Drive 23:/" "/home/antoniovandre/Google Drive 23"
+
+rclone mount --daemon --vfs-cache-mode full "Dropbox:/" "/home/antoniovandre/Dropbox"
