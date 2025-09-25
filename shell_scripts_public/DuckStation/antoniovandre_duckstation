@@ -2,11 +2,11 @@
 
 # Script de inicialização do emulador de Playstation 1 DuckStation, de Antonio Vandré.
 
-# Última atualização: 22-06-2025.
+# Última atualização: 25-09-2025.
 
 SETTINGSFILE="/home/antoniovandre/.var/app/org.duckstation.DuckStation/config/duckstation/settings.ini"
 
-VALUE=$(find /run 2>> /dev/null | grep "org.duckstation.DuckStation" | grep "PSX BIOS" | head -n 1 | sed 's/by\-app\/org.duckstation.DuckStation\///g')
+VALUE=$(find /run/user/1000/doc/ 2>> /dev/null | grep "org.duckstation.DuckStation" | grep "PSX BIOS" | head -n 1 | sed 's/by\-app\/org.duckstation.DuckStation\///g')
 
 sed -i "/SearchDirectory =*/c\SearchDirectory = ${VALUE/\//\\\/}" "${SETTINGSFILE}"
 
