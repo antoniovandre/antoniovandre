@@ -4,7 +4,7 @@
 
 # Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
 
-# Última atualização: 15-06-2024. Não considerando alterações em variáveis globais.
+# Última atualização: 11-11-2025. Não considerando alterações em variáveis globais.
 
 if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/shell_scripts/Util/antoniovandre_env" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
 
@@ -23,7 +23,7 @@ if ! ls "${INDEXFILE}" &>> /dev/null; then echo -e "${AV_VERMELHO}Arquivo de ín
 # OLDIFS="${IFS}"
 # IFS=","
 
-case "${1}" in "e") echo -ne "Criptografando arquivos";; "d") echo -ne "Descriptografando arquivos";; esac
+case "${1}" in "e") echo -ne "Criptografando arquivos...";; "d") echo -ne "Descriptografando arquivos...";; esac
 
 cat "${INDEXFILE}" > "${TEMPINDEXFILE}"
 
@@ -34,7 +34,7 @@ FLAG="0"
 CONTADOR2="0"
 
 while read LINHA; do TEMPLINHA=$(echo -n "${LINHA}" | awk 'BEGIN{FS=" "} {print $1}'
-); if [ "${TEMPLINHA}" != "" ] && [ "${TEMPLINHA:0:1}" != "#" ]; then CONTADOR2=$(expr "${CONTADOR2}" + 1); CONTADOR="0"; for CAMPO in ${LINHA//,/ }; do CONTADOR=$(expr "${CONTADOR}" + 1); case "${CONTADOR}" in "1") SOURCE=$CAMPO;; "2") DEST=$CAMPO;; "3") SENHA=$CAMPO;; esac; done; case "${1}" in "e") if [ "${FLAG}" == "0" ]; then if ! cp "${SOURCE}" "${TEMPFILE}" &>> /dev/null; then FLAG="1"; fi; fi; if [ "${FLAG}" == "0" ]; then if ! ccrypt -e -K "${SENHA}" "${TEMPFILE}" &>> /dev/null; then FLAG="1"; fi; fi; if [ "${FLAG}" == "0" ]; then if ! mv "${TEMPFILE}.cpt" "${DEST}" &>> /dev/null; then FLAG="1"; fi; fi;; "d") if [ "${FLAG}" == "0" ]; then if ! cp "${DEST}" "${TEMPFILE}" &>> /dev/null; then FLAG="1"; fi; fi; if [ "${FLAG}" == "0" ]; then if ! ccrypt -d -K "${SENHA}" "${TEMPFILE}" &>> /dev/null; then FLAG="1"; fi; fi; if [ "${FLAG}" == "0" ]; then if ! mv "${TEMPFILE}" "${SOURCE}" &>> /dev/null; then FLAG="1"; fi; fi;; esac; echo -ne "."; fi; done < "${TEMPINDEXFILE}"
+); if [ "${TEMPLINHA}" != "" ] && [ "${TEMPLINHA:0:1}" != "#" ]; then CONTADOR2=$(expr "${CONTADOR2}" + 1); CONTADOR="0"; for CAMPO in ${LINHA//,/ }; do CONTADOR=$(expr "${CONTADOR}" + 1); case "${CONTADOR}" in "1") SOURCE=$CAMPO;; "2") DEST=$CAMPO;; "3") SENHA=$CAMPO;; esac; done; case "${1}" in "e") if [ "${FLAG}" == "0" ]; then if ! cp "${SOURCE}" "${TEMPFILE}" &>> /dev/null; then FLAG="1"; fi; fi; if [ "${FLAG}" == "0" ]; then if ! ccrypt -e -K "${SENHA}" "${TEMPFILE}" &>> /dev/null; then FLAG="1"; fi; fi; if [ "${FLAG}" == "0" ]; then if ! mv "${TEMPFILE}.cpt" "${DEST}" &>> /dev/null; then FLAG="1"; fi; fi;; "d") if [ "${FLAG}" == "0" ]; then if ! cp "${DEST}" "${TEMPFILE}" &>> /dev/null; then FLAG="1"; fi; fi; if [ "${FLAG}" == "0" ]; then if ! ccrypt -d -K "${SENHA}" "${TEMPFILE}" &>> /dev/null; then FLAG="1"; fi; fi; if [ "${FLAG}" == "0" ]; then if ! mv "${TEMPFILE}" "${SOURCE}" &>> /dev/null; then FLAG="1"; fi; fi;; esac; fi; done < "${TEMPINDEXFILE}"
 
 # IFS="${OLDIFS}"
 
