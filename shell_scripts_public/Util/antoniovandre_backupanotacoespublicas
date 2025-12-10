@@ -2,11 +2,13 @@
 
 # Script de backup das anotações públicas, de Antonio Vandré.
 
-# Última atualização: 21-03-2025.
+# Última atualização: 10-12-2025.
 
 #____________________
 
 if ! hash git &>> /dev/null; then echo "Software \"git\" não encontrado."; exit 1; fi
+
+if ! hash dbxcli-linux-amd64 &>> /dev/null; then echo "Software \"dbxcli-linux-amd64\" não encontrado."; exit 1; fi
 
 DIR=$PWD; cd "/home/antoniovandre/GitHub/"; rm -fr "antoniovandre2/" &>> /dev/null
 
@@ -19,3 +21,5 @@ cd "/home/antoniovandre/GitHub/antoniovandre2/"
 git add "antoniovandre-anotações_públicas-5.txt" && git commit -m "Atualizando antoniovandre-anotações_públicas-5.txt" && git push
 
 cd "${DIR}"
+
+dbxcli-linux-amd64 put "/home/antoniovandre/Documentos/antoniovandre-anotações_públicas-5.txt" "/Documents/antoniovandre-anotações_públicas-5.txt"
