@@ -4,7 +4,7 @@
 
 # Script de aliases. Deve ser executado com "source".
 
-# Última atualização: 03-09-2025.
+# Última atualização: 28-01-2026.
 
 if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/shell_scripts/Util/antoniovandre_env" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
 
@@ -165,10 +165,10 @@ alias rss="nice -n 20 antoniovandre_leitorrss"
 alias uol="nice -n 20 antoniovandre_leitorrss http://rss.uol.com.br/feed/noticias.xml 120"
 alias scdly="nice -n 20 antoniovandre_leitorrss https://www.sciencedaily.com/rss/all.xml 120"
 alias folha="nice -n 20 antoniovandre_leitorrss https://feeds.folha.uol.com.br/emcimadahora/rss091.xml 120"
-alias sat1="if hash '${HOME}/libvibrant-1.1.1/build/cli/vibrant-cli' &>> /dev/null; then '${HOME}/libvibrant-1.1.1/build/cli/vibrant-cli' $(xrandr | grep ' connected' | cut -d ' ' -f 1) 1; fi"
-alias sat15="if hash '${HOME}/libvibrant-1.1.1/build/cli/vibrant-cli' &>> /dev/null; then '${HOME}/libvibrant-1.1.1/build/cli/vibrant-cli' $(xrandr | grep ' connected' | cut -d ' ' -f 1) 1.5; fi"
-alias sat2="if hash '${HOME}/libvibrant-1.1.1/build/cli/vibrant-cli' &>> /dev/null; then '${HOME}/libvibrant-1.1.1/build/cli/vibrant-cli' $(xrandr | grep ' connected' | cut -d ' ' -f 1) 2; fi"
-alias sat4="if hash '${HOME}/libvibrant-1.1.1/build/cli/vibrant-cli' &>> /dev/null; then '${HOME}/libvibrant-1.1.1/build/cli/vibrant-cli' $(xrandr | grep ' connected' | cut -d ' ' -f 1) 4; fi"
+if ! [ -n "$SSH_CONNECTION" ]; then alias sat1="if hash '${HOME}/libvibrant-1.1.1/build/cli/vibrant-cli' &>> /dev/null; then '${HOME}/libvibrant-1.1.1/build/cli/vibrant-cli' $(xrandr | grep ' connected' | cut -d ' ' -f 1) 1; fi"; fi
+if ! [ -n "$SSH_CONNECTION" ]; then alias sat15="if hash '${HOME}/libvibrant-1.1.1/build/cli/vibrant-cli' &>> /dev/null; then '${HOME}/libvibrant-1.1.1/build/cli/vibrant-cli' $(xrandr | grep ' connected' | cut -d ' ' -f 1) 1.5; fi"; fi
+if ! [ -n "$SSH_CONNECTION" ]; then alias sat2="if hash '${HOME}/libvibrant-1.1.1/build/cli/vibrant-cli' &>> /dev/null; then '${HOME}/libvibrant-1.1.1/build/cli/vibrant-cli' $(xrandr | grep ' connected' | cut -d ' ' -f 1) 2; fi"; fi
+if ! [ -n "$SSH_CONNECTION" ]; then alias sat4="if hash '${HOME}/libvibrant-1.1.1/build/cli/vibrant-cli' &>> /dev/null; then '${HOME}/libvibrant-1.1.1/build/cli/vibrant-cli' $(xrandr | grep ' connected' | cut -d ' ' -f 1) 4; fi"; fi
 alias br0="if hash xcalib &>> /dev/null; then if [ '$(ps -A | grep Xorg)' != '' ]; then xcalib -b 0 -a &>> /dev/null; fi; fi"
 alias br10="if hash xcalib &>> /dev/null; then if [ '$(ps -A | grep Xorg)' != '' ]; then xcalib -b 10 -a &>> /dev/null; fi; fi"
 alias br20="if hash xcalib &>> /dev/null; then if [ '$(ps -A | grep Xorg)' != '' ]; then xcalib -b 20 -a &>> /dev/null; fi; fi"
