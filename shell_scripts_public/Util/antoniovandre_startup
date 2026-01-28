@@ -2,7 +2,7 @@
 
 # Script de startup de Antonio Vandré.
 
-# Última atualização: 27-01-2026.
+# Última atualização: 28-01-2026.
 
 export LANG=C.UTF-8
 
@@ -11,8 +11,8 @@ export LANG=C.UTF-8
 
 bash /home/antoniovandre/shell_scripts/Util/antoniovandre_rclone &
 
-#if [ $(ls /mnt/C0D0970BD0970736/ | wc -l | tr -d '\n') == "0" ]; then sudo mount --bind /mnt/C0D0970BD0970736/ Backup; fi &
+if [ $(ls "/home/antoniovandre/Backup/" | wc -l | tr -d '\n') == "0" ]; then sudo mount --bind /mnt/C0D0970BD0970736/ "/home/antoniovandre/Backup"; fi &
 
-#if [ $(ls /mnt/abd4b09a-d330-4a01-a4fd-21c793f1b043/ | wc -l | tr -d '\n') == "0" ]; then sudo mount --bind /mnt/abd4b09a-d330-4a01-a4fd-21c793f1b043/ 'Backup 2'; fi &
+if [ $(ls "/home/antoniovandre/Backup 2/" | wc -l | tr -d '\n') == "0" ]; then sudo mount --bind /mnt/abd4b09a-d330-4a01-a4fd-21c793f1b043/ "/home/antoniovandre/Backup 2"; fi &
 
-#if [ $(ls /mnt/871b1058-973a-4ece-be68-eba0d5b3a519/ | wc -l | tr -d '\n') == "0" ]; then sudo mount --bind /mnt/871b1058-973a-4ece-be68-eba0d5b3a519/ 'Backup AV/'; fi &
+if [ $(ls "/home/antoniovandre/Backup AV/" | wc -l | tr -d '\n') == "0" ]; then sudo mount --bind /mnt/871b1058-973a-4ece-be68-eba0d5b3a519/ "/home/antoniovandre/Backup AV"; fi &
