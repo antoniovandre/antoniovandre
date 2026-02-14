@@ -4,7 +4,7 @@
 
 // Licença de uso: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
 
-// Última atualização: 06-09-2025. Não considerando alterações em variáveis globais.
+// Última atualização: 14-02-2026. Não considerando alterações em variáveis globais.
 
 #include "../antoniovandre.c"
 
@@ -62,6 +62,8 @@ int main (int argc, char *argv [])
 
 	flag = NUMEROZERO;
 
+	argvb2[NUMEROZERO] = TOKENINICIOEVAL; j++;
+
 	for (i = NUMEROZERO; i < strlen (argvb); i++)
 		{
 		if (argvb [i] == DELIMITADORSTRING) {flag = NUMEROUM; i++; j = NUMEROZERO;}
@@ -77,6 +79,8 @@ int main (int argc, char *argv [])
 				argvb3 [j++] = argvb [i];
 			}
 		}
+
+	argvb2[j] = TOKENFIMEVAL;
 
 	flag = NUMEROZERO;
 
