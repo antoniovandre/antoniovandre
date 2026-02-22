@@ -6,7 +6,7 @@
 
 // Licença de uso: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
 
-// Última atualização: 14-02-2026. Não considerando alterações em variáveis globais.
+// Última atualização: 22-02-2026. Não considerando alterações em variáveis globais.
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -17,7 +17,7 @@
 
 #include "antoniovandre_constantes.c"
 
-#define VERSION 20260214
+#define VERSION 20260222
 #define MENSAGEMNAOCOMPILADOR "Software não compilado em razão do compilador não ser compatível."
 #define NUMEROZERO 0
 #define NUMEROUM 1
@@ -8898,7 +8898,7 @@ char * antoniovandre_eval (char * str, int precisao)
 		{
 		flag2 = NUMEROZERO;
 
-		if ((i >= NUMEROUM) && (str2 [i] == OPERADORSUBTRACAO) && (str2 [i - NUMEROUM] == TOKENINICIOEVAL))  flag2 = NUMEROUM;
+		if ((i >= NUMEROUM) && (str2 [i] == OPERADORSUBTRACAO) && (str2 [i - NUMEROUM] == TOKENINICIOEVAL)) flag2 = NUMEROUM;
 
 		if ((((i == NUMEROZERO) && (str2 [NUMEROZERO] == OPERADORSUBTRACAO)) || (flag2 == NUMEROUM)) && ! ((i > NUMEROUM) && (str2 [i] == CHARUM) && (str2 [i - NUMEROUM] == OPERADORSUBTRACAO) && (str2 [i - 2] == TOKENINICIOEVAL)))
 			{
@@ -9112,6 +9112,8 @@ char * antoniovandre_eval (char * str, int precisao)
 				k--;
 				} while (flag3 == NUMEROUM);
 
+			k++;
+
 			antoniovandre_copiarstring (str6, STRINGVAZIA);
 
 			if (flag4 == NUMEROUM) for (j = k; j < inicio - NUMEROUM; j++) strncat (str6, & str2 [j], NUMEROUM);
@@ -9128,6 +9130,7 @@ char * antoniovandre_eval (char * str, int precisao)
 			if (strcmp (str6, STRINGVAZIA))
 				{
 				antoniovandre_concatenarstring (str3, str6);
+
 				if (tc != OPERADORSUBTRACAO) antoniovandre_concatenarstring (str3, "*");
 				}
 
