@@ -6,7 +6,7 @@
 
 // Licença de uso: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
 
-// Última atualização: 22-02-2026. Não considerando alterações em variáveis globais.
+// Última atualização: 23-02-2026. Não considerando alterações em variáveis globais.
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -17,7 +17,7 @@
 
 #include "antoniovandre_constantes.c"
 
-#define VERSION 20260222
+#define VERSION 20260223
 #define MENSAGEMNAOCOMPILADOR "Software não compilado em razão do compilador não ser compatível."
 #define NUMEROZERO 0
 #define NUMEROUM 1
@@ -434,6 +434,7 @@ int antoniovandre_salvarmathestatisticas (char * cabecalho)
 		unsigned long int cursor;
 		unsigned long int tam = NUMEROZERO;
 		int i;
+		int j;
 
 		DECLARACAO_buffer
 
@@ -470,17 +471,19 @@ int antoniovandre_salvarmathestatisticas (char * cabecalho)
 				cursor = ftell (filemathestatisticas);
 				antoniovandre_copiarstring (antoniovandre_estatisticas_buffer, STRINGVAZIA);
 
+				j = NUMEROZERO;
+
 				while (VERDADE)
 					{
 					flag3 = NUMEROZERO;
 
-					fread (& tc, sizeof (char), 1, filemathestatisticas);
+					fread (& tc, sizeof (char), NUMEROUM, filemathestatisticas);
 
 					for (i = NUMEROZERO; i < strlen (antoniovandre_numeros); i++)
-						if (antoniovandre_numeros[i] == tc) flag3 = NUMEROUM;
+						if (antoniovandre_numeros [i] == tc) {flag3 = NUMEROUM; break;}
 
 					if (flag3 == NUMEROUM)
-						strncpy (antoniovandre_estatisticas_buffer, & tc, NUMEROUM);
+						antoniovandre_estatisticas_buffer [j++] = tc;
 					else
 						break;
 					}
@@ -494,7 +497,7 @@ int antoniovandre_salvarmathestatisticas (char * cabecalho)
 
 				while (! feof (filemathestatisticas))
 					{
-					fread (& tc, sizeof (char), 1, filemathestatisticas);
+					fread (& tc, sizeof (char), NUMEROUM, filemathestatisticas);
 					buffer[tam++] = tc;
 					}
 
@@ -502,10 +505,10 @@ int antoniovandre_salvarmathestatisticas (char * cabecalho)
 
 				char * temp = (char *) malloc (TAMANHO_BUFFER_WORD);
 				sprintf (temp, "%ld", antoniovandre_estatisticas_contador);
-				fwrite (temp, 1, strlen (temp), filemathestatisticas);
+				fwrite (temp, NUMEROUM, strlen (temp), filemathestatisticas);
 				free (temp);
 
-				fwrite (buffer , 1, --tam, filemathestatisticas);
+				fwrite (buffer , NUMEROUM, --tam, filemathestatisticas);
 
 				flag = NUMEROUM;
 				}
