@@ -6,7 +6,7 @@
 
 // Licença de uso: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
 
-// Última atualização: 23-02-2026. Não considerando alterações em variáveis globais.
+// Última atualização: 24-02-2026. Não considerando alterações em variáveis globais.
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -14,10 +14,11 @@
 #define __USE_GNU
 #include <math.h>
 #include <float.h>
+#include <limits.h>
 
 #include "antoniovandre_constantes.c"
 
-#define VERSION 20260223
+#define VERSION 20260224
 #define MENSAGEMNAOCOMPILADOR "Software não compilado em razão do compilador não ser compatível."
 #define NUMEROZERO 0
 #define NUMEROUM 1
@@ -443,6 +444,7 @@ int antoniovandre_salvarmathestatisticas (char * cabecalho)
 		int flag3;
 		char tc;
 		char tc2;
+		char * err;
 
 		antoniovandre_copiarstring (antoniovandre_estatisticas_buffer, STRINGVAZIA);
 
@@ -488,7 +490,21 @@ int antoniovandre_salvarmathestatisticas (char * cabecalho)
 						break;
 					}
 				
-				antoniovandre_estatisticas_contador = atoi (antoniovandre_estatisticas_buffer);
+				antoniovandre_estatisticas_contador = strtoul (antoniovandre_estatisticas_buffer, & err, 10);
+
+				if ((antoniovandre_estatisticas_contador == NUMEROZERO) || (antoniovandre_estatisticas_contador == ULONG_MAX))
+					{
+					if (MACROALOCACAODINAMICA)
+						{
+						free (buffer);
+						free (antoniovandre_estatisticas_buffer);
+						}
+
+					fclose (filemathestatisticas);
+
+					return NUMEROZERO;
+					}
+
 				antoniovandre_estatisticas_contador++;
 
 				fseek (filemathestatisticas, (NUMEROMENOSUM) * (sizeof (char)), SEEK_CUR);
