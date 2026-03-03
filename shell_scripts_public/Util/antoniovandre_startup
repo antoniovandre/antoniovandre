@@ -2,12 +2,14 @@
 
 # Script de startup de Antonio Vandré.
 
-# Última atualização: 28-01-2026.
+# Última atualização: 03-03-2026.
 
 export LANG=C.UTF-8
 
 # bash /home/antoniovandre/shell_scripts/Util/antoniovandre_capturaprocessos &
 # bash /home/antoniovandre/shell_scripts/Util/antoniovandre_logprocessos 'Inicialização' &
+
+DIR="${PWD}"; cd "${HOME}/.cache/"; rm "Google -fr"; ln -s "/mnt/C0D0970BD0970736/Antonio Vandré Pedrosa Furtunato Gomes/Android/cache/Google" "Google"; cd "${DIR}"
 
 bash /home/antoniovandre/shell_scripts/Util/antoniovandre_rclone &
 
