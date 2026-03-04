@@ -6,7 +6,7 @@
 
 // Licença de uso: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
 
-// Última atualização: 03-03-2026. Não considerando alterações em variáveis globais.
+// Última atualização: 04-03-2026. Não considerando alterações em variáveis globais.
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -18,7 +18,7 @@
 
 #include "antoniovandre_constantes.c"
 
-#define VERSION 20260303
+#define VERSION 20260304
 #define MENSAGEMNAOCOMPILADOR "Software não compilado em razão do compilador não ser compatível."
 #define NUMEROZERO 0
 #define NUMEROUM 1
@@ -3274,7 +3274,11 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 					if (argumentos0 [j] != ESPACOBRANCO)
 						{
 						if (argumentos0 [j] == VARIAVELPADRAO)
+							{
+							tc = TOKENINICIOEVAL; strncat (argumentos, & tc, NUMEROUM);
 							antoniovandre_concatenarstring (argumentos, argumentoss);
+							tc = TOKENFIMEVAL; strncat (argumentos, & tc, NUMEROUM);
+							}
 						else
 							strncat (argumentos, & argumentos0 [j], NUMEROUM);
 						}
@@ -3385,7 +3389,11 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 					if (argumentos0 [j] != ESPACOBRANCO)
 						{
 						if (argumentos0 [j] == VARIAVELPADRAO)
+							{
+							tc = TOKENINICIOEVAL; strncat (argumentos, & tc, NUMEROUM);
 							antoniovandre_concatenarstring (argumentos, argumentoss);
+							tc = TOKENFIMEVAL; strncat (argumentos, & tc, NUMEROUM);
+							}
 						else
 							strncat (argumentos, & argumentos0 [j], NUMEROUM);
 						}
@@ -3834,7 +3842,11 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 					if (argumentos0 [j] != ESPACOBRANCO)
 						{
 						if (argumentos0 [j] == VARIAVELPADRAO)
+							{
+							tc = TOKENINICIOEVAL; strncat (argumentos, & tc, NUMEROUM);
 							antoniovandre_concatenarstring (argumentos, argumentoss);
+							tc = TOKENFIMEVAL; strncat (argumentos, & tc, NUMEROUM);
+							}
 						else
 							strncat (argumentos, & argumentos0 [j], NUMEROUM);
 						}
@@ -4928,7 +4940,11 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 					if (argumentos0 [j] != ESPACOBRANCO)
 						{
 						if (argumentos0 [j] == VARIAVELPADRAO)
+							{
+							tc = TOKENINICIOEVAL; strncat (argumentos, & tc, NUMEROUM);
 							antoniovandre_concatenarstring (argumentos, argumentoss);
+							tc = TOKENFIMEVAL; strncat (argumentos, & tc, NUMEROUM);
+							}
 						else
 							strncat (argumentos, & argumentos0 [j], NUMEROUM);
 						}
@@ -5049,7 +5065,11 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 					if (argumentos0 [j] != ESPACOBRANCO)
 						{
 						if (argumentos0 [j] == VARIAVELPADRAO)
+							{
+							tc = TOKENINICIOEVAL; strncat (argumentos, & tc, NUMEROUM);
 							antoniovandre_concatenarstring (argumentos, argumentoss);
+							tc = TOKENFIMEVAL; strncat (argumentos, & tc, NUMEROUM);
+							}
 						else
 							strncat (argumentos, & argumentos0 [j], NUMEROUM);
 						}
@@ -5179,11 +5199,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 						{
 						if (argumentos0 [j] == VARIAVELPADRAO)
 							{
-							tc = TOKENINICIOEVAL;
-							strncat (argumentos, & tc, NUMEROUM);
+							tc = TOKENINICIOEVAL; strncat (argumentos, & tc, NUMEROUM);
 							antoniovandre_concatenarstring (argumentos, argumentoss);
-							tc = TOKENFIMEVAL;
-							strncat (argumentos, & tc, NUMEROUM);
+							tc = TOKENFIMEVAL; strncat (argumentos, & tc, NUMEROUM);
 							}
 						else
 							strncat (argumentos, & argumentos0 [j], NUMEROUM);
