@@ -2,7 +2,7 @@
 
 // Retorna a avaliação (eval) da expressão passada como argumento.
 
-// Licença de uso: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+// Licença de uso: Creative Commons Atribuição (CC BY).
 
 // Última atualização: 23-02-2026. Não considerando alterações em variáveis globais.
 
