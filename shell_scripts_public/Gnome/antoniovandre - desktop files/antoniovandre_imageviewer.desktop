@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=/home/antoniovandre/shell_scripts/Util/antoniovandre_imageviewer_sh %F
+MimeType=image/bmp;image/png;image/jpeg
+Name=Antonio Vandré's Image Viewer
+NoDisplay=true
+Type=Application
