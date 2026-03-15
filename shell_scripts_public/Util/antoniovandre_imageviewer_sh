@@ -20,21 +20,21 @@ if [ "${#}" -lt "1" ]; then echo -e "${AV_VERMELHO}Erro ao encontrar o arquivo${
 
 OLDDIR=$PWD;
 
-if echo "${1}" | grep "/" &>> /dev/null; then cd "${1%/*}"; fi
-
 IFS=$'\n'
 
 LIST=""
 TOTALCONTADOR="0"
 
-for FILE in `ls -1 *.{png,jpg,jpeg,bmp} 2>> /dev/null`; do TOTALCONTADOR=$(expr "${TOTALCONTADOR}" + "1"); FILE=$(echo -n "${FILE}"); if [ "${TOTALCONTADOR}" == "1" ]; then LIST="${FILE}"; else LIST="${LIST}|${FILE}"; fi; done
+for FILE in `ls -1 "${1%/*}/"*.{png,jpg,jpeg,bmp} 2>> /dev/null`; do TOTALCONTADOR=$(expr "${TOTALCONTADOR}" + "1"); FILE=$(echo -n "${FILE}"); if [ "${TOTALCONTADOR}" == "1" ]; then LIST="${FILE}"; else LIST="${LIST}|${FILE}"; fi; done
 
 CONTADOR="1"
 
-while (true); do
+while [ $(echo -n "${LIST}" | cut -d "|" -f "${CONTADOR}") != "${1}" ]; do CONTADOR=$(expr "${CONTADOR}" + "1"); done
+
+while true; do
 
 FILE=$(echo -n "${LIST}" | cut -d "|" -f "${CONTADOR}")
-DESTFILE=$(echo -n "${FILE}" | iconv -t ASCII//TRANSLIT)
+DESTFILE=$(echo -n "${FILE##*/}" | iconv -t ASCII//TRANSLIT)
 DESTFILE="${DESTFILE:0:10}..."
 
 cp "${FILE}" "${TEMPDIR}${DESTFILE}"
