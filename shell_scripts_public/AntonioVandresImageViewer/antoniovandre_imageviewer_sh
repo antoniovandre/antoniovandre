@@ -12,7 +12,7 @@ if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if 
 
 if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "${BASHSCRIPTSDIR}antoniovandre_cores_android" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
 
-if ! [ -n $TEMPDIR ]; then echo -e "${AV_VERMELHO}Diretório ramdisk não configurado${AV_SEMCOR}."; exit 1; fi
+if ! [ -n $TEMPDIR ]; then TENPDIR="/tmp/"; fi
 
 if ! hash iconv &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"iconv\" não encontrado${AV_SEMCOR}."; exit 1; fi
 
