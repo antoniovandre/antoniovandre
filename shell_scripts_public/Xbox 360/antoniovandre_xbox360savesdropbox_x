@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Script de extração e compactação da imagem iso do pendrive contendo save games do Xbox 360 para posterior hospedagem no Dropbox, em GUI. De Antonio Vandré Pedrosa Furtunato Gomes (http://antoniovandre.github.io/MathematicalRamblingsjs).
+
+# Última atualização: 10-03-2016.
+
+xterm antoniovandre_xbox360savesdropbox
+
