@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de execução de um comando do Maxima, de modo interativo, ideal para lançadores.
+
+# Última atualização: 22-03-2020.
+
+if ! hash antoniovandre_echo 1>> /dev/null 2>> /dev/null; then echo -ne "antoniovandre_echo não encontrado.\n\nPressione RETURN para sair."; read; exit 1; fi
+
+DIRETORIOAVBASHSCRIPTS="${HOME}/shell_scripts/Ubuntu/"
+
+if ! [ -n "$AVCORES" ]; then if ! source "${DIRETORIOAVBASHSCRIPTS}antoniovandre_cores"; then echo "Ocorreu um erro ao carregar o arquivo de cores."; fi; fi
+
+if ! [ -n "$executou_prescript" ]; then antoniovandre_echo "Executando prescript... " n; if ! source antoniovandre_bash_maxima_prescript; then echo -e "${AV_VERMELHO}Falhou${AV_SEMCOR}."; exit 1; else echo -e "${AV_VERDE}OK${AV_SEMCOR}."; fi; fi
+
+if ! [ "${USER}" == "antoniovandre" ]; then echo "${AV_VERMELHO}Você não é Antonio Vandré${AV_SEMCOR}."; exit 1; fi
+
+antoniovandre_echo "Entre com o comando:"
+
+read COMANDO
+
+if antoniovandre_bash_maxima_command "${COMANDO}" built-in; then echo -e "${AV_VERDE}Sucesso${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu uma falha${AV_SEMCOR}."; fi
+
+antoniovandre_echo "Pressione RETURN para sair."
+
+read

@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de reset das estatísticas de uso do Maxima.
+
+# Última atualização: 21-03-2020.
+
+DIRETORIOAVBASHSCRIPTS="${HOME}/shell_scripts/Ubuntu/"
+
+if ! hash antoniovandre_echo 1>> /dev/null 2>> /dev/null; then echo "antoniovandre_echo não encontrado."; read; exit 1; fi
+
+if ! [ "${USER}" == "antoniovandre" ]; then echo "Você não é Antonio Vandré."; exit 1; fi
+
+if ! [ -n "$AVCORES" ]; then if ! source "${DIRETORIOAVBASHSCRIPTS}antoniovandre_cores"; then echo "Ocorreu um erro ao carregar o arquivo de cores."; fi; fi
+
+if ! [ -n "$executou_prescript" ]; then antoniovandre_echo "Executando prescript... " n; if ! source antoniovandre_bash_maxima_prescript; then echo "Falhou."; exit 1; else echo -e "${AV_VERDE}OK${AV_SEMCOR}."; fi; fi
+
+if ! antoniovandre_verificarinternet_1 1>> /dev/null 2>> /dev/null; then echo -e "${AV_VERMELHO}Sem conexão com a internet${AV_SEMCOR}."; exit 1; fi
+
+if [ "$encontrou_arquivo_registro_atividades" == "nao" ]; then echo -e "${AV_VERMELHO}Arquivo histórico de atividades não definido${AV_SEMCOR}."; exit 1; fi
+
+echo "Sem estatísticas no momento." > $maxima_arquivo_registro_atividades
+
+antoniovandre_echo "Resetando histórico de atividades... " n
+
+if antoniovandre_dbxcli_put "$maxima_arquivo_registro_atividades" "${ANTONIOVANDRE_DROPBOX_SYNC_FOLDER}${maxima_arquivo_registro_atividades##*/}" 1>> /dev/null 2>> /dev/null; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Falhou${AV_SEMCOR}."; exit 1; fi
+
+cp "${HOME}/shell_scripts/Maxima/antoniovandre_maxima_grafico_registro_atividades_vazio.png" $maxima_grafico_registro_atividades
+
+antoniovandre_echo "Resetando gráfico do histórico de atividades... " n; if antoniovandre_dbxcli_put "$maxima_grafico_registro_atividades" "${ANTONIOVANDRE_DROPBOX_SYNC_FOLDER}${maxima_grafico_registro_atividades##*/}" 1>> /dev/null 2>> /dev/null; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Falhou${AV_SEMCOR}."; exit 1; fi
+
+antoniovandre_echo "Executando postscript... " n; if ! antoniovandre_maxima_postscript; then echo -e "${AV_VERMELHO}Falhou${AV_SEMCOR}."; exit 1; fi; echo -e "${AV_VERDE}OK${AV_SEMCOR}."
+
+antoniovandre_echo "Pressione RETURN para sair."
+
+read

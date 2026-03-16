@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Postscript Maxima.
+
+# Última atualização: 20-01-2019.
+
+unset API_path
+
+unset gerar_grafico
+
+unset avmhgpi
+
+unset maxima_arquivo_registro_atividades
+
+unset encontrou_arquivo_registro_atividades
+
+unset avmhgpdf
+
+unset avmhgpdf_t
+
+unset antoniovandre_maxima_logs_folder
+
+unset avmh
+
+unset executou_prescript
+
+

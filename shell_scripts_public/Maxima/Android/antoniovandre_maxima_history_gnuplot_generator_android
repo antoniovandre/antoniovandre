@@ -1,0 +1,46 @@
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes (http://antoniovandre.github.io/MathematicalRamblingsjs).
+
+# Script gerador do gráfico do histórico de uso das funções em "Antonio Vandré Pedrosa Furtunato Gomes - Maxima API".
+
+# Última atualização: 21-01-2019.
+
+API_path="/storage/emulated/0/av_maxima/Antonio Vandré Pedrosa Furtunato Gomes - Maxima API - Antonio Vandré Pedrosa Furtunato Gomes Android issue.mac"
+
+echo -n "Lendo variáveis setadas na API..."
+
+while read -r linha; do if [ "$(echo $linha | tr -d " " | cut -d "\"" -f 1)" == "antoniovandre_arquivo_estatisticas_funcoes:" ]; then maxima_arquivo_registro_atividades=`echo "$linha" | cut -d'"' -f 2`; fi; if [ "$(echo $linha | tr -d " " | cut -d "\"" -f 1)" == "antoniovandre_arquivo_grafico_estatisticas_funcoes:" ]; then maxima_grafico_registro_atividades=`echo "$linha" | cut -d'"' -f 2`; fi; done < "$API_path"
+
+echo " OK."
+
+echo -n "Criando Gnuplot datafile"
+
+avmhgpd="/storage/emulated/0/antoniovandre_dropbox_sync_folder/antoniovandre_maxima_history_gnuplot_datafile"
+
+avmhgpd_t="/storage/emulated/0/antoniovandre_dropbox_sync_folder/antoniovandre_maxima_history_gnuplot_datafile_temp"
+
+c1="0"
+
+c2="0"
+
+echo -n "" > "$avmhgpd"
+
+echo -n "" > "$avmhgpd_t"
+
+while read -r linha_history_1; do echo -n "."; if [ "$linha_history_1" != "" ]; then while read -r linha_history_2; do if [ "$linha_history_2" != "" ]; then comando_1="$(echo ${linha_history_1} | cut -d'"' -f 2 | cut -d',' -f 1)"; comando_2="$(echo $linha_history_2 | cut -d'"' -f 2 | cut -d',' -f 1)"; if [ "$comando_1" == "$comando_2" ]; then c2="$(expr "$c2" + 1)"; fi; fi; done < "$maxima_arquivo_registro_atividades"; fi; c3="0"; while read -r linha_t; do if [ "$comando_1" == "$linha_t" ]; then c3="1"; fi; done < "$avmhgpd_t"; if [ "$c3" == "0" ] && [ ! "$comando_1" == "" ]; then echo "${c1} ${comando_1} ${c2}" >> "$avmhgpd"; c1="$(expr "$c1" + 1)"; echo "$comando_1" >> "$avmhgpd_t"; fi; c2="0"; done < "$maxima_arquivo_registro_atividades"
+
+rm $avmhgpd_t 1>> /dev/null 2>> /dev/null
+
+echo " OK."
+
+echo -n "Executando Gnuplot..."
+
+diretorio_origem=$PWD
+
+cd "${maxima_grafico_registro_atividades%/*}"
+
+gnuplot -p -e "set xtics font 'Verdana,6'; set yrange [0:]; set boxwidth 0.3; set style fill solid; set xtics 1; set ytics 1; set terminal png size 800,600; set output '${maxima_grafico_registro_atividades##*/}'; set xtics rotate by 45 right; plot '${avmhgpd}' using 1:3:xtic(2) notitle with boxes linecolor rgb '#444444'"
+
+cd "$diretorio_origem"
+
+echo " OK."
+
