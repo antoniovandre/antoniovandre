@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandre Pedrosa Furtunato Gomes.
+
+# Script de inicialização do Antonio Vandre's Image Viewer.
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 16-03-2026. Não considerando alterações em variáveis globais.
+
+if ! [ -n "$AVENV" ] &>> /dev/null; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${BASHSCRIPTSDIR}antoniovandre_env" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! [ -n "$AVCORES" ] &>> /dev/null; then echo -ne "Carregando antoniovandre_cores... "; if ! source "${BASHSCRIPTSDIR}antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! [ -n $TEMPDIR ] &>> /dev/null; then TEMPDIR="/tmp/"; fi
+
+FLAG="0"
+
+if ! hash iconv &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"iconv\" não encontrado${AV_SEMCOR}."; FLAG="1"; fi
+
+if [ "${FLAG}" == "0" ] &>> /dev/null; then if ! hash zenity &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"zenity\" não encontrado${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if [ "${FLAG}" == "0" ] &>> /dev/null; then
+
+	if [ "${#}" == "0" ] &>> /dev/null; then ARG=$(zenity --file-selection 2>> /dev/null); else ARG="${1}"; fi
+
+	FLAG2="0"
+
+	if [ "${ARG}" == "" ] &>> /dev/null; then FLAG2="1"; fi
+
+	if [ "${FLAG2}" == "0" ] &>> /dev/null; then
+
+		OLDDIR=$PWD;
+
+		IFS=$'\n'
+
+		LIST=""
+		TOTALCONTADOR="0"
+
+		for FILE in `ls -1 "${ARG%/*}/"*.{png,PNG,jpg,JPG,jpeg,JPEG,bmp,BMP,dib,DIB,jpe,JPE,jp2,JP2,pbm,PBM,pgm,PGM,ppm,PPM,sr,SR,ras,RAS,tiff,TIFF,tif,TIFF} 2>> /dev/null`; do TOTALCONTADOR=$(expr "${TOTALCONTADOR}" + "1"); FILE=$(echo -n "${FILE}"); if [ "${TOTALCONTADOR}" == "1" ] &>> /dev/null; then LIST="${FILE}"; else LIST="${LIST}|${FILE}"; fi; done
+
+		CONTADOR="1"
+
+		FLAG3="0"
+
+		while [ $(echo -n "${LIST}" | cut -d "|" -f "${CONTADOR}") != "${ARG}" ] &>> /dev/null; do CONTADOR=$(expr "${CONTADOR}" + "1"); if [ "${CONTADOR}" -gt "${TOTALCONTADOR}" ] &>> /dev/null; then echo -e "${AV_VERMELHO}Arquivo não suportado${AV_SEMCOR}."; FLAG3="1"; fi; done
+
+		while [ "${FLAG3}" == "0" ] &>> /dev/null; do
+
+			FILE=$(echo -n "${LIST}" | cut -d "|" -f "${CONTADOR}")
+			DESTFILE=$(echo -n "${FILE##*/}" | iconv -t ASCII//TRANSLIT)
+
+			if [ $(echo -n "${DESTFILE}" | wc -c) -gt "10" ]; then DESTFILE="${DESTFILE:0:10}..."; fi
+
+			cp "${FILE}" "${TEMPDIR}${DESTFILE}"
+
+			cd "${TEMPDIR}"
+
+			RESULT=$(/usr/bin/env QT_QPA_PLATFORM="xcb" /home/antoniovandre/software_sources/C++/Image/antoniovandre_imageviewer "${DESTFILE}" 2>> /dev/null)
+
+			EXITCODE=$?
+
+			FLAGLOOP="0"
+
+			if [ "${EXITCODE}" == "255" ] &>> /dev/null; then echo -e "${AV_VERMELHO}Erro ao carregar a imagem${AV_SEMCOR}."; FLAGLOOP="2"; fi
+
+			if [ "${FLAGLOOP}" == "0" ] &>> /dev/null; then if [ "${RESULTADO}" == "Erro ao carregar a imagem." ] &>> /dev/null; then echo -e "${AV_VERMELHO}${RESULTADO%.*}${AV_SEMCOR}."; FLAGLOOP="2"; fi; fi
+
+			if [ "${FLAGLOOP}" == "0" ] &>> /dev/null; then if [ "${EXITCODE}" == "246" ] &>> /dev/null; then FLAGLOOP="1"; if [ "${CONTADOR}" -lt "${TOTALCONTADOR}" ] &>> /dev/null; then CONTADOR=$(expr "${CONTADOR}" + 1); else CONTADOR="1"; fi; fi; fi
+
+			if [ "${FLAGLOOP}" == "0" ] &>> /dev/null; then if [ "${EXITCODE}" == "245" ] &>> /dev/null; then FLAGLOOP="1"; if [ "${CONTADOR}" -gt "1" ] &>> /dev/null; then CONTADOR=$(expr "${CONTADOR}" - 1); else CONTADOR="${TOTALCONTADOR}"; fi; fi; fi
+
+			rm "${DESTFILE}" &>> /dev/null
+
+			cd "${OLDDIR}"
+
+			if [ "${FLAGLOOP}" == "0" ] &>> /dev/null || [ "${FLAGLOOP}" == "2" ] &>> /dev/null; then break; fi
+
+		done
+
+	fi
+
+fi
