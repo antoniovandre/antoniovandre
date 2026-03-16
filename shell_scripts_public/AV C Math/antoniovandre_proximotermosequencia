@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Projeto Mathematical Ramblings.
+
+# Script "adivinhador" / "cogitador" do próximo termo de uma sequência dada.
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 16-06-2024. Não considerando alterações em variáveis globais.
+
+if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/storage/shared/av_softwares/BASH scripts/antoniovandre_env" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! [ -n "$AVCORES" ]; then echo -n "Carregando antoniovandre_cores... "; if ! source "${BASHSCRIPTSDIR}antoniovandre_cores" &>> /dev/null; then echo "Ocorreu um erro."; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}."; fi; fi
+
+if ! hash antoniovandre_eval &>> /dev/null; then echo -e "${AV_VERMELHO}\"antoniovandre_eval\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if ! hash antoniovandre_funcaomaisproxima &>> /dev/null; then echo -e "${AV_VERMELHO}\"antoniovandre_funcaomaisproxima\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+ARQUIVOFUNCOES="${CSOURCESDIR}Math/antoniovandre_funcoes.txt"
+ARQUIVOPONTOS="${TEMPDIR}avpts"
+DELIMITADORSTRING=","
+DELIMITADORSTRING2=";"
+
+VARIAVEL=$(TEMP=$(antoniovandre_eval "system variaveldesubstituicao" "0" | tr -d "\n"); echo -ne \\x$(printf %02x ${TEMP%.*}))
+
+TEMPFILE="${TEMPDIR}avptstf"
+
+CONTADOR="0"
+echo -n "" > "${ARQUIVOPONTOS}"
+
+for TERMO in $@; do echo -n "${CONTADOR}" >> "${ARQUIVOPONTOS}"; echo -n "${DELIMITADORSTRING}" >> "${ARQUIVOPONTOS}"; echo -n "${TERMO}" >> "${ARQUIVOPONTOS}"; echo -n "${DELIMITADORSTRING2}" >> "${ARQUIVOPONTOS}"; CONTADOR=$(expr "${CONTADOR}" + 1); done
+
+echo -e "\nCalculando...\n"
+
+antoniovandre_funcaomaisproxima "${ARQUIVOPONTOS}" "${ARQUIVOFUNCOES}" 1 2>> /dev/null | tee "${TEMPFILE}"
+
+FUNCAOPROXIMA=$(cat "${TEMPFILE}" | tail -n 1)
+
+PROXIMOTERMO=$(antoniovandre_eval $(echo "${FUNCAOPROXIMA}" | sed "s/${VARIAVEL}/${CONTADOR}/g") "0" 2>> /dev/null)
+
+if [[ "${PROXIMOTERMO}" =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]]; then echo -e "\n${AV_VERDE}Sucesso${AV_SEMCOR}.\n"; echo -e "Próximo termo cogitado: ${AV_CIANOCLARO}${PROXIMOTERMO}${AV_SEMCOR}."; else echo -e "\n${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; fi
+
+exit 0
