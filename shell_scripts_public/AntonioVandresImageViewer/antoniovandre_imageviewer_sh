@@ -49,7 +49,8 @@ if [ "${FLAG}" == "0" ] &>> /dev/null; then
 
 			FILE=$(echo -n "${LIST}" | cut -d "|" -f "${CONTADOR}")
 			DESTFILE=$(echo -n "${FILE##*/}" | iconv -t ASCII//TRANSLIT)
-			DESTFILE="${DESTFILE:0:10}..."
+
+			if [ $(echo -n "${DESTFILE}" | wc -c) -gt "10" ]; then DESTFILE="${DESTFILE:0:10}..."; fi
 
 			cp "${FILE}" "${TEMPDIR}${DESTFILE}"
 
