@@ -1,0 +1,5 @@
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes (antoniovandre.github.io/MathematicalRamblingsjs).
+
+# Arquivo flag para captura de processos. "1" para capturar ou qualquer outra string para não capturar.
+
+1

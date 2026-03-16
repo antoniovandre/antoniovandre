@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes (antoniovandre.github.io/MathematicalRamblingsjs).
+
+# Script de backup de anotações privadas.
+
+# Última atualização: 10-12-2025. Não considerando alterações em variáveis globais.
+
+#____________________
+
+if ! hash git &>> /dev/null; then echo "Software \"git\" não encontrado."; exit 1; fi
+
+if ! hash dbxcli-linux-amd64 &>> /dev/null; then echo "Software \"dbxcli-linux-amd64\" não encontrado."; exit 1; fi
+
+DIR=$PWD; cd "/home/antoniovandre/GitHub/"; rm -fr "antoniovandre2/" &>> /dev/null
+
+git clone --depth 1 "https://github.com/antoniovandre2/antoniovandre2"
+
+cp "/home/antoniovandre/Documentos/antoniovandre-anotações_privadas-5.crypto" "/home/antoniovandre/GitHub/antoniovandre2/"
+
+cd "/home/antoniovandre/GitHub/antoniovandre2/"
+
+git add "antoniovandre-anotações_privadas-5.crypto" && git commit -m "Atualizando antoniovandre-anotações_privadas-5.crypto" && git push
+
+cd "${DIR}"
+
+dbxcli-linux-amd64 put "/home/antoniovandre/Documentos/antoniovandre-anotações_privadas-5.crypto" "/Documents/antoniovandre-anotações_privadas-5.crypto"
