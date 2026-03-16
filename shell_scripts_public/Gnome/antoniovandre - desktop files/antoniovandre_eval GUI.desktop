@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=antoniovandre_eval GUI
+Comment=
+Exec=/usr/bin/antoniovandre_eval_gui
+Icon=/usr/share/antoniovandre_eval_gui_logo_200p.png
+Path=
+Terminal=false
+StartupNotify=false

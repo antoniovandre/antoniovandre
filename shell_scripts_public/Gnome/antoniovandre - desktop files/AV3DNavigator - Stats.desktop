@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=AV3DNavigator - Stats
+Comment=
+Exec=/home/antoniovandre/shell_scripts/AV3DNavigator/antoniovandre_av3dnavigator_estatisticas
+Icon=/home/antoniovandre/software_sources/Java/AV3DNavigator/AV3DNavigator - Logo - 200p.png
+Path=
+Terminal=false
+StartupNotify=false
