@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Última atualização: 17-03-2020. Não considerando alterações em variáveis globais.
+
+IGNORARERRO="0"
+
+ARQUIVONUMEROTENTATIVAS="/home/antoniovandre/antoniovandre_dbxcli_tentativas.txt"
+
+numero_tentativas="$(cat $ARQUIVONUMEROTENTATIVAS | tr -d '\n')"
+
+if ! hash antoniovandre_dbxcli 1>> /dev/null 2>> /dev/null; then echo "Software antoniovandre_dbxcli não encontrado."; exit 1; fi
+
+if ! antoniovandre_verificarinternet_1 1>> /dev/null 2>> /dev/null; then echo "Sem conexão com a internet."; exit 1; fi
+
+contador="1"; while ! antoniovandre_dbxcli ls "$@" && [ "$contador" -le "$numero_tentativas" ] && [ "${IGNORARERRO}" == "0" ]; do echo "Tentando novamente listar os arquivos $1."; contador=$(expr $contador + 1); done
+
+if [ "$contador" -gt "$numero_tentativas" ]; then exit 1; fi
