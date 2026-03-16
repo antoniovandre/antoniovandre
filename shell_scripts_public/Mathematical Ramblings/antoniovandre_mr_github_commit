@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de atualização do MathematicalRamblingsjs no GitHub.
+
+# Última atualização: 02-07-2020.
+
+FLAG="0"
+
+MRGITHUBPATH="/home/antoniovandre/Mathematical Ramblings/GitHub Pages/MathematicalRamblingsjs/"
+
+PATHATUAL=$PWD
+
+cd "${MRGITHUBPATH}"
+
+if ! [ -n "$AVCORES" ]; then antoniovandre_echo "Carregando antoniovandre_cores... " n; if ! source "antoniovandre_cores" &>> /dev/null; then echo "Ocorreu um erro."; else echo -e "${AV_VERDE}OK${AV_SEMCOR}."; fi; fi
+
+if [ "${FLAG}" == "0" ]; then antoniovandre_echo "Checando dependências... " n; if hash git &>> /dev/null && hash antoniovandre_echo &>> /dev/null; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAG="1"; fi; fi
+
+if git add --all; then antoniovandre_echo "Entre com o commit:"; read COMMIT; if git commit -m "$COMMIT"; then if git push -u origin master;
+
+cd "${PATHATUAL}"
+

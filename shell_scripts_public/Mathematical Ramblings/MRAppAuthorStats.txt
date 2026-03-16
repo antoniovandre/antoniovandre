@@ -1,0 +1,9 @@
+MRAppAuthorStats
+
+# Estatísticas de uso do App Mathematical Ramblings pelos próprios desenvolvedores, descontando nos cálculos finais.
+
+# Formato: [CHAVE] , [NÚMERO DE UTILIZAÇÕES]
+
+# Última atualização: 29-08-2025.
+
+MRAppExecCount, 0
