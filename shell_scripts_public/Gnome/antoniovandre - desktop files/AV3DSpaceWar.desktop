@@ -1,9 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Type=Application
-Name=AV3DSpaceWar
-Comment=
-Exec=/home/antoniovandre/shell_scripts/Utilitários/antoniovandre_av3dspacewar
-Icon=/home/antoniovandre/software_sources/Java/AV3DSpaceWar/AV3DSpaceWar - Logo - 200p.png
-Terminal=false
-StartupNotify=false

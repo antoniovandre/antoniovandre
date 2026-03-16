@@ -1,8 +1,0 @@
-#!/bin/sh
-
-# Script de verificação do estado de atualização do LODB em GUI. De Antonio Vandré Pedrosa Furtunato Gomes (http://antoniovandre.github.io/MathematicalRamblingsjs).
-
-# Última atualização: 09-03-2016.
-
-xterm antoniovandre_estadoatualizacao_lodb
-

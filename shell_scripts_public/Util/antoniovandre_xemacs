@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# Script de inicialização do Xemacs, de Antonio Vandré Pedrosa Furtunato Gomes.
-
-# Última atualização: 13-12-2015.
-
-xemacs /home/antoniovandre/Legado\ ontológico/antoniovandre-anotacoes_publicas_sutis.txt /home/antoniovandre/Legado\ ontológico/antoniovandre-anotacoes_publicas_sutis_2.txt /home/antoniovandre/Legado\ ontológico/antoniovandre-weblogs.txt /home/antoniovandre/Legado\ ontológico/antoniovandre-weblogs_2.txt /home/antoniovandre/Legado\ ontológico/antoniovandre-atualmente_lendo.txt /home/antoniovandre/Legado\ ontológico/antoniovandre-notas_livros_lidos.txt /home/antoniovandre/Legado\ ontológico/antoniovandre-livros_lidos.txt /home/antoniovandre/Legado\ ontológico/antoniovandre-livros_lidos_nao_matematicos_menos_biologia_e_filosofia.txt /home/antoniovandre/Legado\ ontológico/antoniovandre-exercícios_não_resolvidos.txt /home/antoniovandre/Legado\ ontológico/antoniovandre-personal_math_weblogs.txt &

@@ -1,9 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Type=Application
-Name=AV3DSpaceCatch
-Comment=
-Exec=/home/antoniovandre/shell_scripts/Utilitários/antoniovandre_av3dspacecatch
-Icon=/home/antoniovandre/software_sources/Java/AV3DSpaceCatch/AV3DSpaceCatch - Logo - 200p.png
-Terminal=false
-StartupNotify=false

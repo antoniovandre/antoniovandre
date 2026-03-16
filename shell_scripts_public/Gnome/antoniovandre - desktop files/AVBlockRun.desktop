@@ -1,9 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Type=Application
-Name=AVBlockRun
-Comment=
-Exec=/home/antoniovandre/shell_scripts/Utilitários/antoniovandre_avblockrun
-Icon=/home/antoniovandre/software_sources/Java/AVBlockRun/AVBlockRun - Logo - 200p.png
-Terminal=false
-StartupNotify=false

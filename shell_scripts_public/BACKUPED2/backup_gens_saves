@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes [google.com/profiles/a.vandre.g].
-
-cp -u /public/gens_saves/* ~/Dropbox/gens_saves/
-
