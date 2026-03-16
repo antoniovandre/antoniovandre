@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de buffering do daylight. Se o segundo argumento for "v", se existir "antoniovandre_imageviewer_loop", o buffer será exibido com auto update.
+
+# Última atualização: 28-11-2020.
+
+TEMPFILE="/home/antoniovandre/Temp/avdltf"
+FLAG="0"
+
+while true; do if antoniovandre_verificarinternet_1 &>> /dev/null; then if wget https://www.timeanddate.com/scripts/sunmap.php?earth=1 -O "${TEMPFILE}" &>> /dev/null; then cp "${TEMPFILE}" /home/antoniovandre/Temp/daylight.jpg; fi; echo "Daylight atualizado em $(date)."; if [ "${1}" == "v" ] && [ "${FLAG}" == "0" ]; then if hash antoniovandre_imageviewer_loop &>> /dev/null; then (antoniovandre_imageviewer_loop /home/antoniovandre/Temp/daylight.jpg 900 25 1 &); FLAG="1"; fi; fi; sleep 15m; else sleep 1m; fi; done

@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de sincronização do Dropbox.
+
+# Última atualização: 02-12-2020.
+
+TEMPOREFRESH="60s"
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if [ -z $(ps -A | grep dropbox) ]; then echo -ne "Iniciando o Dropbox... "; if dropbox start &>> /dev/null; then echo -e "${AV_VERDE}Ok${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; exit 1; fi; else echo -e "${AV_AMARELO}Dropbox já em execução${AV_SEMCOR}."; exit 0; fi
+
+MENSAGEM=""
+CHARPROGRESS=""
+
+echo -ne "Sincronizando...  "; while [ "${MENSAGEM}" != "Atualizado" ]; do
+	MENSAGEM=$(dropbox status | tr -d "\n");
+
+	case "${CHARPROGRESS}" in "") CHARPROGRESS="-";; "-") CHARPROGRESS="\\";; "\\") CHARPROGRESS="|";; "|") CHARPROGRESS="/";; "/") CHARPROGRESS="-";; *) ;; esac; echo -ne "\b${CHARPROGRESS}"
+
+	sleep "${TEMPOREFRESH}"
+done
+
+if dropbox stop &>> /dev/null; then echo -e "\b${AV_VERDE}Sincronização concluída${AV_SEMCOR}."; else echo -e "\b${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; exit 1; fi
+
+exit 0

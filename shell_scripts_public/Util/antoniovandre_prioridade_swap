@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes [google.com/profiles/a.vandre.g].
+
+# Última atualização: 25-10-2016.
+
+sudo sysctl vm.swappiness=$1

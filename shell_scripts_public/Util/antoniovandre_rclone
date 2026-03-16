@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Script de virtualização de storages cloud com Rclone, de Antonio Vandré.
+
+# Última atualização: 27-01-2026.
+
+if [ $(ls "/home/antoniovandre/Google Drive" | wc -l | tr -d '\n') == "0" ]; then rclone mount --daemon --vfs-cache-mode writes "Google Drive:/" "/home/antoniovandre/Google Drive"
+
+# for I in `seq 2 23`; do if [ $(ls "/home/antoniovandre/Google Drive ${I}" | wc -l | tr -d '\n') == "0" ]; then rclone mount --daemon --vfs-cache-mode writes "Google Drive ${I}:/" "/home/antoniovandre/Google Drive ${I}"; fi; done
+
+if [ $(ls "/home/antoniovandre/Dropbox" | wc -l | tr -d '\n') == "0" ]; then rclone mount --daemon --vfs-cache-mode writes "Dropbox:/" "/home/antoniovandre/Dropbox"; fi

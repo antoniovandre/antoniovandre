@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes (antoniovandre.github.io/MathematicalRamblingsjs).
+
+# Script que substitui os newlines por "\n" através do stdin.
+
+# Licença de uso: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 03-09-2025.
+
+while read LINHA; do echo -n "${LINHA}\n"; done < "${1:-/dev/stdin}"

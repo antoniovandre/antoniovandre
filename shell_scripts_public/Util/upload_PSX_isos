@@ -1,0 +1,9 @@
+#!/bin/sh
+
+for i in `seq 1 10`; do
+
+megacopy -u a.vandre.g.quinze@gmail.com -p 1245780mg15 -l /media/antoniovandre/B573-D84B/PSXisos/BACKUPED32 -r /Root/PSX\ isos/BACKUPED32
+
+while ! ping -c 1 www.mega.nz; do sleep 5m; done
+
+done

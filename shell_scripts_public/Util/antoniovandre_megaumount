@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Script de desmontagem local dos drives remotos das contas MEGA, de Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Deve-se executar como usuário root.
+
+# Última atualização: 02-07-2020.
+
+if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+ARQUIVODADOS="/home/antoniovandre/antoniovandremegadados.txt"
+
+if ! ls "${ARQUIVODADOS}" &>> /dev/null; then echo -e "${AV_VERMELHO}Arquivo de dados não encontrado${AV_SEMCOR}."; exit 1; fi
+
+while read LINHA; do if [ "${LINHA:0:1}" != "#" ] && [ "${LINHA:0:1}" != "" ]; then DIRETORIOMONTAGEM="$(echo ${LINHA} | cut -d ',' -f 3)"; echo -n "Desmontando \"${DIRETORIOMONTAGEM}\"... "; if umount "${DIRETORIOMONTAGEM}" &>> /dev/null; then echo -e "${AV_VERDE}OK${AV_SEMCOR}."; else echo -e "${AV_VERMELHO}Falhou${AV_SEMCOR}."; fi; fi; done < ${ARQUIVODADOS}
+
+echo "Pressione RETURN para sair."
+
+read
+

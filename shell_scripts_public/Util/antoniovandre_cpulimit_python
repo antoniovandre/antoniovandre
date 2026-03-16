@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script limitador de uso da CPU por softwares Python.
+
+# Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
+
+# Última atualização: 02-07-2020.
+
+if ! hash antoniovandre_cpulimit &>> /dev/null; then echo "\"antoniovanadre_cpulimit\" não encontrado."; exit 1; fi
+
+echo "Cpulimit. Varrendo o padrão \"python\"..."
+
+antoniovandre_cpulimit python p e
+
