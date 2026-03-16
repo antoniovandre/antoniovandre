@@ -1,0 +1,9 @@
+AV3DNavigatorAuthorStats
+
+# Estatísticas de uso do AV3DNavigator pelos próprios desenvolvedores, descontando nos cálculos finais.
+
+# Formato: [CHAVE] , [NÚMERO DE UTILIZAÇÕES]
+
+# Última atualização: 11-08-2025.
+
+AV3DNavigatorExecCount, 3

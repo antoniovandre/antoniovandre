@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script de inicialização do AV3DNavigator.
+
+# Última atualização: 18-08-2024. Não considerando alterações em variáveis globais.
+
+DIRETORIO="${HOME}/software_sources/Java/AV3DNavigator/"
+
+cd "${DIRETORIO}"
+
+DEBUG=""
+
+if [ "$2" == "Debug" ]; then DEBUG="Debug"; fi
+
+java -jar AV3DNavigatorLauncher.jar Casa.txt "${DEBUG}"
