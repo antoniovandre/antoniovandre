@@ -1776,7 +1776,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [3];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 3) posicoes [contador] = j; contador++;}
 
@@ -1846,7 +1848,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [3];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 3) posicoes [contador] = j; contador++;}
 
@@ -1916,7 +1920,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [3];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 3) posicoes [contador] = j; contador++;}
 
@@ -1986,7 +1992,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [3];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 3) posicoes [contador] = j; contador++;}
 
@@ -2056,7 +2064,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [3];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 3) posicoes [contador] = j; contador++;}
 
@@ -2126,7 +2136,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [3];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 3) posicoes [contador] = j; contador++;}
 
@@ -2196,7 +2208,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [2];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 2) posicoes [contador] = j; contador++;}
 
@@ -2251,7 +2265,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [2];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 2) posicoes [contador] = j; contador++;}
 
@@ -2306,7 +2322,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [NUMEROUM];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < NUMEROUM) posicoes [contador] = j; contador++;}
 
@@ -2368,7 +2386,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [2];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 2) posicoes [contador] = j; contador++;}
 
@@ -2433,7 +2453,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [2];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 2) posicoes [contador] = j; contador++;}
 
@@ -2501,7 +2523,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [2];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 2) posicoes [contador] = j; contador++;}
 
@@ -2569,7 +2593,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [2];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 2) posicoes [contador] = j; contador++;}
 
@@ -2637,7 +2663,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [2];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 2) posicoes [contador] = j; contador++;}
 
@@ -2705,7 +2733,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [2];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 2) posicoes [contador] = j; contador++;}
 
@@ -2773,7 +2803,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [2];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 2) posicoes [contador] = j; contador++;}
 
@@ -2844,7 +2876,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [2];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 2) posicoes [contador] = j; contador++;}
 
@@ -2917,7 +2951,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [TAMANHO_BUFFER_SMALL];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < TAMANHO_BUFFER_SMALL) posicoes [contador] = j; contador++;}
 
@@ -3007,7 +3043,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [TAMANHO_BUFFER_SMALL];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < TAMANHO_BUFFER_SMALL) posicoes [contador] = j; contador++;}
 
@@ -3095,7 +3133,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [2];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 2) posicoes [contador] = j; contador++;}
 
@@ -3103,9 +3143,11 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 
 			char * argumentos0 = antoniovandre_substring (temp, NUMEROZERO, posicoes [NUMEROZERO] - NUMEROUM);
 
+			l = strlen (argumentos0);
+
 			for (j = NUMEROZERO; j < strlen (argumentos0); j++)
 				if (argumentos0 [j] == VARIAVELPADRAO)
-					{tc = TOKENFIMEVAL; strncat (argumentos0, & tc, NUMEROUM); break;}
+					{tc = TOKENFIMEVAL; strncat (argumentos0, & tc, NUMEROUM); l++; break;}
 
 			char * argumentos1 = antoniovandre_eval (antoniovandre_substring (temp, posicoes[NUMEROZERO] + NUMEROUM, posicoes [NUMEROUM] - NUMEROUM), precisao);
 
@@ -3132,7 +3174,7 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 
 				argumentoss = antoniovandre_numeroparastring (k, precisao);
 
-				for (j = NUMEROZERO; j < strlen (argumentos0); j++)
+				for (j = NUMEROZERO; j < l; j++)
 					if (argumentos0 [j] != ESPACOBRANCO)
 						{
 						if (argumentos0 [j] == VARIAVELPADRAO)
@@ -3145,17 +3187,20 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 							strncat (argumentos, & argumentos0 [j], NUMEROUM);
 						}
 
+				free (argumentoss);
+
 				argumentor = antoniovandre_eval (argumentos, precisao);
 
 				parcela = strtold (argumentor, & err);
 
-				if (* err != NUMEROZERO) {free (argumentoss); free (argumentor); free (argumentos0); if (temp != NULL) free (temp); char * result = (char *) malloc (TAMANHO_BUFFER_PHRASE); antoniovandre_copiarstring (result, STRINGSAIDAERRO); if (MACROALOCACAODINAMICA) {if (str2 != NULL) free (str2); if (buffer != NULL) free (buffer); for (i = NUMEROZERO; i < TAMANHO_BUFFER_SMALL; i++) {if (funcoesconstantes [i].token != NULL) free (funcoesconstantes [i].token); if (funcoesconstantes [i].comentario != NULL) free (funcoesconstantes [i].comentario);} if (funcoesconstantes != NULL) free (funcoesconstantes); return result;}}
+				free (argumentor);
+
+				if (* err != NUMEROZERO) {free (argumentos0); if (temp != NULL) free (temp); char * result = (char *) malloc (TAMANHO_BUFFER_PHRASE); antoniovandre_copiarstring (result, STRINGSAIDAERRO); if (MACROALOCACAODINAMICA) {if (str2 != NULL) free (str2); if (buffer != NULL) free (buffer); for (i = NUMEROZERO; i < TAMANHO_BUFFER_SMALL; i++) {if (funcoesconstantes [i].token != NULL) free (funcoesconstantes [i].token); if (funcoesconstantes [i].comentario != NULL) free (funcoesconstantes [i].comentario);} if (funcoesconstantes != NULL) free (funcoesconstantes); return result;}}
 
 				soma += parcela;
 				}
 
 			free (argumentos0);
-			free (argumentoss); free (argumentor);
 
 			argumento = soma;
 
@@ -3203,7 +3248,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [2];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 2) posicoes [contador] = j; contador++;}
 
@@ -3211,9 +3258,11 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 
 			char * argumentos0 = antoniovandre_substring (temp, NUMEROZERO, posicoes [NUMEROZERO] - NUMEROUM);
 
+			l = strlen (argumentos0);
+
 			for (j = NUMEROZERO; j < strlen (argumentos0); j++)
 				if (argumentos0 [j] == VARIAVELPADRAO)
-					{tc = TOKENFIMEVAL; strncat (argumentos0, & tc, NUMEROUM); break;}
+					{tc = TOKENFIMEVAL; strncat (argumentos0, & tc, NUMEROUM); l++; break;}
 
 			char * argumentos1 = antoniovandre_eval (antoniovandre_substring (temp, posicoes[NUMEROZERO] + NUMEROUM, posicoes [NUMEROUM] - NUMEROUM), precisao);
 
@@ -3240,7 +3289,7 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 
 				argumentoss = antoniovandre_numeroparastring (k, precisao);
 
-				for (j = NUMEROZERO; j < strlen (argumentos0); j++)
+				for (j = NUMEROZERO; j < l; j++)
 					if (argumentos0 [j] != ESPACOBRANCO)
 						{
 						if (argumentos0 [j] == VARIAVELPADRAO)
@@ -3253,16 +3302,19 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 							strncat (argumentos, & argumentos0 [j], NUMEROUM);
 						}
 
-				char * argumentor = antoniovandre_eval (argumentos, precisao);
+				free (argumentoss);
+
+				argumentor = antoniovandre_eval (argumentos, precisao);
 
 				fator = strtold (argumentor, & err);
 
-				if (* err != NUMEROZERO) {free (argumentoss); free (argumentor); free (argumentos0); if (temp != NULL) free (temp); char * result = (char *) malloc (TAMANHO_BUFFER_PHRASE); antoniovandre_copiarstring (result, STRINGSAIDAERRO); if (MACROALOCACAODINAMICA) {if (str2 != NULL) free (str2); if (buffer != NULL) free (buffer); for (i = NUMEROZERO; i < TAMANHO_BUFFER_SMALL; i++) {if (funcoesconstantes [i].token != NULL) free (funcoesconstantes [i].token); if (funcoesconstantes [i].comentario != NULL) free (funcoesconstantes [i].comentario);} if (funcoesconstantes != NULL) free (funcoesconstantes); return result;}}
+				free (argumentor);
+
+				if (* err != NUMEROZERO) {free (argumentos0); if (temp != NULL) free (temp); char * result = (char *) malloc (TAMANHO_BUFFER_PHRASE); antoniovandre_copiarstring (result, STRINGSAIDAERRO); if (MACROALOCACAODINAMICA) {if (str2 != NULL) free (str2); if (buffer != NULL) free (buffer); for (i = NUMEROZERO; i < TAMANHO_BUFFER_SMALL; i++) {if (funcoesconstantes [i].token != NULL) free (funcoesconstantes [i].token); if (funcoesconstantes [i].comentario != NULL) free (funcoesconstantes [i].comentario);} if (funcoesconstantes != NULL) free (funcoesconstantes); return result;}}
 
 				produto *= fator;
 				}
 
-			free (argumentoss); free (argumentor);
 			free (argumentos0);
 
 			argumento = produto;
@@ -3311,7 +3363,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [TAMANHO_BUFFER_SMALL];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < TAMANHO_BUFFER_SMALL) posicoes [contador] = j; contador++;}
 
@@ -3390,7 +3444,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [TAMANHO_BUFFER_SMALL];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < TAMANHO_BUFFER_SMALL) posicoes [contador] = j; contador++;}
 
@@ -3463,7 +3519,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [TAMANHO_BUFFER_SMALL];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < TAMANHO_BUFFER_SMALL) posicoes [contador] = j; contador++;}
 
@@ -3536,7 +3594,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [TAMANHO_BUFFER_SMALL];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < TAMANHO_BUFFER_SMALL) posicoes [contador] = j; contador++;}
 
@@ -3609,7 +3669,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [2];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 2) posicoes [contador] = j; contador++;}
 
@@ -3617,9 +3679,11 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 
 			char * argumentos0 = antoniovandre_substring (temp, NUMEROZERO, posicoes [NUMEROZERO] - NUMEROUM);
 
+			l = strlen (argumentos0);
+
 			for (j = NUMEROZERO; j < strlen (argumentos0); j++)
 				if (argumentos0 [j] == VARIAVELPADRAO)
-					{tc = TOKENFIMEVAL; strncat (argumentos0, & tc, NUMEROUM); break;}
+					{tc = TOKENFIMEVAL; strncat (argumentos0, & tc, NUMEROUM); l++; break;}
 
 			char * argumentos1 = antoniovandre_eval (antoniovandre_substring (temp, posicoes[NUMEROZERO] + NUMEROUM, posicoes [NUMEROUM] - NUMEROUM), precisao);
 
@@ -3646,7 +3710,7 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 
 				argumentoss = antoniovandre_numeroparastring (valor, precisao);
 
-				for (j = NUMEROZERO; j < strlen (argumentos0); j++)
+				for (j = NUMEROZERO; j < l; j++)
 					if (argumentos0 [j] != ESPACOBRANCO)
 						{
 						if (argumentos0 [j] == VARIAVELPADRAO)
@@ -3659,15 +3723,18 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 							strncat (argumentos, & argumentos0 [j], NUMEROUM);
 						}
 
+				free (argumentoss);
+
 				argumentor = antoniovandre_eval (argumentos, precisao);
 
 				valor = strtold (argumentor, & err);
 
-				if (* err != NUMEROZERO) {free (argumentoss); free (argumentor); free (argumentos0); if (temp != NULL) free (temp); char * result = (char *) malloc (TAMANHO_BUFFER_PHRASE); antoniovandre_copiarstring (result, STRINGSAIDAERRO); if (MACROALOCACAODINAMICA) {if (str2 != NULL) free (str2); if (buffer != NULL) free (buffer); for (i = NUMEROZERO; i < TAMANHO_BUFFER_SMALL; i++) {if (funcoesconstantes [i].token != NULL) free (funcoesconstantes [i].token); if (funcoesconstantes [i].comentario != NULL) free (funcoesconstantes [i].comentario);} if (funcoesconstantes != NULL) free (funcoesconstantes); return result;}}
+				free (argumentor);
+
+				if (* err != NUMEROZERO) {free (argumentos0); if (temp != NULL) free (temp); char * result = (char *) malloc (TAMANHO_BUFFER_PHRASE); antoniovandre_copiarstring (result, STRINGSAIDAERRO); if (MACROALOCACAODINAMICA) {if (str2 != NULL) free (str2); if (buffer != NULL) free (buffer); for (i = NUMEROZERO; i < TAMANHO_BUFFER_SMALL; i++) {if (funcoesconstantes [i].token != NULL) free (funcoesconstantes [i].token); if (funcoesconstantes [i].comentario != NULL) free (funcoesconstantes [i].comentario);} if (funcoesconstantes != NULL) free (funcoesconstantes); return result;}}
 				}
 
 			free (argumentos0);
-			free (argumentoss); free (argumentor);
 
 			argumento = valor;
 
@@ -3715,7 +3782,11 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [NUMEROUM];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < NUMEROUM) posicoes [contador] = j; contador++;}
 
@@ -3732,10 +3803,14 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			if (argumento1 != (unsigned long long int) argumento1) {free (argumentos0); if (temp != NULL) free (temp); char * result = (char *) malloc (TAMANHO_BUFFER_PHRASE); antoniovandre_copiarstring (result, STRINGSAIDAERRO); if (MACROALOCACAODINAMICA) {if (str2 != NULL) free (str2); if (buffer != NULL) free (buffer); for (i = NUMEROZERO; i < TAMANHO_BUFFER_SMALL; i++) {if (funcoesconstantes [i].token != NULL) free (funcoesconstantes [i].token); if (funcoesconstantes [i].comentario != NULL) free (funcoesconstantes [i].comentario);} if (funcoesconstantes != NULL) free (funcoesconstantes); return result;}}
 
 			char argumentos [TAMANHO_BUFFER_PHRASE];
+			char * argumentoss;
+			char * argumentor;
 
 			TIPONUMEROREAL valor = NUMEROZERO;
 			TIPONUMEROREAL parcela;
 			int flagerr = NUMEROZERO;
+
+			l = strlen (argumentos0);
 
 			for (j = NUMEROZERO; j < strlen (argumentos0); j++)
 				{
@@ -4105,7 +4180,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [TAMANHO_BUFFER_SMALL];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < TAMANHO_BUFFER_SMALL) posicoes [contador] = j; contador++;}
 
@@ -4178,7 +4255,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [TAMANHO_BUFFER_SMALL];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < TAMANHO_BUFFER_SMALL) posicoes [contador] = j; contador++;}
 
@@ -4251,7 +4330,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [TAMANHO_BUFFER_SMALL];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < TAMANHO_BUFFER_SMALL) posicoes [contador] = j; contador++;}
 
@@ -4327,7 +4408,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [TAMANHO_BUFFER_SMALL];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < TAMANHO_BUFFER_SMALL) posicoes [contador] = j; contador++;}
 
@@ -4408,7 +4491,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [TAMANHO_BUFFER_SMALL];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < TAMANHO_BUFFER_SMALL) posicoes [contador] = j; contador++;}
 
@@ -4489,7 +4574,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [NUMEROUM];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < NUMEROUM) posicoes [contador] = j; contador++;}
 
@@ -4545,7 +4632,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [NUMEROUM];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < NUMEROUM) posicoes [contador] = j; contador++;}
 
@@ -4616,7 +4705,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [3];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 3) posicoes [contador] = j; contador++;}
 
@@ -4624,9 +4715,11 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 
 			char * argumentos0 = antoniovandre_substring (temp, NUMEROZERO, posicoes [NUMEROZERO] - NUMEROUM);
 
-			for (j = NUMEROZERO; j < strlen (argumentos0); j++)
+			l = strlen (argumentos0);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (argumentos0 [j] == VARIAVELPADRAO)
-					{tc = TOKENFIMEVAL; strncat (argumentos0, & tc, NUMEROUM); break;}
+					{tc = TOKENFIMEVAL; strncat (argumentos0, & tc, NUMEROUM); l++; break;}
 
 			char * argumentos1 = antoniovandre_eval (antoniovandre_substring (temp, posicoes[NUMEROZERO] + NUMEROUM, posicoes [NUMEROUM] - NUMEROUM), precisao);
 
@@ -4670,17 +4763,20 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 							strncat (argumentos, & argumentos0 [j], NUMEROUM);
 						}
 
+				free (argumentoss);
+
 				argumentor = antoniovandre_eval (argumentos, precisao);
 
 				valor = strtold (argumentor, & err);
 
-				if (* err != NUMEROZERO) {free (argumentoss); free (argumentor); free (argumentos0); if (temp != NULL) free (temp); char * result = (char *) malloc (TAMANHO_BUFFER_PHRASE); antoniovandre_copiarstring (result, STRINGSAIDAERRO); if (MACROALOCACAODINAMICA) {if (str2 != NULL) free (str2); if (buffer != NULL) free (buffer); for (i = NUMEROZERO; i < TAMANHO_BUFFER_SMALL; i++) {if (funcoesconstantes [i].token != NULL) free (funcoesconstantes [i].token); if (funcoesconstantes [i].comentario != NULL) free (funcoesconstantes [i].comentario);} if (funcoesconstantes != NULL) free (funcoesconstantes); return result;}}
+				free (argumentor);
+
+				if (* err != NUMEROZERO) {free (argumentos0); if (temp != NULL) free (temp); char * result = (char *) malloc (TAMANHO_BUFFER_PHRASE); antoniovandre_copiarstring (result, STRINGSAIDAERRO); if (MACROALOCACAODINAMICA) {if (str2 != NULL) free (str2); if (buffer != NULL) free (buffer); for (i = NUMEROZERO; i < TAMANHO_BUFFER_SMALL; i++) {if (funcoesconstantes [i].token != NULL) free (funcoesconstantes [i].token); if (funcoesconstantes [i].comentario != NULL) free (funcoesconstantes [i].comentario);} if (funcoesconstantes != NULL) free (funcoesconstantes); return result;}}
 
 				argumentorr [k] = valor;
 				}
 
 			free (argumentos0);
-			free (argumentoss); free (argumentor);
 
 			for (k = NUMEROZERO; k < argumento2; k++)
 				for (j = NUMEROZERO; j < (int) powl (2, argumento2 - k - NUMEROUM); j++)
@@ -4732,7 +4828,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [3];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 3) posicoes [contador] = j; contador++;}
 
@@ -4740,9 +4838,11 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 
 			char * argumentos0 = antoniovandre_substring (temp, NUMEROZERO, posicoes [NUMEROZERO] - NUMEROUM);
 
+			l = strlen (argumentos0);
+
 			for (j = NUMEROZERO; j < strlen (argumentos0); j++)
 				if (argumentos0 [j] == VARIAVELPADRAO)
-					{tc = TOKENFIMEVAL; strncat (argumentos0, & tc, NUMEROUM); break;}
+					{tc = TOKENFIMEVAL; strncat (argumentos0, & tc, NUMEROUM); l++; break;}
 
 			char * argumentos1 = antoniovandre_eval (antoniovandre_substring (temp, posicoes[NUMEROZERO] + NUMEROUM, posicoes [NUMEROUM] - NUMEROUM), precisao);
 
@@ -4775,7 +4875,7 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 
 				argumentoss = antoniovandre_numeroparastring (argumento1 + k * (argumento2 - argumento1) / argumento3, precisao);
 
-				for (j = NUMEROZERO; j < strlen (argumentos0); j++)
+				for (j = NUMEROZERO; j < l; j++)
 					if (argumentos0 [j] != ESPACOBRANCO)
 						{
 						if (argumentos0 [j] == VARIAVELPADRAO)
@@ -4788,11 +4888,15 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 							strncat (argumentos, & argumentos0 [j], NUMEROUM);
 						}
 
+				free (argumentoss);
+
 				argumentor = antoniovandre_eval (argumentos, precisao);
 
 				valor = strtold (argumentor, & err);
 
-				if ((* err != NUMEROZERO) && (flag == NUMEROUM)) {free (argumentoss); free (argumentor); free (argumentos0); if (temp != NULL) free (temp); char * result = (char *) malloc (TAMANHO_BUFFER_PHRASE); antoniovandre_copiarstring (result, STRINGSAIDAERRO); if (MACROALOCACAODINAMICA) {if (str2 != NULL) free (str2); if (buffer != NULL) free (buffer); for (i = NUMEROZERO; i < TAMANHO_BUFFER_SMALL; i++) {if (funcoesconstantes [i].token != NULL) free (funcoesconstantes [i].token); if (funcoesconstantes [i].comentario != NULL) free (funcoesconstantes [i].comentario);} if (funcoesconstantes != NULL) free (funcoesconstantes); return result;}}
+				free (argumentor);
+
+				if ((* err != NUMEROZERO) && (flag == NUMEROUM)) {free (argumentos0); if (temp != NULL) free (temp); char * result = (char *) malloc (TAMANHO_BUFFER_PHRASE); antoniovandre_copiarstring (result, STRINGSAIDAERRO); if (MACROALOCACAODINAMICA) {if (str2 != NULL) free (str2); if (buffer != NULL) free (buffer); for (i = NUMEROZERO; i < TAMANHO_BUFFER_SMALL; i++) {if (funcoesconstantes [i].token != NULL) free (funcoesconstantes [i].token); if (funcoesconstantes [i].comentario != NULL) free (funcoesconstantes [i].comentario);} if (funcoesconstantes != NULL) free (funcoesconstantes); return result;}}
 
 				if (* err != NUMEROZERO) {flag = NUMEROUM; continue;} else flag = NUMEROZERO;
 
@@ -4800,7 +4904,6 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 				}
 
 			free (argumentos0);
-			free (argumentoss); free (argumentor);
 
 			argumento = soma;
 
@@ -4848,7 +4951,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [3];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 4) posicoes [contador] = j; contador++;}
 
@@ -4856,9 +4961,11 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 
 			char * argumentos0 = antoniovandre_substring (temp, NUMEROZERO, posicoes [NUMEROZERO] - NUMEROUM);
 
+			l = strlen (argumentos0);
+
 			for (j = NUMEROZERO; j < strlen (argumentos0); j++)
 				if (argumentos0 [j] == VARIAVELPADRAO)
-					{tc = TOKENFIMEVAL; strncat (argumentos0, & tc, NUMEROUM); break;}
+					{tc = TOKENFIMEVAL; strncat (argumentos0, & tc, NUMEROUM); l++; break;}
 
 			char * argumentos1 = antoniovandre_eval (antoniovandre_substring (temp, posicoes[NUMEROZERO] + NUMEROUM, posicoes [NUMEROUM] - NUMEROUM), precisao);
 
@@ -4881,14 +4988,13 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			if ((argumento3 != (long long int) argumento3) || (argumento3 < NUMEROMENOSUM) || (argumento4 != (unsigned long long int) argumento4)) {free (argumentos0); if (temp != NULL) free (temp); char * result = (char *) malloc (TAMANHO_BUFFER_PHRASE); antoniovandre_copiarstring (result, STRINGSAIDAERRO); if (MACROALOCACAODINAMICA) {if (str2 != NULL) free (str2); if (buffer != NULL) free (buffer); for (i = NUMEROZERO; i < TAMANHO_BUFFER_SMALL; i++) {if (funcoesconstantes [i].token != NULL) free (funcoesconstantes [i].token); if (funcoesconstantes [i].comentario != NULL) free (funcoesconstantes [i].comentario);} if (funcoesconstantes != NULL) free (funcoesconstantes); return result;}}
 
 			char argumentos [TAMANHO_BUFFER_PHRASE];
+			char * argumentoss;
+			char * argumentor;
 
 			TIPONUMEROREAL ponto;
 			TIPONUMEROREAL pontop;
 			TIPONUMEROREAL valor;
 			TIPONUMEROREAL valorp;
-
-			char * argumentoss;
-			char * argumentor;
 
 			flag = NUMEROZERO;
 			flag2 = NUMEROZERO;
@@ -4902,7 +5008,7 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 
 				argumentoss = antoniovandre_numeroparastring (ponto, precisao);
 
-				for (j = NUMEROZERO; j < strlen (argumentos0); j++)
+				for (j = NUMEROZERO; j < l; j++)
 					if (argumentos0 [j] != ESPACOBRANCO)
 						{
 						if (argumentos0 [j] == VARIAVELPADRAO)
@@ -4915,9 +5021,13 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 							strncat (argumentos, & argumentos0 [j], NUMEROUM);
 						}
 
+				free (argumentoss);
+
 				argumentor = antoniovandre_eval (argumentos, precisao);
 
 				valor = strtold (argumentor, & err);
+
+				free (argumentor);
 
 				if ((fabsl (valor) <= EPSILON) && (flag2 == NUMEROZERO))
 					{contador++; flag2 = NUMEROUM;}
@@ -4946,7 +5056,6 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			if (argumento3 == NUMEROMENOSUM) {flag = NUMEROUM; argumento = contador;}
 
 			free (argumentos0);
-			free (argumentoss); free (argumentor);
 
 			if (contador <= (long long int) argumento3) {if (temp != NULL) free (temp); char * result = (char *) malloc (TAMANHO_BUFFER_PHRASE); antoniovandre_copiarstring (result, STRINGSAIDAERROOVER); if (MACROALOCACAODINAMICA) {if (str2 != NULL) free (str2); if (buffer != NULL) free (buffer); for (i = NUMEROZERO; i < TAMANHO_BUFFER_SMALL; i++) {if (funcoesconstantes [i].token != NULL) free (funcoesconstantes [i].token); if (funcoesconstantes [i].comentario != NULL) free (funcoesconstantes [i].comentario);} if (funcoesconstantes != NULL) free (funcoesconstantes); return result;}}
 
@@ -7054,7 +7163,9 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			int posicoes [2];
 			int contador = NUMEROZERO;
 
-			for (j = NUMEROZERO; j < strlen (temp); j++)
+			l = strlen (temp);
+
+			for (j = NUMEROZERO; j < l; j++)
 				if (temp [j] == DELIMITADORSTRINGARGUMENTOS)
 					{if (contador < 2) posicoes [contador] = j; contador++;}
 
