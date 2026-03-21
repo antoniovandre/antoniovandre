@@ -25,7 +25,7 @@ echo -ne "Renomeando arquivos em lote"
 
 CONTADOR="0";
 
-for FILE in `ls -1 * 2>> /dev/null`; do echo -ne "."; CONTADOR=$(expr "${CONTADOR}" + 1); if ls "${1} - ${CONTADOR}.${FILE##*.}" &>> /dev/null; then STRDIF=" - antoniovandre"; else STRDIF=""; fi; if [ "${FILE##*.}" != "${FILE%%.*}" ]; then EXTENSAO=".${FILE##*.}"; else EXTENSAO=""; fi; if ls "${1} - ${CONTADOR}${STRDIF}${EXTENSAO}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Conflito de nomes${AV_SEMCOR}."; exit 1; fi; if ! mv "${FILE}" "${1} - ${CONTADOR}${STRDIF}${EXTENSAO}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Ocorreu uma falha${AV_SEMCOR}."; exit 1; fi; done
+for FILE in `ls -1 * 2>> /dev/null`; do echo -ne "."; CONTADOR=$(expr "${CONTADOR}" + 1); if ls "${1} - ${CONTADOR}.${FILE##*.}" &>> /dev/null; then STRDIF=" - antoniovandre"; else STRDIF=""; fi; if [ "${FILE##*.}" != "${FILE%%.*}" ] &>> /dev/null; then EXTENSAO=".${FILE##*.}"; else EXTENSAO=""; fi; if ls "${1} - ${CONTADOR}${STRDIF}${EXTENSAO}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Conflito de nomes${AV_SEMCOR}."; exit 1; fi; if ! mv "${FILE}" "${1} - ${CONTADOR}${STRDIF}${EXTENSAO}" &>> /dev/null; then echo -e " ${AV_VERMELHO}Ocorreu uma falha${AV_SEMCOR}."; exit 1; fi; done
 
 IFS="${OLDIFS}"
 
