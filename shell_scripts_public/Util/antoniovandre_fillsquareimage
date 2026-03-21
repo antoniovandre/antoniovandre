@@ -16,6 +16,8 @@ if ! [ -n "$AVCORES" ] &>> /dev/null &>> /dev/null; then echo -ne "Carregando an
 
 if ! hash magick &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"ImageMagick\" não encontrado${AV_SEMCOR}."; exit 1; fi
 
+if ! [ -n "AV_TEMP" ] &>> /dev/null; then AV_TEMP="/tmp/"; fi
+
 echo -n "Preenchendo \"${1}\"... "
 
 FLAG="0";
