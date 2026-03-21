@@ -2,17 +2,20 @@
 
 # Script de renomear arquivos em lote. De Antonio Vandré Pedrosa Furtunato Gomes.
 
+# Use: "antoniovandre_renomearlote <PADRÃO>". Os arquivos encontrados em TARGETDIR serão renomeados com o padrão fornecido, numericamente distintos.
+
 # Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
 
-# Última atualização: 07-07-2020.
+# Última atualização: 21-03-2026.
 
 TARGETDIR="/home/antoniovandre/to rename/"
 
-if ! [ -n "$AVCORES" ]; then echo -ne "Carregando antoniovandre_cores... "; if ! source "antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+if ! [ -n "$AVCORES" ] &>> /dev/null; then echo -ne "Carregando antoniovandre_cores... "; if ! source "antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
 
-if [ "${1}" == "" ]; then echo -e "${AV_VERMELHO}Argumento vazio${AV_SEMCOR}."; exit 1; fi
+if [ "${1}" == "" ] &>> /dev/null; then echo -e "${AV_VERMELHO}Forneça um padrão${AV_SEMCOR}."; exit 1; fi
 
 DIR="${PWD}"
+
 if ! cd "${TARGETDIR}" &>> /dev/null; then echo -e "${AV_VERMELHO}Erro ao entrar no diretório de renomeação${AV_SEMCOR}."; exit 1; fi
 
 OLDIFS="${IFS}"
@@ -28,5 +31,5 @@ IFS="${OLDIFS}"
 
 cd "${DIR}"
 
-if [ "${CONTADOR}" != "0" ]; then echo -e " ${AV_VERDE}Sucesso${AV_SEMCOR} ao renomear todos os arquivos."; else echo -e ". ${AV_VERMELHO}Diretório vazio${AV_SEMCOR}."; fi
+if [ "${CONTADOR}" != "0" ] &>> /dev/null; then echo -e " ${AV_VERDE}Sucesso${AV_SEMCOR} ao renomear todos os arquivos."; else echo -e ". ${AV_VERMELHO}Diretório vazio${AV_SEMCOR}."; fi
 
