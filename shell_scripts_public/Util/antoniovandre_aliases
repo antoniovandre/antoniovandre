@@ -4,7 +4,7 @@
 
 # Script de aliases. Deve ser executado com "source".
 
-# Última atualização: 28-01-2026.
+# Última atualização: 22-03-2026.
 
 if ! [ -n "$AVENV" ]; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/shell_scripts/Util/antoniovandre_env" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
 
@@ -61,6 +61,8 @@ unalias an
 unalias ac
 unalias aj
 unalias c
+unalias sg
+unalias sp
 
 # Início aliases matemáticos 1/1.
 
@@ -182,6 +184,8 @@ alias an="antoniovandre_aviso ncurses"
 alias ac="antoniovandre_aviso console"
 alias aj="antoniovandre_aviso java"
 alias c="antoniovandre_cmd"
+alias sg="antoniovandre_dbxclisyncfolder get"
+alias sp="antoniovandre_dbxclisyncfolder put"
 
 # Início aliases matemáticos 1/1.
 
