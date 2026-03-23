@@ -6,7 +6,7 @@
 
 // Licença de uso: Creative Commons Atribuição (CC BY).
 
-// Última atualização: 19-03-2026. Não considerando alterações em variáveis globais.
+// Última atualização: 22-03-2026. Não considerando alterações em variáveis globais.
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -18,7 +18,7 @@
 
 #include "antoniovandre_constantes.c"
 
-#define VERSION 20260319
+#define VERSION 20260322
 #define MENSAGEMNAOCOMPILADOR "Software não compilado em razão do compilador não ser compatível."
 #define NUMEROZERO 0
 #define NUMEROUM 1
@@ -82,7 +82,19 @@
 
 typedef long double TIPONUMEROREAL;
 
+// ____________________
+
+// Esta estrutura deve ser definida conforme a MACROALOCACAODINAMICA.
+
+// Se falsa:
+
+// typedef struct {char token [TAMANHO_BUFFER_WORD]; TIPONUMEROREAL valor; char comentario [TAMANHO_BUFFER_PHRASE];} tokenfuncaoconstante; // Estrutura para funções e constantes.
+
+// Se verdadeira:
+
 typedef struct {char * token; TIPONUMEROREAL valor; char * comentario;} tokenfuncaoconstante; // Estrutura para funções e constantes.
+
+// ____________________
 
 typedef struct {TIPONUMEROREAL real; TIPONUMEROREAL img;} NUMEROCOMPLEXO; // Estrutura número complexo.
 
@@ -1205,13 +1217,14 @@ int antoniovandre_expressao (char * str)
 char * antoniovandre_substring (char * str, int inicio, int fim)
 	{
 	char * strt = (char *) malloc (fim - inicio + 2);
+	int len = strlen (str);
 	int i;
 
 	if (strt == NULL) {char * r = (char *) malloc (NUMEROUM); r [NUMEROZERO] = CARACTEREFIMSTRING; return r;}
 
 	antoniovandre_copiarstring (strt, STRINGVAZIA);
 
-	for (i = inicio; (i <= fim) && (i - inicio < strlen (str)); i++)
+	for (i = inicio; (i <= fim) && (i - inicio < len); i++)
 		strncat (strt, & str [i], NUMEROUM);
 
 	return strt;
@@ -3348,7 +3361,7 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 
 			l = strlen (argumentos0);
 
-			for (j = NUMEROZERO; j < strlen (argumentos0); j++)
+			for (j = NUMEROZERO; j < l; j++)
 				if (argumentos0 [j] == VARIAVELPADRAO)
 					{tc = TOKENFIMEVAL; strncat (argumentos0, & tc, NUMEROUM); l++; break;}
 
@@ -3471,7 +3484,7 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 
 			l = strlen (argumentos0);
 
-			for (j = NUMEROZERO; j < strlen (argumentos0); j++)
+			for (j = NUMEROZERO; j < l; j++)
 				if (argumentos0 [j] == VARIAVELPADRAO)
 					{tc = TOKENFIMEVAL; strncat (argumentos0, & tc, NUMEROUM); l++; break;}
 
@@ -3900,7 +3913,7 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 
 			l = strlen (argumentos0);
 
-			for (j = NUMEROZERO; j < strlen (argumentos0); j++)
+			for (j = NUMEROZERO; j < l; j++)
 				if (argumentos0 [j] == VARIAVELPADRAO)
 					{tc = TOKENFIMEVAL; strncat (argumentos0, & tc, NUMEROUM); l++; break;}
 
@@ -4045,7 +4058,7 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 
 			l = strlen (argumentos0);
 
-			for (j = NUMEROZERO; j < strlen (argumentos0); j++)
+			for (j = NUMEROZERO; j < l; j++)
 				{
 				switch (argumentos0 [strlen (argumentos0) - j - NUMEROUM])
 					{
@@ -5087,7 +5100,7 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 
 			l = strlen (argumentos0);
 
-			for (j = NUMEROZERO; j < strlen (argumentos0); j++)
+			for (j = NUMEROZERO; j < l; j++)
 				if (argumentos0 [j] == VARIAVELPADRAO)
 					{tc = TOKENFIMEVAL; strncat (argumentos0, & tc, NUMEROUM); l++; break;}
 
@@ -5123,7 +5136,7 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 			char * argumentoss;
 			char * argumentor;
 
-			TIPONUMEROREAL soma;
+			TIPONUMEROREAL soma = NUMEROZERO;
 			TIPONUMEROREAL valor;
 
 			flag = NUMEROZERO;
@@ -5224,7 +5237,7 @@ char * antoniovandre_evalcelulafuncao (char * str, int precisao)
 
 			l = strlen (argumentos0);
 
-			for (j = NUMEROZERO; j < strlen (argumentos0); j++)
+			for (j = NUMEROZERO; j < l; j++)
 				if (argumentos0 [j] == VARIAVELPADRAO)
 					{tc = TOKENFIMEVAL; strncat (argumentos0, & tc, NUMEROUM); l++; break;}
 
