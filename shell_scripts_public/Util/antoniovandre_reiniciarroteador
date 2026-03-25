@@ -17,7 +17,8 @@ if ! [ -n "$AVCORES" ] &>> /dev/null &>> /dev/null; then echo -ne "Carregando an
 if ! hash curl &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"curl\" não encontrado${AV_SEMCOR}."; exit 1; fi
 
 ARQUIVOSENHA="${HOME}/senharoteador.txt"
+ARQUIVOROUTERIP="${HOME}/iproteador.txt"
 
-IP="192.168.0.1"
+IP=$(cat "${ARQUIVOROUTERIP}" | tr -d "\n")
 
 echo -n "Reiniciando ${IP} ..."; if curl --user "admin:$(cat ${ARQUIVOSENHA} | tr -d '\n')" "http://${IP}/userRpm/SysRebootRpm.htm?Reboot=Reboot"; then echo -e " ${AV_VERDE}Sucesso${AV_SEMCOR}."; else echo -e " ${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; exit 1; fi
