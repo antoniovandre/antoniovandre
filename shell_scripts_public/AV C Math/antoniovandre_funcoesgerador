@@ -18,9 +18,9 @@ if ! hash antoniovandre_eval_script &>> /dev/null; then echo "${AV_VERMELHO}\"an
 
 ARQUIVOFUNCOES="${HOME}/Temp/antoniovandre_funcoes.txt"
 
-POTENCIA="1.43"
-VALORMINIMO="-625"
-VALORMAXIMO="625"
+POTENCIA="1.5"
+VALORMINIMO="-100"
+VALORMAXIMO="100"
 VALORPASSO="1"
 
 VARIAVEL="X"
@@ -41,9 +41,9 @@ for i in `seq $VALORPASSO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for j in `s
 
 # Gerador de polinômios do segundo grau.
 
-for i in `seq $VALORMINIMO $VALORPASSO "-${VALORPASSO}" | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "($(T=$(antoniovandre_eval_script "(sinal(${i}))piso((modulo(${i}))^${POTENCIA})"); echo -n "${T%.*}"))*${VARIAVEL}^2+($(T=$(antoniovandre_eval_script "(sinal(${j}))piso((modulo(${j}))^${POTENCIA})"); echo -n "${T%.*}"))*${VARIAVEL}+($(T=$(antoniovandre_eval_script "(sinal(${k}))piso((modulo(${k}))^${POTENCIA})"); echo -n "${T%.*}")),"; done; done; done >> "${ARQUIVOFUNCOES}"
+#for i in `seq $VALORMINIMO $VALORPASSO "-${VALORPASSO}" | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "($(T=$(antoniovandre_eval_script "(sinal(${i}))piso((modulo(${i}))^${POTENCIA})"); echo -n "${T%.*}"))*${VARIAVEL}^2+($(T=$(antoniovandre_eval_script "(sinal(${j}))piso((modulo(${j}))^${POTENCIA})"); echo -n "${T%.*}"))*${VARIAVEL}+($(T=$(antoniovandre_eval_script "(sinal(${k}))piso((modulo(${k}))^${POTENCIA})"); echo -n "${T%.*}")),"; done; done; done >> "${ARQUIVOFUNCOES}"
 
-for i in `seq $VALORPASSO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "($(T=$(antoniovandre_eval_script "(sinal(${i}))piso((modulo(${i}))^${POTENCIA})"); echo -n "${T%.*}"))*${VARIAVEL}^2+($(T=$(antoniovandre_eval_script "(sinal(${j}))piso((modulo(${j}))^${POTENCIA})"); echo -n "${T%.*}"))*${VARIAVEL}+($(T=$(antoniovandre_eval_script "(sinal(${k}))piso((modulo(${k}))^${POTENCIA})"); echo -n "${T%.*}")),"; done; done; done >> "${ARQUIVOFUNCOES}"
+#for i in `seq $VALORPASSO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for j in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do for k in `seq $VALORMINIMO $VALORPASSO $VALORMAXIMO | tr ',' '.'`; do echo -n "($(T=$(antoniovandre_eval_script "(sinal(${i}))piso((modulo(${i}))^${POTENCIA})"); echo -n "${T%.*}"))*${VARIAVEL}^2+($(T=$(antoniovandre_eval_script "(sinal(${j}))piso((modulo(${j}))^${POTENCIA})"); echo -n "${T%.*}"))*${VARIAVEL}+($(T=$(antoniovandre_eval_script "(sinal(${k}))piso((modulo(${k}))^${POTENCIA})"); echo -n "${T%.*}")),"; done; done; done >> "${ARQUIVOFUNCOES}"
 
 # Gerador de polinômios do terceiro grau.
 
