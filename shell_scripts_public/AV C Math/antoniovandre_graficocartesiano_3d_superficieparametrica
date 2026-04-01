@@ -170,7 +170,7 @@ if ! [[ "${RESOLUCAOANGULO}" =~ ^[0-9]+$ ]]; then echo -e "${AV_VERMELHO}Valor i
 
 echo -n "" > "${ARQUIVODAT}"
 
-echo "Construindo arquivo dat...";
+echo "Construindo arquivo dat. Pressione \"q\" para cancelar...";
 
 CHARPROGRESS=""
 
@@ -182,6 +182,8 @@ U=$(antoniovandre_eval_script "${TOKENINICIOEVAL}${MIN}${TOKENFIMEVAL} + ${TOKEN
 
 for J in `seq 1 "${RESOLUCAO}"`; do
 V=$(antoniovandre_eval_script "${TOKENINICIOEVAL}${MINY}${TOKENFIMEVAL} + ${TOKENINICIOEVAL}${J}${TOKENFIMEVAL} * ${TOKENINICIOEVAL}${TOKENINICIOEVAL}${MAXY}${TOKENFIMEVAL} - ${TOKENINICIOEVAL}${MINY}${TOKENFIMEVAL}${TOKENFIMEVAL} / ${TOKENINICIOEVAL}${RESOLUCAO}${TOKENFIMEVAL}" | tr -d "\n")
+
+read -rsn1 -t 0.1 input; if [ "${input}" == "q" ]; then if hash tput &>> /dev/null; then tput cnorm; fi; echo -e "\r"; exit 0; fi
 
 TEMPX=$(echo -n "${FUNCOESX}" | cut -d ${DELIMITADOR} -f ${L} | sed "s/${VARIAVEL}/${TOKENINICIOEVAL}${U}${TOKENFIMEVAL}/g" | sed "s/${VARIAVEL2}/${TOKENINICIOEVAL}${V}${TOKENFIMEVAL}/g" | tr -d "\n")
 

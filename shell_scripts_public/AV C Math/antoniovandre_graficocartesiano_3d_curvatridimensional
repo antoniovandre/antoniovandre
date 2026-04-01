@@ -160,7 +160,7 @@ if ! [[ "${RESOLUCAOANGULO}" =~ ^[0-9]+$ ]]; then echo -e "${AV_VERMELHO}Valor i
 
 echo -n "" > "${ARQUIVODAT}"
 
-echo "Construindo arquivo dat...";
+echo "Construindo arquivo dat. Pressione \"q\" para cancelar...";
 
 CHARPROGRESS=""
 
@@ -169,6 +169,8 @@ if hash tput &>> /dev/null; then tput civis; fi
 for L in `seq 1 "${NUMEROFUNCOES}"`; do
 for I in `seq 1 "${RESOLUCAO}"`; do
 U=$(antoniovandre_eval_script "${TOKENINICIOEVAL}${MIN}${TOKENFIMEVAL} + ${TOKENINICIOEVAL}${I}${TOKENFIMEVAL} * ${TOKENINICIOEVAL}${TOKENINICIOEVAL}${MAX}${TOKENFIMEVAL} - ${TOKENINICIOEVAL}${MIN}${TOKENFIMEVAL}${TOKENFIMEVAL} / ${TOKENINICIOEVAL}${RESOLUCAO}${TOKENFIMEVAL}" | tr -d "\n")
+
+read -rsn1 -t 0.1 input; if [ "${input}" == "q" ]; then if hash tput &>> /dev/null; then tput cnorm; fi; echo -e "\r"; exit 0; fi
 
 TEMPX=$(echo -n "${FUNCOESX}" | cut -d "${DELIMITADOR}" -f ${L} | sed "s/${VARIAVEL}/${TOKENINICIOEVAL}${U}${TOKENFIMEVAL}/g")
 
