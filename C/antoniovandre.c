@@ -6,7 +6,7 @@
 
 // Licença de uso: Creative Commons Atribuição (CC BY).
 
-// Última atualização: 31-03-2026. Não considerando alterações em variáveis globais.
+// Última atualização: 01-04-2026. Não considerando alterações em variáveis globais.
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -18,7 +18,7 @@
 
 #include "antoniovandre_constantes.c"
 
-#define VERSION 20260331
+#define VERSION 20260401
 #define MENSAGEMNAOCOMPILADOR "Software não compilado em razão do compilador não ser compatível."
 #define NUMEROZERO 0
 #define NUMEROUM 1
@@ -338,20 +338,12 @@ int antoniovandre_copiarstring (char * dest, char * orig)
 	char buffer;
 
 	if (COPIARSTRINGPERSONAL)
-		{
-		for (i = NUMEROZERO; i < tam; i++)
-			{
-			if (dest[i] == CARACTEREFIMSTRING) break;
-			dest[i] = (char) NULL;
-			}
-
 		for (i = NUMEROZERO; i < tam; i++)
 			{
 			buffer = orig[i];
 			dest[i] = buffer;
 
 			if (buffer == CARACTEREFIMSTRING) break;
-			}
 		}
 	else strcpy (dest, orig);
 
@@ -958,7 +950,7 @@ unsigned long int antoniovandre_fatorial (unsigned long int n)
 char * antoniovandre_reduzirtermossemelhantes (char * args)
 	{
 	int nargs = NUMEROUM;
-	char strf [TAMANHO_BUFFER_WORD];
+	char * strf = malloc (TAMANHO_BUFFER_WORD);
 	char parteliteral [TAMANHO_BUFFER_WORD];
 	char strt [TAMANHO_BUFFER_WORD];
 	int i;
@@ -1043,9 +1035,9 @@ char * antoniovandre_reduzirtermossemelhantes (char * args)
 	for (i = NUMEROZERO; i < nargs; i++) if (strlit [i] != NULL) free (strlit [i]);
 
 	if (flag == NUMEROUM)
-		return (strf);
+		return strf;
 	else
-		return (antoniovandre_numeroparastring (0, precisao));
+		return antoniovandre_numeroparastring (0, precisao);
 	}
 
 // Valor numérico de um polinômio.
