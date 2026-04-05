@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Central DJ
+Comment=
+Exec=/usr/bin/xterm -T "Central DJ" -e "cat '/home/antoniovandre/Imagens/Ícones/Central DJ.txt'; echo -e '\n\nOuvindo Central DJ (https://www.centraldj.com.br).\n\nCtrl + C para sair...\n'; sleep 1s; /usr/bin/cvlc -q $(cat '/home/antoniovandre/Músicas/Central DJ.m3u' | tr -d '\n')"
+Icon=/home/antoniovandre/Imagens/Ícones/Central DJ.png
+Path=
+Terminal=false
+StartupNotify=false
