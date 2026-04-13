@@ -6,7 +6,7 @@
 
 // Licença de uso: Creative Commons Atribuição (CC BY).
 
-// Última atualização: 12-04-2026. Não considerando alterações em variáveis globais.
+// Última atualização: 13-04-2026. Não considerando alterações em variáveis globais.
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -18,7 +18,7 @@
 
 #include "antoniovandre_constantes.c"
 
-#define VERSION 20260412
+#define VERSION 20260413
 #define MENSAGEMNAOCOMPILADOR "Software não compilado em razão do compilador não ser compatível."
 #define NUMEROZERO 0
 #define NUMEROUM 1
@@ -9109,16 +9109,7 @@ char * antoniovandre_eval (char * str, int precisao)
 						{tc = TOKENFIMEVAL; strncat (str3, & tc, NUMEROUM); flag3 = NUMEROZERO; flag4 = NUMEROZERO;}
 					}
 
-				if (str2 [i] == TOKENINICIOEVAL)
-					{tc = TOKENINICIOEVAL; strncat (str3, & tc, NUMEROUM);}
-
-				if (str2 [i] == TOKENFIMEVAL)
-					{tc = TOKENFIMEVAL; strncat (str3, & tc, NUMEROUM);}
-
-				if (str2 [i] == DELIMITADORSTRINGARGUMENTOS)
-					{tc = TOKENFIMEVAL; strncat (str3, & tc, NUMEROUM); tc = DELIMITADORSTRINGARGUMENTOS; strncat (str3, & tc, NUMEROUM); tc = TOKENINICIOEVAL; strncat (str3, & tc, NUMEROUM);}
-				else
-					strncat (str3, & str2 [i], NUMEROUM);
+				strncat (str3, & str2 [i], NUMEROUM);
 				}
 
 		antoniovandre_copiarstring (str2, STRINGVAZIA);
