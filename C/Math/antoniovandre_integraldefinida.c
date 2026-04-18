@@ -6,7 +6,7 @@
 
 // Licença de uso: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
 
-// Última atualização: 08-07-2024.
+// Última atualização: 18-04-2026. Não considerando alterações em variáveis globais.
 
 #include "/home/antoniovandre/software_sources/C/antoniovandre.c"
 
@@ -23,6 +23,13 @@ int main (int argc, char *argv [])
 	int j;
 	char * err;
 	int precisao = antoniovandre_precisao_real ();
+
+	if ((strlen (argv [1]) >= TAMANHO_BUFFER_PHRASE) || (strlen (argv [2]) >= TAMANHO_BUFFER_PHRASE)  || (strlen (argv [3]) >= TAMANHO_BUFFER_PHRASE))
+		{
+		printf (STRINGSAIDAERROOVER);
+		printf ("\n");
+		return NUMEROMENOSUM;
+		}
 
 	if (argc != 4 || (argc == 2 && (! strcmp (argv [1], "h") || ! strcmp (argv [1], "help") || ! strcmp (argv [1], "-h") || ! strcmp (argv [1], "--help"))))
 		{

@@ -6,9 +6,9 @@
 
 // Licença de uso: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
 
-// Última atualização: 04-02-2023.
+// Última atualização: 18-04-2026. Não considerando alterações em variáveis globais.
 
-#include "/home/antoniovandre/software_sources/C/antoniovandre.c"
+#include "../antoniovandre.c"
 
 #define RAIZESFUNCAO_MENSAGEM_USO "Use antoniovandre_raizesfuncao <FUNÇÃO> <MÍNIMO VALOR DA PESQUISA> <MÁXIMO VALOR DA PESQUISA> <STEP> <LOG>."
 #define CABECALHO_ESTATISTICAS_MATHRAIZESFUNCAO "raizesfuncao"
@@ -25,6 +25,13 @@ int main (int argc, char *argv [])
 	int i;
 	int j;
 	char * err;
+
+	if ((strlen (argv [1]) >= TAMANHO_BUFFER_PHRASE) || (strlen (argv [2]) >= TAMANHO_BUFFER_PHRASE)  || (strlen (argv [3]) >= TAMANHO_BUFFER_PHRASE) || (strlen (argv [4]) >= TAMANHO_BUFFER_WORD) || (strlen (argv [5]) >= TAMANHO_BUFFER_WORD))
+		{
+		printf (STRINGSAIDAERROOVER);
+		printf ("\n");
+		return NUMEROMENOSUM;
+		}
 
 	if (! ((argc == 6) || (argc == 2)))
 		{

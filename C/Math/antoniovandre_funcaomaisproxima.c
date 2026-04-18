@@ -6,9 +6,9 @@
 
 // Licença de uso: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
 
-// Última atualização: 04-02-2023.
+// Última atualização: 18-04-2026. Não considerando alterações em variáveis globais.
 
-#include "/home/antoniovandre/software_sources/C/antoniovandre.c"
+#include "../antoniovandre.c"
 
 #define FUNCAOMAISPROXIMA_MENSAGEM_USO "Use antoniovandre_funcaomaisproxima <ARQUIVO DE PONTOS> <ARQUIVO DE FUNÇÕES> <LOG>.\n\nLeia o arquivo \"README_antoniovandre_funcaomaisproxima.txt\".\n"
 #define CABECALHO_ESTATISTICAS_MATHFUNCAOMAISPROXIMA "funcaomaisproxima"
@@ -21,6 +21,13 @@ int main (int argc, char *argv [])
 	char * argvb3;
 	int i;
 	int j;
+
+	if ((strlen (argv [1]) >= TAMANHO_BUFFER_PHRASE) || (strlen (argv [2]) >= TAMANHO_BUFFER_PHRASE)  || (strlen (argv [3]) >= TAMANHO_BUFFER_WORD))
+		{
+		printf (STRINGSAIDAERROOVER);
+		printf ("\n");
+		return NUMEROMENOSUM;
+		}
 
 	if (! ((argc == 4) || (argc == 2)))
 		{

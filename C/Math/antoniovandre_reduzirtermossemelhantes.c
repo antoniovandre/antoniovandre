@@ -6,9 +6,9 @@
 
 // Licença de uso: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
 
-// Última atualização: 01-07-2020.
+// Última atualização: 18-04-2026. Não considerando alterações em variáveis globais.
 
-#include "/home/antoniovandre/software_sources/C/antoniovandre.c"
+#include "../antoniovandre.c"
 
 #define REDUZIRTERMOSSEMELHANTES_MENSAGEM_USO "Use antoniovandre_reduzirtermossemelhantes <MONÔMIO [MONÔMIO ...]>."
 #define CABECALHO_ESTATISTICAS_MATHREDUZIRTERMOSSEMELHANTES "reduzirtermossemelhantes"
@@ -25,6 +25,13 @@ int main (int argc, char *argv [])
 
 	for (i = 1; i < argc; i++)
 		{
+		if (shiftb >= TAMANHO_BUFFER_PHRASE)
+			{
+			printf (STRINGSAIDAERROOVER);
+			printf ("\n");
+			return NUMEROMENOSUM;
+			}
+
 		for (j = 0; j < strlen (argv [i]); j++) argvb [shiftb++] = argv [i][j];
 
 		if (i < argc - 1) argvb [shiftb++] = DELIMITADORSTRING;
