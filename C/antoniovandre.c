@@ -9040,9 +9040,6 @@ char * antoniovandre_eval (char * str, int precisao)
 		if (str [i] == DELIMITADORSTRINGARGUMENTOS) flag = NUMEROUM;
 		}
 
-	for (i = NUMEROZERO; i < j; i++)
-		if (! strncmp (str2 + i, "tamanhostring", 13)) {flag = NUMEROUM; break;}
-
 	if (flag == NUMEROUM)
 		{
 		k = NUMEROZERO;
@@ -9079,7 +9076,7 @@ char * antoniovandre_eval (char * str, int precisao)
 							if (flag2 == NUMEROZERO)
 								{tc = TOKENINICIOEVAL; strncat(str3, & tc, NUMEROUM);}
 
-							if ((! strncmp (str2 + i, "base", 4)) || (! strncmp (str2 + i, "tamanhostring", 13)) || (! strncmp (str2 + i, "numeroocorrenciasstring", 23)))
+							if (! strncmp (str2 + i, "base", 4))
 								flag5 = NUMEROUM;
 
 							contador = NUMEROZERO;
