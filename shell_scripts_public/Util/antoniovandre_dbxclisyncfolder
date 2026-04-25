@@ -14,25 +14,40 @@ if ! [ -n "$AVENV" ] &>> /dev/null; then echo -ne "Carregando variáveis de ambi
 
 if ! [ -n "$AVCORES" ] &>> /dev/null &>> /dev/null; then echo -ne "Carregando antoniovandre_cores... "; if ! source "antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
 
-EXECUTAVEL="dbxcli-linux-arm"
+EXECUTAVEL="dbxcli-linux-amd64"
 
 if ! hash "${EXECUTAVEL}" &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"${EXECUTAVEL}\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+if ! [ -n "${TEMPDIR}" ]; then TEMPDIR="/tmp/"; fi
 
 FOLDER="${HOME}/dbxclisync"
 OLDDIR=$PWD
 
-echo -n "Sincronizando"
+echo -n "Sincronizando... "
 
 FLAG="0"
 IFS=$'\n'
 
 mkdir "${FOLDER}" &>> /dev/null
-cd "${FOLDER}"
+cd "${FOLDER}" &>> /dev/null
 
-if [ "${1}" == "get" ] &>> /dev/null; then for FILE in `"${EXECUTAVEL}" ls /dbxclisync/ 2>> /dev/null`; do if ! "${EXECUTAVEL}" get $(echo -n "${FILE#*/}" | xargs) &>> /dev/null; then FLAG="1"; fi; echo -n "."; if [ "${FLAG}" == "1" ] &>> /dev/null; then break; fi; done; fi
+if [ "${1}" == "get" ] &>> /dev/null; then "${EXECUTAVEL}" ls /dbxclisync/ -l 2>> /dev/null | tail +2 > "${TEMPDIR}antoniovandre_dbxclisyncfolder_tempfile"; fi
 
-if [ "${1}" == "put" ] &>> /dev/null; then cd "${FOLDER}"; for FILE in `ls -1 *`; do if ! "${EXECUTAVEL}" put "${FILE}" "/dbxclisync/${FILE}" &>> /dev/null; then FLAG="1"; fi; echo -n "."; if [ "${FLAG}" == "1" ] &>> /dev/null; then break; fi; done; fi
+if [ "${1}" == "put" ] &>> /dev/null; then ls -1 * 2>> /dev/null > "${TEMPDIR}antoniovandre_dbxclisyncfolder_tempfile"; fi
 
-cd "${OLDDIR}"
+TOTAL=$(cat "${TEMPDIR}antoniovandre_dbxclisyncfolder_tempfile" 2>> /dev/null | wc -l)
 
-if [ "${FLAG}" == "0" ] &>> /dev/null; then echo -e " ${AV_VERDE}Sucesso${AV_SEMCOR}."; else echo -e " ${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; fi
+CONTADOR="0"
+
+if [ "${TOTAL}" -gt "0" ]; then
+	if [ "${1}" == "get" ] &>> /dev/null; then for FILE in `cat "${TEMPDIR}antoniovandre_dbxclisyncfolder_tempfile" 2>> /dev/null`; do FILE=$(echo -n "${FILE}" | cut -d " " -f7-); if ! "${EXECUTAVEL}" get $(echo -n "${FILE#*/}" | xargs) &>> /dev/null; then FLAG="1"; fi; CONTADOR=$(expr "${CONTADOR}" + "1"); echo -ne "\rSincronizando... "; echo -n "${CONTADOR} / ${TOTAL}"; if [ "${FLAG}" == "1" ] &>> /dev/null; then break; fi; done; fi
+
+	if [ "${1}" == "put" ] &>> /dev/null; then cd "${FOLDER}"; for FILE in `cat "${TEMPDIR}antoniovandre_dbxclisyncfolder_tempfile" 2>> /dev/null`; do if ! "${EXECUTAVEL}" put "${FILE}" "/dbxclisync/${FILE}" &>> /dev/null; then FLAG="1"; fi; CONTADOR=$(expr "${CONTADOR}" + "1"); echo -ne "\rSincronizando... "; echo -n "${CONTADOR} / ${TOTAL}"; if [ "${FLAG}" == "1" ] &>> /dev/null; then break; fi; done; fi
+else
+	echo "Nada a fazer."
+fi
+
+rm "${TEMPDIR}antoniovandre_dbxclisyncfolder_tempfile" &>> /dev/null
+cd "${OLDDIR}" &>> /dev/null
+
+if [ "${TOTAL}" -gt "0" ]; then if [ "${FLAG}" == "0" ] &>> /dev/null; then echo -e " ${AV_VERDE}Sucesso${AV_SEMCOR}."; else echo -e " ${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; fi; fi

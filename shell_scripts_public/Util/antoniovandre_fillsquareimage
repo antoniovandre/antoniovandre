@@ -18,13 +18,13 @@ if ! hash bc &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"bc\" não enc
 
 if ! hash magick &>> /dev/null; then if ! hash convert &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"ImageMagick\" não encontrado${AV_SEMCOR}."; exit 1; else EXECUTAVEL="convert"; fi; else EXECUTAVEL="magick"; fi
 
-if ! [ -n "AV_TEMP" ] &>> /dev/null; then AV_TEMP="/tmp/"; fi
+if ! [ -n "{TEMPDIR}" ] &>> /dev/null; then TEMPDIR="/tmp/"; fi
 
 echo -n "Preenchendo \"${1}\"... "
 
 FLAG="0";
 
-TEMPFILE="${AV_TEMP}antoniovandre_fillsquareimage.png"
+TEMPFILE="${TEMPDIR}antoniovandre_fillsquareimage.png"
 
 if ! cp "${1}" $(echo -n "${TEMPFILE}" | sed 's/%s/\_/g') &>> /dev/null; then FLAG="1"; fi
 
