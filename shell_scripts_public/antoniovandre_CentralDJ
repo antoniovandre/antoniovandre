@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ -n "$DISPLAY" ]; then xterm -T "Central DJ" -e "if hash mocp &>> /dev/null; then cat '/home/antoniovandre/Imagens/Ícones/Central DJ.txt'; tput civis; echo -e '\n\nOuvindo Central DJ (https://www.centraldj.com.br).'; mocp -S &>> /dev/null; mocp -a -p '/home/antoniovandre/Músicas/Central DJ.m3u'; read; else echo 'Software mocp não encontrado'; fi"; else if hash mocp &>> /dev/null; then cat '/home/antoniovandre/Imagens/Ícones/Central DJ.txt'; tput civis; echo -e '\n\nOuvindo Central DJ (https://www.centraldj.com.br).'; mocp -S &>> /dev/null; mocp -a -p '/home/antoniovandre/Músicas/Central DJ.m3u'; read; else echo 'Software mocp não encontrado'; fi; fi
+
+if hash mocp &>> /dev/null; then /usr/bin/mocp -x; fi
+
+tput cnorm
