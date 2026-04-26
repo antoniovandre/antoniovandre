@@ -14,6 +14,11 @@ if ! hash md5sum &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"md5sum\" 
 
 if ! hash dbxcli-linux-amd64 &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"dbxcli-linux-amd64\" não encontrado${AV_SEMCOR}."; exit 1; fi
 
+sincronizar ()
+	{
+	for FILE in `find "${STOPATH}" -type f 2>> /dev/null`; do echo -n "${FILE/#*${STOPATH}} ..."; MD5ORIG=$(md5sum "${FILE}" | awk '{print $1}'); TEMP=$(dbxcli-linux-amd64 ls "${CLOUDSTOPATH}${FILE/#*${STOPATH}}" 2>> /dev/null); TEMP="${TEMP%"${TEMP##*[![:space:]]}"}"; if [ "${TEMP/#*${CLOUDSTOPATH}}" != "" ] && [ "${TEMP/#*${CLOUDSTOPATH}}" == "${FILE/#*${STOPATH}}" ]; then MD5DEST=$(OLDDIR=$PWD; cd "${TEMPDIR}"; dbxcli-linux-amd64 get "${CLOUDSTOPATH}/${FILE/#*${STOPATH}}" &>> /dev/null; md5sum "${FILE##*/}" 2>> /dev/null | awk '{print $1}'; rm "${FILE/#*${STOPATH}}" &>> /dev/null; cd "${OLDDIR}"); if [ "${MD5DEST}" != "" ] && [ "${MD5ORIG}" != "${MD5DEST}" ]; then if dbxcli-linux-amd64 put "${FILE}" "${CLOUDSTOPATH}${FILE/#*${STOPATH}}" &>> /dev/null; then echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; FLAGSUSS="1"; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAGERR="1"; fi; else echo -e " ${AV_CIANO}Não é necessário${AV_SEMCOR}."; fi; else dbxcli-linux-amd64 put "${FILE}" "${CLOUDSTOPATH}${FILE/#*${STOPATH}}" &>> /dev/null; echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; FLAGSUSS="1"; fi; done
+	}
+
 echo -e "Realizando backups de dados pessoais do DuckStation...\n"
 
 FLAGSUSS="0"; FLAGERR="0"
@@ -23,12 +28,12 @@ IFS=$'\n'
 STOPATH="/home/antoniovandre/.local/share/duckstation/memcards/"
 CLOUDSTOPATH="/DuckStation memcards/"
 
-for FILE in `find "${STOPATH}" -type f 2>> /dev/null`; do echo -n "${FILE/#*${STOPATH}} ..."; MD5ORIG=$(md5sum "${FILE}" | awk '{print $1}'); TEMP=$(dbxcli-linux-amd64 ls "${CLOUDSTOPATH}${FILE/#*${STOPATH}}" 2>> /dev/null); TEMP="${TEMP%"${TEMP##*[![:space:]]}"}"; if [ "${TEMP/#*${CLOUDSTOPATH}}" != "" ] && [ "${TEMP/#*${CLOUDSTOPATH}}" == "${FILE/#*${STOPATH}}" ]; then MD5DEST=$(OLDDIR=$PWD; cd "${TEMPDIR}"; dbxcli-linux-amd64 get "${CLOUDSTOPATH}/${FILE/#*${STOPATH}}" &>> /dev/null; md5sum "${FILE##*/}" 2>> /dev/null | awk '{print $1}'; rm "${FILE/#*${STOPATH}}" &>> /dev/null; cd "${OLDDIR}"); if [ "${MD5DEST}" != "" ] && [ "${MD5ORIG}" != "${MD5DEST}" ]; then if dbxcli-linux-amd64 put "${FILE}" "${CLOUDSTOPATH}${FILE/#*${STOPATH}}" &>> /dev/null; then echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; FLAGSUSS="1"; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAGERR="1"; fi; else echo -e " ${AV_CIANO}Não é necessário${AV_SEMCOR}."; fi; else dbxcli-linux-amd64 put "${FILE}" "${CLOUDSTOPATH}${FILE/#*${STOPATH}}" &>> /dev/null; echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; FLAGSUSS="1"; fi; done
+sincronizar
 
 STOPATH="/home/antoniovandre/.local/share/duckstation/savestates/"
 CLOUDSTOPATH="/DuckStation savestates/"
 
-for FILE in `find "${STOPATH}" -type f 2>> /dev/null`; do echo -n "${FILE/#*${STOPATH}} ..."; MD5ORIG=$(md5sum "${FILE}" | awk '{print $1}'); TEMP=$(dbxcli-linux-amd64 ls "${CLOUDSTOPATH}${FILE/#*${STOPATH}}" 2>> /dev/null); TEMP="${TEMP%"${TEMP##*[![:space:]]}"}"; if [ "${TEMP/#*${CLOUDSTOPATH}}" != "" ] && [ "${TEMP/#*${CLOUDSTOPATH}}" == "${FILE/#*${STOPATH}}" ]; then MD5DEST=$(OLDDIR=$PWD; cd "${TEMPDIR}"; dbxcli-linux-amd64 get "${CLOUDSTOPATH}/${FILE/#*${STOPATH}}" &>> /dev/null; md5sum "${FILE##*/}" 2>> /dev/null | awk '{print $1}'; rm "${FILE/#*${STOPATH}}" &>> /dev/null; cd "${OLDDIR}"); if [ "${MD5DEST}" != "" ] && [ "${MD5ORIG}" != "${MD5DEST}" ]; then if dbxcli-linux-amd64 put "${FILE}" "${CLOUDSTOPATH}${FILE/#*${STOPATH}}" &>> /dev/null; then echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; FLAGSUSS="1"; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAGERR="1"; fi; else echo -e " ${AV_CIANO}Não é necessário${AV_SEMCOR}."; fi; else dbxcli-linux-amd64 put "${FILE}" "${CLOUDSTOPATH}${FILE/#*${STOPATH}}" &>> /dev/null; echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; FLAGSUSS="1"; fi; done
+sincronizar
 
 if [ "${FLAGSUSS}" == "1" ]; then
 	if [ "${FLAGERR}" == "0" ]; then
