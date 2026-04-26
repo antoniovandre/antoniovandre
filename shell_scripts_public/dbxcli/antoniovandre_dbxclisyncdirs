@@ -8,7 +8,7 @@
 #
 # Uso:
 #
-# "antoniovandre_dbxclisyncfolder <DIRETORIOLOCAL> <DIRETORIOCLOUD> [FLAG]"
+# "antoniovandre_dbxclisyncdirs <DIRETORIOLOCAL> <DIRETORIOCLOUD> [FLAG]"
 #
 # Se FLAG é "full", deleta no diretório cloud
 # arquivos não encontrados no diretório local.
@@ -31,7 +31,7 @@ if ! hash "${EXECUTAVEL}" &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"
 
 if ! [ -n "${TEMPDIR}" ]; then TEMPDIR="/tmp/"; fi
 
-if [ "${#}" -lt 2 ]; then echo "Use \"antoniovandre_dbxclisyncfolder <DIRETORIOLOCAL> <DIRETORIOCLOUD> [FLAG]\"."; exit 1; fi
+if [ "${#}" -lt 2 ]; then echo "Use \"antoniovandre_dbxclisyncdirs <DIRETORIOLOCAL> <DIRETORIOCLOUD> [FLAG]\"."; exit 1; fi
 
 STOPATH="${1}"
 CLOUDSTOPATH="${2}"
