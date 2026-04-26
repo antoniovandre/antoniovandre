@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Proprietário: Antonio Vandré Pedrosa Furtunato Gomes.
+
+# Script para copiar arquivos, separado para ter privilégios dentro do sistema.
+
+# Última atualização: 22-03-2020.
+
+cp $@
+

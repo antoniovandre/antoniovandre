@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Script para visualização de múltiplas imagens, utilizando o software "Mirage". De Antonio Vandré Pedrosa Furtunato Gomes (github.com/antoniovandre).
+
+# Requer o software "mirage".
+
+# Última atualização: 16-03-2026.
+
+if ! [ -n "$AVENV" ] &>> /dev/null; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${BASHSCRIPTSDIR}antoniovandre_env" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! [ -n "$AVCORES" ] &>> /dev/null; then echo -ne "Carregando antoniovandre_cores... "; if ! source "${BASHSCRIPTSDIR}antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+FLAG="0"
+
+if ! hash mirage &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"mirage\" não encontrado${AV_SEMCOR}."; FLAG="1"; fi
+
+if [ "${FLAG}" == "0" ]; then
+
+	TEMPDIRMIR="${TEMPDIR}antoniovandre_imageviewer/"
+
+	mkdir "${TEMPDIRMIR}"
+
+	IFS=$'\n'
+
+	for ARQUIVO in `readlink -e "${1%/*}/"*"${1##*/}"*`; do cp "${ARQUIVO}" "${TEMPDIRMIR}" &>> /dev/null; done
+
+	mirage "${TEMPDIRMIR}" &>> /dev/null
+
+	rm -r "${TEMPDIRMIR}"
+
+fi

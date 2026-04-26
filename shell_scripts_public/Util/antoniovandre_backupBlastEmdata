@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Script de backup do dos dados pessoais do Snes9x, de Antonio Vandré.
+
+# Dependências: dbxcli, md5sum.
+
+# Última atualização: 25-04-2026. Não considerando alterações em variáveis globais.
+
+if ! [ -n "$AVENV" ] &>> /dev/null; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/shell_scripts/Util/antoniovandre_env" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! [ -n "$AVCORES" ] &>> /dev/null &>> /dev/null; then echo -ne "Carregando antoniovandre_cores... "; if ! source "antoniovandre_cores" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
+
+if ! hash md5sum &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"md5sum\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+EXECUTAVEL="dbxcli-linux-amd64"
+
+if ! hash "${EXECUTAVEL}" &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"${EXECUTAVEL}\" não encontrado${AV_SEMCOR}."; exit 1; fi
+
+sincronizar ()
+	{
+	for FILE in `find "${STOPATH}" -type f 2>> /dev/null`; do echo -n "${FILE/#*${STOPATH}} ..."; MD5ORIG=$(md5sum "${FILE}" | awk '{print $1}'); TEMP=$("${EXECUTAVEL}" ls "${CLOUDSTOPATH}${FILE/#*${STOPATH}}" 2>> /dev/null); TEMP="${TEMP%"${TEMP##*[![:space:]]}"}"; if [ "${TEMP/#*${CLOUDSTOPATH}}" != "" ] && [ "${TEMP/#*${CLOUDSTOPATH}}" == "${FILE/#*${STOPATH}}" ]; then MD5DEST=$(OLDDIR=$PWD; cd "${TEMPDIR}"; "${EXECUTAVEL}" get "${CLOUDSTOPATH}/${FILE/#*${STOPATH}}" &>> /dev/null; md5sum "${FILE##*/}" 2>> /dev/null | awk '{print $1}'; rm "${FILE/#*${STOPATH}}" &>> /dev/null; cd "${OLDDIR}"); if [ "${MD5DEST}" != "" ] && [ "${MD5ORIG}" != "${MD5DEST}" ]; then if "${EXECUTAVEL}" put "${FILE}" "${CLOUDSTOPATH}${FILE/#*${STOPATH}}" &>> /dev/null; then echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; FLAGSUSS="1"; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAGERR="1"; fi; else echo -e " ${AV_CIANO}Não é necessário${AV_SEMCOR}."; fi; else "${EXECUTAVEL}" put "${FILE}" "${CLOUDSTOPATH}${FILE/#*${STOPATH}}" &>> /dev/null; echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; FLAGSUSS="1"; fi; done
+
+	if [ "${1}" == "full" ]; then
+		FLAGSYNCINIT="0"; for CLOUDFILE in `"${EXECUTAVEL}" ls -l "${CLOUDSTOPATH}"`; do if [ "${FLAGSYNCINIT}" == "0" ]; then FLAGSYNCINIT="1"; continue; fi; CLOUDFILE="/${CLOUDFILE#*/}"; CLOUDFILE="${CLOUDFILE%"${CLOUDFILE##*[![:space:]]}"}"; FLAGSYNC="0"; for LOCALFILE in `find "${STOPATH}" -type f`; do if [ "${CLOUDFILE#*${CLOUDSTOPATH}}" == "${LOCALFILE#*${STOPATH}}" ]; then FLAGSYNC="1"; fi; done; if [ "${FLAGSYNC}" == "0" ]; then echo -ne "${AV_AMARELO}Deletando${AV_SEMCOR} ${CLOUDFILE#*${CLOUDSTOPATH}} ..."; if "${EXECUTAVEL}" rm "${CLOUDFILE}" &>> /dev/null; then echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; FLAGSUSS="1"; else echo -e " ${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAGERR="1"; fi; fi; done
+	fi
+	}
+
+echo -e "Realizando backups de dados pessoais do BlastEm...\n"
+
+FLAGSUSS="0"; FLAGERR="0"
+
+IFS=$'\n'
+
+STOPATH="/home/antoniovandre/.local/share/blastem/"
+CLOUDSTOPATH="/BlastEm - Game saves/"
+
+sincronizar
+
+if [ "${FLAGSUSS}" == "1" ]; then
+	if [ "${FLAGERR}" == "0" ]; then
+		echo -e "\n${AV_VERDE}Backups concluídos${AV_SEMCOR}.";
+	else
+		echo -e "\n${AV_AMARELO}Backups concluídos com alguns erros${AV_SEMCOR}.";
+	fi
+else
+	if [ "${FLAGERR}" == "0" ]; then
+		echo -e "\n${AV_VERDE}Nenhum trabalho foi necessário${AV_SEMCOR}.";
+	else
+		echo -e "\n${AV_VERMELHO}Falha ao realizar os backups${AV_SEMCOR}.";
+	fi
+fi
