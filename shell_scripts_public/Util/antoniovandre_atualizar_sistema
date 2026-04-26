@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# Script de atualizaçãodo sistem Linux. De Antonio Vandré Pedrosa Furtunato Gomes (http://antoniovandre.github.io/MathematicalRamblingsjs).
-
-# Última atualização: 03-03-2026.
-
-sudo bash -c "if hash apt-get &>> /dev/null; then apt-get update && apt-get upgrade -y && apt-get autoremove -y && apt-get clean; fi; if hash flatpak &>> /dev/null; then flatpak update -y; fi; if hash snap &>> /dev/null; then snap refresh; fi"
-
-if ! [ -z $1 ]; then if [ $1 == "prompt" ]; then echo -e "\nPressione RETURN para sair."; read; fi; fi
