@@ -2,7 +2,7 @@
 
 # Script de backup do dos dados pessoais do DuckStation, de Antonio Vandré.
 
-# Dependências: "dbxcli-linux-amd64", "md5sum".
+# Dependências: dbxcli, md5sum.
 
 # Última atualização: 25-04-2026. Não considerando alterações em variáveis globais.
 
@@ -12,11 +12,17 @@ if ! [ -n "$AVCORES" ] &>> /dev/null &>> /dev/null; then echo -ne "Carregando an
 
 if ! hash md5sum &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"md5sum\" não encontrado${AV_SEMCOR}."; exit 1; fi
 
-if ! hash dbxcli-linux-amd64 &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"dbxcli-linux-amd64\" não encontrado${AV_SEMCOR}."; exit 1; fi
+EXECUTAVEL="dbxcli-linux-amd64"
+
+if ! hash "${EXECUTAVEL}" &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"${EXECUTAVEL}\" não encontrado${AV_SEMCOR}."; exit 1; fi
 
 sincronizar ()
 	{
-	for FILE in `find "${STOPATH}" -type f 2>> /dev/null`; do echo -n "${FILE/#*${STOPATH}} ..."; MD5ORIG=$(md5sum "${FILE}" | awk '{print $1}'); TEMP=$(dbxcli-linux-amd64 ls "${CLOUDSTOPATH}${FILE/#*${STOPATH}}" 2>> /dev/null); TEMP="${TEMP%"${TEMP##*[![:space:]]}"}"; if [ "${TEMP/#*${CLOUDSTOPATH}}" != "" ] && [ "${TEMP/#*${CLOUDSTOPATH}}" == "${FILE/#*${STOPATH}}" ]; then MD5DEST=$(OLDDIR=$PWD; cd "${TEMPDIR}"; dbxcli-linux-amd64 get "${CLOUDSTOPATH}/${FILE/#*${STOPATH}}" &>> /dev/null; md5sum "${FILE##*/}" 2>> /dev/null | awk '{print $1}'; rm "${FILE/#*${STOPATH}}" &>> /dev/null; cd "${OLDDIR}"); if [ "${MD5DEST}" != "" ] && [ "${MD5ORIG}" != "${MD5DEST}" ]; then if dbxcli-linux-amd64 put "${FILE}" "${CLOUDSTOPATH}${FILE/#*${STOPATH}}" &>> /dev/null; then echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; FLAGSUSS="1"; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAGERR="1"; fi; else echo -e " ${AV_CIANO}Não é necessário${AV_SEMCOR}."; fi; else dbxcli-linux-amd64 put "${FILE}" "${CLOUDSTOPATH}${FILE/#*${STOPATH}}" &>> /dev/null; echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; FLAGSUSS="1"; fi; done
+	for FILE in `find "${STOPATH}" -type f 2>> /dev/null`; do echo -n "${FILE/#*${STOPATH}} ..."; MD5ORIG=$(md5sum "${FILE}" | awk '{print $1}'); TEMP=$("${EXECUTAVEL}" ls "${CLOUDSTOPATH}${FILE/#*${STOPATH}}" 2>> /dev/null); TEMP="${TEMP%"${TEMP##*[![:space:]]}"}"; if [ "${TEMP/#*${CLOUDSTOPATH}}" != "" ] && [ "${TEMP/#*${CLOUDSTOPATH}}" == "${FILE/#*${STOPATH}}" ]; then MD5DEST=$(OLDDIR=$PWD; cd "${TEMPDIR}"; "${EXECUTAVEL}" get "${CLOUDSTOPATH}/${FILE/#*${STOPATH}}" &>> /dev/null; md5sum "${FILE##*/}" 2>> /dev/null | awk '{print $1}'; rm "${FILE/#*${STOPATH}}" &>> /dev/null; cd "${OLDDIR}"); if [ "${MD5DEST}" != "" ] && [ "${MD5ORIG}" != "${MD5DEST}" ]; then if "${EXECUTAVEL}" put "${FILE}" "${CLOUDSTOPATH}${FILE/#*${STOPATH}}" &>> /dev/null; then echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; FLAGSUSS="1"; else echo -e "${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAGERR="1"; fi; else echo -e " ${AV_CIANO}Não é necessário${AV_SEMCOR}."; fi; else "${EXECUTAVEL}" put "${FILE}" "${CLOUDSTOPATH}${FILE/#*${STOPATH}}" &>> /dev/null; echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; FLAGSUSS="1"; fi; done
+
+	if [ "${1}" == "full" ]; then
+		FLAGSYNCINIT="0"; for CLOUDFILE in `"${EXECUTAVEL}" ls -l "${CLOUDSTOPATH}"`; do if [ "${FLAGSYNCINIT}" == "0" ]; then FLAGSYNCINIT="1"; continue; fi; CLOUDFILE="/${CLOUDFILE#*/}"; CLOUDFILE="${CLOUDFILE%"${CLOUDFILE##*[![:space:]]}"}"; FLAGSYNC="0"; for LOCALFILE in `find "${STOPATH}" -type f`; do if [ "${CLOUDFILE#*${CLOUDSTOPATH}}" == "${LOCALFILE#*${STOPATH}}" ]; then FLAGSYNC="1"; fi; done; if [ "${FLAGSYNC}" == "0" ]; then echo -ne "${AV_AMARELO}Deletando${AV_SEMCOR} ${CLOUDFILE#*${CLOUDSTOPATH}} ..."; if "${EXECUTAVEL}" rm "${CLOUDFILE}" &>> /dev/null; then echo -e " ${AV_VERDE}Ok${AV_SEMCOR}."; FLAGSUSS="1"; else echo -e " ${AV_VERMELHO}Ocorreu um erro${AV_SEMCOR}."; FLAGERR="1"; fi; fi; done
+	fi
 	}
 
 echo -e "Realizando backups de dados pessoais do DuckStation...\n"
