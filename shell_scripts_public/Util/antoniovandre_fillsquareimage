@@ -8,7 +8,7 @@
 
 # Licença: Atribuição-NãoComercial-CompartilhaIgual (CC BY-NC-SA).
 
-# Última atualização: 21-03-2026. Não considerando alterações em variáveis globais.
+# Última atualização: 29-03-2026. Não considerando alterações em variáveis globais.
 
 if ! [ -n "$AVENV" ] &>> /dev/null; then echo -ne "Carregando variáveis de ambiente... "; if ! source "${HOME}/shell_scripts/Util/antoniovandre_env" &>> /dev/null; then echo -e "Ocorreu um erro.\n"; else echo -e "${AV_VERDE}Ok${AV_SEMCOR}.\n"; fi; fi
 
@@ -17,6 +17,8 @@ if ! [ -n "$AVCORES" ] &>> /dev/null &>> /dev/null; then echo -ne "Carregando an
 if ! hash bc &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"bc\" não encontrado${AV_SEMCOR}."; exit 1; fi
 
 if ! hash magick &>> /dev/null; then if ! hash convert &>> /dev/null; then echo -e "${AV_VERMELHO}Software \"ImageMagick\" não encontrado${AV_SEMCOR}."; exit 1; else EXECUTAVEL="convert"; fi; else EXECUTAVEL="magick"; fi
+
+if [ "${#}" -lt "1" ]; then echo "Use \"antoniovandre_fillsquareimage <ARQUIVOIMAGEM>\"."; exit 1; fi
 
 if ! [ -n "{TEMPDIR}" ] &>> /dev/null; then TEMPDIR="/tmp/"; fi
 
