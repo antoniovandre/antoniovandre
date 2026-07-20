@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=MR - Notícias
+Comment=
+Exec=/usr/bin/firefox-esr -width 400 -height 900 "/home/antoniovandre/Mathematical Ramblings/MR - Softwares/MR - Notícias.html"
+Icon=/home/antoniovandre/Mathematical Ramblings/MR - Softwares/Mathematical Ramblings logo.png
+Path=
+Terminal=false
+StartupNotify=false
