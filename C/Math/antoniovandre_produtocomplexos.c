@@ -8,7 +8,7 @@
 
 // Última atualização: 03-07-2024.
 
-#include "/home/antoniovandre/software_sources/C/antoniovandre.c"
+#include "../antoniovandre.c"
 
 #define PRODUTOCOMPLEXO_MENSAGEM_USO "Use antoniovandre_produtocomplexos <<PARTE REAL> <PARTE IMAGINÁRIA> [<DELIMITADOR> <PARTE REAL> <PARTE IMAGINÁRIA> [...]]>."
 #define CABECALHO_ESTATISTICAS_PRODUTOCOMPLEXO "produtocomplexos"

@@ -8,7 +8,7 @@
 
 // Última atualização: 09-07-2020.
 
-#include "/home/antoniovandre/software_sources/C/antoniovandre.c"
+#include "../antoniovandre.c"
 
 #define COSSECANTE_MENSAGEM_USO "Use antoniovandre_cossecante <NÚMERO REAL NO DOMÍNIO>."
 #define CABECALHO_ESTATISTICAS_MATHCOSSECANTE "cossecante"

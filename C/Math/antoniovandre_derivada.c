@@ -8,7 +8,7 @@
 
 // Última atualização: 08-07-2024.
 
-#include "/home/antoniovandre/software_sources/C/antoniovandre.c"
+#include "../antoniovandre.c"
 
 #define DERIVADA_MENSAGEM_USO "Use antoniovandre_derivada <FUNÇÃO DE UMA VARIÁVEL NA VARIÁVEL DE SUBSTITUIÇÃO, DIFERENCIÁVEL NO PONTO> <EXPRESSÃO PARA O PONTO>."
 #define DERIVADA_MENSAGEM_ERRO_SECUNDARIA "Erro interno em decorrência de erros de maus parâmetros ou valores elevados."

@@ -8,7 +8,7 @@
 
 // Última atualização: 03-07-2024.
 
-#include "/home/antoniovandre/software_sources/C/antoniovandre.c"
+#include "../antoniovandre.c"
 
 #define TANGENTE_MENSAGEM_USO "Use antoniovandre_tangente <NÚMERO REAL NO DOMÍNIO>."
 #define CABECALHO_ESTATISTICAS_MATHTANGENTE "tangente"

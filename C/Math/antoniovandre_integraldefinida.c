@@ -8,7 +8,7 @@
 
 // Última atualização: 18-04-2026. Não considerando alterações em variáveis globais.
 
-#include "/home/antoniovandre/software_sources/C/antoniovandre.c"
+#include "../antoniovandre.c"
 
 #define INTEGRALDEFINIDA_MENSAGEM_USO "Use antoniovandre_integraldefinida <FUNÇÃO DE UMA VARIÁVEL NA VARIÁVEL DE SUBSTITUIÇÃO> <EXPRESSÃO PARA O LIMITE INFERIOR> <EXPRESSÃO PARA O LIMITE SUPERIOR>."
 #define CABECALHO_ESTATISTICAS_MATHINTEGRALDEFINIDA "integraldefinida"

@@ -8,7 +8,7 @@
 
 // Última atualização: 09-07-2020.
 
-#include "/home/antoniovandre/software_sources/C/antoniovandre.c"
+#include "../antoniovandre.c"
 
 #define POTENCIA_MENSAGEM_USO "Use antoniovandre_potencia <NÚMERO REAL> <NÚMERO REAL DE MODO À POTENCIA RETORNAR UM NÚMERO REAL>."
 #define CABECALHO_ESTATISTICAS_MATHPOTENCIA "potencia"

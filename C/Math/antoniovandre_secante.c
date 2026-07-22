@@ -8,7 +8,7 @@
 
 // Última atualização: 03-07-2024.
 
-#include "/home/antoniovandre/software_sources/C/antoniovandre.c"
+#include "../antoniovandre.c"
 
 #define SECANTE_MENSAGEM_USO "Use antoniovandre_secante <NÚMERO REAL NO DOMÍNIO>."
 #define CABECALHO_ESTATISTICAS_MATHSECANTE "secante"

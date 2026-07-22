@@ -8,7 +8,7 @@
 
 // Última atualização: 07-12-2020.
 
-#include "/home/antoniovandre/software_sources/C/antoniovandre.c"
+#include "../antoniovandre.c"
 
 #define DETERMINANTE_MENSAGEM_USO "Use antoniovandre_determinante <<ELEMENTO , ELEMENTO , ...> / <ELEMENTO , ELEMENTO , ...> / ...>."
 #define CABECALHO_ESTATISTICAS_MATHDETERMINANTE "determinante"

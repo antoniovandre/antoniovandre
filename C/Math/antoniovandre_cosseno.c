@@ -8,7 +8,7 @@
 
 // Última atualização: 04-02-2023.
 
-#include "/home/antoniovandre/software_sources/C/antoniovandre.c"
+#include "../antoniovandre.c"
 
 #define COSSENO_MENSAGEM_USO "Use antoniovandre_cosseno <NÚMERO REAL>."
 #define CABECALHO_ESTATISTICAS_MATHCOSSENO "cosseno"

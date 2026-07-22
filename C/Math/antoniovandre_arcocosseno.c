@@ -8,7 +8,7 @@
 
 // Última atualização: 09-07-2020.
 
-#include "/home/antoniovandre/software_sources/C/antoniovandre.c"
+#include "../antoniovandre.c"
 
 #define ARCOCOSSENO_MENSAGEM_USO "Use antoniovandre_arcocosseno <NÚMERO REAL ENTRE -1 E 1 INCLUSIVE>."
 #define CABECALHO_ESTATISTICAS_MATHARCOCOSSENO "arcocosseno"

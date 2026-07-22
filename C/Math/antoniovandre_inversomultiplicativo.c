@@ -8,7 +8,7 @@
 
 // Última atualização: 09-07-2020.
 
-#include "/home/antoniovandre/software_sources/C/antoniovandre.c"
+#include "../antoniovandre.c"
 
 #define INVERSO_MULTIPLICATIVO_MENSAGEM_USO "Use antoniovandre_inversomultiplicativo <NÚMERO REAL NÃO NULO>."
 #define CABECALHO_ESTATISTICAS_MATHINVERSOMULTIPLICATIVO "inversomultiplicativo"

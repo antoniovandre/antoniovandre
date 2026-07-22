@@ -8,7 +8,7 @@
 
 // Última atualização: 09-07-2020.
 
-#include "/home/antoniovandre/software_sources/C/antoniovandre.c"
+#include "../antoniovandre.c"
 
 #define COTANGENTE_MENSAGEM_USO "Use antoniovandre_cotangente <NÚMERO REAL NO DOMÍNIO>."
 #define CABECALHO_ESTATISTICAS_MATHCOTANGENTE "cotangente"

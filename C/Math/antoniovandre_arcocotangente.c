@@ -8,7 +8,7 @@
 
 // Última atualização: 09-07-2020.
 
-#include "/home/antoniovandre/software_sources/C/antoniovandre.c"
+#include "../antoniovandre.c"
 
 #define ARCOCOTANGENTE_MENSAGEM_USO "Use antoniovandre_arcocotangente <NÚMERO REAL>."
 #define CABECALHO_ESTATISTICAS_MATHARCOCOTANGENTE "arcocotangente"

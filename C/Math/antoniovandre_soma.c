@@ -8,7 +8,7 @@
 
 // Última atualização: 04-02-2023.
 
-#include "/home/antoniovandre/software_sources/C/antoniovandre.c"
+#include "../antoniovandre.c"
 
 #define SOMA_MENSAGEM_USO "Use antoniovandre_soma <NÚMERO REAL [NÚMERO REAL] ...>."
 #define CABECALHO_ESTATISTICAS_MATHSOMA "soma"

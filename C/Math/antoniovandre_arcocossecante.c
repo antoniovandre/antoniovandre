@@ -8,7 +8,7 @@
 
 // Última atualização: 09-07-2020.
 
-#include "/home/antoniovandre/software_sources/C/antoniovandre.c"
+#include "../antoniovandre.c"
 
 #define ARCOCOSSECANTE_MENSAGEM_USO "Use antoniovandre_arcocossecante <NÚMERO REAL NÃO PERTENCENTE AO INTERVALO (-1, 1)>."
 #define CABECALHO_ESTATISTICAS_MATHARCOCOSSECANTE "arcocossecante"
